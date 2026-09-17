@@ -4,48 +4,100 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TenzorPipe — zero-VRAM media ingestion engine</title>
-<meta name="description" content="MP4 and WAV to synchronized RGB and Log-Mel tensors in Apache Arrow. CPU decoding, zero GPU memory, millisecond re-reads, bit-exact reproducibility.">
+<meta name="description" content="Decode video once on the CPU into Apache Arrow tensors, then memory-map them every epoch. Zero GPU memory, millisecond re-reads, bit-exact reproducibility.">
 <meta property="og:title" content="TenzorPipe — zero-VRAM media ingestion engine">
-<meta property="og:description" content="Decode once on the CPU, then memory-map Apache Arrow tensors for every training epoch.">
+<meta property="og:description" content="Decode once on the CPU. Memory-map Apache Arrow tensors for every training epoch. 0 MiB VRAM, bit-exact output.">
 <meta property="og:image" content="assets/banner.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1220'/><path d='M20 50h60M50 20v60' stroke='%2322D3EE' stroke-width='10' stroke-linecap='round'/></svg>">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230B1220'/><path d='M22 50h56M50 22v56' stroke='%2322D3EE' stroke-width='11' stroke-linecap='round'/></svg>">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config = { theme: { extend: { colors: { ink: '#0B1220', slate850: '#131C2E' } } } };
+tailwind.config = { theme: { extend: {
+  colors: { ink: '#0B1220', panel: '#111B2E', line: '#1E293B' },
+  fontFamily: { mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'] },
+  keyframes: { float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } } },
+  animation: { float: 'float 6s ease-in-out infinite' },
+} } };
 </script>
+<style>
+  .glow { background:
+      radial-gradient(60rem 30rem at 15% -10%, rgba(34,211,238,.16), transparent 60%),
+      radial-gradient(50rem 26rem at 90% 0%, rgba(45,212,191,.12), transparent 60%),
+      radial-gradient(40rem 24rem at 50% 120%, rgba(56,189,248,.10), transparent 60%); }
+  .grid-bg { background-image:
+      linear-gradient(rgba(148,163,184,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,.05) 1px, transparent 1px);
+      background-size: 56px 56px; }
+  .card:hover { transform: translateY(-3px); }
+  .card { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+</style>
 </head>
-<body class="bg-ink text-slate-200 antialiased">
+<body class="bg-ink text-slate-300 antialiased selection:bg-cyan-400/30">
+<div class="glow">
+<div class="grid-bg">
+
+<!-- Nav -->
+<nav class="sticky top-0 z-40 backdrop-blur bg-ink/80 border-b border-line/70">
+  <div class="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 font-extrabold tracking-tight text-white">
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#0B1220" stroke="#22D3EE" stroke-width="6"/><path d="M22 50h56M50 22v56" stroke="#22D3EE" stroke-width="11" stroke-linecap="round"/></svg>
+      Tenzor<span class="text-cyan-400">Pipe</span>
+    </a>
+    <div class="hidden sm:flex items-center gap-6 text-sm">
+      <a href="#how" class="hover:text-cyan-300 transition">How it works</a>
+      <a href="#benchmarks" class="hover:text-cyan-300 transition">Benchmarks</a>
+      <a href="#usecases" class="hover:text-cyan-300 transition">Use cases</a>
+      <a href="#quickstart" class="hover:text-cyan-300 transition">Quickstart</a>
+      <a href="#enterprise" class="px-3 py-1.5 rounded-lg bg-cyan-500 text-ink font-semibold hover:bg-cyan-400 transition">Licensing</a>
+    </div>
+  </div>
+</nav>
 
 <!-- Hero -->
-<header class="mx-auto max-w-6xl px-6 pt-12 pb-10">
+<header id="top" class="mx-auto max-w-6xl px-6 pt-14 pb-10">
   <img src="assets/banner.png" alt="TenzorPipe — zero-VRAM media ingestion engine"
-       class="w-full max-w-3xl mx-auto rounded-2xl ring-1 ring-cyan-400/20 shadow-2xl shadow-cyan-500/10">
-  <h1 class="mt-10 text-4xl sm:text-5xl font-extrabold tracking-tight text-white text-center">
-    Decode once. <span class="text-cyan-400">Train forever.</span>
+       class="w-full max-w-3xl mx-auto rounded-2xl ring-1 ring-cyan-400/25 shadow-2xl shadow-cyan-500/10 animate-float">
+  <h1 class="mt-12 text-4xl sm:text-6xl font-extrabold tracking-tight text-white text-center leading-tight">
+    Decode once.<br class="sm:hidden"> <span class="bg-gradient-to-r from-cyan-300 via-teal-300 to-sky-400 bg-clip-text text-transparent">Train forever.</span>
   </h1>
-  <p class="mt-5 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto text-center">
+  <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto text-center leading-relaxed">
     TenzorPipe turns MP4 (H.264/AAC) and WAV into synchronized RGB and Log-Mel tensors in batched
     Apache Arrow IPC — decoded on the CPU, with <strong class="text-white">no GPU memory</strong>,
-    no FFmpeg runtime dependency, and byte-identical output every run.
+    no FFmpeg runtime dependency, and byte-identical output on every run.
   </p>
-  <div class="mt-7 flex flex-wrap gap-2 justify-center text-xs font-semibold">
-    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-orange-400/30 text-orange-300">Rust 1.98.1</span>
-    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-sky-400/30 text-sky-300">PyO3 · abi3-py39</span>
-    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-cyan-400/30 text-cyan-300">Apache Arrow IPC</span>
-    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-amber-400/30 text-amber-300">BSL 1.1 → Apache-2.0</span>
+  <div class="mt-8 flex flex-wrap gap-2 justify-center text-xs font-semibold">
+    <span class="px-3 py-1 rounded-full bg-panel ring-1 ring-orange-400/30 text-orange-300">Rust 1.98.1</span>
+    <span class="px-3 py-1 rounded-full bg-panel ring-1 ring-sky-400/30 text-sky-300">PyO3 · abi3-py39</span>
+    <span class="px-3 py-1 rounded-full bg-panel ring-1 ring-cyan-400/30 text-cyan-300">Apache Arrow IPC</span>
+    <span class="px-3 py-1 rounded-full bg-panel ring-1 ring-amber-400/30 text-amber-300">BSL 1.1 → Apache-2.0</span>
   </div>
-  <div class="mt-8 flex flex-wrap gap-3 justify-center">
-    <a href="#quickstart" class="px-5 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-ink font-semibold transition">Quickstart</a>
-    <a href="#benchmarks" class="px-5 py-3 rounded-xl bg-slate850 hover:bg-slate-800 ring-1 ring-slate-700 font-semibold transition">Benchmarks</a>
-    <a href="#enterprise" class="px-5 py-3 rounded-xl bg-slate850 hover:bg-slate-800 ring-1 ring-slate-700 font-semibold transition">Commercial use</a>
+
+  <!-- Stat tiles -->
+  <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card rounded-2xl bg-panel/80 ring-1 ring-line p-6 hover:ring-cyan-400/40">
+      <div class="text-4xl font-extrabold text-emerald-400">0 MiB</div>
+      <div class="mt-1 text-sm text-slate-400">GPU memory during decode</div>
+    </div>
+    <div class="card rounded-2xl bg-panel/80 ring-1 ring-line p-6 hover:ring-cyan-400/40">
+      <div class="text-4xl font-extrabold text-cyan-300">2.8 ms</div>
+      <div class="mt-1 text-sm text-slate-400">per epoch after the first pass</div>
+    </div>
+    <div class="card rounded-2xl bg-panel/80 ring-1 ring-line p-6 hover:ring-cyan-400/40">
+      <div class="text-4xl font-extrabold text-white">1,056</div>
+      <div class="mt-1 text-sm text-slate-400">regression cases, byte-identical</div>
+    </div>
+    <div class="card rounded-2xl bg-panel/80 ring-1 ring-line p-6 hover:ring-cyan-400/40">
+      <div class="text-4xl font-extrabold text-white">7.9×</div>
+      <div class="mt-1 text-sm text-slate-400">faster first pass than v0.2.0</div>
+    </div>
   </div>
 </header>
 
 <!-- Demo video -->
-<section class="mx-auto max-w-5xl px-6 py-10">
-  <h2 class="text-2xl font-bold text-white">See it side by side</h2>
+<section class="mx-auto max-w-5xl px-6 py-12">
+  <h2 class="text-3xl font-bold text-white">See it side by side</h2>
   <p class="mt-2 text-slate-400">Narrated, 25 seconds. Every figure on screen was measured on the machine that produced the video.</p>
-  <div class="mt-6 rounded-2xl overflow-hidden ring-1 ring-slate-700 bg-slate850">
+  <div class="mt-6 rounded-2xl overflow-hidden ring-1 ring-line bg-panel shadow-2xl shadow-cyan-500/5">
     <video class="w-full" controls preload="metadata" poster="assets/banner.png">
       <source src="assets/tenzorpipe_demo.mp4" type="video/mp4">
       Your browser cannot play embedded video —
@@ -54,50 +106,92 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0B1220', slate850: '#131
   </div>
 </section>
 
+<!-- How it works -->
+<section id="how" class="mx-auto max-w-6xl px-6 py-12">
+  <h2 class="text-3xl font-bold text-white">One decode, then pure memory reads</h2>
+  <p class="mt-2 text-slate-400 max-w-3xl">
+    Conventional loaders re-decode every clip on every epoch. TenzorPipe decodes once into a
+    contiguous Arrow artifact; each epoch after that is a memory map away.
+  </p>
+  <div class="mt-8 rounded-2xl bg-panel/70 ring-1 ring-line p-6 overflow-x-auto">
+    <svg viewBox="0 0 1000 270" class="w-full min-w-[720px]" role="img" aria-label="Pipeline: media decodes once into an Arrow artifact, then every epoch memory-maps it">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 z" fill="#22D3EE"/></marker>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0E7490"/><stop offset="100%" stop-color="#155E75"/></linearGradient>
+      </defs>
+      <rect x="10" y="80" width="190" height="90" rx="14" fill="#0F172A" stroke="#334155"/>
+      <text x="105" y="118" text-anchor="middle" fill="#E2E8F0" font-size="20" font-weight="700">MP4 · WAV</text>
+      <text x="105" y="144" text-anchor="middle" fill="#94A3B8" font-size="15">H.264 / AAC-LC</text>
+
+      <rect x="270" y="60" width="230" height="130" rx="16" fill="url(#g1)" stroke="#22D3EE"/>
+      <text x="385" y="100" text-anchor="middle" fill="#F8FAFC" font-size="20" font-weight="700">TenzorPipe engine</text>
+      <text x="385" y="128" text-anchor="middle" fill="#CFFAFE" font-size="14">CPU decode · 0 MiB VRAM</text>
+      <text x="385" y="152" text-anchor="middle" fill="#CFFAFE" font-size="14">skips unused non-ref frames</text>
+      <text x="385" y="176" text-anchor="middle" fill="#A5F3FC" font-size="13">once per clip</text>
+
+      <rect x="570" y="80" width="180" height="90" rx="14" fill="#042F2E" stroke="#2DD4BF"/>
+      <text x="660" y="114" text-anchor="middle" fill="#F0FDFA" font-size="19" font-weight="700">clip.tenzor</text>
+      <text x="660" y="140" text-anchor="middle" fill="#99F6E4" font-size="14">Apache Arrow IPC</text>
+
+      <rect x="820" y="60" width="170" height="130" rx="16" fill="#0F172A" stroke="#334155"/>
+      <text x="905" y="98" text-anchor="middle" fill="#E2E8F0" font-size="19" font-weight="700">training loop</text>
+      <text x="905" y="124" text-anchor="middle" fill="#94A3B8" font-size="14">zero-copy torch</text>
+      <text x="905" y="148" text-anchor="middle" fill="#94A3B8" font-size="14">views</text>
+      <text x="905" y="174" text-anchor="middle" fill="#67E8F9" font-size="13">epochs 1 … N</text>
+
+      <line x1="205" y1="125" x2="262" y2="125" stroke="#22D3EE" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="505" y1="125" x2="562" y2="125" stroke="#22D3EE" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="755" y1="125" x2="812" y2="125" stroke="#22D3EE" stroke-width="3" marker-end="url(#arrow)"/>
+      <path d="M905 200 C 905 248, 660 248, 660 180" fill="none" stroke="#2DD4BF" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+      <text x="782" y="266" text-anchor="middle" fill="#5EEAD4" font-size="14">every later epoch · 2.8 ms memory map</text>
+    </svg>
+  </div>
+</section>
+
 <!-- Benchmarks -->
-<section id="benchmarks" class="mx-auto max-w-6xl px-6 py-10">
-  <h2 class="text-2xl font-bold text-white">Measured, not marketed</h2>
-  <p class="mt-2 text-slate-400">
+<section id="benchmarks" class="mx-auto max-w-6xl px-6 py-12">
+  <h2 class="text-3xl font-bold text-white">Measured, not marketed</h2>
+  <p class="mt-2 text-slate-400 max-w-3xl">
     One 20-second 1080p30 H.264 clip at 8 Mb/s, Intel i5-14400F + RTX 5060 (8 GB) under WSL2,
     50 measured iterations per contender. Full method, raw numbers and caveats:
-    <a class="text-cyan-400 underline" href="https://github.com/tenzorpipe/tenzorpipe/blob/main/BENCHMARKS.md">BENCHMARKS.md</a>.
+    <a class="text-cyan-400 underline hover:text-cyan-300" href="https://github.com/tenzorpipe/tenzorpipe/blob/main/BENCHMARKS.md">BENCHMARKS.md</a>.
   </p>
-  <div class="mt-6 overflow-x-auto rounded-2xl ring-1 ring-slate-700">
-    <table class="w-full text-left border-collapse bg-slate850/60">
-      <thead class="bg-slate850 text-slate-300 text-sm uppercase tracking-wide">
+  <div class="mt-8 overflow-x-auto rounded-2xl ring-1 ring-line">
+    <table class="w-full text-left border-collapse bg-panel/60 min-w-[680px]">
+      <thead class="bg-panel text-slate-300 text-xs uppercase tracking-widest">
         <tr>
           <th class="px-5 py-4 font-semibold">Metric</th>
-          <th class="px-5 py-4 font-semibold text-cyan-300">TenzorPipe 0.3.0</th>
+          <th class="px-5 py-4 font-bold text-cyan-300 bg-cyan-500/10">TenzorPipe 0.3.0</th>
           <th class="px-5 py-4 font-semibold">FFmpeg pipe</th>
           <th class="px-5 py-4 font-semibold">NVIDIA DALI</th>
           <th class="px-5 py-4 font-semibold">TorchCodec (CUDA)</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-800 text-lg">
+      <tbody class="divide-y divide-line text-lg">
         <tr>
           <td class="px-5 py-4 text-slate-300">First-pass ingest</td>
-          <td class="px-5 py-4 text-cyan-300 font-bold">646 ms</td>
+          <td class="px-5 py-4 text-cyan-300 font-bold bg-cyan-500/5">646 ms</td>
           <td class="px-5 py-4">554 ms</td>
           <td class="px-5 py-4">442 ms</td>
           <td class="px-5 py-4">276 ms</td>
         </tr>
-        <tr class="bg-cyan-500/5">
+        <tr>
           <td class="px-5 py-4 text-slate-300">Every later training epoch</td>
-          <td class="px-5 py-4 text-cyan-300 font-bold">2.8 ms <span class="text-sm font-normal text-slate-400">Arrow re-read</span></td>
+          <td class="px-5 py-4 text-cyan-300 font-bold bg-cyan-500/5">2.8 ms <span class="text-sm font-normal text-slate-400">Arrow re-read</span></td>
           <td class="px-5 py-4 text-slate-400">decode again</td>
           <td class="px-5 py-4 text-slate-400">decode again</td>
           <td class="px-5 py-4 text-slate-400">decode again</td>
         </tr>
         <tr>
           <td class="px-5 py-4 text-slate-300">GPU memory during decode</td>
-          <td class="px-5 py-4 text-emerald-400 font-bold">0 MiB</td>
+          <td class="px-5 py-4 text-emerald-400 font-bold bg-cyan-500/5">0 MiB</td>
           <td class="px-5 py-4 text-emerald-400">0 MiB</td>
           <td class="px-5 py-4 text-rose-300">822 MiB</td>
           <td class="px-5 py-4 text-rose-300">650 MiB</td>
         </tr>
         <tr>
           <td class="px-5 py-4 text-slate-300">Output reproducibility</td>
-          <td class="px-5 py-4 text-cyan-300 font-bold">1,056 / 1,056 byte-identical</td>
+          <td class="px-5 py-4 text-cyan-300 font-bold bg-cyan-500/5">1,056 / 1,056 byte-identical</td>
           <td class="px-5 py-4 text-slate-400" colspan="3">differ from each other by colour conversion and resampling</td>
         </tr>
       </tbody>
@@ -109,10 +203,94 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0B1220', slate850: '#131
   </p>
 </section>
 
+<!-- Use cases -->
+<section id="usecases" class="mx-auto max-w-6xl px-6 py-12">
+  <h2 class="text-3xl font-bold text-white">Target architectures &amp; concrete use cases</h2>
+  <p class="mt-2 text-slate-400 max-w-3xl">Where a zero-VRAM, bit-exact, decode-once pipeline changes the engineering calculus.</p>
+
+  <div class="mt-8 grid md:grid-cols-2 gap-5">
+    <!-- Edge robotics -->
+    <article class="card rounded-2xl bg-panel/80 ring-1 ring-line hover:ring-cyan-400/40 p-7">
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-xl bg-cyan-500/10 ring-1 ring-cyan-400/30 p-3">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1.4"/><path d="M9 13h.01M15 13h.01M9.5 16.5h5"/><path d="M2 12v3M22 12v3"/>
+          </svg>
+        </span>
+        <div>
+          <h3 class="text-xl font-bold text-white">Edge robotics &amp; autonomous perception</h3>
+          <p class="text-sm text-cyan-300/80">Jetson · drones · humanoids</p>
+        </div>
+      </div>
+      <ul class="mt-5 space-y-3 text-slate-300 text-[15px] leading-relaxed">
+        <li>Eliminates VRAM decode contention on shared and unified-memory architectures, where every decoder byte is a byte the model cannot have.</li>
+        <li>Streams contiguous Apache Arrow frames straight into spatial neural networks with <strong class="text-emerald-400">0 MiB GPU overhead</strong>, conserving battery and compute bandwidth.</li>
+      </ul>
+    </article>
+
+    <!-- Multimodal training -->
+    <article class="card rounded-2xl bg-panel/80 ring-1 ring-line hover:ring-cyan-400/40 p-7">
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-xl bg-sky-500/10 ring-1 ring-sky-400/30 p-3">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8A3 3 0 0 0 7 17a3 3 0 0 0 5 1.9V4.5A2.5 2.5 0 0 0 9.5 3z"/><path d="M15 3a3 3 0 0 1 3 3 3 3 0 0 1 1 5.8A3 3 0 0 1 17 17a3 3 0 0 1-5 1.9"/>
+          </svg>
+        </span>
+        <div>
+          <h3 class="text-xl font-bold text-white">Multimodal LLM &amp; VLM training</h3>
+          <p class="text-sm text-sky-300/80">video-language models · multi-GPU clusters</p>
+        </div>
+      </div>
+      <ul class="mt-5 space-y-3 text-slate-300 text-[15px] leading-relaxed">
+        <li>Ingests training video once into the structured <code class="font-mono text-cyan-300">.tenzor</code> format, with video and Log-Mel audio locked to the same 0.5 s epoch grid.</li>
+        <li>Re-reads tensors at <strong class="text-cyan-300">sub-3 ms</strong> multi-epoch speed, keeping clusters saturated instead of repeatedly decompressing the same MP4s.</li>
+      </ul>
+    </article>
+
+    <!-- Air-gapped -->
+    <article class="card rounded-2xl bg-panel/80 ring-1 ring-line hover:ring-emerald-400/40 p-7">
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-xl bg-emerald-500/10 ring-1 ring-emerald-400/30 p-3">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V6z"/><path d="M9.5 12l1.8 1.8 3.4-3.6"/>
+          </svg>
+        </span>
+        <div>
+          <h3 class="text-xl font-bold text-white">Air-gapped &amp; sovereign pipelines</h3>
+          <p class="text-sm text-emerald-300/80">defense · medical · regulated data</p>
+        </div>
+      </div>
+      <ul class="mt-5 space-y-3 text-slate-300 text-[15px] leading-relaxed">
+        <li>Full local execution: zero cloud APIs, zero network calls, and no temporary frame dumps to disk — a libc-level write audit observed only the final artifact.</li>
+        <li>Deterministic, <strong class="text-emerald-400">bit-exact</strong> ingestion suited to HIPAA and air-gapped environments, verified across 1,056 regression cases.</li>
+      </ul>
+    </article>
+
+    <!-- Indexing -->
+    <article class="card rounded-2xl bg-panel/80 ring-1 ring-line hover:ring-amber-400/40 p-7">
+      <div class="flex items-start gap-4">
+        <span class="shrink-0 rounded-xl bg-amber-500/10 ring-1 ring-amber-400/30 p-3">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="6"/><path d="M20 20l-3.6-3.6"/><path d="M8.5 11h5M11 8.5v5"/>
+          </svg>
+        </span>
+        <div>
+          <h3 class="text-xl font-bold text-white">High-throughput local indexing &amp; search</h3>
+          <p class="text-sm text-amber-300/80">journaling · media ops · embeddings</p>
+        </div>
+      </div>
+      <ul class="mt-5 space-y-3 text-slate-300 text-[15px] leading-relaxed">
+        <li>Removes the disk thrashing and process-spawn latency of shelling out to FFmpeg across thousands of local clips.</li>
+        <li>Pipes contiguous frame batches straight into local vector embedding models — <strong class="text-amber-300">16 clips in 0.41 s</strong> versus 1.95 s one at a time.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
 <!-- Quickstart -->
-<section id="quickstart" class="mx-auto max-w-5xl px-6 py-10">
-  <h2 class="text-2xl font-bold text-white">Three lines</h2>
-  <pre class="mt-6 rounded-2xl bg-slate850 ring-1 ring-slate-700 p-6 overflow-x-auto text-sm leading-relaxed"><code class="text-slate-200"><span class="text-slate-500"># 1. install (Linux x86-64, CPython 3.9+)</span>
+<section id="quickstart" class="mx-auto max-w-5xl px-6 py-12">
+  <h2 class="text-3xl font-bold text-white">Three lines</h2>
+  <pre class="mt-6 rounded-2xl bg-panel ring-1 ring-line p-6 overflow-x-auto text-sm leading-relaxed font-mono"><code class="text-slate-200"><span class="text-slate-500"># 1. install (Linux x86-64, CPython 3.9+)</span>
 pip install tenzorpipe
 
 <span class="text-slate-500"># 2. decode once into Apache Arrow</span>
@@ -121,15 +299,15 @@ python -c <span class="text-cyan-300">"import tenzorpipe as tp; tp.ingest('clip.
 <span class="text-slate-500"># 3. memory-map tensors for every epoch</span>
 python -c <span class="text-cyan-300">"import tenzorpipe as tp; d = tp.load('clip.tenzor'); print(len(d), d[0]['video'].shape)"</span></code></pre>
   <div class="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
-    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+    <div class="card rounded-xl bg-panel/80 ring-1 ring-line p-5">
       <div class="text-cyan-300 font-semibold">Tensor contract</div>
       <p class="mt-2 text-slate-400">224×224 RGB CHW float32 in [-1, 1] and 64-band Log-Mel, one row per 0.5 s epoch.</p>
     </div>
-    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+    <div class="card rounded-xl bg-panel/80 ring-1 ring-line p-5">
       <div class="text-cyan-300 font-semibold">No runtime deps</div>
       <p class="mt-2 text-slate-400">OpenH264 and the AAC decoder are compiled in. No FFmpeg, no CUDA, no system codecs.</p>
     </div>
-    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+    <div class="card rounded-xl bg-panel/80 ring-1 ring-line p-5">
       <div class="text-cyan-300 font-semibold">Bit-exact</div>
       <p class="mt-2 text-slate-400">Same bytes on every worker count, verified against the previous release on 1,056 cases.</p>
     </div>
@@ -137,9 +315,9 @@ python -c <span class="text-cyan-300">"import tenzorpipe as tp; d = tp.load('cli
 </section>
 
 <!-- Enterprise -->
-<section id="enterprise" class="mx-auto max-w-5xl px-6 py-10">
-  <div class="rounded-2xl bg-gradient-to-br from-slate850 to-ink ring-1 ring-amber-400/30 p-8">
-    <h2 class="text-2xl font-bold text-white">Commercial &amp; enterprise licensing</h2>
+<section id="enterprise" class="mx-auto max-w-5xl px-6 py-12">
+  <div class="rounded-2xl bg-gradient-to-br from-panel to-ink ring-1 ring-amber-400/30 p-8 shadow-2xl shadow-amber-500/5">
+    <h2 class="text-3xl font-bold text-white">Commercial &amp; enterprise licensing</h2>
     <p class="mt-3 text-slate-300">
       TenzorPipe is released under the <strong>Business Source License 1.1</strong>. It converts to
       <strong>Apache-2.0 on 16 September 2030</strong>.
@@ -169,7 +347,7 @@ python -c <span class="text-cyan-300">"import tenzorpipe as tp; d = tp.load('cli
   </div>
 </section>
 
-<footer class="mx-auto max-w-6xl px-6 py-12 text-sm text-slate-500 border-t border-slate-800">
+<footer class="mx-auto max-w-6xl px-6 py-12 text-sm text-slate-500 border-t border-line">
   <p>© 2026 Jonathan Tyler Montgomery. TenzorPipe 0.3.0 — Business Source License 1.1.</p>
   <p class="mt-2">
     Third-party components (OpenH264, Apache Arrow, and others) remain under their own licenses;
@@ -177,5 +355,7 @@ python -c <span class="text-cyan-300">"import tenzorpipe as tp; d = tp.load('cli
   </p>
 </footer>
 
+</div>
+</div>
 </body>
 </html>

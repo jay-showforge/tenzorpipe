@@ -73,6 +73,47 @@ WSL2, 50 measured iterations each. All tables, methods and caveats are in [BENCH
 fastest first-pass decoder. Its advantages are zero VRAM, byte-exact reproducible tensors and
 near-free re-reads for multi-epoch training; the first pass is 7.9× faster than v0.2.0.
 
+## How it works
+
+```mermaid
+flowchart LR
+    A["MP4 H.264/AAC<br/>WAV"] -->|"decode once<br/>CPU, 0 MiB VRAM"| B["TenzorPipe engine<br/><small>skips unused non-reference frames</small>"]
+    B --> C["clip.tenzor<br/><small>Apache Arrow IPC</small>"]
+    C -->|"epoch 1"| D["training loop<br/><small>zero-copy torch views</small>"]
+    C -->|"epoch 2 … N<br/>2.8 ms re-read"| D
+    style B fill:#0e7490,stroke:#22d3ee,color:#f8fafc
+    style C fill:#134e4a,stroke:#2dd4bf,color:#f8fafc
+```
+
+The decode happens once. Every epoch after that memory-maps the same contiguous tensors, so the
+GPU stays free for the model and the tensors are identical on every run and every worker count.
+
+## Target architectures & concrete use cases
+
+**🤖 Edge robotics & autonomous perception** — Jetson, drones, humanoids
+Unified-memory boards make every decoder byte a byte the model cannot have. TenzorPipe decodes on
+the CPU with **0 MiB of GPU allocation**, so NVDEC surfaces and decoder pools never contend with
+inference. Contiguous Arrow frames stream straight into spatial networks, conserving battery and
+compute bandwidth on the same die.
+
+**🧠 Multimodal LLM & video-language model training**
+Ingest the corpus once into `.tenzor`, then re-read video tensors in **single-digit milliseconds**
+per clip per epoch. Multi-GPU clusters stay saturated instead of burning cycles re-decompressing
+the same MP4s for every pass, and the 0.5 s epoch grid keeps video and Log-Mel audio aligned for
+cross-modal attention.
+
+**🛡️ Air-gapped & sovereign pipelines** — defense, medical, regulated data
+Fully local execution: no cloud APIs, no network calls, no temporary frame dumps to disk (a
+libc-level write audit observed only the final artifact). Output is **bit-exact and
+deterministic** — 1,056 regression cases byte-identical to the previous release — which is what
+reproducible clinical and evidentiary pipelines require.
+
+**🔎 High-throughput local video indexing & search** — journaling, media ops
+Thousands of short clips punish shell-out FFmpeg with process-spawn latency and disk thrashing.
+TenzorPipe runs in-process through PyO3 and hands contiguous frame batches directly to local
+embedding models; `python/tenzor_batch.py` saturates every core across files
+(16 clips in 0.41 s versus 1.95 s sequentially).
+
 **License:** Business Source License 1.1. Production use is permitted for individuals and
 organizations whose annual gross revenue, combined with their parents, subsidiaries and affiliates,
 is under US$100,000; non-production use is unrestricted. Larger organizations and embedded
