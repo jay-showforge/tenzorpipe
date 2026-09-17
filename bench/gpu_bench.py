@@ -40,16 +40,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BENCH_HOME = Path(os.environ.get("BENCH_HOME", Path.home() / ".tenzor-bench"))
-TENZOR_BIN = ROOT / "bin" / "tenzor-linux-x86_64"
+RELEASE_BIN = ROOT / "bin" / "tenzor-linux-x86_64"  # untouched v0.2.0 release binary
+# Binary under test; --tenzor-bin overrides (worker processes inherit it via this variable).
+TENZOR_BIN = Path(os.environ.get("TENZOR_BIN", RELEASE_BIN))
 RES = 224
 EPOCH_S = 0.5
 MEL_ROWS = 50
 
 # name -> (description, device that decodes, supports AAC audio)
 CONTENDERS = {
-    "tenzorpipe-w1": ("TenzorPipe 0.2.0, --video-workers 1 (CLI default)", "CPU (OpenH264)", True),
-    "tenzorpipe-w6": ("TenzorPipe 0.2.0, --video-workers 6 (v0.2.0 recommendation)", "CPU (OpenH264)", True),
-    "tenzorpipe-auto": ("TenzorPipe 0.2.0, --video-workers 0 (cores-2)", "CPU (OpenH264)", True),
+    "tenzorpipe-default": ("TenzorPipe under test, no worker flag (CLI default)", "CPU (OpenH264)", True),
+    "tenzorpipe-w1": ("TenzorPipe under test, --video-workers 1", "CPU (OpenH264)", True),
+    "tenzorpipe-w6": ("TenzorPipe under test, --video-workers 6", "CPU (OpenH264)", True),
+    "tenzorpipe-auto": ("TenzorPipe under test, --video-workers 0", "CPU (OpenH264)", True),
+    "tenzorpipe-v020-auto": ("Unmodified v0.2.0 release binary, --video-workers 0", "CPU (OpenH264)", True),
     "dali-nvdec": ("NVIDIA DALI fn.readers.video(device='gpu')", "GPU (NVDEC)", False),
     "torchcodec-cuda": ("TorchCodec VideoDecoder(device='cuda') + GPU Log-Mel", "GPU (NVDEC)", True),
     "torchcodec-cpu": ("TorchCodec VideoDecoder(device='cpu')", "CPU (libavcodec)", True),
@@ -228,12 +232,16 @@ def make_contender(name, clip, scenario, tmp):
     sy, sx = aligned_nearest(clip["height"]), aligned_nearest(clip["width"])
 
     if name.startswith("tenzorpipe"):
-        workers = {"tenzorpipe-w1": 1, "tenzorpipe-w6": 6, "tenzorpipe-auto": 0}[name]
+        workers = {"tenzorpipe-default": None, "tenzorpipe-w1": 1, "tenzorpipe-w6": 6,
+                   "tenzorpipe-auto": 0, "tenzorpipe-v020-auto": 0}[name]
+        binary = RELEASE_BIN if name == "tenzorpipe-v020-auto" else TENZOR_BIN
         sys.path.insert(0, str(ROOT / "python"))
         import torch  # noqa: F401  (loader dependency; CPU only, no CUDA context is created)
         from tenzor import TenzorDataset
         out = Path(tmp) / f"tzb-{os.getpid()}.tenzor"
-        cmd = [str(TENZOR_BIN), "-i", clip["path"], "-o", str(out), "--video-workers", str(workers)]
+        cmd = [str(binary), "-i", clip["path"], "-o", str(out)]
+        if workers is not None:
+            cmd += ["--video-workers", str(workers)]
 
         def run():
             out.unlink(missing_ok=True)
@@ -567,7 +575,9 @@ def environment():
         info["torch_cuda"] = torch.version.cuda
     except Exception:
         pass
+    info["tenzor_bin"] = str(TENZOR_BIN)
     info["tenzor_sha256"] = sh(["sha256sum", str(TENZOR_BIN)]).split()[0]
+    info["release_sha256"] = sh(["sha256sum", str(RELEASE_BIN)]).split()[0]
     return info
 
 
@@ -638,7 +648,9 @@ def write_markdown(path, rows, results, clips, env, args):
     md += ["", "## Environment", "", "```json", json.dumps(env, indent=2), "```", "",
            "Raw per-iteration latencies: `bench/results/latest.json`. Reproduce inside WSL2/Linux:", "",
            "```sh", "bash bench/setup_wsl.sh && . ~/.tenzor-bench/env.sh",
-           f"python bench/gpu_bench.py --iters {args.iters} --warmup {args.warmup} --seconds {args.seconds}", "```", "",
+           "cargo build --release --locked && mkdir -p target/release  # CARGO_TARGET_DIR may differ",
+           f"python bench/gpu_bench.py --iters {args.iters} --warmup {args.warmup} --seconds {args.seconds}"
+           + (f" --tenzor-bin {os.path.relpath(TENZOR_BIN, ROOT)}" if TENZOR_BIN != RELEASE_BIN else ""), "```", "",
            "<!-- ANALYSIS -->", ""]
     old = path.read_text() if path.exists() else ""
     if "<!-- ANALYSIS -->" in old:  # keep hand-written analysis across reruns
@@ -661,15 +673,21 @@ def main():
     ap.add_argument("--tmp", default="/dev/shm", help="TenzorPipe output dir (tmpfs keeps disk I/O out of the timing)")
     ap.add_argument("--regen-clips", action="store_true")
     ap.add_argument("--out", default=str(ROOT / "BENCHMARKS.md"))
+    ap.add_argument("--tenzor-bin", help="TenzorPipe binary under test (default: bin/tenzor-linux-x86_64)")
     ap.add_argument("--merge", action="store_true",
                     help="keep other contenders' results from bench/results/latest.json and replace only those re-run")
     args = ap.parse_args()
     if args.cmd == "worker":
         return worker(args)
+    global TENZOR_BIN
+    if args.tenzor_bin:
+        TENZOR_BIN = Path(args.tenzor_bin).resolve()
+        os.environ["TENZOR_BIN"] = str(TENZOR_BIN)
 
     if not TENZOR_BIN.exists() or not shutil.which("ffmpeg"):
         sys.exit("need bin/tenzor-linux-x86_64 and ffmpeg on PATH (run bench/setup_wsl.sh, then . ~/.tenzor-bench/env.sh)")
-    os.chmod(TENZOR_BIN, 0o755)
+    for binary in {TENZOR_BIN, RELEASE_BIN}:
+        os.chmod(binary, 0o755)
     clips = prepare_clips(args.seconds, args.regen_clips)
     for sc, c in clips.items():
         print(f"[clip] {sc}: {Path(c['path']).name} {c['width']}x{c['height']} {c['frames']} frames "

@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""Non-reference skip gate: new binary vs the v0.2.0 release binary, byte for byte.
+
+Both binaries report version 0.2.0, so successful artifacts must be byte-identical with no
+version-string substitution. Failures must agree on exit status and the first error line.
+
+    python3 scripts/test_skip_identity.py [media ...]
+        (default: every committed fixture + $TENZOR_GEN_FIXTURES from gen_skip_fixtures.sh)
+
+Environment: OLD (default bin/tenzor-linux-x86_64), NEW (default target/release/tenzor),
+RESULT (JSON path), JOBS (parallel cases, default 4).
+"""
+import concurrent.futures
+import hashlib
+import json
+import os
+import pathlib
+import re
+import subprocess
+import sys
+import tempfile
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+OLD = os.environ.get("OLD", str(ROOT / "bin/tenzor-linux-x86_64"))
+NEW = os.environ.get("NEW", str(ROOT / "target/release/tenzor"))
+GEN = pathlib.Path(os.environ.get("TENZOR_GEN_FIXTURES", "/tmp/tenzor-skip-fixtures"))
+# Disk, not tmpfs: long-330 at 0.05 s windows writes ~4 GiB per artifact.
+OUT_ROOT = pathlib.Path(os.environ.get("TENZOR_OUTPUT_ROOT", "/tmp/tenzor-artifacts"))
+OUT_ROOT.mkdir(parents=True, exist_ok=True)
+OUT = pathlib.Path(tempfile.mkdtemp(prefix="skip-identity-", dir=OUT_ROOT))
+
+SETTINGS = [
+    [],
+    ["--resolution", "160", "--window-sec", "0.33", "--batch-epochs", "2"],
+    ["--window-sec", "0.05", "--batch-epochs", "7"],
+    ["--execution", "sequential", "--window-sec", "1.0"],
+]
+# (label, new-binary args, equivalent old-binary args). Old default is 1 worker, new default is auto.
+VARIANTS = [
+    ("default", [], ["--video-workers", "1"]),
+    ("w1", ["--video-workers", "1"], ["--video-workers", "1"]),
+    ("w2-chunk250", ["--video-workers", "2", "--chunk-target-ms", "250"], ["--video-workers", "2", "--chunk-target-ms", "250"]),
+    ("w8", ["--video-workers", "8"], ["--video-workers", "8"]),
+    ("w1-noskip", ["--video-workers", "1", "--no-skip-nonref"], ["--video-workers", "1"]),
+    ("w4-noskip", ["--video-workers", "4", "--no-skip-nonref"], ["--video-workers", "4"]),
+]
+
+
+def run(binary, media, args, tag):
+    out = OUT / f"{tag}.tenzor"
+    out.unlink(missing_ok=True)
+    try:
+        p = subprocess.run([binary, "-i", str(media), "-o", str(out), *args], capture_output=True, text=True, timeout=900)
+    except subprocess.TimeoutExpired:
+        return {"rc": "TIMEOUT", "sha256": None, "error": "", "skipped": None, "panic": False, "leftover": False}
+    digest = None
+    if p.returncode == 0:
+        h = hashlib.sha256()
+        with out.open("rb") as f:
+            while chunk := f.read(1 << 20):
+                h.update(chunk)
+        digest = h.hexdigest()
+    leftover = p.returncode != 0 and out.exists()
+    out.unlink(missing_ok=True)
+    err = next((l for l in p.stderr.splitlines() if l.startswith("Error")), "")
+    skipped = re.search(r"skipped_nonref=(\d+)", p.stderr)
+    return {"rc": p.returncode, "sha256": digest, "error": err, "panic": "panicked" in p.stderr,
+            "leftover": leftover, "skipped": int(skipped.group(1)) if skipped else None}
+
+
+def case(media, s_index, variant):
+    label, new_args, old_args = variant
+    settings = SETTINGS[s_index]
+    tag = f"{media.stem}-{s_index}-{label}"
+    old = run(OLD, media, settings + old_args, tag + "-old")
+    new = run(NEW, media, settings + new_args, tag + "-new")
+    same_success = old["rc"] == 0 and new["rc"] == 0 and old["sha256"] == new["sha256"]
+    same_failure = old["rc"] != 0 and new["rc"] == old["rc"] and new["error"] == old["error"]
+    # Resource exhaustion in the test environment proves nothing about identity.
+    infra = any(word in old["error"] + new["error"] for word in ("No space left", "Cannot allocate"))
+    ok = (same_success or same_failure) and not (new["panic"] or new["leftover"] or infra)
+    kind = "INFRASTRUCTURE" if infra else "identical" if same_success else "same-error" if same_failure else (
+        "new-succeeds-where-old-failed" if old["rc"] != 0 and new["rc"] == 0 else "MISMATCH")
+    return dict(file=str(media), settings=" ".join(settings), variant=label, ok=ok, kind=kind,
+                old_rc=old["rc"], new_rc=new["rc"], old_error=old["error"], new_error=new["error"],
+                skipped_nonref=new["skipped"])
+
+
+def main():
+    if len(sys.argv) > 1:
+        media = [pathlib.Path(m) for m in sys.argv[1:]]
+    else:
+        media = sorted(p for p in (ROOT / "fixtures").iterdir() if p.is_file())
+        media += sorted(p for p in (ROOT / "fixtures").glob("audio-v020/*") if p.is_file())
+        media += sorted(GEN.glob("*.mp4")) if GEN.exists() else []
+    jobs = [(m, s, v) for m in media for s in range(len(SETTINGS)) for v in VARIANTS]
+    print(f"{len(media)} media x {len(SETTINGS)} settings x {len(VARIANTS)} variants = {len(jobs)} cases "
+          f"(OLD={OLD}, NEW={NEW})", flush=True)
+    rows = []
+    with concurrent.futures.ThreadPoolExecutor(int(os.environ.get("JOBS", "4"))) as pool:
+        for row in pool.map(lambda j: case(*j), jobs):
+            rows.append(row)
+            if not row["ok"] or row["kind"] != "identical":
+                print(("PASS " if row["ok"] else "FAIL ") + row["kind"], pathlib.Path(row["file"]).name,
+                      f"[{row['settings']}]", row["variant"], "rc", row["old_rc"], row["new_rc"],
+                      row["old_error"][:70], "|", row["new_error"][:70], flush=True)
+    summary = {}
+    for r in rows:
+        summary[r["kind"]] = summary.get(r["kind"], 0) + 1
+    skipped_total = sum(r["skipped_nonref"] or 0 for r in rows)
+    exercised = sum(1 for r in rows if (r["skipped_nonref"] or 0) > 0 and r["kind"] == "identical")
+    fails = sum(not r["ok"] for r in rows)
+    result = dict(old_binary=OLD, new_binary=NEW,
+                  old_sha256=hashlib.sha256(pathlib.Path(OLD).read_bytes()).hexdigest(),
+                  new_sha256=hashlib.sha256(pathlib.Path(NEW).read_bytes()).hexdigest(),
+                  cases=len(rows), failures=fails, kinds=summary,
+                  identical_cases_with_skipping=exercised, skipped_access_units_total=skipped_total, rows=rows)
+    path = pathlib.Path(os.environ.get("RESULT", ROOT / "evidence/v0.2.1/skip-identity.json"))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(result, indent=1))
+    print(f"TOTAL {len(rows)} FAIL {fails} kinds={summary} identical-with-skips={exercised} "
+          f"skipped-access-units={skipped_total}")
+    sys.exit(1 if fails else 0)
+
+
+if __name__ == "__main__":
+    main()

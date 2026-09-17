@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased — 0.2.1 candidate
+
+- Skip decoding access units whose slices are all non-reference (`nal_ref_idc == 0`) and that no
+  epoch selects, in both the chunked and single-decoder paths. Output is byte-identical to 0.2.0
+  (1,056-case gate against the release binary). 1080p benchmark: 1 worker 5.02 s → 2.99 s, auto
+  1.03 s → 0.63 s. Logs report `skipped_nonref=N`; `--no-skip-nonref` restores full decoding.
+  Corrupt slice data inside a skipped picture is no longer detected (the output equals the clean input's).
+- `--video-workers` now defaults to auto: `available_parallelism()`, clamped to 1–16 and capped at the
+  clip's IDR chunk count (previously 1; `0` previously meant cores − 2). Default 1080p run
+  5.02 s → 0.63 s at ~500 MiB engine RSS (was 87 MiB). `--decoder-threads` runs still default to 1.
+- Vendor `openh264-sys2` 0.9.8 with a build-script patch: define `HAVE_AVX2` for NASM and C++ (upstream
+  makefile parity), and fail the build when NASM fails instead of silently building C-only OpenH264
+  (19% slower). AVX2 itself measured no speedup on High-profile decode.
+- Add `scripts/test_skip_identity.py`, `scripts/gen_skip_fixtures.sh`, `scripts/run_regression_copy.sh`;
+  the chunked corruption fuzz now checks both strict (`--no-skip-nonref`) and default semantics.
+- Add the competitor benchmark suite (`bench/`) with results in BENCHMARKS.md, and a file-level
+  batching scaffold (`python/tenzor_batch.py`, docs/FILE_BATCHING.md).
+
 ## 0.2.0 — independent EPYC verification
 
 - Accept the supplied exact-value Huffman/bit-read/formula-table and IMDCT-buffer optimizations and contiguous sinc buffer.

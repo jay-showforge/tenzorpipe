@@ -49,10 +49,15 @@ struct Cli {
     /// Nonzero values require the experimental-decoder-threads build feature.
     #[arg(long, default_value_t = 0)]
     decoder_threads: usize,
-    /// Independent H.264 decoders over IDR-aligned chunks. 1 = v0.1.6 single-decoder
-    /// path; 0 = auto (available cores minus 2, at least 1, at most 16).
-    #[arg(long, default_value_t = 1)]
-    video_workers: usize,
+    /// Independent H.264 decoders over IDR-aligned chunks. 1 = single-decoder path;
+    /// 0 = auto (available parallelism, at most 16, never more than the clip's IDR chunks).
+    /// Default: auto, or 1 when --decoder-threads is set.
+    #[arg(long)]
+    video_workers: Option<usize>,
+    /// Decode every access unit, including non-reference pictures that no epoch selects.
+    /// Output is identical either way; skipping only saves decode time.
+    #[arg(long)]
+    no_skip_nonref: bool,
     /// In concurrent mode, decode audio inline instead of on its own thread
     /// (0.1.9 behaviour). Output values are identical either way.
     #[arg(long)]
@@ -75,7 +80,10 @@ fn main() -> Result<()> {
         "decoder threading is experimental; rebuild with --features experimental-decoder-threads"
     );
     ensure!(args.queue_mib <= 64, "--queue-mib must be 0..64");
-    ensure!(args.video_workers <= 64, "--video-workers must be 0..64");
+    ensure!(
+        args.video_workers.is_none_or(|n| n <= 64),
+        "--video-workers must be 0..64"
+    );
     ensure!(
         (250..=60_000).contains(&args.chunk_target_ms),
         "--chunk-target-ms must be 250..60000"
@@ -85,7 +93,7 @@ fn main() -> Result<()> {
         "--video-buffer-mib must be 1..1024"
     );
     ensure!(
-        args.video_workers == 1 || args.decoder_threads == 0,
+        args.video_workers.is_none_or(|n| n == 1) || args.decoder_threads == 0,
         "--video-workers and --decoder-threads cannot be combined"
     );
     ensure!(
@@ -317,6 +325,7 @@ fn run(
         window_ms,
         audio_duration_ms,
         decoder_threads: args.decoder_threads,
+        skip_nonref: !args.no_skip_nonref,
     };
     let epoch = match args.execution {
         Execution::Sequential => {
@@ -488,14 +497,19 @@ fn run(
         },
     ))
 }
-fn video_workers(requested: usize) -> usize {
-    if requested == 0 {
+fn video_workers(args: &Cli) -> usize {
+    // Chunk planning further caps auto at the clip's number of IDR chunks.
+    let auto = || {
         std::thread::available_parallelism()
             .map_or(1, |n| n.get())
-            .saturating_sub(2)
             .clamp(1, 16)
-    } else {
-        requested
+    };
+    match args.video_workers {
+        Some(0) => auto(),
+        Some(requested) => requested,
+        // Experimental internal decoder threads only run on the single-decoder path.
+        None if args.decoder_threads > 0 => 1,
+        None => auto(),
     }
 }
 fn decode_video<F>(
@@ -510,7 +524,7 @@ fn decode_video<F>(
 where
     F: FnMut(usize, i64, &[f32]) -> Result<()>,
 {
-    let workers = video_workers(args.video_workers);
+    let workers = video_workers(args);
     if workers <= 1 {
         // Unchanged v0.1.6 single-decoder path.
         return video::decode_h264_mp4(mp4, config, metrics, cancel, on_epoch);
@@ -531,8 +545,13 @@ where
 }
 fn log_video(info: &video::VideoInfo) {
     eprintln!(
-        "video {}x{}, duration {}ms, decoded {} access units, resized {} selected pictures",
-        info.width, info.height, info.duration_ms, info.sample_count, info.resized_count
+        "video {}x{}, duration {}ms, decoded {} access units, resized {} selected pictures, skipped_nonref={}",
+        info.width,
+        info.height,
+        info.duration_ms,
+        info.sample_count - info.skipped_count,
+        info.resized_count,
+        info.skipped_count
     );
 }
 

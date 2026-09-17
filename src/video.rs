@@ -9,7 +9,10 @@ use openh264::{
     formats::YUVSource,
 };
 use rust_h264::nal::parse_avcc_config;
-use std::{cmp::Reverse, collections::BinaryHeap};
+use std::{
+    cmp::Reverse,
+    collections::{BTreeMap, BinaryHeap},
+};
 
 #[derive(Debug, Clone)]
 pub struct VideoInfo {
@@ -18,6 +21,8 @@ pub struct VideoInfo {
     pub duration_ms: u64,
     pub sample_count: usize,
     pub resized_count: usize,
+    /// Access units never sent to the decoder: non-reference and not epoch-selected.
+    pub skipped_count: usize,
 }
 
 #[derive(Clone, Copy)]
@@ -26,6 +31,86 @@ pub struct VideoConfig {
     pub window_ms: u64,
     pub audio_duration_ms: u64,
     pub decoder_threads: usize,
+    /// Skip decoding access units that no picture references and no epoch selects.
+    pub skip_nonref: bool,
+}
+
+/// True when no other picture can depend on this access unit: every VCL NAL is a
+/// non-IDR slice with `nal_ref_idc == 0`, and the unit carries nothing else that
+/// affects decoder state (only SEI, access-unit delimiters or filler may accompany it).
+/// Malformed units return false so normal decoding reports the input error.
+pub(crate) fn is_disposable(mut data: &[u8], length_size: usize) -> bool {
+    if !(1..=4).contains(&length_size) {
+        return false;
+    }
+    let mut slices = 0;
+    while !data.is_empty() {
+        if data.len() < length_size {
+            return false;
+        }
+        let n = data[..length_size]
+            .iter()
+            .fold(0usize, |v, b| (v << 8) | *b as usize);
+        data = &data[length_size..];
+        if n == 0 || n > data.len() || data[0] & 0x80 != 0 {
+            return false;
+        }
+        let (ref_idc, kind) = ((data[0] >> 5) & 3, data[0] & 0x1f);
+        match kind {
+            1 if ref_idc == 0 => slices += 1,
+            6 | 9 | 12 => (),
+            _ => return false,
+        }
+        data = &data[n..];
+    }
+    slices > 0
+}
+
+/// Streaming answer to "does any epoch select the picture presented at `pts`?",
+/// using the same bounded presentation lookahead and midpoint rules as decoding.
+/// Unknown answers are reported as needed, so the oracle can only disable skipping.
+struct SelectionOracle<I> {
+    presentation: PresentationTimes<I>,
+    current: Option<i64>,
+    next: Option<i64>,
+    epoch: usize,
+    window_ms: u64,
+    total: usize,
+    needed: BTreeMap<i64, bool>,
+}
+impl<I: Iterator<Item = Result<i64>>> SelectionOracle<I> {
+    fn new(source: I, window_ms: u64, total: usize) -> Result<Self> {
+        let mut presentation = PresentationTimes::new(source);
+        let current = presentation.next_pts()?;
+        let next = presentation.next_pts()?;
+        Ok(Self {
+            presentation,
+            current,
+            next,
+            epoch: 0,
+            window_ms,
+            total,
+            needed: BTreeMap::new(),
+        })
+    }
+    /// `pts` must be inside the presentation range.
+    fn needed(&mut self, pts: i64) -> Result<bool> {
+        while let Some(current) = self.current.filter(|&c| c <= pts) {
+            let end = epoch_end(current, self.next, self.window_ms, self.total);
+            let selected = self.epoch < end;
+            if selected {
+                self.epoch = end;
+            }
+            *self.needed.entry(current).or_insert(false) |= selected;
+            self.current = self.next;
+            self.next = self.presentation.next_pts()?;
+        }
+        // Decode order trails presentation by at most the reorder depth; keep a margin.
+        while self.needed.len() > 4 * MAX_REORDER {
+            self.needed.pop_first();
+        }
+        Ok(self.needed.get(&pts).copied().unwrap_or(true))
+    }
 }
 
 /// Decode every access unit, converting only nearest-epoch pictures.
@@ -45,6 +130,7 @@ where
         window_ms,
         audio_duration_ms,
         decoder_threads,
+        skip_nonref,
     } = config;
     anyhow::ensure!(window_ms > 0, "epoch window must be positive");
     let track = mp4
@@ -113,19 +199,22 @@ where
         .context("initialize OpenH264 SPS/PPS")?;
     let mut pts_ms = BinaryHeap::new();
     let color = video_color(mp4)?;
+    let in_range = |pts: i64| pts >= 0 && (pts as f64) < timeline.duration_sec * 1000.;
     // Metadata-only lookahead avoids copying a borrowed decoder picture just to
     // learn its successor's PTS. The heap is capped, independent of clip duration.
-    let timestamps = track
-        .samples()
-        .map(|sample| {
-            let sample = sample.context("read H.264 presentation metadata")?;
-            Ok((timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64)
-        })
-        .filter(|pts: &Result<i64>| match pts {
-            Ok(pts) => *pts >= 0 && (*pts as f64) < timeline.duration_sec * 1000.,
-            Err(_) => true,
-        });
-    let mut presentation = PresentationTimes::new(timestamps);
+    let timestamps = || {
+        track
+            .samples()
+            .map(|sample| {
+                let sample = sample.context("read H.264 presentation metadata")?;
+                Ok((timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64)
+            })
+            .filter(|pts: &Result<i64>| match pts {
+                Ok(pts) => in_range(*pts),
+                Err(_) => true,
+            })
+    };
+    let mut presentation = PresentationTimes::new(timestamps());
     let mut current_pts = presentation.next_pts()?;
     anyhow::ensure!(
         current_pts.is_some(),
@@ -134,11 +223,29 @@ where
     let mut next_pts = presentation.next_pts()?;
     let duration_ms = (timeline.duration_sec * 1000.0).round() as u64;
     let total_epochs = duration_ms.max(audio_duration_ms).div_ceil(window_ms) as usize;
+    // A second, independent lookahead decides skips before decoding. Any metadata
+    // error just disables skipping, so errors surface in the original order below.
+    let mut oracle = (skip_nonref && decoder_threads == 0)
+        .then(|| SelectionOracle::new(timestamps(), window_ms, total_epochs).ok())
+        .flatten();
+    // In-range presentation times whose access units were skipped, with multiplicity.
+    let mut skipped_pts: BTreeMap<i64, usize> = BTreeMap::new();
+    let mut skipped_count = 0usize;
+    let take_skipped = |skipped: &mut BTreeMap<i64, usize>, pts: Option<i64>| -> Option<i64> {
+        let pts = pts?;
+        let count = skipped.get_mut(&pts)?;
+        *count -= 1;
+        if *count == 0 {
+            skipped.remove(&pts);
+        }
+        Some(pts)
+    };
     let mut epoch = 0;
     let mut resized_count = 0;
     let mut out_index = 0usize;
     let mut emit = |frame: openh264::decoder::DecodedYUV<'_>,
-                    pts_ms: &mut BinaryHeap<Reverse<i64>>|
+                    pts_ms: &mut BinaryHeap<Reverse<i64>>,
+                    skipped: &mut BTreeMap<i64, usize>|
      -> Result<()> {
         let Reverse(pts) = pts_ms.pop().context("decoder produced extra picture")?;
         out_index += 1;
@@ -147,7 +254,19 @@ where
             w == width && h == height,
             "midstream H.264 resolution changes unsupported"
         );
-        if pts >= 0 && (pts as f64) < timeline.duration_sec * 1000. {
+        if in_range(pts) {
+            // Earlier presentation slots that were never decoded advance the lookahead
+            // exactly as a decoded, unselected picture would.
+            while let Some(skipped_pts) =
+                take_skipped(skipped, current_pts.filter(|&current| current < pts))
+            {
+                anyhow::ensure!(
+                    epoch >= epoch_end(skipped_pts, next_pts, window_ms, total_epochs),
+                    "skipped H.264 picture {skipped_pts} ms was selected for an epoch"
+                );
+                current_pts = next_pts;
+                next_pts = presentation.next_pts()?;
+            }
             anyhow::ensure!(
                 current_pts == Some(pts),
                 "decoded PTS disagrees with bounded presentation lookahead"
@@ -179,9 +298,30 @@ where
         cancel.check()?;
         let parse_started = metrics.start();
         let sample = sample.context("read H.264 access unit")?;
-        pts_ms.push(Reverse(
-            (timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64,
-        ));
+        let pts = (timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64;
+        // Some(true) = skip, Some(false) = decode, None = oracle failed (stop skipping).
+        let decision = match oracle.as_mut() {
+            Some(oracle) if is_disposable(sample.data, config.length_size) => {
+                if in_range(pts) {
+                    oracle.needed(pts).ok().map(|needed| !needed)
+                } else {
+                    Some(true)
+                }
+            }
+            _ => Some(false),
+        };
+        if decision.is_none() {
+            oracle = None;
+        }
+        if decision == Some(true) {
+            skipped_count += 1;
+            if in_range(pts) {
+                *skipped_pts.entry(pts).or_default() += 1;
+            }
+            metrics.end(Stage::VideoParse, parse_started);
+            continue;
+        }
+        pts_ms.push(Reverse(pts));
         anyhow::ensure!(
             pts_ms.len() <= 34,
             "H.264 reorder queue exceeds 34 pictures"
@@ -207,22 +347,31 @@ where
             .with_context(|| format!("decode OpenH264 access unit {index}"))?;
         metrics.end(Stage::VideoDecode, decode_started);
         if let Some(frame) = frame {
-            emit(frame, &mut pts_ms)?;
+            emit(frame, &mut pts_ms, &mut skipped_pts)?;
         }
     }
     let decode_started = metrics.start();
     let remaining = decoder.flush_remaining().context("flush OpenH264")?;
     metrics.end(Stage::VideoDecode, decode_started);
     for frame in remaining {
-        emit(frame, &mut pts_ms)?;
+        emit(frame, &mut pts_ms, &mut skipped_pts)?;
+    }
+    // Skipped pictures presented after the last decoded one.
+    while let Some(skipped) = take_skipped(&mut skipped_pts, current_pts) {
+        anyhow::ensure!(
+            epoch >= epoch_end(skipped, next_pts, window_ms, total_epochs),
+            "skipped H.264 picture {skipped} ms was selected for an epoch"
+        );
+        current_pts = next_pts;
+        next_pts = presentation.next_pts()?;
     }
     anyhow::ensure!(
-        out_index == track.sample_count(),
+        out_index + skipped_count == track.sample_count(),
         "H.264 picture count mismatch: {out_index} vs {} access units",
-        track.sample_count()
+        track.sample_count() - skipped_count
     );
     anyhow::ensure!(
-        current_pts.is_none() && epoch == total_epochs,
+        current_pts.is_none() && epoch == total_epochs && skipped_pts.is_empty(),
         "incomplete H.264 presentation sequence"
     );
     Ok(VideoInfo {
@@ -231,6 +380,7 @@ where
         duration_ms: (timeline.duration_sec * 1000.0).round() as u64,
         sample_count: track.sample_count(),
         resized_count,
+        skipped_count,
     })
 }
 
@@ -420,6 +570,90 @@ mod tests {
             }
         }
         assert_eq!((epoch, resized), (660, 660));
+    }
+
+    fn avcc(nals: &[&[u8]]) -> Vec<u8> {
+        nals.iter()
+            .flat_map(|n| {
+                (n.len() as u32)
+                    .to_be_bytes()
+                    .into_iter()
+                    .chain(n.iter().copied())
+            })
+            .collect()
+    }
+
+    #[test]
+    fn disposable_only_for_unreferenced_non_idr_slices() {
+        let nonref_slice: &[u8] = &[0x01, 0x88];
+        let sei: &[u8] = &[0x06, 0x05];
+        let aud: &[u8] = &[0x09, 0x10];
+        assert!(is_disposable(&avcc(&[nonref_slice]), 4));
+        assert!(is_disposable(
+            &avcc(&[aud, sei, nonref_slice, nonref_slice]),
+            4
+        ));
+        for kept in [
+            avcc(&[&[0x21, 0x88]]),               // nal_ref_idc 1
+            avcc(&[&[0x41, 0x88]]),               // nal_ref_idc 2
+            avcc(&[&[0x65, 0x88]]),               // IDR
+            avcc(&[nonref_slice, &[0x41, 0x88]]), // one referenced slice
+            avcc(&[&[0x67, 0x42], nonref_slice]), // SPS changes decoder state
+            avcc(&[nonref_slice, &[0x0a]]),       // end of sequence
+            avcc(&[&[0x02, 0x88]]),               // data partitioning
+            avcc(&[sei]),                         // no slice at all
+            vec![],
+            vec![0, 0, 0, 9, 0x01],    // truncated payload
+            vec![0, 0, 0, 1, 0x81],    // forbidden bit
+            vec![0, 0, 0, 2, 0x01],    // truncated payload
+            vec![0, 0, 0, 1, 0x01, 0], // trailing partial length
+        ] {
+            assert!(!is_disposable(&kept, 4), "{kept:?}");
+        }
+        assert!(is_disposable(&[2, 0x01, 0x88], 1));
+        assert!(!is_disposable(&avcc(&[nonref_slice]), 5));
+    }
+
+    #[test]
+    fn selection_oracle_matches_upfront_selection_in_decode_order() {
+        // Decode order is I P B B per group; PTS gaps and duplicates exercise ties and sparsity.
+        let patterns: Vec<Vec<i64>> = vec![
+            (0..200)
+                .flat_map(|g| [g * 4, g * 4 + 3, g * 4 + 1, g * 4 + 2])
+                .map(|f| (f as f64 * 1000. / 30.).round() as i64)
+                .collect(),
+            (0..60)
+                .flat_map(|g| [g * 900, g * 900 + 700, g * 900 + 100, g * 900 + 350])
+                .collect(),
+            vec![0, 40, 0, 20, 80, 120, 80, 100, 160, 160, 140, 150],
+        ];
+        for decode_order in patterns {
+            let mut presented = decode_order.clone();
+            presented.sort_unstable();
+            for window in [50, 330, 500, 1000] {
+                let total =
+                    ((*presented.last().unwrap() as u64) + window).div_ceil(window) as usize;
+                let mut selected = std::collections::BTreeSet::new();
+                let mut epoch = 0;
+                for (i, &p) in presented.iter().enumerate() {
+                    let end = epoch_end(p, presented.get(i + 1).copied(), window, total);
+                    if epoch < end {
+                        selected.insert(p);
+                        epoch = end;
+                    }
+                }
+                let mut oracle =
+                    SelectionOracle::new(decode_order.iter().copied().map(Ok), window, total)
+                        .unwrap();
+                for &p in &decode_order {
+                    assert_eq!(
+                        oracle.needed(p).unwrap(),
+                        selected.contains(&p),
+                        "pts {p}, window {window}"
+                    );
+                }
+            }
+        }
     }
 
     #[test]

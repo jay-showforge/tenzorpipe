@@ -1,6 +1,6 @@
 # BENCHMARKS — TenzorPipe vs DALI vs TorchCodec vs FFmpeg (1080p ingestion)
 
-Generated 2026-09-16 19:18 by `bench/gpu_bench.py` — 5 warm-up + **50 measured iterations** per contender, each contender in a fresh process.
+Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured iterations** per contender, each contender in a fresh process.
 
 ## Task (identical for every contender)
 
@@ -15,27 +15,31 @@ Generated 2026-09-16 19:18 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 
 | Contender | Decode | Audio | Latency ms (median) | p5–p95 ms | Source FPS | Epochs/s | Peak RSS MiB | RSS growth MiB | Child RSS MiB | VRAM torch MiB | VRAM NVML Δ MiB | CPU cores | Setup+cold s | Video MAE | Mel MAE |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **tenzorpipe-w1** | CPU (OpenH264) | n/a | 5022.5 | 4963.2–5187.4 | 119 | 7.9 | 674 | 110 | 87 | 0 | 0 (no CUDA) | 1.11 | 6.21 | ref | — |
-| **tenzorpipe-w6** | CPU (OpenH264) | n/a | 1468.8 | 1416.2–1559.9 | 406 | 27.1 | 889 | 324 | 301 | 0 | 0 (no CUDA) | 4.92 | 3.06 | 0.0000 | — |
-| **tenzorpipe-auto** | CPU (OpenH264) | n/a | 1031.5 | 1011.1–1079.2 | 580 | 38.6 | 1084 | 520 | 497 | 0 | 0 (no CUDA) | 9.20 | 2.35 | 0.0000 | — |
+| **tenzorpipe-default** | CPU (OpenH264) | n/a | 624.9 | 608.2–646.8 | 957 | 63.8 | 1077 | 496 | 496 | 0 | 0 (no CUDA) | 8.78 | 1.85 | 0.0000 | — |
+| **tenzorpipe-w1** | CPU (OpenH264) | n/a | 2990.6 | 2950.0–3136.1 | 199 | 13.3 | 668 | 110 | 87 | 0 | 0 (no CUDA) | 1.13 | 4.22 | ref | — |
+| **tenzorpipe-w6** | CPU (OpenH264) | n/a | 888.2 | 857.4–934.3 | 674 | 44.9 | 881 | 323 | 300 | 0 | 0 (no CUDA) | 4.83 | 2.14 | 0.0000 | — |
+| **tenzorpipe-auto** | CPU (OpenH264) | n/a | 631.0 | 611.1–653.9 | 950 | 63.3 | 1078 | 520 | 497 | 0 | 0 (no CUDA) | 8.75 | 1.86 | 0.0000 | — |
+| **tenzorpipe-v020-auto** | CPU (OpenH264) | n/a | 1030.9 | 1015.6–1060.2 | 580 | 38.7 | 1077 | 520 | 497 | 0 | 0 (no CUDA) | 9.15 | 2.33 | 0.0000 | — |
 | dali-nvdec | GPU (NVDEC) | n/a | 441.7 | 440.2–445.6 | 1364 | 90.9 | 1074 | 0 | — | 46 | 822 | 0.42 | 2.23 | 0.0799 | — |
 | torchcodec-cuda | GPU (NVDEC) | n/a | 276.0 | 267.7–286.7 | 2173 | 144.8 | 1128 | 0 | — | 256 | 650 | 0.47 | 2.63 | 0.0047 | — |
 | torchcodec-cpu | CPU (libavcodec) | n/a | 2216.3 | 2190.1–2261.6 | 270 | 18.0 | 1005 | 281 | — | 0 | 0 (no CUDA) | 1.31 | 4.30 | 0.0070 | — |
-| torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' (removed in torchvision 0.29) | | | | | | | | | | | | | | |
-| ffmpeg-pipe | CPU (libavcodec) | n/a | 542.4 | 525.3–585.1 | 1095 | 73.0 | 707 | 172 | 167 | 0 | 0 (no CUDA) | 9.01 | 1.83 | 0.0466 | — |
+| torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' | | | | | | | | | | | | | | |
+| ffmpeg-pipe | CPU (libavcodec) | n/a | 530.7 | 521.7–545.7 | 1129 | 75.3 | 702 | 172 | 167 | 0 | 0 (no CUDA) | 9.04 | 1.79 | 0.0466 | — |
 
 ## Scenario 2 — video + AAC audio
 
 | Contender | Decode | Audio | Latency ms (median) | p5–p95 ms | Source FPS | Epochs/s | Peak RSS MiB | RSS growth MiB | Child RSS MiB | VRAM torch MiB | VRAM NVML Δ MiB | CPU cores | Setup+cold s | Video MAE | Mel MAE |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **tenzorpipe-w1** | CPU (OpenH264) | Log-Mel | 5120.7 | 5006.5–5293.9 | 117 | 7.8 | 679 | 115 | 92 | 0 | 0 (no CUDA) | 1.14 | 6.27 | ref | ref |
-| **tenzorpipe-w6** | CPU (OpenH264) | Log-Mel | 1483.9 | 1424.5–1546.7 | 405 | 27.0 | 892 | 327 | 304 | 0 | 0 (no CUDA) | 4.98 | 2.71 | 0.0000 | 0.000 |
-| **tenzorpipe-auto** | CPU (OpenH264) | Log-Mel | 1073.2 | 1043.7–1101.6 | 558 | 37.2 | 1087 | 523 | 500 | 0 | 0 (no CUDA) | 8.90 | 2.36 | 0.0000 | 0.000 |
+| **tenzorpipe-default** | CPU (OpenH264) | Log-Mel | 687.5 | 668.7–716.1 | 871 | 58.1 | 1081 | 523 | 500 | 0 | 0 (no CUDA) | 8.26 | 1.92 | 0.0000 | 0.000 |
+| **tenzorpipe-w1** | CPU (OpenH264) | Log-Mel | 3010.0 | 2962.2–3152.5 | 197 | 13.1 | 674 | 115 | 92 | 0 | 0 (no CUDA) | 1.17 | 4.28 | ref | ref |
+| **tenzorpipe-w6** | CPU (OpenH264) | Log-Mel | 884.8 | 846.0–936.7 | 675 | 45.0 | 885 | 327 | 303 | 0 | 0 (no CUDA) | 4.98 | 2.10 | 0.0000 | 0.000 |
+| **tenzorpipe-auto** | CPU (OpenH264) | Log-Mel | 683.5 | 660.3–715.7 | 877 | 58.4 | 1081 | 523 | 499 | 0 | 0 (no CUDA) | 8.30 | 1.89 | 0.0000 | 0.000 |
+| **tenzorpipe-v020-auto** | CPU (OpenH264) | Log-Mel | 1086.7 | 1052.4–1121.4 | 552 | 36.8 | 1081 | 523 | 500 | 0 | 0 (no CUDA) | 8.89 | 2.28 | 0.0000 | 0.000 |
 | dali-nvdec | GPU (NVDEC) | none (unsupported) | 442.2 | 440.6–444.2 | 1367 | 91.2 | 1074 | 0 | — | 46 | 823 | 0.41 | 2.17 | 0.0799 | — |
 | torchcodec-cuda | GPU (NVDEC) | Log-Mel | 312.3 | 307.7–322.7 | 1912 | 127.5 | 1398 | 0 | — | 288 | 665 | 0.54 | 2.92 | 0.0047 | 0.014 |
 | torchcodec-cpu | CPU (libavcodec) | Log-Mel | 2318.0 | 2223.8–2372.6 | 260 | 17.3 | 1041 | 285 | — | 0 | 0 (no CUDA) | 1.33 | 4.42 | 0.0070 | 0.014 |
-| torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' (removed in torchvision 0.29) | | | | | | | | | | | | | | |
-| ffmpeg-pipe | CPU (libavcodec) | Log-Mel | 592.0 | 572.0–624.0 | 1012 | 67.5 | 787 | 191 | 168 | 0 | 0 (no CUDA) | 10.90 | 1.72 | 0.0466 | 0.014 |
+| torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' | | | | | | | | | | | | | | |
+| ffmpeg-pipe | CPU (libavcodec) | Log-Mel | 608.7 | 580.8–635.2 | 985 | 65.6 | 732 | 168 | 168 | 0 | 0 (no CUDA) | 10.63 | 1.68 | 0.0466 | 0.014 |
 
 ### Column definitions
 
@@ -49,32 +53,36 @@ Generated 2026-09-16 19:18 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 
 ## TenzorPipe internals (for bottleneck analysis)
 
-- `tenzorpipe-auto` / av: engine CLI 1065.6 ms + Arrow→torch load 2.9 ms (medians)
-- `tenzorpipe-w1` / av: engine CLI 5114.2 ms + Arrow→torch load 2.9 ms (medians)
-- `tenzorpipe-w6` / av: engine CLI 1476.3 ms + Arrow→torch load 2.8 ms (medians)
-- `tenzorpipe-auto` / video: engine CLI 1023.2 ms + Arrow→torch load 2.7 ms (medians)
-- `tenzorpipe-w1` / video: engine CLI 5014.8 ms + Arrow→torch load 2.8 ms (medians)
-- `tenzorpipe-w6` / video: engine CLI 1460.2 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-auto` / av: engine CLI 675.6 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-default` / av: engine CLI 679.8 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-v020-auto` / av: engine CLI 1079.5 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-w1` / av: engine CLI 3001.7 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-w6` / av: engine CLI 877.3 ms + Arrow→torch load 2.8 ms (medians)
+- `tenzorpipe-auto` / video: engine CLI 623.7 ms + Arrow→torch load 2.8 ms (medians)
+- `tenzorpipe-default` / video: engine CLI 617.9 ms + Arrow→torch load 2.7 ms (medians)
+- `tenzorpipe-v020-auto` / video: engine CLI 1023.1 ms + Arrow→torch load 2.8 ms (medians)
+- `tenzorpipe-w1` / video: engine CLI 2983.0 ms + Arrow→torch load 2.8 ms (medians)
+- `tenzorpipe-w6` / video: engine CLI 880.4 ms + Arrow→torch load 2.7 ms (medians)
 
 `--profile` from one warm run per variant — wall-clock stage timers overlap across threads, so they are not additive; `*_wait` rows are idle time.
 
-| Stage (s) | tenzorpipe-auto / av | tenzorpipe-w1 / av | tenzorpipe-w6 / av | tenzorpipe-auto / video | tenzorpipe-w1 / video | tenzorpipe-w6 / video |
-|---|---:|---:|---:|---:|---:|---:|
-| video_decode | 9.035 | 4.941 | 6.744 | 9.130 | 4.962 | 6.949 |
-| collector_receive_wait | 1.039 | 4.952 | 1.379 | 0.955 | 4.975 | 1.457 |
-| worker_send_wait | 1.040 | 4.718 | 1.358 | 0.015 | 0.001 | 0.003 |
-| video_reorder_wait | 0.981 | 0.000 | 1.358 | 0.953 | 0.000 | 1.462 |
-| video_window_wait | 0.001 | 0.000 | 0.109 | 0.001 | 0.000 | 0.244 |
-| audio_source | 0.084 | 0.076 | 0.081 | 0.000 | 0.000 | 0.000 |
-| audio_source_wait | 0.049 | 0.006 | 0.024 | 0.000 | 0.000 | 0.000 |
-| video_resize | 0.034 | 0.017 | 0.030 | 0.043 | 0.017 | 0.033 |
-| audio_resample | 0.021 | 0.019 | 0.028 | 0.000 | 0.000 | 0.000 |
-| video_parse | 0.021 | 0.010 | 0.017 | 0.023 | 0.013 | 0.018 |
-| audio_mel | 0.014 | 0.012 | 0.018 | 0.000 | 0.000 | 0.000 |
-| arrow_write | 0.009 | 0.014 | 0.010 | 0.010 | 0.013 | 0.010 |
-| arrow_pack | 0.009 | 0.012 | 0.013 | 0.011 | 0.014 | 0.012 |
-| setup | 0.008 | 0.008 | 0.013 | 0.005 | 0.003 | 0.003 |
-| **wall** | **1.067** | **4.987** | **1.418** | **0.984** | **5.006** | **1.485** |
+| Stage (s) | tenzorpipe-auto / av | tenzorpipe-default / av | tenzorpipe-v020-auto / av | tenzorpipe-w1 / av | tenzorpipe-w6 / av | tenzorpipe-auto / video | tenzorpipe-default / video | tenzorpipe-v020-auto / video | tenzorpipe-w1 / video | tenzorpipe-w6 / video |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| video_decode | 5.477 | 5.229 | 9.121 | 2.936 | 3.883 | 5.300 | 5.296 | 9.062 | 2.890 | 3.881 |
+| collector_receive_wait | 0.655 | 0.613 | 1.013 | 2.953 | 0.825 | 0.568 | 0.584 | 0.973 | 2.905 | 0.799 |
+| worker_send_wait | 0.652 | 0.611 | 1.025 | 2.816 | 0.806 | 0.019 | 0.018 | 0.013 | 0.001 | 0.013 |
+| video_reorder_wait | 0.595 | 0.553 | 0.954 | 0.000 | 0.796 | 0.562 | 0.581 | 0.972 | 0.000 | 0.793 |
+| video_window_wait | 0.000 | 0.000 | 0.001 | 0.000 | 0.202 | 0.001 | 0.001 | 0.001 | 0.000 | 0.021 |
+| audio_source | 0.100 | 0.087 | 0.084 | 0.080 | 0.085 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| audio_source_wait | 0.049 | 0.048 | 0.047 | 0.010 | 0.035 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| video_resize | 0.042 | 0.035 | 0.037 | 0.017 | 0.028 | 0.042 | 0.043 | 0.040 | 0.017 | 0.031 |
+| audio_resample | 0.028 | 0.022 | 0.022 | 0.020 | 0.024 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| video_parse | 0.018 | 0.016 | 0.023 | 0.007 | 0.011 | 0.016 | 0.018 | 0.023 | 0.009 | 0.012 |
+| audio_mel | 0.017 | 0.014 | 0.014 | 0.013 | 0.016 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| setup | 0.015 | 0.011 | 0.006 | 0.012 | 0.009 | 0.003 | 0.003 | 0.003 | 0.011 | 0.004 |
+| arrow_write | 0.012 | 0.009 | 0.014 | 0.010 | 0.010 | 0.012 | 0.012 | 0.009 | 0.013 | 0.010 |
+| arrow_pack | 0.012 | 0.010 | 0.011 | 0.013 | 0.012 | 0.012 | 0.012 | 0.011 | 0.013 | 0.011 |
+| **wall** | **0.696** | **0.644** | **1.046** | **2.991** | **0.859** | **0.597** | **0.613** | **0.998** | **2.944** | **0.826** |
 
 ## Environment
 
@@ -94,7 +102,9 @@ Generated 2026-09-16 19:18 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
   "pyarrow": "25.0.1",
   "ffmpeg": "ffmpeg version n8.1.2-53-g1005b294ff-20260916 Copyright (c) 2000-2026 the FFmpeg developers",
   "torch_cuda": "13.0",
-  "tenzor_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77"
+  "tenzor_bin": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor",
+  "tenzor_sha256": "152c4f57c0fd199520da1e8c8aa79651722f61467706ab13b03b9abbf5b2a440",
+  "release_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77"
 }
 ```
 
@@ -102,136 +112,120 @@ Raw per-iteration latencies: `bench/results/latest.json`. Reproduce inside WSL2/
 
 ```sh
 bash bench/setup_wsl.sh && . ~/.tenzor-bench/env.sh
-python bench/gpu_bench.py --iters 50 --warmup 5 --seconds 20
+cargo build --release --locked && mkdir -p target/release  # CARGO_TARGET_DIR may differ
+python bench/gpu_bench.py --iters 50 --warmup 5 --seconds 20 --tenzor-bin target/release/tenzor
 ```
 
 <!-- ANALYSIS -->
-## Analysis — where TenzorPipe wins, where it loses, what to fix before release
+## Analysis — v0.2.1 candidate (skip non-reference pictures, AVX2 build, auto default)
 
-*Written from the 2026-09-16 run above (i5-14400F, RTX 5060 8 GB, WSL2). The follow-up measurements in
-this section come from `bench/bottleneck_probe.sh` on the same video-only clip. The script regenerates
-the tables but keeps this section; update it by hand if the numbers move.*
+*Written 2026-09-16 from the tables above. Rows named `tenzorpipe-default/-w1/-w6/-auto` are the
+candidate built from this tree (`target/release/tenzor`). `tenzorpipe-v020-auto` is the untouched
+v0.2.0 release binary, run in the same session. `ffmpeg-pipe` was re-measured in the same session.
+The DALI and TorchCodec rows come from the earlier v0.2.0 run on the same machine and clips; nothing
+they depend on changed. The analysis of the v0.2.0 release itself is archived in
+`bench/results/analysis-v020.md`.*
 
 ### Headline
 
-On raw ingestion speed of 1080p H.264, **TenzorPipe v0.2.0 is not yet competitive.** With every CPU
-core it takes 1,032 ms per 20 s clip. That makes it **3.7× slower than TorchCodec-CUDA** (276 ms),
-**2.3× slower than DALI** (442 ms) and **1.9× slower than a plain FFmpeg pipe on the same CPU** (542 ms).
-At the CLI default (`--video-workers 1`) it takes 5,023 ms, which is slower than every contender,
-including single-threaded TorchCodec-CPU (2,216 ms). TenzorPipe's real advantages are GPU memory,
-host memory, determinism and re-read cost, not latency.
+| Video-only, 1080p 20 s clip | v0.2.0 | candidate | Speedup |
+|---|---:|---:|---:|
+| CLI default, no flags | 5,023 ms (1 worker) | **625 ms** (auto) | **8.0×** |
+| `--video-workers 1` | 5,023 ms | 2,991 ms | 1.68× |
+| `--video-workers 6` | 1,469 ms | 888 ms | 1.65× |
+| `--video-workers 0` (auto) | 1,031 ms¹ | 631 ms | 1.63× |
 
-### Where TenzorPipe outperforms
+¹ Same-session release row.
 
-| Advantage | Evidence |
+**Against FFmpeg's 531 ms, the default is now 1.18× slower (94 ms), down from 1.94×.** With audio,
+TenzorPipe takes 688 ms to FFmpeg's 609 ms, 1.13× slower. That puts TenzorPipe 1.41× behind DALI
+(442 ms) and 2.26× behind TorchCodec-CUDA (276 ms), still with zero VRAM. Every output tensor stayed
+byte-identical to v0.2.0.
+
+### Where the speedup came from (interleaved A/B, 5 runs each, `evidence/v0.2.1/ab-attribution.txt`)
+
+| Build | 1 worker | auto workers | Output |
+|---|---:|---:|---|
+| v0.2.0 release | 5.34 s | 1.02 s | reference |
+| C-only OpenH264 (`OPENH264_NO_ASM=1`), no skipping | 6.59 s (0.81×) | 1.18 s (0.86×) | identical |
+| + NASM with `HAVE_AVX2`, no skipping | 5.28 s (1.01×) | 1.03 s (0.99×) | identical |
+| + skip unselected non-reference pictures | **3.14 s (1.70×)** | **0.63 s (1.63×)** | identical |
+
+- **Skipping frames is the entire speedup.** 265 of 600 access units are never decoded: the clip's 281
+  non-reference B-frames minus the 16 that epochs select.
+- **SIMD was already on in the release.** A C-only build is 19% slower, so the v0.2.0 binary did use
+  its NASM SSE2/SSSE3/SSE4.1 routines.
+- **AVX2 was compiled out, and enabling it changes nothing measurable.** `openh264-sys2` never defined
+  `HAVE_AVX2`, which the vendored build patch now fixes. But OpenH264's AVX2 code covers only the
+  residual IDCT and luma interpolation. The High-profile hot path is scalar CABAC entropy decoding,
+  which has no SIMD version at all. The patch is kept because it is free, byte-identical, and makes a
+  missing NASM fail the build instead of silently producing a 19% slower binary.
+- **The new default is where the 8× comes from.** Auto workers alone give 5×, and skipping gives the
+  rest.
+
+### Correctness gates (all on the candidate binary)
+
+| Gate | Result |
 |---|---|
-| **Zero GPU memory** | DALI holds 822 MiB of device memory and TorchCodec-CUDA 650–665 MiB. On this 8 GB card, with 2.7 GB already used by the desktop, that is 12–15% of the free VRAM taken from model and batch. TenzorPipe uses none. |
-| **Lowest total footprint (1 worker)** | 674–679 MiB peak for the whole process tree, the lowest of any contender, including FFmpeg (707–787). The engine itself peaks at **87–92 MiB** at 1080p. Per-clip RSS growth is 110–115 MiB, against 172–191 (FFmpeg) and 281–285 (TorchCodec-CPU). |
-| **Re-read cost ≈ 3 ms** | Loading the finished `.tenzor` into PyTorch tensors takes a median **2.8 ms** per clip. Epochs 2…N of training pay 2.8 ms instead of re-decoding: 276 ms even for the fastest GPU path, about **100×**. This is the structural win, but it only holds when a dataset is read more than once, and competitors can add a cache too. |
-| **Bit-exact determinism** | 6 and auto workers produce **identical tensors** to 1 worker (video and Mel MAE 0.0000). The other libraries disagree with each other by 0.005–0.08 (colour conversion and resize sampling). `check_dali_alignment.py` shows DALI's difference is in pixel values, not a frame offset. |
-| **Audio + video in one pass** | DALI cannot decode AAC in MP4 at all. TenzorPipe's audio adds only 40–100 ms per clip (profile: AAC decode 76–84 ms, resample ~20 ms, Mel ~13 ms), comparable to TorchCodec-CUDA (+36 ms) and FFmpeg (+50 ms). |
-| **Cold start** | With auto workers, setup plus the first clip takes 2.35 s: on par with DALI (2.2 s), better than TorchCodec-CUDA (2.6–2.9 s) and TorchCodec-CPU (4.3 s). FFmpeg is fastest (1.7–1.8 s). |
+| `cargo fmt --check`, `cargo clippy -D warnings`, `cargo deny check licenses` | pass |
+| `cargo test --all-targets` | 32 pass (30 existing + disposable-NAL classifier + streaming-oracle equivalence) |
+| **`scripts/test_skip_identity.py`**: new vs v0.2.0 release binary, byte for byte | **1,056 cases, 0 failures**: 936 identical artifacts (396 of them with skipping active, 93,716 access units skipped) and 120 identical errors |
+| `test_matrix.py` (default and 4 workers) | 16 media + 12 failure cases + PyTorch loader, both pass |
+| `test_epoch_selection.py` vs v0.1.6 (1 and 4 workers) | 41/41 exact-value, both pass |
+| `test_concurrency.py`, `test_chunk_boundaries.py` vs v0.1.6, `test_audio_write_failure.py` | 38, 30 and 12 checks pass |
+| `test_audio_identity.py` vs v0.1.9 (default variant is now auto) | 396 cases: 336 identical artifacts + 60 error agreements |
+| `fuzz_chunked_corruption.py` (gate updated, see below) | 24/24 pass |
 
-### Bottleneck 1 — the H.264 decoder is ~99% of wall time
+The identity media: every committed fixture, plus open-GOP, 23.976 fps, VFR, audio-tail, 330 s and
+1080p clips, plus x264 `b-pyramid` none/normal/strict, `bf=16` and `refs=1` streams
+(`scripts/gen_skip_fixtures.sh`). The project gates ran on a scratch copy of the repository
+(`scripts/run_regression_copy.sh`), because several of them regenerate committed fixtures.
 
-`--profile` with 1 worker shows `video_decode` taking 4.96 s of 5.01 s. Everything else is small:
-resize 17–43 ms, audio ~130 ms in total, Arrow pack + write ~25 ms, and loading into PyTorch 2.8 ms.
-**Do not spend pre-release time on resize, Mel, Arrow or the loader: together they are under 5%.**
+**One behaviour change, found by the corruption fuzz:** in 2 of 24 corrupted files, every damaged byte
+sat inside a skipped non-reference picture. v0.2.0 decoded that picture and failed. The candidate never
+decodes it, so it succeeds, and its output is **byte-identical to the output from the uncorrupted
+file**, so no damaged data reaches a tensor. With `--no-skip-nonref` all 24 fail exactly as before.
+The fuzz gate now enforces exactly that: strict mode must reject every corruption, and default mode
+must either fail or match the clean output.
 
-The decoder itself is slow per core:
+### Costs of the new default
 
-| Decoder, 600 frames 1080p High profile, 1 thread | Wall | Frames/s |
-|---|---:|---:|
-| OpenH264 (TenzorPipe `--video-workers 1`) | 5.05 s | 119 |
-| libavcodec (`ffmpeg -threads 1 -f null`) | 2.58 s | 233 |
-| libavcodec, non-reference frames skipped | 1.55 s | 387 |
+- **RAM:** the default-run engine now peaks at **496 MiB** on 1080p, against 87 MiB for the old
+  1-worker default: about 48 MiB per decoder, 10 decoders here. `--video-workers 1` still peaks at
+  87 MiB and is itself 1.68× faster than before.
+- **CPU:** 8.8 cores for 957 fps (109 fps/core), against FFmpeg's 9.0 cores for 1,129 fps
+  (125 fps/core). One worker is the most CPU-efficient setting: 176 fps/core, up from 107.
+- **Many processes at once:** a pipeline that starts several `tenzor` processes without a flag now
+  oversubscribes the CPU. Pass `--video-workers` explicitly or use `python/tenzor_batch.py`.
+- **Cold start:** setup plus the first clip drops from 6.2 s (old default) to 1.85 s, close to FFmpeg's
+  1.8 s.
 
-So OpenH264 decodes about **2× slower per core** than libavcodec on this CABAC/B-frame stream. That
-gap is why FFmpeg on the same cores (1,095 fps at 9.0 cores) beats TenzorPipe auto (580 fps at 9.2
-cores).
+### What still separates TenzorPipe from FFmpeg (94 ms)
 
-### Bottleneck 2 — decoding frames nobody uses
-
-Only 40 of the 600 frames become output rows. Of the 600, **281 (47%) are non-reference B-frames**,
-which no other frame depends on (`ffprobe -skip_frame noref` leaves 319). libavcodec decodes the clip
-**40% faster** when it skips them. TenzorPipe decodes every access unit.
-
-**Fix (highest value, no new dependency):** before feeding an access unit to OpenH264, check whether
-all its VCL NAL units have `nal_ref_idc == 0`. If so, and the epoch selection (already computed from
-container timing) does not pick that picture, skip it. The expected result is roughly 1.4–1.6× at
-every worker count. That estimate comes from the libavcodec measurement and has not been measured in
-TenzorPipe. It must pass the existing exact-identity matrix, because skipped pictures change what the
-PTS reorder queue sees.
-
-### Bottleneck 3 — parallelism is capped by IDR chunk count
-
-Worker sweep (3 runs each; the clip has 2 s GOPs, so exactly 10 chunks):
-
-| Workers | 1 | 2 | 4 | 6 | 8 | 10 | 12 | 14 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Wall s | 5.06 | 2.95 | 1.90 | 1.42 | 1.47 | 1.03 | 1.02 | 1.02 |
-| Engine peak RSS MiB | 86 | 138 | 225 | 299 | 398 | 495 | 495 | 496 |
-| Effective workers | 1 | 2 | 4 | 6 | 8 | 10 | 10 | 10 |
-
-- Wall time follows **⌈chunks ÷ workers⌉ rounds**: 6 and 8 workers both need 2 rounds (1.42 vs
-  1.47 s), and anything from 10 up needs 1. Workers beyond the chunk count are clamped to 10, so the
-  auto setting's "cores − 2" (14) is really 10 here.
-- **This matters most for training data:** a 10 s clip with 2 s GOPs has only 5 chunks, so it can
-  never use more than 5 decoders. For datasets of short clips, running several files at once is the
-  lever that scales. Intra-file chunking cannot.
-- Per-frame efficiency drops as workers are added. Summed decode time is 4.96 s with 1 worker, 6.95 s
-  with 6 and 9.13 s with 10, so 10 workers achieve a 4.9× speedup (49% efficiency). The i5-14400F has
-  6 P-cores and 4 E-cores with 16 threads, and each round waits for its slowest chunk, which can land on an E-core or a
-  sibling hyper-thread (plausible but not isolated in this run).
-
-**Fixes:** (a) cut chunks so their count is a multiple of the worker count, and balance chunk sizes
-across P- and E-cores; (b) document or provide multi-file concurrency for clip datasets; (c) have
-auto pick min(chunks, physical cores, memory budget), not cores − 2.
-
-### Bottleneck 4 — about 48 MiB of RAM per worker at 1080p
-
-Engine RSS grows by about **48 MiB per extra worker** (86 MiB → 495 MiB for 10). The v0.2.0 EPYC
-report measured about 11 MiB per worker at 360p, so this scales with frame area: it is OpenH264
-picture buffers. `MALLOC_ARENA_MAX=2` changed nothing (503 → 507 MiB with auto workers), which rules
-out glibc per-thread arenas. With auto workers at 1080p the engine uses 3× the memory of the FFmpeg
-pipe (497 vs 167 MiB).
-
-**Fixes:** size the decoded picture buffer from the SPS (`max_num_ref_frames`, level) rather than the
-maximum, and make auto respect a RAM budget. `--video-buffer-mib` only bounds output tensors, not
-decoder state.
-
-### Bottleneck 5 — the CLI default
-
-At 1080p, `--video-workers 1` is **3.4× slower than 6 workers and 4.9× slower than auto** on this
-machine. The conservative default made sense at 360p, but it is the headline number most users will
-see.
-
-**Fix:** choose the default from resolution, chunk count and a memory budget, or at least print a
-hint when a single decoder runs on a multi-core host.
-
-### Larger strategic options (these need a policy decision)
-
-- **Optional NVDEC backend** (feature-gated, CPU path stays default): the GPU contenders here reach
-  1,364–2,173 fps, 2.3–3.7× TenzorPipe's best, at 650–820 MiB of VRAM and under 0.5 CPU cores. It
-  would give up the zero-VRAM advantage for users who enable it.
-- **libavcodec's H.264 decoder** is 2× faster per core, but it is LGPL/GPL.
-  `DEPENDENCY_POLICY.md` and the "no FFmpeg" design goal currently rule it out.
-- First confirm the release binary's OpenH264 was built with its assembly routines enabled.
-  `BUILD_STATUS.md` says NASM was present, but this benchmark did not check the binary itself.
+1. **Per-core decoder speed, still about 1.9×.** With non-reference skipping on both sides, one thread:
+   libavcodec takes 1.55 s and OpenH264 inside TenzorPipe takes 2.99 s. With 1 worker, `video_decode`
+   is 2.89 s of 2.94 s wall; resize, audio and Arrow together are under 5%. The gap is OpenH264's
+   CABAC and reconstruction, and SIMD flags cannot close it (see the AVX2 row above).
+2. **Parallel efficiency is about 48%.** Ten decoders give 4.8× over one: summed `video_decode` is
+   5.30 s against 2.89 s. The 10 chunks run in a single round, so wall time is set by the slowest chunk
+   on a 6 P-core + 4 E-core CPU with hyper-threads.
+3. **Frames decoded after the last selected picture.** Within each chunk, access units decoded after
+   the last selected picture (and its reorder window) cannot affect the output. With a 2 s GOP and
+   0.5 s epochs that is roughly the last quarter of each GOP, now mostly P-frames because the B-frames
+   are already skipped. Flushing each chunk's decoder once its selected pictures are out would skip
+   them. **This is the next candidate, and its gain is unmeasured; an estimate of 15–25% of decode
+   time is a guess.** It needs the same identity gate, because flushing early changes when OpenH264
+   emits pictures.
+4. **For datasets of short clips, run files in parallel.** On 16 × 10 s 360p clips, 16 files × 1
+   worker took 0.41 s against 1.95 s sequential. See `docs/FILE_BATCHING.md`.
 
 ### Caveats
 
-- **One synthetic clip:** `testsrc2` + temporal noise, ~8 Mb/s, High profile, 3 B-frames, 2 s GOP,
-  on one machine under WSL2. Real footage, other GOP structures and native Linux will shift the
-  absolute numbers. The decoder ratios and scaling pattern should hold.
-- **DALI's setup:** `fn.readers.video` indexes the file once at pipeline build, and that cost is in
-  "Setup+cold", not in per-clip latency. For datasets of many files, DALI's per-file cost would be
-  somewhat higher than shown.
-- **Where tensors land:** GPU contenders leave tensors on the GPU, CPU contenders in host memory. A
-  CPU path feeding GPU training still pays a host-to-device copy (about 24 MiB per clip here),
-  which is not timed.
-- **VRAM readings:** NVML Δ is device-wide, because WSL2 has no per-process accounting.
-- **RSS sampling:** RSS is sampled every 5 ms and can miss very short peaks; the sampled engine peaks
-  agree with `/usr/bin/time` within 2%.
-- **`torchvision.io.read_video`** was removed in torchvision 0.29, so it could not be measured.
-
+- **Synthetic content:** one generated 1080p clip (testsrc2 + noise, ~8 Mb/s, x264 High, 3 B-frames,
+  2 s GOP) on one machine under WSL2. The share of non-reference pictures depends on the encoder:
+  streams without B-frames (Baseline, most phone recordings) gain nothing from skipping, while
+  B-pyramid-free encodes gain more.
+- **Carried-over rows:** the DALI and TorchCodec rows are from an earlier session. Same-session release
+  and FFmpeg rows reproduced their earlier medians within 3% (release 0.1%, FFmpeg 2.2% video / 2.8% A/V).
+- **Version string:** the candidate still reports version 0.2.0 so identity gates can compare bytes
+  directly. Bump the version (and the version-substitution identity scripts) at release.

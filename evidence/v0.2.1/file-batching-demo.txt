@@ -1,0 +1,7 @@
+sequential, default workers:        1.952828596 s
+16 at once, default workers (naive): .483727588 s
+16 files: 16 concurrent x --video-workers 1 (core budget 16)
+done: 16/16 files in 0.41s (38.62 files/s)
+16 files: 16 concurrent x --video-workers 1 (core budget 16)
+done: 16/16 files in 0.42s (38.43 files/s)
+outputs identical across modes

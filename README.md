@@ -22,8 +22,10 @@ cargo deny check licenses
 ```
 
 OpenH264 is compiled from BSD-licensed source. No FFmpeg library or executable is
-used by the engine. NASM enables OpenH264's assembly optimizations; without it,
-its build script falls back to C/C++. Check build output before comparing speed.
+used by the engine. NASM enables OpenH264's assembly optimizations, including the AVX2
+routines (selected at runtime by CPUID) via the vendored `openh264-sys2` build patch
+(vendor/openh264-sys2/TENZORPIPE_PATCH.md). A NASM failure now fails the build instead of
+silently producing a slower C-only decoder; set `OPENH264_ALLOW_C_FALLBACK=1` to accept one.
 The lockfile and local SPS metadata and AAC inverse-transform patches are included.
 
 ## Run
@@ -78,12 +80,20 @@ configuration. Do not enable that feature in deployments. See docs/releases/v0.1
 ## Parallel video decoding
 
 `--video-workers N` decodes H.264 with N independent OpenH264 instances over
-IDR-aligned chunks. `1` (the default) runs the unchanged 0.1.6 single-decoder
-path; `0` picks available cores minus 2 (1–16). The CLI default remains one to avoid multiplying decoder RAM. See the current
-BENCHMARK_REPORT.md for the measured worker recommendation after the audio speedup.
+IDR-aligned chunks. `1` runs the single-decoder path. `0` and the **default** (since
+the 0.2.1 candidate) pick `available_parallelism()`, clamped to 1–16 and further capped at
+the clip's number of chunks. The default falls back to one decoder when the experimental
+`--decoder-threads` is set.
+
+Each worker adds OpenH264 picture buffers: about 48 MiB per extra worker at 1080p (about
+14 MiB at 360p), so a 16-thread host can reach ~500 MiB of engine RSS on 1080p input. Pass
+`--video-workers 1` (or a small N) where RAM matters more than latency, and always pass an
+explicit value when running several `tenzor` processes at once (see
+docs/FILE_BATCHING.md and `python/tenzor_batch.py`). BENCHMARKS.md has current measurements.
 
 ```sh
-./target/release/tenzor -i fixtures/long-330.mp4 -o par.tenzor --video-workers 6 --profile
+./target/release/tenzor -i fixtures/long-330.mp4 -o par.tenzor --profile          # auto workers
+./target/release/tenzor -i fixtures/long-330.mp4 -o small.tenzor --video-workers 1 # lowest RAM
 ```
 
 - Chunks start only at access units whose VCL NALs are all IDR slices and whose
@@ -107,6 +117,24 @@ BENCHMARK_REPORT.md for the measured worker recommendation after the audio speed
   batch budgets are separate. See BENCHMARK_REPORT.md for current measured RSS.
 - Worker and emitter panics cancel before scoped joins; partial thread-start
   failures also trigger cancellation. Native faults remain process-level failures.
+
+### Skipping unused non-reference pictures
+
+Only the picture nearest each epoch start is converted, so most decoded pictures are
+discarded. An access unit whose slices all have `nal_ref_idc == 0` (typically
+non-reference B-frames) cannot affect any other picture. If no epoch selects it, it is now
+never sent to OpenH264. Output is byte-identical to decoding everything; on the 1080p
+benchmark clip 265 of 600 access units are skipped. The log reports
+`skipped_nonref=N`, and `--no-skip-nonref` restores full decoding.
+
+- Selection is decided before decoding. The chunked path uses its up-front plan; the
+  single-decoder path runs a second bounded presentation lookahead. If that lookahead hits
+  a metadata error, skipping stops and the normal path reports the error in its usual order.
+- Only units containing non-reference non-IDR slices plus SEI, access-unit delimiters or
+  filler are skipped. Parameter sets, end-of-sequence/stream NALs, data partitions and
+  malformed units are always decoded, so framing errors are reported as before.
+- Trade-off: corrupt *slice data* inside a skipped picture is no longer detected, because
+  that picture is never decoded. Use `--no-skip-nonref` to validate every picture.
 
 ## Audio execution in 0.2.0
 

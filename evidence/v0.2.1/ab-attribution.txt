@@ -1,0 +1,18 @@
+
+--video-workers 1 (synthetic-1080p30-h264-20s-video-only.mp4, 5 interleaved reps)
+  release    median  5.343s  (min 5.066)  x1.00 vs release  maxrss   86.8 MiB  single                       skipped_nonref=0     same bytes as release: True
+  c-only     median  6.588s  (min 6.290)  x0.81 vs release  maxrss   87.2 MiB  single                       skipped_nonref=0     same bytes as release: True
+  avx2       median  5.279s  (min 5.077)  x1.01 vs release  maxrss   86.8 MiB  single                       skipped_nonref=0     same bytes as release: True
+  avx2+skip  median  3.136s  (min 2.988)  x1.70 vs release  maxrss   86.7 MiB  single                       skipped_nonref=265   same bytes as release: True
+
+--video-workers 0 (synthetic-1080p30-h264-20s-video-only.mp4, 5 interleaved reps)
+  release    median  1.022s  (min 0.993)  x1.00 vs release  maxrss  496.5 MiB  video_mode=chunked workers=10 skipped_nonref=0     same bytes as release: True
+  c-only     median  1.182s  (min 1.175)  x0.86 vs release  maxrss  496.3 MiB  video_mode=chunked workers=10 skipped_nonref=0     same bytes as release: True
+  avx2       median  1.033s  (min 1.005)  x0.99 vs release  maxrss  497.3 MiB  video_mode=chunked workers=10 skipped_nonref=0     same bytes as release: True
+  avx2+skip  median  0.626s  (min 0.619)  x1.63 vs release  maxrss  496.4 MiB  video_mode=chunked workers=10 skipped_nonref=265   same bytes as release: True
+
+--video-workers default (synthetic-1080p30-h264-20s-video-only.mp4, 5 interleaved reps)
+  release    median  5.276s  (min 5.212)  x1.00 vs release  maxrss   86.8 MiB  single                       skipped_nonref=0     same bytes as release: True
+  c-only     median  1.212s  (min 1.179)  x4.35 vs release  maxrss  496.5 MiB  video_mode=chunked workers=10 skipped_nonref=0     same bytes as release: True
+  avx2       median  1.032s  (min 1.022)  x5.11 vs release  maxrss  497.0 MiB  video_mode=chunked workers=10 skipped_nonref=0     same bytes as release: True
+  avx2+skip  median  0.620s  (min 0.613)  x8.51 vs release  maxrss  497.0 MiB  video_mode=chunked workers=10 skipped_nonref=265   same bytes as release: True

@@ -36,6 +36,7 @@ strip = true
 
 [patch.crates-io]
 openh264 = { path = "vendor/openh264" }
+openh264-sys2 = { path = "vendor/openh264-sys2" }
 rusty_aac = { path = "vendor/rusty_aac" }
 rust_h264 = { path = "vendor/rust_h264" }
 

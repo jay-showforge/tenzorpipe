@@ -13,7 +13,7 @@
 use anyhow::{Context, Result, anyhow, bail};
 use std::{
     cmp::Reverse,
-    collections::{BTreeMap, BinaryHeap},
+    collections::{BTreeMap, BTreeSet, BinaryHeap},
     ops::Range,
     sync::{Condvar, Mutex},
     time::Duration,
@@ -24,7 +24,7 @@ use crate::media::Timeline;
 use crate::metrics::{Metrics, Stage};
 use crate::video::{
     MAX_REORDER, PresentationTimes, VideoConfig, VideoInfo, avcc_to_annexb, decode_h264_mp4,
-    epoch_end, video_color, yuv420_to_resized_chw,
+    epoch_end, is_disposable, video_color, yuv420_to_resized_chw,
 };
 use mp4io::{Codec, CodecConfig, Mp4, SampleEntry, TrackKind};
 use openh264::{
@@ -299,6 +299,7 @@ where
 struct ChunkOutput {
     pictures: Vec<(Selection, Vec<f32>)>,
     resized: usize,
+    skipped: usize,
 }
 
 /// Decode with `par.workers` independent decoders when the clip has valid IDR
@@ -475,12 +476,18 @@ where
         let mut out = ChunkOutput {
             pictures: Vec::with_capacity(wanted.len()),
             resized: 0,
+            skipped: 0,
         };
+        // Presentation times are unique here (duplicates fall back to the single path),
+        // so a set identifies skipped in-range pictures exactly.
+        let mut skipped_pts = BTreeSet::new();
+        let mut skipped = 0usize;
         let mut produced = 0usize;
         let mut next_expected = 0usize;
         let mut next_wanted = 0usize;
         let mut emit = |frame: openh264::decoder::DecodedYUV<'_>,
-                        heap: &mut BinaryHeap<Reverse<i64>>|
+                        heap: &mut BinaryHeap<Reverse<i64>>,
+                        skipped_pts: &mut BTreeSet<i64>|
          -> Result<()> {
             let Reverse(p) = heap.pop().context("decoder produced extra picture")?;
             produced += 1;
@@ -490,6 +497,13 @@ where
                 "midstream H.264 resolution changes unsupported"
             );
             if in_range(p) {
+                // Skipped slots presented before this picture were never decoded.
+                while expected
+                    .get(next_expected)
+                    .is_some_and(|&e| e < p && skipped_pts.remove(&e))
+                {
+                    next_expected += 1;
+                }
                 anyhow::ensure!(
                     expected.get(next_expected) == Some(&p),
                     "decoded PTS disagrees with bounded presentation lookahead"
@@ -520,6 +534,19 @@ where
                 .sample(index)
                 .context("read H.264 access unit")?
                 .context("read H.264 access unit")?;
+            // Never referenced and never selected: skip without decoding. Selections are
+            // sorted by presentation time, so a binary search answers membership.
+            if config.skip_nonref
+                && is_disposable(sample.data, avcc.length_size)
+                && wanted.binary_search_by_key(&pts[index], |s| s.pts).is_err()
+            {
+                skipped += 1;
+                if in_range(pts[index]) {
+                    skipped_pts.insert(pts[index]);
+                }
+                metrics.end(Stage::VideoParse, parse_started);
+                continue;
+            }
             heap.push(Reverse(pts[index]));
             anyhow::ensure!(
                 heap.len() <= MAX_REORDER,
@@ -546,19 +573,27 @@ where
                 .with_context(|| format!("decode OpenH264 access unit {index}"))?;
             metrics.end(Stage::VideoDecode, decode_started);
             if let Some(frame) = frame {
-                emit(frame, &mut heap)?;
+                emit(frame, &mut heap, &mut skipped_pts)?;
             }
         }
         let decode_started = metrics.start();
         let remaining = decoder.flush_remaining().context("flush OpenH264")?;
         metrics.end(Stage::VideoDecode, decode_started);
         for frame in remaining {
-            emit(frame, &mut heap)?;
+            emit(frame, &mut heap, &mut skipped_pts)?;
+        }
+        out.skipped = skipped;
+        // Skipped pictures presented after the chunk's last decoded picture.
+        while expected
+            .get(next_expected)
+            .is_some_and(|e| skipped_pts.remove(e))
+        {
+            next_expected += 1;
         }
         anyhow::ensure!(
-            produced == range.len(),
+            produced + out.skipped == range.len() && skipped_pts.is_empty(),
             "H.264 picture count mismatch in chunk {c}: {produced} vs {} access units",
-            range.len()
+            range.len() - out.skipped
         );
         anyhow::ensure!(
             next_expected == expected.len() && next_wanted == wanted.len(),
@@ -568,6 +603,7 @@ where
     };
 
     let mut resized_count = 0;
+    let mut skipped_count = 0;
     let mut next_epoch = 0usize;
     run_ordered(
         chunks.len(),
@@ -578,6 +614,7 @@ where
         decode_chunk,
         |_, chunk: ChunkOutput| {
             resized_count += chunk.resized;
+            skipped_count += chunk.skipped;
             for (sel, chw) in chunk.pictures {
                 let (start, end) = sel.epochs;
                 if start != next_epoch {
@@ -601,6 +638,7 @@ where
         duration_ms,
         sample_count: n,
         resized_count,
+        skipped_count,
     })
 }
 
