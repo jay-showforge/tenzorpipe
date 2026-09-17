@@ -1,15 +1,14 @@
-# DEPENDENCY_POLICY — TenzorPipe 0.2.0
+# DEPENDENCY_POLICY — TenzorPipe 0.3.0
 
-**cargo deny check licenses: PASS** on the pinned runtime lockfile. The unused
-BSD-3-Clause/ISC allowance warnings are retained. The supplied deny.toml still named
-root v0.1.9; its exact root-only BUSL exception now names=0.2.0. The permitted dependency
-license list and runtime dependency versions were not widened or changed.
+**cargo deny check licenses: PASS** on the pinned lockfile. The unused BSD-3-Clause/ISC
+allowance warnings are retained. The exact root-only BUSL exception names =0.3.0. The
+permitted dependency license list was not widened.
 
 Allowed: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, Unicode-3.0, Zlib and CC0-1.0.
 Unlisted dependencies fail closed. GPL, LGPL, AGPL, SSPL and other prohibited/copyleft
 dependencies are not authorized. BUSL-1.1 is not a dependency allowlist entry.
 
-- Source-built OpenH264 wrapper/sys 0.9.8: BSD-2-Clause; retained NASM assembly and source notices. No downloaded codec binary or FFmpeg engine linkage.
+- Source-built OpenH264 wrapper/sys 0.9.8: BSD-2-Clause; both vendored (vendor/openh264, vendor/openh264-sys2) with TENZORPIPE_PATCH.md build notes; retained NASM assembly and source notices. No downloaded codec binary or FFmpeg engine linkage.
 - rusty_aac 0.5.0: Apache-2.0. Vendored Huffman, bit-reader, table and FFT-buffer patches retain the original references/tests and license.
 - RustFFT 6.4.1: MIT OR Apache-2.0. No smaller-FFT algorithm or new DSP dependency was introduced.
 - rust_h264 0.4.0: MIT OR Apache-2.0; used for patched SPS/VUI metadata, not its decoder.
@@ -27,8 +26,10 @@ cargo deny check licenses
 cargo metadata --locked --format-version 1 > evidence/cargo-metadata.json
 ```
 
-**Project license remains incomplete.** BUSL-1.1 was supplied without finalized
-owner-specific licensor, Change Date or Additional Use Grant. The earlier proposed
-revenue/change terms were examples, not an owner decision; none were invented here.
-`publish=false` remains. Dependency compliance is not a commercial-rights or codec
-patent determination. This limitation remains before a commercial publication.
+**Project license:** Business Source License 1.1 (see LICENSE). Licensor Jonathan Tyler
+Montgomery; Additional Use Grant for production use by individuals and legal entities with
+aggregate annual gross revenue below US$100,000; Change Date 2030-09-16; Change License
+Apache-2.0. Third-party components keep their own licenses. `publish=false` remains for
+crates.io. Dependency license compliance is not a codec patent determination: OpenH264 is
+built from source, so Cisco's patent-license coverage for its prebuilt binaries does not apply
+to these builds.

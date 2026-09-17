@@ -2,6 +2,9 @@
 
 ## 0.3.0 — 2026-09-16
 
+- License the project under the Business Source License 1.1 (LICENSE): Additional Use Grant
+  for production use below US$100,000 annual gross revenue; Change Date 2030-09-16; Change
+  License Apache-2.0.
 - Skip decoding access units whose slices are all non-reference (`nal_ref_idc == 0`) and that no
   epoch selects, in both the chunked and single-decoder paths. Output is byte-identical to 0.2.0
   (1,056-case gate against the release binary). 1080p benchmark: 1 worker 5.02 s → 2.99 s, auto
