@@ -1,6 +1,6 @@
 # BENCHMARKS — TenzorPipe vs DALI vs TorchCodec vs FFmpeg (1080p ingestion)
 
-Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured iterations** per contender, each contender in a fresh process.
+Generated 2026-09-16 21:49 by `bench/gpu_bench.py` — 5 warm-up + **50 measured iterations** per contender, each contender in a fresh process.
 
 ## Task (identical for every contender)
 
@@ -15,7 +15,7 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 
 | Contender | Decode | Audio | Latency ms (median) | p5–p95 ms | Source FPS | Epochs/s | Peak RSS MiB | RSS growth MiB | Child RSS MiB | VRAM torch MiB | VRAM NVML Δ MiB | CPU cores | Setup+cold s | Video MAE | Mel MAE |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **tenzorpipe-default** | CPU (OpenH264) | n/a | 624.9 | 608.2–646.8 | 957 | 63.8 | 1077 | 496 | 496 | 0 | 0 (no CUDA) | 8.78 | 1.85 | 0.0000 | — |
+| **tenzorpipe-default** | CPU (OpenH264) | n/a | 645.5 | 624.2–665.4 | 931 | 62.1 | 1098 | 520 | 497 | 0 | 0 (no CUDA) | 8.74 | 3.27 | 0.0000 | — |
 | **tenzorpipe-w1** | CPU (OpenH264) | n/a | 2990.6 | 2950.0–3136.1 | 199 | 13.3 | 668 | 110 | 87 | 0 | 0 (no CUDA) | 1.13 | 4.22 | ref | — |
 | **tenzorpipe-w6** | CPU (OpenH264) | n/a | 888.2 | 857.4–934.3 | 674 | 44.9 | 881 | 323 | 300 | 0 | 0 (no CUDA) | 4.83 | 2.14 | 0.0000 | — |
 | **tenzorpipe-auto** | CPU (OpenH264) | n/a | 631.0 | 611.1–653.9 | 950 | 63.3 | 1078 | 520 | 497 | 0 | 0 (no CUDA) | 8.75 | 1.86 | 0.0000 | — |
@@ -24,13 +24,13 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 | torchcodec-cuda | GPU (NVDEC) | n/a | 276.0 | 267.7–286.7 | 2173 | 144.8 | 1128 | 0 | — | 256 | 650 | 0.47 | 2.63 | 0.0047 | — |
 | torchcodec-cpu | CPU (libavcodec) | n/a | 2216.3 | 2190.1–2261.6 | 270 | 18.0 | 1005 | 281 | — | 0 | 0 (no CUDA) | 1.31 | 4.30 | 0.0070 | — |
 | torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' | | | | | | | | | | | | | | |
-| ffmpeg-pipe | CPU (libavcodec) | n/a | 530.7 | 521.7–545.7 | 1129 | 75.3 | 702 | 172 | 167 | 0 | 0 (no CUDA) | 9.04 | 1.79 | 0.0466 | — |
+| ffmpeg-pipe | CPU (libavcodec) | n/a | 554.3 | 528.8–581.1 | 1087 | 72.5 | 701 | 172 | 167 | 0 | 0 (no CUDA) | 8.92 | 1.60 | 0.0466 | — |
 
 ## Scenario 2 — video + AAC audio
 
 | Contender | Decode | Audio | Latency ms (median) | p5–p95 ms | Source FPS | Epochs/s | Peak RSS MiB | RSS growth MiB | Child RSS MiB | VRAM torch MiB | VRAM NVML Δ MiB | CPU cores | Setup+cold s | Video MAE | Mel MAE |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **tenzorpipe-default** | CPU (OpenH264) | Log-Mel | 687.5 | 668.7–716.1 | 871 | 58.1 | 1081 | 523 | 500 | 0 | 0 (no CUDA) | 8.26 | 1.92 | 0.0000 | 0.000 |
+| **tenzorpipe-default** | CPU (OpenH264) | Log-Mel | 708.8 | 689.0–734.9 | 843 | 56.2 | 1081 | 523 | 500 | 0 | 0 (no CUDA) | 8.37 | 2.02 | 0.0000 | 0.000 |
 | **tenzorpipe-w1** | CPU (OpenH264) | Log-Mel | 3010.0 | 2962.2–3152.5 | 197 | 13.1 | 674 | 115 | 92 | 0 | 0 (no CUDA) | 1.17 | 4.28 | ref | ref |
 | **tenzorpipe-w6** | CPU (OpenH264) | Log-Mel | 884.8 | 846.0–936.7 | 675 | 45.0 | 885 | 327 | 303 | 0 | 0 (no CUDA) | 4.98 | 2.10 | 0.0000 | 0.000 |
 | **tenzorpipe-auto** | CPU (OpenH264) | Log-Mel | 683.5 | 660.3–715.7 | 877 | 58.4 | 1081 | 523 | 499 | 0 | 0 (no CUDA) | 8.30 | 1.89 | 0.0000 | 0.000 |
@@ -39,7 +39,7 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 | torchcodec-cuda | GPU (NVDEC) | Log-Mel | 312.3 | 307.7–322.7 | 1912 | 127.5 | 1398 | 0 | — | 288 | 665 | 0.54 | 2.92 | 0.0047 | 0.014 |
 | torchcodec-cpu | CPU (libavcodec) | Log-Mel | 2318.0 | 2223.8–2372.6 | 260 | 17.3 | 1041 | 285 | — | 0 | 0 (no CUDA) | 1.33 | 4.42 | 0.0070 | 0.014 |
 | torchvision-read_video | *skipped:* ImportError: cannot import name 'read_video' from 'torchvision.io' | | | | | | | | | | | | | | |
-| ffmpeg-pipe | CPU (libavcodec) | Log-Mel | 608.7 | 580.8–635.2 | 985 | 65.6 | 732 | 168 | 168 | 0 | 0 (no CUDA) | 10.63 | 1.68 | 0.0466 | 0.014 |
+| ffmpeg-pipe | CPU (libavcodec) | Log-Mel | 631.5 | 600.0–648.1 | 954 | 63.6 | 782 | 191 | 168 | 0 | 0 (no CUDA) | 10.40 | 1.81 | 0.0466 | 0.014 |
 
 ### Column definitions
 
@@ -54,12 +54,12 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 ## TenzorPipe internals (for bottleneck analysis)
 
 - `tenzorpipe-auto` / av: engine CLI 675.6 ms + Arrow→torch load 2.9 ms (medians)
-- `tenzorpipe-default` / av: engine CLI 679.8 ms + Arrow→torch load 2.9 ms (medians)
+- `tenzorpipe-default` / av: engine CLI 701.0 ms + Arrow→torch load 2.8 ms (medians)
 - `tenzorpipe-v020-auto` / av: engine CLI 1079.5 ms + Arrow→torch load 2.9 ms (medians)
 - `tenzorpipe-w1` / av: engine CLI 3001.7 ms + Arrow→torch load 2.9 ms (medians)
 - `tenzorpipe-w6` / av: engine CLI 877.3 ms + Arrow→torch load 2.8 ms (medians)
 - `tenzorpipe-auto` / video: engine CLI 623.7 ms + Arrow→torch load 2.8 ms (medians)
-- `tenzorpipe-default` / video: engine CLI 617.9 ms + Arrow→torch load 2.7 ms (medians)
+- `tenzorpipe-default` / video: engine CLI 637.1 ms + Arrow→torch load 2.8 ms (medians)
 - `tenzorpipe-v020-auto` / video: engine CLI 1023.1 ms + Arrow→torch load 2.8 ms (medians)
 - `tenzorpipe-w1` / video: engine CLI 2983.0 ms + Arrow→torch load 2.8 ms (medians)
 - `tenzorpipe-w6` / video: engine CLI 880.4 ms + Arrow→torch load 2.7 ms (medians)
@@ -68,21 +68,21 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 
 | Stage (s) | tenzorpipe-auto / av | tenzorpipe-default / av | tenzorpipe-v020-auto / av | tenzorpipe-w1 / av | tenzorpipe-w6 / av | tenzorpipe-auto / video | tenzorpipe-default / video | tenzorpipe-v020-auto / video | tenzorpipe-w1 / video | tenzorpipe-w6 / video |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| video_decode | 5.477 | 5.229 | 9.121 | 2.936 | 3.883 | 5.300 | 5.296 | 9.062 | 2.890 | 3.881 |
-| collector_receive_wait | 0.655 | 0.613 | 1.013 | 2.953 | 0.825 | 0.568 | 0.584 | 0.973 | 2.905 | 0.799 |
-| worker_send_wait | 0.652 | 0.611 | 1.025 | 2.816 | 0.806 | 0.019 | 0.018 | 0.013 | 0.001 | 0.013 |
-| video_reorder_wait | 0.595 | 0.553 | 0.954 | 0.000 | 0.796 | 0.562 | 0.581 | 0.972 | 0.000 | 0.793 |
-| video_window_wait | 0.000 | 0.000 | 0.001 | 0.000 | 0.202 | 0.001 | 0.001 | 0.001 | 0.000 | 0.021 |
-| audio_source | 0.100 | 0.087 | 0.084 | 0.080 | 0.085 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| audio_source_wait | 0.049 | 0.048 | 0.047 | 0.010 | 0.035 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| video_resize | 0.042 | 0.035 | 0.037 | 0.017 | 0.028 | 0.042 | 0.043 | 0.040 | 0.017 | 0.031 |
-| audio_resample | 0.028 | 0.022 | 0.022 | 0.020 | 0.024 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| video_parse | 0.018 | 0.016 | 0.023 | 0.007 | 0.011 | 0.016 | 0.018 | 0.023 | 0.009 | 0.012 |
-| audio_mel | 0.017 | 0.014 | 0.014 | 0.013 | 0.016 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| setup | 0.015 | 0.011 | 0.006 | 0.012 | 0.009 | 0.003 | 0.003 | 0.003 | 0.011 | 0.004 |
-| arrow_write | 0.012 | 0.009 | 0.014 | 0.010 | 0.010 | 0.012 | 0.012 | 0.009 | 0.013 | 0.010 |
-| arrow_pack | 0.012 | 0.010 | 0.011 | 0.013 | 0.012 | 0.012 | 0.012 | 0.011 | 0.013 | 0.011 |
-| **wall** | **0.696** | **0.644** | **1.046** | **2.991** | **0.859** | **0.597** | **0.613** | **0.998** | **2.944** | **0.826** |
+| video_decode | 5.477 | 5.540 | 9.121 | 2.936 | 3.883 | 5.300 | 5.379 | 9.062 | 2.890 | 3.881 |
+| collector_receive_wait | 0.655 | 0.646 | 1.013 | 2.953 | 0.825 | 0.568 | 0.562 | 0.973 | 2.905 | 0.799 |
+| worker_send_wait | 0.652 | 0.648 | 1.025 | 2.816 | 0.806 | 0.019 | 0.014 | 0.013 | 0.001 | 0.013 |
+| video_reorder_wait | 0.595 | 0.588 | 0.954 | 0.000 | 0.796 | 0.562 | 0.557 | 0.972 | 0.000 | 0.793 |
+| video_window_wait | 0.000 | 0.000 | 0.001 | 0.000 | 0.202 | 0.001 | 0.000 | 0.001 | 0.000 | 0.021 |
+| audio_source | 0.100 | 0.084 | 0.084 | 0.080 | 0.085 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| audio_source_wait | 0.049 | 0.044 | 0.047 | 0.010 | 0.035 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| video_resize | 0.042 | 0.040 | 0.037 | 0.017 | 0.028 | 0.042 | 0.044 | 0.040 | 0.017 | 0.031 |
+| audio_resample | 0.028 | 0.021 | 0.022 | 0.020 | 0.024 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| video_parse | 0.018 | 0.017 | 0.023 | 0.007 | 0.011 | 0.016 | 0.018 | 0.023 | 0.009 | 0.012 |
+| audio_mel | 0.017 | 0.015 | 0.014 | 0.013 | 0.016 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| setup | 0.015 | 0.008 | 0.006 | 0.012 | 0.009 | 0.003 | 0.004 | 0.003 | 0.011 | 0.004 |
+| arrow_write | 0.012 | 0.009 | 0.014 | 0.010 | 0.010 | 0.012 | 0.009 | 0.009 | 0.013 | 0.010 |
+| arrow_pack | 0.012 | 0.010 | 0.011 | 0.013 | 0.012 | 0.012 | 0.010 | 0.011 | 0.013 | 0.011 |
+| **wall** | **0.696** | **0.675** | **1.046** | **2.991** | **0.859** | **0.597** | **0.588** | **0.998** | **2.944** | **0.826** |
 
 ## Environment
 
@@ -103,7 +103,7 @@ Generated 2026-09-16 20:25 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
   "ffmpeg": "ffmpeg version n8.1.2-53-g1005b294ff-20260916 Copyright (c) 2000-2026 the FFmpeg developers",
   "torch_cuda": "13.0",
   "tenzor_bin": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor",
-  "tenzor_sha256": "152c4f57c0fd199520da1e8c8aa79651722f61467706ab13b03b9abbf5b2a440",
+  "tenzor_sha256": "451c1f5d14b608ccdb93eac5ebba9ab1884d6ab2f548ce207ad6c686d81ecc39",
   "release_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77"
 }
 ```
@@ -117,29 +117,36 @@ python bench/gpu_bench.py --iters 50 --warmup 5 --seconds 20 --tenzor-bin target
 ```
 
 <!-- ANALYSIS -->
+
 ## Analysis — v0.3.0 (skip non-reference pictures, AVX2 build, auto default)
 
-*Written 2026-09-16 from the tables above. Rows named `tenzorpipe-default/-w1/-w6/-auto` are the
-v0.3.0 engine built from this tree before the version bump (it still embedded "0.2.0"; the
+*Written 2026-09-16 from the tables above. The `tenzorpipe-default` and `ffmpeg-pipe` rows are the
+final v0.3.0 binary (after the version bump and library split) and FFmpeg, re-measured together
+in a later session. Rows named `tenzorpipe-w1/-w6/-auto` are the v0.3.0 engine built from this
+tree before the version bump (it still embedded "0.2.0"; the
 engine code is unchanged by the bump and later packaging, which were re-verified). `tenzorpipe-v020-auto` is the untouched
-v0.2.0 release binary, run in the same session. `ffmpeg-pipe` was re-measured in the same session.
+v0.2.0 release binary, run in that same pre-bump session.
 The DALI and TorchCodec rows come from the earlier v0.2.0 run on the same machine and clips; nothing
 they depend on changed. The analysis of the v0.2.0 release itself is archived in
 `bench/results/analysis-v020.md`.*
 
 ### Headline
 
-| Video-only, 1080p 20 s clip | v0.2.0 | candidate | Speedup |
+| Video-only, 1080p 20 s clip | v0.2.0 | v0.3.0 | Speedup |
 |---|---:|---:|---:|
-| CLI default, no flags | 5,023 ms (1 worker) | **625 ms** (auto) | **8.0×** |
+| CLI default, no flags | 5,023 ms (1 worker) | **625 ms** (auto)² | **8.0×** |
 | `--video-workers 1` | 5,023 ms | 2,991 ms | 1.68× |
 | `--video-workers 6` | 1,469 ms | 888 ms | 1.65× |
 | `--video-workers 0` (auto) | 1,031 ms¹ | 631 ms | 1.63× |
 
-¹ Same-session release row.
+¹ Same-session release row. ² Pre-bump run; the final 0.3.0 binary measured **646 ms** in a later
+session where FFmpeg also slowed from 531 ms to 554 ms (ratio 1.18× → 1.16×), i.e. host drift,
+not a regression. A same-session interleaved A/B of the final binary against v0.2.0 is in
+`evidence/v0.3.0/ab-final-binary.txt` (5.16 s → 0.66 s, 7.9×).
 
-**Against FFmpeg's 531 ms, the default is now 1.18× slower (94 ms), down from 1.94×.** With audio,
-TenzorPipe takes 688 ms to FFmpeg's 609 ms, 1.13× slower. That puts TenzorPipe 1.41× behind DALI
+**Against FFmpeg, the default is now 1.16–1.18× slower, down from 1.94×:** 625 vs 531 ms in the
+pre-bump session, 646 vs 554 ms for the final binary (tables above). With audio, the final binary
+takes 709 ms to FFmpeg's 632 ms (1.12×). That puts TenzorPipe 1.41× behind DALI
 (442 ms) and 2.26× behind TorchCodec-CUDA (276 ms), still with zero VRAM. Every output tensor stayed
 byte-identical to v0.2.0.
 

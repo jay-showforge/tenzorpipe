@@ -1,0 +1,8 @@
+
+--video-workers default (synthetic-1080p30-h264-20s-video-only.mp4, 5 interleaved reps)
+  v0.2.0     median  5.163s  (min 5.128)  x1.00 vs v0.2.0  maxrss   86.9 MiB  single                       skipped_nonref=0     same bytes as v0.2.0: True
+  v0.3.0     median  0.656s  (min 0.635)  x7.87 vs v0.2.0  maxrss  495.6 MiB  video_mode=chunked workers=10 skipped_nonref=265   same bytes as v0.2.0: False
+
+--video-workers 1 (synthetic-1080p30-h264-20s-video-only.mp4, 5 interleaved reps)
+  v0.2.0     median  5.150s  (min 5.089)  x1.00 vs v0.2.0  maxrss   86.8 MiB  single                       skipped_nonref=0     same bytes as v0.2.0: True
+  v0.3.0     median  3.034s  (min 3.025)  x1.70 vs v0.2.0  maxrss   86.8 MiB  single                       skipped_nonref=265   same bytes as v0.2.0: False

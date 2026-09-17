@@ -24,6 +24,7 @@
   `tenzorpipe.ingest()` runs the engine in-process with the GIL released, `tenzorpipe.load()`
   returns the zero-copy `TenzorDataset`, and the wheel installs the `tenzor` command. PyTorch is
   now an optional extra; `python/tenzor.py` remains as a compatibility shim.
+- README Quickstart: installation, a five-line ingestion example and benchmark highlights.
 - The engine is a library crate (`tenzor_pipe::convert`); the `tenzor` binary and the Python
   extension (workspace member `bindings/python`) share it.
 

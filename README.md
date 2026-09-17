@@ -1,9 +1,47 @@
 # TenzorPipe 0.3.0
 
 MP4 H.264/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in batched
-Apache Arrow IPC (`.tenzor`). This release runs audio and video concurrently through bounded queues,
-preserving the independently verified v0.1.6 tensor values. See **CHANGELOG.md** for 0.3.0 changes and **BENCHMARKS.md** for current measurements; earlier
-build, test and benchmark reports are in docs/releases/.
+Apache Arrow IPC (`.tenzor`), decoded on the CPU with no FFmpeg or CUDA runtime dependency.
+
+## Quickstart
+
+**Install** (Linux x86-64, glibc 2.34+, CPython 3.9+):
+
+```sh
+pip install "tenzorpipe[torch]"                                               # from PyPI, once published
+pip install "dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl[torch]" # release wheel
+pip install ".[torch]"                                                        # from source (Rust 1.98.1 + NASM)
+```
+
+**Ingest an MP4 and read it as PyTorch tensors:**
+
+```python
+import tenzorpipe as tp
+tp.ingest("clip.mp4", "clip.tenzor")                # decode once: 224×224 RGB + 64-band Log-Mel every 0.5 s
+with tp.load("clip.tenzor") as data:                # memory-mapped Arrow, zero-copy tensor views
+    for batch in data.iter_batches():
+        video, mel = batch["video"], batch["audio"]  # float32 [B,3,224,224] and [B,50,64]
+```
+
+**Benchmark highlights.** One 20 s 1080p30 H.264 clip, Intel i5-14400F + RTX 5060 8 GB under
+WSL2, 50 measured iterations each. All tables, methods and caveats are in [BENCHMARKS.md](BENCHMARKS.md).
+
+| | TenzorPipe 0.3.0 | FFmpeg pipe | NVIDIA DALI | TorchCodec (CUDA) |
+|---|---:|---:|---:|---:|
+| Ingest one clip into 224² tensors, default settings | 646 ms¹ | 554 ms | 442 ms | 276 ms |
+| GPU memory used | **0 MiB** | 0 MiB | 822 MiB | 650 MiB |
+| Every later epoch over the same clip | **2.8 ms** re-read | decode again | decode again | decode again |
+
+¹ 625 ms in an earlier run of the same engine, where FFmpeg took 531 ms. TenzorPipe is not the
+fastest first-pass decoder. Its advantages are zero VRAM, byte-exact reproducible tensors and
+near-free re-reads for multi-epoch training; the first pass is 7.9× faster than v0.2.0.
+
+**License:** Business Source License 1.1. Production use is permitted for individuals and
+organizations with under US$100,000 annual gross revenue, and non-production use is unrestricted.
+It converts to Apache-2.0 on 2030-09-16. See [LICENSE](LICENSE).
+
+See **CHANGELOG.md** for 0.3.0 changes. Earlier build, test and benchmark reports are in
+docs/releases/.
 
 ## Build
 
