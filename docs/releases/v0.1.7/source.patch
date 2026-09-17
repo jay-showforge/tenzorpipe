@@ -1,0 +1,821 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "tenzor-pipe"
+-version = "0.1.6"
++version = "0.1.7"
+ edition = "2024"
+ description = "High-throughput media-to-tensor preprocessing engine for multimodal AI"
+ license = "BUSL-1.1"
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1010,7 +1010,7 @@
+ 
+ [[package]]
+ name = "tenzor-pipe"
+-version = "0.1.6"
++version = "0.1.7"
+ dependencies = [
+  "anyhow",
+  "arrow",
+--- a/deny.toml
++++ b/deny.toml
+@@ -24,5 +24,5 @@
+ # Preserve the supplied project license; this exception cannot authorize dependencies.
+ [[licenses.exceptions]]
+ name = "tenzor-pipe"
+-version = "=0.1.6"
++version = "=0.1.7"
+ allow = ["BUSL-1.1"]
+--- a/src/video.rs
++++ b/src/video.rs
+@@ -26,6 +26,8 @@
+     pub window_ms: u64,
+     pub audio_duration_ms: u64,
+     pub decoder_threads: usize,
++    pub workers: usize,
++    pub queue_slots: usize,
+ }
+ 
+ /// Decode every access unit, converting only nearest-epoch pictures.
+@@ -35,6 +37,46 @@
+     config: VideoConfig,
+     metrics: &Metrics,
+     cancel: &crate::concurrency::Cancellation,
++    input_mapping: Option<&memmap2::Mmap>,
++    on_epoch: F,
++) -> Result<VideoInfo>
++where
++    F: FnMut(usize, i64, &[f32]) -> Result<()>,
++{
++    if config.workers == 2 {
++        let started = metrics.start();
++        let plan = partition_plan(mp4, config, cancel, input_mapping)?;
++        metrics.end(Stage::VideoPartition, started);
++        if let Some(plan) = plan {
++            eprintln!(
++                "TENZOR_PARTITION {{\"split_sample\":{},\"split_epoch\":{},\"left_last_pts_ms\":{},\"right_first_pts_ms\":{},\"workers\":2}}",
++                plan.split, plan.epoch, plan.previous, plan.next
++            );
++            return decode_dual(mp4, config, metrics, cancel, plan, on_epoch);
++        }
++        eprintln!(
++            "TENZOR_PARTITION {{\"workers\":1,\"fallback\":\"no eligible interior IDR with separated presentation ranges\"}}"
++        );
++    }
++    decode_span(mp4, config, metrics, cancel, None, on_epoch)
++}
++
++#[derive(Clone, Copy)]
++struct Span {
++    start: usize,
++    end: usize,
++    epoch_start: usize,
++    epoch_end: usize,
++    successor: Option<i64>,
++    worker: usize,
++}
++
++fn decode_span<F>(
++    mp4: &Mp4<'_>,
++    config: VideoConfig,
++    metrics: &Metrics,
++    cancel: &crate::concurrency::Cancellation,
++    span: Option<Span>,
+     mut on_epoch: F,
+ ) -> Result<VideoInfo>
+ where
+@@ -45,6 +87,7 @@
+         window_ms,
+         audio_duration_ms,
+         decoder_threads,
++        ..
+     } = config;
+     anyhow::ensure!(window_ms > 0, "epoch window must be positive");
+     let track = mp4
+@@ -54,6 +97,8 @@
+         .context("no supported H.264 video track found")?;
+ 
+     let timeline = Timeline::for_track(track, mp4.timescale())?;
++    let start_sample = span.map_or(0, |s| s.start);
++    let end_sample = span.map_or(track.sample_count(), |s| s.end);
+     let entry = track
+         .sample_entry()
+         .context("H.264 track missing sample entry")?;
+@@ -117,6 +162,8 @@
+     // learn its successor's PTS. The heap is capped, independent of clip duration.
+     let timestamps = track
+         .samples()
++        .skip(start_sample)
++        .take(end_sample - start_sample)
+         .map(|sample| {
+             let sample = sample.context("read H.264 presentation metadata")?;
+             Ok((timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64)
+@@ -134,7 +181,7 @@
+     let mut next_pts = presentation.next_pts()?;
+     let duration_ms = (timeline.duration_sec * 1000.0).round() as u64;
+     let total_epochs = duration_ms.max(audio_duration_ms).div_ceil(window_ms) as usize;
+-    let mut epoch = 0;
++    let mut epoch = span.map_or(0, |s| s.epoch_start);
+     let mut resized_count = 0;
+     let mut out_index = 0usize;
+     let mut emit = |frame: openh264::decoder::DecodedYUV<'_>,
+@@ -152,7 +199,12 @@
+                 current_pts == Some(pts),
+                 "decoded PTS disagrees with bounded presentation lookahead"
+             );
+-            let end = epoch_end(pts, next_pts, window_ms, total_epochs);
++            let end = epoch_end(
++                pts,
++                next_pts.or(span.and_then(|s| s.successor)),
++                window_ms,
++                total_epochs,
++            );
+             if epoch < end {
+                 let started = metrics.start();
+                 let chw = yuv420_to_resized_chw(
+@@ -175,7 +227,12 @@
+         }
+         Ok(())
+     };
+-    for (index, sample) in track.samples().enumerate() {
++    for (index, sample) in track
++        .samples()
++        .enumerate()
++        .skip(start_sample)
++        .take(end_sample - start_sample)
++    {
+         cancel.check()?;
+         let parse_started = metrics.start();
+         let sample = sample.context("read H.264 access unit")?;
+@@ -206,6 +263,16 @@
+             .decode(&annexb)
+             .with_context(|| format!("decode OpenH264 access unit {index}"))?;
+         metrics.end(Stage::VideoDecode, decode_started);
++        if let Some(s) = span {
++            metrics.end(
++                if s.worker == 0 {
++                    Stage::VideoDecode0
++                } else {
++                    Stage::VideoDecode1
++                },
++                decode_started,
++            );
++        }
+         if let Some(frame) = frame {
+             emit(frame, &mut pts_ms)?;
+         }
+@@ -213,23 +280,33 @@
+     let decode_started = metrics.start();
+     let remaining = decoder.flush_remaining().context("flush OpenH264")?;
+     metrics.end(Stage::VideoDecode, decode_started);
++    if let Some(s) = span {
++        metrics.end(
++            if s.worker == 0 {
++                Stage::VideoDecode0
++            } else {
++                Stage::VideoDecode1
++            },
++            decode_started,
++        );
++    }
+     for frame in remaining {
+         emit(frame, &mut pts_ms)?;
+     }
+     anyhow::ensure!(
+-        out_index == track.sample_count(),
++        out_index == end_sample - start_sample,
+         "H.264 picture count mismatch: {out_index} vs {} access units",
+-        track.sample_count()
++        end_sample - start_sample
+     );
+     anyhow::ensure!(
+-        current_pts.is_none() && epoch == total_epochs,
++        current_pts.is_none() && epoch == span.map_or(total_epochs, |s| s.epoch_end),
+         "incomplete H.264 presentation sequence"
+     );
+     Ok(VideoInfo {
+         width,
+         height,
+         duration_ms: (timeline.duration_sec * 1000.0).round() as u64,
+-        sample_count: track.sample_count(),
++        sample_count: end_sample - start_sample,
+         resized_count,
+     })
+ }
+@@ -586,3 +663,399 @@
+         }
+     }
+ }
++
++#[derive(Clone, Copy, Debug)]
++struct PartitionPlan {
++    split: usize,
++    epoch: usize,
++    total_epochs: usize,
++    previous: i64,
++    next: i64,
++}
++
++/// Inspect NAL headers, not just the container's keyframe flag. All VCL NALs
++/// in the access unit must be IDR slices; partition starts are never inferred
++/// from an ordinary I picture or a recovery-point SEI.
++fn is_idr(mut data: &[u8], length_size: usize) -> Result<bool> {
++    anyhow::ensure!((1..=4).contains(&length_size), "invalid AVC length size");
++    anyhow::ensure!(!data.is_empty(), "empty AVC sample");
++    let mut idr = false;
++    let mut other_vcl = false;
++    while !data.is_empty() {
++        anyhow::ensure!(data.len() >= length_size, "truncated AVCC NAL length");
++        let n = data[..length_size]
++            .iter()
++            .fold(0usize, |v, b| (v << 8) | *b as usize);
++        data = &data[length_size..];
++        anyhow::ensure!(
++            n > 0 && n <= data.len(),
++            "invalid/truncated AVCC NAL payload"
++        );
++        let kind = data[0] & 31;
++        anyhow::ensure!(data[0] & 128 == 0 && kind != 0, "invalid AVC NAL header");
++        idr |= kind == 5;
++        other_vcl |= matches!(kind, 1..=4 | 19..=21);
++        data = &data[n..];
++    }
++    Ok(idr && !other_vcl)
++}
++
++/// Two metadata passes and O(1) partition state. No per-frame index is retained.
++/// A conservative fallback protects edit-list clipping and cross-boundary PTS.
++fn partition_plan(
++    mp4: &Mp4<'_>,
++    config: VideoConfig,
++    cancel: &crate::concurrency::Cancellation,
++    input_mapping: Option<&memmap2::Mmap>,
++) -> Result<Option<PartitionPlan>> {
++    let track = mp4
++        .tracks()
++        .iter()
++        .find(|t| t.kind() == TrackKind::Video && t.codec() == Some(Codec::H264))
++        .context("no supported H.264 video track found")?;
++    let Some(SampleEntry::Video(v)) = track.sample_entry() else {
++        bail!("missing video entry")
++    };
++    let CodecConfig::Avc(c) = &v.config else {
++        bail!("missing AVC configuration")
++    };
++    let avc = parse_avcc_config(&c.raw).map_err(anyhow::Error::msg)?;
++    let timeline = Timeline::for_track(track, mp4.timescale())?;
++    let pts = |cts| (timeline.pts_sec(cts, track.timescale()) * 1000.).round() as i64;
++    let middle = timeline.duration_sec * 500.;
++    let mut best: Option<(usize, f64)> = None;
++    for (index, sample) in track.samples().enumerate() {
++        cancel.check()?;
++        // Limit input-page residency during indexing. A full-file scan without
++        // this release made RSS scale with compressed file size before decode.
++        if index % 128 == 0 {
++            release_index_pages(input_mapping)?;
++        }
++        let sample = sample.context("index H.264 IDR samples")?;
++        if sample.is_sync && is_idr(sample.data, avc.length_size)? {
++            let p = pts(sample.cts);
++            if index > 0 && p > 0 && (p as f64) < timeline.duration_sec * 1000. {
++                let distance = (p as f64 - middle).abs();
++                if best.is_none_or(|(_, old)| distance < old) {
++                    best = Some((index, distance));
++                }
++            }
++        }
++    }
++    release_index_pages(input_mapping)?;
++    let Some((split, _)) = best else {
++        return Ok(None);
++    };
++    let mut previous = None;
++    let mut next = None;
++    let mut left_max = i64::MIN;
++    let mut right_min = i64::MAX;
++    for (index, sample) in track.samples().enumerate() {
++        cancel.check()?;
++        // Limit input-page residency during indexing. A full-file scan without
++        // this release made RSS scale with compressed file size before decode.
++        if index % 128 == 0 {
++            release_index_pages(input_mapping)?;
++        }
++        let sample = sample.context("verify H.264 partition presentation ranges")?;
++        let p = pts(sample.cts);
++        let display = p >= 0 && (p as f64) < timeline.duration_sec * 1000.;
++        if index < split {
++            left_max = left_max.max(p);
++            if display {
++                previous = Some(previous.map_or(p, |v: i64| v.max(p)));
++            }
++        } else {
++            right_min = right_min.min(p);
++            if display {
++                next = Some(next.map_or(p, |v: i64| v.min(p)));
++            }
++        }
++    }
++    release_index_pages(input_mapping)?;
++    if left_max >= right_min {
++        return Ok(None);
++    }
++    let (Some(previous), Some(next)) = (previous, next) else {
++        return Ok(None);
++    };
++    let duration_ms = (timeline.duration_sec * 1000.).round() as u64;
++    let total_epochs = duration_ms
++        .max(config.audio_duration_ms)
++        .div_ceil(config.window_ms) as usize;
++    let epoch = epoch_end(previous, Some(next), config.window_ms, total_epochs);
++    // Avoid spawning a worker which cannot contribute an epoch.
++    if epoch == 0 || epoch == total_epochs {
++        return Ok(None);
++    }
++    Ok(Some(PartitionPlan {
++        split,
++        epoch,
++        total_epochs,
++        previous,
++        next,
++    }))
++}
++
++fn decode_dual<F>(
++    mp4: &Mp4<'_>,
++    config: VideoConfig,
++    metrics: &Metrics,
++    cancel: &crate::concurrency::Cancellation,
++    plan: PartitionPlan,
++    mut on_epoch: F,
++) -> Result<VideoInfo>
++where
++    F: FnMut(usize, i64, &[f32]) -> Result<()>,
++{
++    use crate::concurrency::{CancelOnDrop, Cancelled, Message, VideoEpoch, check_index, worker};
++    let track = mp4
++        .tracks()
++        .iter()
++        .find(|t| t.kind() == TrackKind::Video && t.codec() == Some(Codec::H264))
++        .unwrap();
++    let spans = [
++        Span {
++            start: 0,
++            end: plan.split,
++            epoch_start: 0,
++            epoch_end: plan.epoch,
++            successor: Some(plan.next),
++            worker: 0,
++        },
++        Span {
++            start: plan.split,
++            end: track.sample_count(),
++            epoch_start: plan.epoch,
++            epoch_end: plan.total_epochs,
++            successor: None,
++            worker: 1,
++        },
++    ];
++    std::thread::scope(|scope| {
++        // This guard also handles allocation/spawn failures and collector panics.
++        let mut guard = CancelOnDrop(Some(cancel));
++        // Total slots across the two video sub-workers equals the original video
++        // allowance. The outer video channel is rendezvous in dual mode.
++        let capacities = [config.queue_slots.div_ceil(2), config.queue_slots / 2];
++        let mut receivers = Vec::with_capacity(2);
++        let mut handles = Vec::with_capacity(2);
++        for span in spans {
++            let (tx, rx) = crossbeam_channel::bounded(capacities[span.worker]);
++            receivers.push(rx);
++            handles.push(
++                std::thread::Builder::new()
++                    .name(format!("tenzor-video-{}", span.worker))
++                    .spawn_scoped(scope, move || {
++                        let started = metrics.start();
++                        let result = worker(
++                            || {
++                                let info = decode_span(
++                                    mp4,
++                                    config,
++                                    metrics,
++                                    cancel,
++                                    Some(span),
++                                    |index, pts, tensor| {
++                                        cancel.send_stage(
++                                            &tx,
++                                            Message::Data(VideoEpoch {
++                                                index,
++                                                pts,
++                                                values: tensor.to_vec(),
++                                            }),
++                                            metrics,
++                                            if span.worker == 0 {
++                                                Stage::VideoSend0
++                                            } else {
++                                                Stage::VideoSend1
++                                            },
++                                        )
++                                    },
++                                )?;
++                                cancel.send_stage(
++                                    &tx,
++                                    Message::End(span.epoch_end),
++                                    metrics,
++                                    if span.worker == 0 {
++                                        Stage::VideoSend0
++                                    } else {
++                                        Stage::VideoSend1
++                                    },
++                                )?;
++                                Ok(info)
++                            },
++                            cancel,
++                            if span.worker == 0 {
++                                "video 0"
++                            } else {
++                                "video 1"
++                            },
++                        );
++                        metrics.end(
++                            if span.worker == 0 {
++                                Stage::VideoWall0
++                            } else {
++                                Stage::VideoWall1
++                            },
++                            started,
++                        );
++                        result
++                    })
++                    .context("spawn independent video decoder")?,
++            );
++        }
++        let collected = worker(
++            || -> Result<()> {
++                let mut expected = 0;
++                for (span, rx) in spans.iter().zip(&receivers) {
++                    loop {
++                        match cancel.recv_stage(rx, metrics, Stage::VideoMergeWait)? {
++                            Message::Data(v) => {
++                                check_index(v.index, expected)?;
++                                anyhow::ensure!(
++                                    expected < span.epoch_end,
++                                    "partition emitted extra epoch"
++                                );
++                                on_epoch(v.index, v.pts, &v.values)?;
++                                expected += 1;
++                            }
++                            Message::End(n) => {
++                                anyhow::ensure!(
++                                    n == span.epoch_end && expected == n,
++                                    "partition EOF/count mismatch"
++                                );
++                                break;
++                            }
++                        }
++                    }
++                }
++                anyhow::ensure!(
++                    expected == plan.total_epochs,
++                    "incomplete partitioned video"
++                );
++                Ok(())
++            },
++            cancel,
++            "video merge",
++        );
++        drop(receivers);
++        let mut infos = Vec::with_capacity(2);
++        let mut failure = None;
++        for handle in handles {
++            match handle
++                .join()
++                .unwrap_or_else(|_| Err(anyhow::anyhow!("video thread panic outside worker")))
++            {
++                Ok(info) => infos.push(info),
++                Err(e) if !e.is::<Cancelled>() && failure.is_none() => failure = Some(e),
++                Err(_) => (),
++            }
++        }
++        if let Err(ref e) = collected
++            && !e.is::<Cancelled>()
++        {
++            return Err(collected.unwrap_err());
++        }
++        if let Some(e) = failure {
++            return Err(e);
++        }
++        collected?;
++        anyhow::ensure!(infos.len() == 2, "video partition cancelled");
++        let mut info = infos.remove(0);
++        info.sample_count += infos[0].sample_count;
++        info.resized_count += infos[0].resized_count;
++        guard.0 = None;
++        Ok(info)
++    })
++}
++
++/// Only residency changes: the immutable source remains mapped and valid.
++fn release_index_pages(input_mapping: Option<&memmap2::Mmap>) -> Result<()> {
++    #[cfg(unix)]
++    if let Some(mapping) = input_mapping {
++        // Same immutable-input contract as the existing batch-level page release.
++        unsafe {
++            mapping.unchecked_advise(memmap2::UncheckedAdvice::DontNeed)?;
++        }
++    }
++    #[cfg(not(unix))]
++    let _ = input_mapping;
++    Ok(())
++}
++
++#[cfg(test)]
++mod partition_tests {
++    use super::*;
++    #[test]
++    fn requires_idr_vcl_and_valid_avcc_not_an_i_picture_flag() {
++        assert!(is_idr(&[0, 0, 0, 2, 0x65, 0x88], 4).unwrap());
++        assert!(!is_idr(&[0, 0, 0, 2, 0x41, 0x88], 4).unwrap());
++        assert!(!is_idr(&[0, 0, 0, 1, 0x67], 4).unwrap());
++        assert!(!is_idr(&[1, 0x65, 1, 0x41], 1).unwrap());
++        for bytes in [vec![], vec![0], vec![0, 0, 0, 0], vec![0, 0, 0, 2, 0x65]] {
++            assert!(is_idr(&bytes, 4).is_err());
++        }
++    }
++    #[test]
++    fn split_keeps_earlier_frame_on_integer_midpoint_ties() {
++        assert_eq!(epoch_end(1950, Some(2050), 500, 10), 5);
++        assert_eq!(epoch_end(1949, Some(2050), 500, 10), 4);
++    }
++    fn cancelled_merge(panic: bool, fail_epoch: usize) {
++        let (tx, rx) = std::sync::mpsc::channel();
++        std::thread::spawn(move || {
++            let data = std::fs::read(concat!(
++                env!("CARGO_MANIFEST_DIR"),
++                "/fixtures/dual-idr.mp4"
++            ))
++            .unwrap();
++            let mp4 = Mp4::parse(&data).unwrap();
++            let result = decode_h264_mp4(
++                &mp4,
++                VideoConfig {
++                    resolution: 32,
++                    window_ms: 50,
++                    audio_duration_ms: 4150,
++                    decoder_threads: 0,
++                    workers: 2,
++                    queue_slots: 0,
++                },
++                &Metrics::new(false),
++                &crate::concurrency::Cancellation::new(),
++                None,
++                |epoch, _, _| {
++                    if epoch == fail_epoch {
++                        assert!(!panic, "injected merge panic");
++                        bail!("injected merge failure");
++                    }
++                    Ok(())
++                },
++            );
++            tx.send(result.unwrap_err().to_string()).unwrap();
++        });
++        let error = rx
++            .recv_timeout(std::time::Duration::from_secs(5))
++            .expect("partition workers did not join");
++        assert!(
++            error.contains(if panic {
++                "panicked"
++            } else {
++                "injected merge failure"
++            }),
++            "{error}"
++        );
++    }
++    #[test]
++    fn real_decoders_join_after_first_span_merge_failure() {
++        cancelled_merge(false, 0);
++    }
++    #[test]
++    fn real_decoders_join_after_second_span_merge_failure() {
++        cancelled_merge(false, 45);
++    }
++    #[test]
++    fn real_decoders_join_after_merge_panic() {
++        cancelled_merge(true, 0);
++    }
++}
+--- a/src/concurrency.rs
++++ b/src/concurrency.rs
+@@ -41,17 +41,29 @@
+         }
+     }
+     pub fn send<T>(&self, tx: &Sender<T>, value: T, metrics: &Metrics) -> Result<()> {
++        self.send_stage(tx, value, metrics, Stage::SendWait)
++    }
++    pub fn send_stage<T>(
++        &self,
++        tx: &Sender<T>,
++        value: T,
++        metrics: &Metrics,
++        stage: Stage,
++    ) -> Result<()> {
+         self.check()?;
+         let start = metrics.start();
+         let result = select! {recv(self.receiver)->_=>Err(Cancelled.into()),send(tx,value)->r=>r.map_err(|_|Cancelled.into())};
+-        metrics.end(Stage::SendWait, start);
++        metrics.end(stage, start);
+         result
+     }
+     pub fn recv<T>(&self, rx: &Receiver<T>, metrics: &Metrics) -> Result<T> {
++        self.recv_stage(rx, metrics, Stage::ReceiveWait)
++    }
++    pub fn recv_stage<T>(&self, rx: &Receiver<T>, metrics: &Metrics, stage: Stage) -> Result<T> {
+         self.check()?;
+         let start = metrics.start();
+         let result = select! {recv(self.receiver)->_=>Err(Cancelled.into()),recv(rx)->r=>r.map_err(|_|Cancelled.into())};
+-        metrics.end(Stage::ReceiveWait, start);
++        metrics.end(stage, start);
+         result
+     }
+ }
+@@ -83,7 +95,11 @@
+     (slots, slots * row)
+ }
+ 
+-fn worker<F: FnOnce() -> Result<()>>(f: F, cancel: &Cancellation, label: &str) -> Result<()> {
++pub(crate) fn worker<T, F: FnOnce() -> Result<T>>(
++    f: F,
++    cancel: &Cancellation,
++    label: &str,
++) -> Result<T> {
+     let result =
+         std::panic::catch_unwind(std::panic::AssertUnwindSafe(f)).unwrap_or_else(|payload| {
+             let message = payload
+@@ -101,6 +117,7 @@
+ 
+ pub fn run<A, V, C>(
+     capacity: usize,
++    video_capacity: usize,
+     audio: Option<A>,
+     video: Option<V>,
+     collector: C,
+@@ -116,18 +133,27 @@
+ {
+     let cancel = Cancellation::new();
+     std::thread::scope(|scope| {
++        let _guard = CancelOnDrop(Some(&cancel));
+         let (atx, arx) = bounded(capacity);
+-        let (vtx, vrx) = bounded(capacity);
++        let (vtx, vrx) = bounded(video_capacity);
+         let audio_on = audio.is_some();
+         let video_on = video.is_some();
+-        let ah = audio.map(|f| {
+-            let c = &cancel;
+-            scope.spawn(move || worker(|| f(atx, c), c, "audio"))
+-        });
+-        let vh = video.map(|f| {
+-            let c = &cancel;
+-            scope.spawn(move || worker(|| f(vtx, c), c, "video"))
+-        });
++        let ah = audio
++            .map(|f| {
++                let c = &cancel;
++                std::thread::Builder::new()
++                    .name("tenzor-audio".into())
++                    .spawn_scoped(scope, move || worker(|| f(atx, c), c, "audio"))
++            })
++            .transpose()?;
++        let vh = video
++            .map(|f| {
++                let c = &cancel;
++                std::thread::Builder::new()
++                    .name("tenzor-video".into())
++                    .spawn_scoped(scope, move || worker(|| f(vtx, c), c, "video"))
++            })
++            .transpose()?;
+         // Catch collector panics too: scoped threads must never be joined while
+         // a producer is stranded on a full/rendezvous channel.
+         let collected = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+@@ -174,6 +200,16 @@
+         "epoch order mismatch: expected {expected}, got {actual}"
+     );
+     Ok(())
++}
++
++/// Must live inside the thread scope so cancellation precedes implicit joins.
++pub(crate) struct CancelOnDrop<'a>(pub Option<&'a Cancellation>);
++impl Drop for CancelOnDrop<'_> {
++    fn drop(&mut self) {
++        if let Some(c) = self.0 {
++            c.cancel();
++        }
++    }
+ }
+ 
+ #[cfg(test)]
+@@ -216,7 +252,7 @@
+                 c.check()?;
+                 Err(anyhow!("injected decode failure"))
+             };
+-            let result = run(cap, Some(audio), Some(video), |_, _, _| {
++            let result = run(cap, cap, Some(audio), Some(video), |_, _, _| {
+                 if panic_collector {
+                     panic!("injected collector failure");
+                 }
+--- a/src/metrics.rs
++++ b/src/metrics.rs
+@@ -19,8 +19,16 @@
+     SendWait,
+     ReceiveWait,
+     FinalSync,
++    VideoPartition,
++    VideoDecode0,
++    VideoDecode1,
++    VideoSend0,
++    VideoSend1,
++    VideoMergeWait,
++    VideoWall0,
++    VideoWall1,
+ }
+-const NAMES: [&str; 12] = [
++const NAMES: [&str; 20] = [
+     "setup",
+     "video_parse",
+     "video_decode",
+@@ -33,11 +41,19 @@
+     "worker_send_wait",
+     "collector_receive_wait",
+     "final_sync",
++    "video_partition",
++    "video_decode_worker_0",
++    "video_decode_worker_1",
++    "video_send_wait_worker_0",
++    "video_send_wait_worker_1",
++    "video_merge_receive_wait",
++    "video_wall_worker_0",
++    "video_wall_worker_1",
+ ];
+ #[derive(Clone)]
+ pub struct Metrics {
+     enabled: bool,
+-    values: Arc<[AtomicU64; 12]>,
++    values: Arc<[AtomicU64; 20]>,
+ }
+ impl Metrics {
+     pub fn new(enabled: bool) -> Self {
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -48,9 +48,20 @@
+     /// Nonzero values require the experimental-decoder-threads build feature.
+     #[arg(long, default_value_t = 0)]
+     decoder_threads: usize,
++    /// Experimental independent IDR-span decoders. Default retains one decoder.
++    #[arg(long, default_value_t = 1)]
++    video_workers: usize,
+ }
+ fn main() -> Result<()> {
+     let args = Cli::parse();
++    ensure!(
++        [1, 2].contains(&args.video_workers),
++        "--video-workers must be 1 or 2"
++    );
++    ensure!(
++        args.video_workers == 1 || args.decoder_threads == 0,
++        "independent workers require default internal decoder threading"
++    );
+     ensure!(
+         [0, 1, 2, 4].contains(&args.decoder_threads),
+         "--decoder-threads must be 0, 1, 2, or 4"
+@@ -289,6 +300,8 @@
+         window_ms,
+         audio_duration_ms,
+         decoder_threads: args.decoder_threads,
++        workers: args.video_workers,
++        queue_slots: slots,
+     };
+     let epoch = match args.execution {
+         Execution::Sequential => {
+@@ -306,6 +319,7 @@
+                     video_config,
+                     metrics,
+                     &Cancellation::new(),
++                    mmap.as_ref(),
+                     |index, pts, tensor| {
+                         concurrency::check_index(index, epoch)?;
+                         emit(index, Some((pts, tensor)))?;
+@@ -354,6 +368,7 @@
+                         video_config,
+                         &video_metrics,
+                         cancel,
++                        mmap.as_ref(),
+                         |index, pts, tensor| {
+                             cancel.send(
+                                 &tx,
+@@ -372,6 +387,7 @@
+             });
+             concurrency::run(
+                 slots,
++                if args.video_workers == 2 { 0 } else { slots },
+                 audio_worker,
+                 video_worker,
+                 |audio_rx, video_rx, cancel| {

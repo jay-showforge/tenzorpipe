@@ -1,0 +1,5 @@
+{
+  "flash_epoch_ms": 1000,
+  "audio_peak_hop": 100,
+  "audio_peak_ms": 1000
+}

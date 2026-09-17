@@ -1,0 +1,13 @@
+warning[license-not-encountered]: license was not encountered
+  ┌─ /workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/deny.toml:8:4
+  │
+8 │   "BSD-3-Clause",
+  │    ━━━━━━━━━━━━ unmatched license allowance
+
+warning[license-not-encountered]: license was not encountered
+  ┌─ /workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/deny.toml:9:4
+  │
+9 │   "ISC",
+  │    ━━━ unmatched license allowance
+
+licenses ok

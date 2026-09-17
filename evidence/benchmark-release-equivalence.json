@@ -1,0 +1,5 @@
+{
+  "artifacts_compared": 12,
+  "all_columns_bit_identical": true,
+  "comparison": "benchmark-verification.json vs docs/releases/v0.1.4/benchmark-verification.json"
+}

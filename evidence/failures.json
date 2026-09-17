@@ -1,0 +1,97 @@
+[
+  {
+    "file": "empty.mp4",
+    "args": [],
+    "exit_code": 1,
+    "error": "Error: input file is empty"
+  },
+  {
+    "file": "corrupt.mp4",
+    "args": [],
+    "exit_code": 1,
+    "error": "Error: parse MP4\n\nCaused by:\n    unexpected end of input at byte 40 (needed 4643 more bytes)"
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "args": [],
+    "exit_code": 1,
+    "error": "video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=12042240\nError: invalid/truncated AVCC NAL payload"
+  },
+  {
+    "file": "unsupported-mpeg4.mp4",
+    "args": [],
+    "exit_code": 1,
+    "error": "Error: no supported H.264 video track found"
+  },
+  {
+    "file": "unsupported.mp3",
+    "args": [],
+    "exit_code": 1,
+    "error": "Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and WAV"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--resolution",
+      "0"
+    ],
+    "exit_code": 1,
+    "error": "Error: --resolution must be between 32 and 1024"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--resolution",
+      "1025"
+    ],
+    "exit_code": 1,
+    "error": "Error: --resolution must be between 32 and 1024"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--window-sec",
+      "0"
+    ],
+    "exit_code": 1,
+    "error": "Error: --window-sec must be between 0.05 and 10 seconds"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--window-sec",
+      "nan"
+    ],
+    "exit_code": 1,
+    "error": "Error: --window-sec must be between 0.05 and 10 seconds"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--window-sec",
+      ".123"
+    ],
+    "exit_code": 1,
+    "error": "Error: --window-sec must be a multiple of 0.01 seconds (10 ms hop)"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--batch-epochs",
+      "0"
+    ],
+    "exit_code": 1,
+    "error": "Error: --batch-epochs must be between 1 and 1024"
+  },
+  {
+    "file": "high-bframes.mp4",
+    "args": [
+      "--resolution",
+      "1024",
+      "--batch-epochs",
+      "1024"
+    ],
+    "exit_code": 1,
+    "error": "Error: requested batch exceeds 256 MiB; reduce --batch-epochs or --resolution"
+  }
+]

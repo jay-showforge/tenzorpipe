@@ -1,0 +1,5 @@
+/target/
+/out/
+__pycache__/
+*.pyc
+/fixtures/long-*.mp4

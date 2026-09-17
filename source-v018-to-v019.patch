@@ -1,0 +1,522 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "tenzor-pipe"
+-version = "0.1.8"
++version = "0.1.9"
+ edition = "2024"
+ description = "High-throughput media-to-tensor preprocessing engine for multimodal AI"
+ license = "BUSL-1.1"
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1010,7 +1010,7 @@
+ 
+ [[package]]
+ name = "tenzor-pipe"
+-version = "0.1.8"
++version = "0.1.9"
+ dependencies = [
+  "anyhow",
+  "arrow",
+--- a/deny.toml
++++ b/deny.toml
+@@ -24,5 +24,5 @@
+ # Preserve the supplied project license; this exception cannot authorize dependencies.
+ [[licenses.exceptions]]
+ name = "tenzor-pipe"
+-version = "=0.1.6"
++version = "=0.1.9"
+ allow = ["BUSL-1.1"]
+--- a/src/concurrency.rs
++++ b/src/concurrency.rs
+@@ -83,7 +83,11 @@
+     (slots, slots * row)
+ }
+ 
+-fn worker<F: FnOnce() -> Result<()>>(f: F, cancel: &Cancellation, label: &str) -> Result<()> {
++pub(crate) fn worker<T, F: FnOnce() -> Result<T>>(
++    f: F,
++    cancel: &Cancellation,
++    label: &str,
++) -> Result<T> {
+     let result =
+         std::panic::catch_unwind(std::panic::AssertUnwindSafe(f)).unwrap_or_else(|payload| {
+             let message = payload
+@@ -116,18 +120,27 @@
+ {
+     let cancel = Cancellation::new();
+     std::thread::scope(|scope| {
++        let _guard = CancelOnDrop(Some(&cancel));
+         let (atx, arx) = bounded(capacity);
+         let (vtx, vrx) = bounded(capacity);
+         let audio_on = audio.is_some();
+         let video_on = video.is_some();
+-        let ah = audio.map(|f| {
+-            let c = &cancel;
+-            scope.spawn(move || worker(|| f(atx, c), c, "audio"))
+-        });
+-        let vh = video.map(|f| {
+-            let c = &cancel;
+-            scope.spawn(move || worker(|| f(vtx, c), c, "video"))
+-        });
++        let ah = audio
++            .map(|f| {
++                let c = &cancel;
++                std::thread::Builder::new()
++                    .name("tenzor-audio".into())
++                    .spawn_scoped(scope, move || worker(|| f(atx, c), c, "audio"))
++            })
++            .transpose()?;
++        let vh = video
++            .map(|f| {
++                let c = &cancel;
++                std::thread::Builder::new()
++                    .name("tenzor-video".into())
++                    .spawn_scoped(scope, move || worker(|| f(vtx, c), c, "video"))
++            })
++            .transpose()?;
+         // Catch collector panics too: scoped threads must never be joined while
+         // a producer is stranded on a full/rendezvous channel.
+         let collected = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+@@ -174,6 +187,16 @@
+         "epoch order mismatch: expected {expected}, got {actual}"
+     );
+     Ok(())
++}
++
++/// Must live inside the thread scope so cancellation precedes implicit joins.
++pub(crate) struct CancelOnDrop<'a>(pub Option<&'a Cancellation>);
++impl Drop for CancelOnDrop<'_> {
++    fn drop(&mut self) {
++        if let Some(c) = self.0 {
++            c.cancel();
++        }
++    }
+ }
+ 
+ #[cfg(test)]
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -331,6 +331,7 @@
+                     video_config,
+                     metrics,
+                     &Cancellation::new(),
++                    mmap.as_ref(),
+                     |index, pts, tensor| {
+                         concurrency::check_index(index, epoch)?;
+                         emit(index, Some((pts, tensor)))?;
+@@ -380,6 +381,7 @@
+                         video_config,
+                         &video_metrics,
+                         cancel,
++                        mmap.as_ref(),
+                         |index, pts, tensor| {
+                             cancel.send(
+                                 &tx,
+@@ -490,6 +492,7 @@
+     config: video::VideoConfig,
+     metrics: &Metrics,
+     cancel: &Cancellation,
++    input_mapping: Option<&Mmap>,
+     on_epoch: F,
+ ) -> Result<video::VideoInfo>
+ where
+@@ -510,6 +513,7 @@
+         },
+         metrics,
+         cancel,
++        input_mapping,
+         on_epoch,
+     )
+ }
+--- a/src/video_parallel.rs
++++ b/src/video_parallel.rs
+@@ -8,8 +8,8 @@
+ //!
+ //! Ordering and memory: a worker may only claim chunk `c` while
+ //! `c < next_chunk_to_emit + window`. Finished chunks wait in a reorder map and
+-//! are emitted strictly in order, so at most `window` decoded chunks (plus the
+-//! one being forwarded) exist at once, independent of clip length.
++//! are emitted strictly in order, so at most `window` decoded chunks (including
++//! the one being forwarded) exist at once, independent of clip length.
+ use anyhow::{Context, Result, anyhow, bail};
+ use std::{
+     cmp::Reverse,
+@@ -19,7 +19,7 @@
+     time::Duration,
+ };
+ 
+-use crate::concurrency::{Cancellation, Cancelled};
++use crate::concurrency::{CancelOnDrop, Cancellation, Cancelled, worker};
+ use crate::media::Timeline;
+ use crate::metrics::{Metrics, Stage};
+ use crate::video::{
+@@ -98,24 +98,55 @@
+     chunks
+ }
+ 
+-/// True when the first VCL NAL of an AVCC sample is an IDR slice (type 5).
++/// A sync flag alone is insufficient: validate every AVCC NAL header and require
++/// all VCL NALs to be IDR slices. Malformed candidates fall back to normal decode,
++/// where the strict access-unit validator reports the actual input error.
+ fn first_vcl_is_idr(mut data: &[u8], length_size: usize) -> bool {
+-    while data.len() > length_size {
++    if !(1..=4).contains(&length_size) {
++        return false;
++    }
++    let mut found = false;
++    while !data.is_empty() {
++        if data.len() < length_size {
++            return false;
++        }
+         let n = data[..length_size]
+             .iter()
+             .fold(0usize, |v, b| (v << 8) | *b as usize);
+         data = &data[length_size..];
+-        if n == 0 || n > data.len() {
++        if n == 0 || n > data.len() || data[0] & 128 != 0 || data[0] & 31 == 0 {
+             return false;
+         }
+-        match data[0] & 0x1f {
+-            5 => return true,
+-            1..=4 => return false,
+-            _ => {}
++        match data[0] & 31 {
++            5 => found = true,
++            1..=4 | 19..=21 => return false,
++            _ => (),
+         }
+         data = &data[n..];
+     }
+-    false
++    found
++}
++
++const PLAN_BUDGET_BYTES: usize = 32 * 1024 * 1024;
++// Conservative simultaneous vector-payload allowance, including capacities and
++// per-chunk containers. Allocator bookkeeping is additional bounded overhead.
++const PLAN_BYTES_PER_SAMPLE: usize = 192;
++fn plan_fits_budget(samples: usize) -> bool {
++    samples
++        .checked_mul(PLAN_BYTES_PER_SAMPLE)
++        .is_some_and(|bytes| bytes <= PLAN_BUDGET_BYTES)
++}
++fn release_index_pages(mapping: Option<&memmap2::Mmap>) -> Result<()> {
++    #[cfg(unix)]
++    if let Some(mapping) = mapping {
++        // Input must stay immutable, as with existing batch-level page release.
++        unsafe {
++            mapping.unchecked_advise(memmap2::UncheckedAdvice::DontNeed)?;
++        }
++    }
++    #[cfg(not(unix))]
++    let _ = mapping;
++    Ok(())
+ }
+ 
+ /// Ordered, window-bounded parallel map. `work(c)` runs on worker threads;
+@@ -163,21 +194,75 @@
+         wake.notify_all();
+     };
+ 
+-    std::thread::scope(|scope| {
+-        for _ in 0..workers.max(1) {
+-            scope.spawn(|| {
+-                loop {
++    std::thread::scope(|scope| -> Result<()> {
++        let mut guard = CancelOnDrop(Some(cancel));
++        for index in 0..workers.max(1) {
++            std::thread::Builder::new()
++                .name(format!("tenzor-chunk-{index}"))
++                .spawn_scoped(scope, || {
++                    loop {
++                        let started = metrics.start();
++                        let claimed = {
++                            let mut s = state.lock().unwrap_or_else(|p| p.into_inner());
++                            loop {
++                                if s.error.is_some()
++                                    || cancel.check().is_err()
++                                    || s.next_claim >= count
++                                {
++                                    break None;
++                                }
++                                if s.next_claim < s.next_emit + window {
++                                    s.next_claim += 1;
++                                    break Some(s.next_claim - 1);
++                                }
++                                s = wake
++                                    .wait_timeout(s, tick)
++                                    .unwrap_or_else(|p| p.into_inner())
++                                    .0;
++                            }
++                        };
++                        metrics.end(Stage::VideoWindowWait, started);
++                        let Some(c) = claimed else { break };
++                        let result =
++                            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| work(c)))
++                                .unwrap_or_else(|payload| {
++                                    let message = payload
++                                        .downcast_ref::<String>()
++                                        .map(String::as_str)
++                                        .or_else(|| payload.downcast_ref::<&str>().copied())
++                                        .unwrap_or("unknown panic");
++                                    Err(anyhow!("video decode worker panicked: {message}"))
++                                });
++                        match result {
++                            Ok(value) => {
++                                let mut s = state.lock().unwrap_or_else(|p| p.into_inner());
++                                s.done.insert(c, value);
++                                drop(s);
++                                wake.notify_all();
++                            }
++                            Err(e) => {
++                                fail(e);
++                                break;
++                            }
++                        }
++                    }
++                })
++                .context("spawn chunk decoder worker")?;
++        }
++
++        let emitted = worker(
++            || -> Result<()> {
++                for c in 0..count {
+                     let started = metrics.start();
+-                    let claimed = {
++                    let value = {
+                         let mut s = state.lock().unwrap_or_else(|p| p.into_inner());
+                         loop {
+-                            if s.error.is_some() || cancel.check().is_err() || s.next_claim >= count
+-                            {
+-                                break None;
++                            if let Some(e) = s.error.take() {
++                                return Err(e);
+                             }
+-                            if s.next_claim < s.next_emit + window {
+-                                s.next_claim += 1;
+-                                break Some(s.next_claim - 1);
++                            cancel.check()?;
++                            if let Some(v) = s.done.remove(&c) {
++                                break v;
+                             }
+                             s = wake
+                                 .wait_timeout(s, tick)
+@@ -185,63 +270,25 @@
+                                 .0;
+                         }
+                     };
+-                    metrics.end(Stage::VideoWindowWait, started);
+-                    let Some(c) = claimed else { break };
+-                    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| work(c)))
+-                        .unwrap_or_else(|payload| {
+-                            let message = payload
+-                                .downcast_ref::<String>()
+-                                .map(String::as_str)
+-                                .or_else(|| payload.downcast_ref::<&str>().copied())
+-                                .unwrap_or("unknown panic");
+-                            Err(anyhow!("video decode worker panicked: {message}"))
+-                        });
+-                    match result {
+-                        Ok(value) => {
+-                            let mut s = state.lock().unwrap_or_else(|p| p.into_inner());
+-                            s.done.insert(c, value);
+-                            drop(s);
+-                            wake.notify_all();
+-                        }
+-                        Err(e) => {
+-                            fail(e);
+-                            break;
+-                        }
+-                    }
++                    wake.notify_all();
++                    metrics.end(Stage::VideoReorderWait, started);
++                    emit(c, value)?;
++                    // Return the admission credit only after the emitted payload is
++                    // dropped. The configured window now includes this chunk.
++                    state.lock().unwrap_or_else(|p| p.into_inner()).next_emit = c + 1;
++                    wake.notify_all();
+                 }
+-            });
+-        }
+-
+-        let emitted = (|| -> Result<()> {
+-            for c in 0..count {
+-                let started = metrics.start();
+-                let value = {
+-                    let mut s = state.lock().unwrap_or_else(|p| p.into_inner());
+-                    loop {
+-                        if let Some(e) = s.error.take() {
+-                            return Err(e);
+-                        }
+-                        cancel.check()?;
+-                        if let Some(v) = s.done.remove(&c) {
+-                            s.next_emit = c + 1;
+-                            break v;
+-                        }
+-                        s = wake
+-                            .wait_timeout(s, tick)
+-                            .unwrap_or_else(|p| p.into_inner())
+-                            .0;
+-                    }
+-                };
+-                wake.notify_all();
+-                metrics.end(Stage::VideoReorderWait, started);
+-                emit(c, value)?;
+-            }
+-            Ok(())
+-        })();
++                Ok(())
++            },
++            cancel,
++            "chunk emitter",
++        );
+         if let Err(e) = emitted {
+             fail(e);
+         }
+-    });
++        guard.0 = None;
++        Ok(())
++    })?;
+     let mut s = state.into_inner().unwrap_or_else(|p| p.into_inner());
+     match s.error.take() {
+         Some(e) => Err(e),
+@@ -262,6 +309,7 @@
+     par: ParallelConfig,
+     metrics: &Metrics,
+     cancel: &Cancellation,
++    input_mapping: Option<&memmap2::Mmap>,
+     mut on_epoch: F,
+ ) -> Result<VideoInfo>
+ where
+@@ -307,10 +355,18 @@
+     // ---- Metadata pre-pass: timing, IDR flags, selection -------------------
+     let plan_started = metrics.start();
+     let n = track.sample_count();
++    if !plan_fits_budget(n) {
++        metrics.end(Stage::VideoParse, plan_started);
++        return fallback("planning metadata exceeds 32 MiB allowance", on_epoch);
++    }
+     let duration_ms_f = timeline.duration_sec * 1000.;
+     let mut pts = Vec::with_capacity(n);
+     let mut idr = Vec::with_capacity(n);
+     for i in 0..n {
++        cancel.check()?;
++        if i % 128 == 0 {
++            release_index_pages(input_mapping)?;
++        }
+         let Ok(Some(sample)) = track.sample(i) else {
+             metrics.end(Stage::VideoParse, plan_started);
+             return fallback("sample table read failed", on_epoch);
+@@ -318,6 +374,7 @@
+         pts.push((timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64);
+         idr.push(sample.is_sync && first_vcl_is_idr(sample.data, avcc.length_size));
+     }
++    release_index_pages(input_mapping)?;
+     let in_range = |p: i64| p >= 0 && (p as f64) < duration_ms_f;
+     let mut presentation =
+         PresentationTimes::new(pts.iter().copied().filter(|p| in_range(*p)).map(Ok));
+@@ -395,9 +452,11 @@
+     eprintln!(
+         "video_mode=chunked workers={workers} window={window} chunks={} max_chunk_tensor_bytes={max_chunk_bytes} bound_bytes={}",
+         chunks.len(),
+-        (window + 1) * max_chunk_bytes
++        window * max_chunk_bytes
+     );
+ 
++    drop(presented);
++    drop(idr);
+     let parameter_sets = annexb_parameter_sets(&avcc_raw)?;
+ 
+     // ---- Decode one chunk on a fresh decoder --------------------------------
+@@ -626,6 +685,9 @@
+         let p = [0, 0, 0, 2, 0x06, 0x00, 0, 0, 0, 2, 0x41, 0x88];
+         assert!(!first_vcl_is_idr(&p, 4));
+         assert!(!first_vcl_is_idr(&[0, 0, 0, 9, 0x65], 4));
++        assert!(!first_vcl_is_idr(&[1, 0x65, 1, 0x41], 1));
++        assert!(!first_vcl_is_idr(&[1, 0xe5], 1));
++        assert!(!first_vcl_is_idr(&[1, 0x65, 0], 1));
+     }
+ 
+     #[test]
+@@ -721,3 +783,79 @@
+         assert!(r.unwrap_err().is::<Cancelled>());
+     }
+ }
++
++#[cfg(test)]
++mod regression_tests {
++    use super::*;
++    use std::sync::atomic::{AtomicUsize, Ordering};
++    struct Live<'a>(&'a AtomicUsize);
++    impl Drop for Live<'_> {
++        fn drop(&mut self) {
++            self.0.fetch_sub(1, Ordering::SeqCst);
++        }
++    }
++    #[test]
++    fn regression_budget_includes_emitting_chunk() {
++        let live = AtomicUsize::new(0);
++        let peak = AtomicUsize::new(0);
++        run_ordered(
++            30,
++            4,
++            2,
++            &Cancellation::new(),
++            &Metrics::new(false),
++            |_| {
++                let now = live.fetch_add(1, Ordering::SeqCst) + 1;
++                peak.fetch_max(now, Ordering::SeqCst);
++                Ok(Live(&live))
++            },
++            |_, value| {
++                std::thread::sleep(Duration::from_millis(3));
++                drop(value);
++                Ok(())
++            },
++        )
++        .unwrap();
++        assert!(
++            peak.load(Ordering::SeqCst) <= 2,
++            "live chunk payloads exceeded budget: {}",
++            peak.load(Ordering::SeqCst)
++        );
++    }
++    #[test]
++    fn regression_emitter_panic_cancels_before_join() {
++        let (tx, rx) = std::sync::mpsc::channel();
++        std::thread::spawn(move || {
++            let result = std::panic::catch_unwind(|| {
++                run_ordered(
++                    10000,
++                    4,
++                    2,
++                    &Cancellation::new(),
++                    &Metrics::new(false),
++                    Ok,
++                    |_, _| panic!("injected emitter panic"),
++                )
++            });
++            tx.send(result.is_err() || result.unwrap().is_err())
++                .unwrap();
++        });
++        assert!(
++            rx.recv_timeout(Duration::from_secs(2))
++                .expect("emitter panic stranded scoped workers")
++        );
++    }
++}
++
++#[cfg(test)]
++mod planning_budget_tests {
++    use super::*;
++    #[test]
++    fn planning_cap_rejects_excess_and_overflow_before_allocation() {
++        assert!(plan_fits_budget(PLAN_BUDGET_BYTES / PLAN_BYTES_PER_SAMPLE));
++        assert!(!plan_fits_budget(
++            PLAN_BUDGET_BYTES / PLAN_BYTES_PER_SAMPLE + 1
++        ));
++        assert!(!plan_fits_budget(usize::MAX));
++    }
++}

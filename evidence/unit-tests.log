@@ -1,0 +1,20 @@
+    Finished `test` profile [unoptimized] target(s) in 0.06s
+     Running unittests src/main.rs (target/debug/deps/tenzor-e1f3fffc6e497b22)
+
+running 13 tests
+test audio::tests::downmix_channels ... ok
+test audio::tests::mel_bank_covers_frequency_range ... ok
+test video::avcc_tests::converts_one_two_and_four_byte_lengths ... ok
+test video::avcc_tests::rejects_truncated_zero_and_invalid_nals ... ok
+test video::tests::neutral_black_yuv_is_near_black_rgb ... ok
+test video::tests::presentation_lookahead_rejects_excessive_reordering_and_parse_errors ... ok
+test video::tests::selection_matches_legacy_midpoints_gaps_ties_and_tail ... ok
+test video::tests::presentation_lookahead_orders_b_frames_with_bounded_memory ... ok
+test video::tests::thirty_fps_selects_exactly_two_pictures_per_second ... ok
+test audio::tests::short_final_window_is_analyzed_and_silence_is_floor ... ok
+test audio::tests::sinc_antialias_and_gain ... ok
+test audio::aac_transform_tests::fast_imdct_matches_direct_sum_for_long_short_dense_and_sparse_spectra ... ok
+test audio::tests::streaming_sinc_matches_whole_signal_across_boundaries ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+

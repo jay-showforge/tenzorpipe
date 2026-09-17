@@ -1,0 +1,761 @@
+PASS baseline720.mp4 --resolution 224 N=1   
+PASS baseline720.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS baseline720.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS baseline720.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 224 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS baseline720.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS baseline720.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 224 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS baseline720.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS baseline720.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS baseline720.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS baseline720.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 N=1   
+PASS high-bframes.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS high-bframes.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS high-bframes.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS high-bframes.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS high-bframes.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS high-bframes.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS high-bframes.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS high-bframes.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS high-bframes.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS short.mp4 --resolution 224 N=1   
+PASS short.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS short.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=1   
+PASS silent-video.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS silent-video.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=1   
+PASS color709.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS color709.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=1   
+PASS fullrange.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fullrange.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=1   
+PASS sync-pulse.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=1806336 bound_bytes=7225344 
+PASS sync-pulse.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=1806336 bound_bytes=10838016 
+PASS sync-pulse.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=1806336 bound_bytes=18063360 
+PASS sync-pulse.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=1228800 bound_bytes=4915200 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=1228800 bound_bytes=7372800 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=1228800 bound_bytes=12288000 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS sync-pulse.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=15654912 bound_bytes=62619648 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=4 chunks=2 max_chunk_tensor_bytes=15654912 bound_bytes=78274560 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=4 chunks=2 max_chunk_tensor_bytes=15654912 bound_bytes=78274560 
+PASS sync-pulse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=1   
+PASS selection-vfr.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-vfr.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=1   
+PASS selection-sparse.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS selection-sparse.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 N=1   
+PASS fixture-h264-aac.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS fixture-h264-aac.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS fixture-h264-aac.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 N=4  video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS fixture-h264-aac.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS fixture-h264-aac.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 N=8  video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS fixture-h264-aac.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS fixture-h264-aac.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=3 window=5 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=3 window=9 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS fixture-h264-aac.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=3 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS fixture-h264-aac.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS audio-only.mp4 --resolution 224 N=1   
+PASS audio-only.mp4 --resolution 224 N=2   
+PASS audio-only.mp4 --resolution 224 N=2 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 N=2 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 224 N=4   
+PASS audio-only.mp4 --resolution 224 N=4 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 N=4 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 224 N=8   
+PASS audio-only.mp4 --resolution 224 N=8 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 N=8 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2   
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4   
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8   
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=2   
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=4   
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=8   
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2   
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4   
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8   
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250  
+PASS audio-only.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1  
+PASS corrupt-nal.mp4 --resolution 224 N=1   ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=1   ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=5 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=9 chunks=2 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   ['  12: <unknown>']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['  13: <unknown>']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['  13: <unknown>']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=2 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 ['             at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0']
+PASS corrupt-nal.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" ['  13: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=1   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=2   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=4   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=8   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=1   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=2   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=4   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=8   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8   ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS corrupt.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=1   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=2   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=4   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=8   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2   ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4   ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8   ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=1   ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=2   ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=4   ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=8   ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8   ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250  ['   8: <unknown>']
+PASS empty.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1  ['   8: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=1   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=2   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=2 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=2 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=4   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=4 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=4 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=8   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=8 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 N=8 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=1   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=2   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=4   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=8   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8   ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250  ['   9: <unknown>']
+PASS unsupported-mpeg4.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1  ['   9: <unknown>']
+PASS gen-open-gop.mp4 --resolution 224 N=1   
+PASS gen-open-gop.mp4 --resolution 224 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-open-gop.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="fewer than 2 IDR chunks" 
+PASS gen-720-g45.mp4 --resolution 224 N=1   
+PASS gen-720-g45.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=3612672 bound_bytes=14450688 
+PASS gen-720-g45.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=8 max_chunk_tensor_bytes=1806336 bound_bytes=7225344 
+PASS gen-720-g45.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=3612672 bound_bytes=21676032 
+PASS gen-720-g45.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=8 max_chunk_tensor_bytes=1806336 bound_bytes=10838016 
+PASS gen-720-g45.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=3612672 bound_bytes=36126720 
+PASS gen-720-g45.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=8 max_chunk_tensor_bytes=1806336 bound_bytes=18063360 
+PASS gen-720-g45.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=3072000 bound_bytes=12288000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=8 max_chunk_tensor_bytes=1536000 bound_bytes=6144000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=3072000 bound_bytes=18432000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=8 max_chunk_tensor_bytes=1536000 bound_bytes=9216000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=3072000 bound_bytes=30720000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=8 max_chunk_tensor_bytes=1536000 bound_bytes=15360000 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=4064256 bound_bytes=16257024 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=8 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=4064256 bound_bytes=24385536 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=8 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=4064256 bound_bytes=40642560 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=8 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS gen-720-g45.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=8 max_chunk_tensor_bytes=18063360 bound_bytes=72253440 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=3 window=3 chunks=8 max_chunk_tensor_bytes=18063360 bound_bytes=72253440 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=3 window=3 chunks=8 max_chunk_tensor_bytes=18063360 bound_bytes=72253440 
+PASS gen-720-g45.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 N=1   
+PASS gen-baseline-g12.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS gen-baseline-g12.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=16 max_chunk_tensor_bytes=602112 bound_bytes=2408448 
+PASS gen-baseline-g12.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS gen-baseline-g12.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=16 max_chunk_tensor_bytes=602112 bound_bytes=3612672 
+PASS gen-baseline-g12.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS gen-baseline-g12.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=16 max_chunk_tensor_bytes=602112 bound_bytes=6021120 
+PASS gen-baseline-g12.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=16 max_chunk_tensor_bytes=614400 bound_bytes=2457600 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=16 max_chunk_tensor_bytes=614400 bound_bytes=3686400 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=16 max_chunk_tensor_bytes=614400 bound_bytes=6144000 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=4 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=16 max_chunk_tensor_bytes=1354752 bound_bytes=5419008 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=4 window=5 chunks=4 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=16 max_chunk_tensor_bytes=1354752 bound_bytes=8128512 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=4 window=9 chunks=4 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=16 max_chunk_tensor_bytes=1354752 bound_bytes=13547520 
+PASS gen-baseline-g12.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=4 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=16 max_chunk_tensor_bytes=6021120 bound_bytes=24084480 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=4 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=16 max_chunk_tensor_bytes=6021120 bound_bytes=36126720 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=4 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=16 max_chunk_tensor_bytes=6021120 bound_bytes=60211200 
+PASS gen-baseline-g12.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 N=1   
+PASS long-30.mp4 --resolution 224 N=2  video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS long-30.mp4 --resolution 224 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=9633792 
+PASS long-30.mp4 --resolution 224 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 N=4  video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS long-30.mp4 --resolution 224 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=14450688 
+PASS long-30.mp4 --resolution 224 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 N=8  video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS long-30.mp4 --resolution 224 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=24084480 
+PASS long-30.mp4 --resolution 224 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=1   
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2  video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=8601600 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4  video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=12902400 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8  video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2150400 bound_bytes=21504000 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=1   
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=2  video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=3 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=10838016 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=4  video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=4 --chunk-target-ms 250 video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=16257024 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=8  video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=8 --chunk-target-ms 250 video_mode=chunked workers=8 window=9 chunks=15 max_chunk_tensor_bytes=2709504 bound_bytes=27095040 
+PASS long-30.mp4 --resolution 336 --window-sec 1.0 N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=1   
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2  video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=2 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4  video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=4 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8  video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --chunk-target-ms 250 video_mode=chunked workers=2 window=2 chunks=15 max_chunk_tensor_bytes=24084480 bound_bytes=72253440 
+PASS long-30.mp4 --resolution 224 --window-sec 0.05 --execution sequential N=8 --video-buffer-mib 1 video_mode=single_fallback reason="byte budget allows fewer than 2 in-flight chunks" 
+TOTAL 760 FAIL 0

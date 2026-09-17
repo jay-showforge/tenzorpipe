@@ -1,0 +1,32 @@
+v0.1.6 1 wall=11.35s cpu=155% rss=61.2MiB 
+v0.1.8 N=1 1 wall=11.07s cpu=157% rss=60.9MiB 
+v0.1.8 N=2 1 wall=9.49s cpu=188% rss=82.8MiB video_mode=chunked workers=2 window=3 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=9633792
+v0.1.8 N=3 1 wall=9.55s cpu=185% rss=96.4MiB video_mode=chunked workers=3 window=4 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+v0.1.8 N=4 1 wall=9.60s cpu=186% rss=112.4MiB video_mode=chunked workers=4 window=5 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=14450688
+v0.1.6 2 wall=11.28s cpu=156% rss=61.2MiB 
+v0.1.8 N=1 2 wall=11.27s cpu=156% rss=60.9MiB 
+v0.1.8 N=2 2 wall=9.49s cpu=187% rss=82.6MiB video_mode=chunked workers=2 window=3 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=9633792
+v0.1.8 N=3 2 wall=9.69s cpu=185% rss=97.6MiB video_mode=chunked workers=3 window=4 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+v0.1.8 N=4 2 wall=9.62s cpu=186% rss=112.8MiB video_mode=chunked workers=4 window=5 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=14450688
+v0.1.6 3 wall=11.51s cpu=155% rss=61.7MiB 
+v0.1.8 N=1 3 wall=11.15s cpu=157% rss=61.4MiB 
+v0.1.8 N=2 3 wall=9.48s cpu=188% rss=82.6MiB video_mode=chunked workers=2 window=3 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=9633792
+v0.1.8 N=3 3 wall=9.78s cpu=184% rss=97.2MiB video_mode=chunked workers=3 window=4 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+v0.1.8 N=4 3 wall=9.75s cpu=186% rss=115.2MiB video_mode=chunked workers=4 window=5 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=14450688
+v0.1.6 4 wall=11.51s cpu=154% rss=61.6MiB 
+v0.1.8 N=1 4 wall=11.53s cpu=156% rss=60.3MiB 
+v0.1.8 N=2 4 wall=9.64s cpu=187% rss=82.4MiB video_mode=chunked workers=2 window=3 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=9633792
+v0.1.8 N=3 4 wall=9.75s cpu=186% rss=96.7MiB video_mode=chunked workers=3 window=4 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+v0.1.8 N=4 4 wall=9.91s cpu=185% rss=114.9MiB video_mode=chunked workers=4 window=5 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=14450688
+v0.1.6 5 wall=11.31s cpu=156% rss=61.5MiB 
+v0.1.8 N=1 5 wall=11.39s cpu=156% rss=60.9MiB 
+v0.1.8 N=2 5 wall=9.65s cpu=186% rss=82.7MiB video_mode=chunked workers=2 window=3 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=9633792
+v0.1.8 N=3 5 wall=9.81s cpu=186% rss=96.2MiB video_mode=chunked workers=3 window=4 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+v0.1.8 N=4 5 wall=9.89s cpu=185% rss=114.1MiB video_mode=chunked workers=4 window=5 chunks=165 max_chunk_tensor_bytes=2408448 bound_bytes=14450688
+
+identical_across_variants: True
+v0.1.6       median 11.35s [11.28-11.51] cpu 155% rss 61.7MiB | decode(sum) 10.57 audio_src 4.33 resample 2.01 mel 0.32 write 0.28 recv_wait 10.60 win_wait 0.00 reorder_wait 0.00
+v0.1.8 N=1   median 11.27s [11.07-11.53] cpu 156% rss 61.4MiB | decode(sum) 10.52 audio_src 4.36 resample 2.03 mel 0.32 write 0.28 recv_wait 10.58 win_wait 0.00 reorder_wait 0.00
+v0.1.8 N=2   median 9.49s [9.48-9.65] cpu 187% rss 82.8MiB | decode(sum) 16.36 audio_src 5.72 resample 2.65 mel 0.38 write 0.25 recv_wait 8.78 win_wait 1.09 reorder_wait 1.40
+v0.1.8 N=3   median 9.75s [9.55-9.81] cpu 185% rss 97.6MiB | decode(sum) 18.75 audio_src 5.77 resample 2.65 mel 0.42 write 0.24 recv_wait 8.98 win_wait 7.61 reorder_wait 0.20
+v0.1.8 N=4   median 9.75s [9.60-9.91] cpu 186% rss 115.2MiB | decode(sum) 19.41 audio_src 5.75 resample 2.67 mel 0.40 write 0.24 recv_wait 9.07 win_wait 16.42 reorder_wait 0.34

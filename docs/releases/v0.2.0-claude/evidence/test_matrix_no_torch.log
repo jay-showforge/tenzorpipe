@@ -1,0 +1,23 @@
+VERIFY baseline720.mp4 224
+VERIFY high-bframes.mp4 160
+VERIFY high-bframes.mp4 224
+VERIFY high-bframes.mp4 336
+VERIFY short.mp4 224
+VERIFY silent-video.mp4 224
+VERIFY wav-44100-2ch.wav 224
+VERIFY wav-48000-2ch.wav 224
+VERIFY wav-16000-1ch.wav 224
+VERIFY wav-48000-6ch.wav 224
+VERIFY audio-only.mp4 224
+VERIFY color709.mp4 224
+VERIFY fullrange.mp4 224
+VERIFY sync-pulse.mp4 224
+VERIFY aac-6ch.mp4 224
+VERIFY tiny.wav 224
+Traceback (most recent call last):
+  File "/home/claude/tp20/tenzorpipe-v0.2.0/scripts/test_matrix.py", line 26, in <module>
+    sys.path.insert(0,str(ROOT/'python'));from tenzor import TenzorDataset
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/tp20/tenzorpipe-v0.2.0/python/tenzor.py", line 10, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

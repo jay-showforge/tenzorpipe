@@ -1,0 +1,523 @@
+[
+  {
+    "file": "baseline720.mp4",
+    "resolution": 224,
+    "epochs": 7,
+    "record_batches": 4,
+    "artifact_bytes": 4446730,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 3,
+        "source_frame": 45,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 4,
+        "source_frame": 60,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 5,
+        "source_frame": 75,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 6,
+        "source_frame": 90,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 327,
+      "active_logmel_mae": 0.0018429067787028373,
+      "active_logmel_p99": 0.02855380200495589,
+      "maximum_logmel_error": 0.9823455245636405
+    }
+  },
+  {
+    "file": "high-bframes.mp4",
+    "resolution": 160,
+    "epochs": 7,
+    "record_batches": 4,
+    "artifact_bytes": 2317834,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 3,
+        "source_frame": 45,
+        "type": "B",
+        "mae_255": 0.15247978270053864,
+        "p99_255": 1.7874544858932495
+      },
+      {
+        "epoch": 4,
+        "source_frame": 60,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 5,
+        "source_frame": 75,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 6,
+        "source_frame": 90,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 327,
+      "active_logmel_mae": 0.0018429067787028373,
+      "active_logmel_p99": 0.02855380200495589,
+      "maximum_logmel_error": 0.9823455245636405
+    }
+  },
+  {
+    "file": "high-bframes.mp4",
+    "resolution": 224,
+    "epochs": 7,
+    "record_batches": 4,
+    "artifact_bytes": 4446730,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 3,
+        "source_frame": 45,
+        "type": "B",
+        "mae_255": 0.1569344848394394,
+        "p99_255": 2.328765869140625
+      },
+      {
+        "epoch": 4,
+        "source_frame": 60,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 5,
+        "source_frame": 75,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 6,
+        "source_frame": 90,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 327,
+      "active_logmel_mae": 0.0018429067787028373,
+      "active_logmel_p99": 0.02855380200495589,
+      "maximum_logmel_error": 0.9823455245636405
+    }
+  },
+  {
+    "file": "high-bframes.mp4",
+    "resolution": 336,
+    "epochs": 7,
+    "record_batches": 4,
+    "artifact_bytes": 9879882,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 3,
+        "source_frame": 45,
+        "type": "B",
+        "mae_255": 0.1678055226802826,
+        "p99_255": 2.649765968322754
+      },
+      {
+        "epoch": 4,
+        "source_frame": 60,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 5,
+        "source_frame": 75,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 6,
+        "source_frame": 90,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 327,
+      "active_logmel_mae": 0.0018429067787028373,
+      "active_logmel_p99": 0.02855380200495589,
+      "maximum_logmel_error": 0.9823455245636405
+    }
+  },
+  {
+    "file": "short.mp4",
+    "resolution": 224,
+    "epochs": 1,
+    "record_batches": 1,
+    "artifact_bytes": 638914,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 13,
+      "active_logmel_mae": 0.004248396529002155,
+      "active_logmel_p99": 0.1708320800624607,
+      "maximum_logmel_error": 0.7010040443082621
+    }
+  },
+  {
+    "file": "silent-video.mp4",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 1908186,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ]
+  },
+  {
+    "file": "wav-44100-2ch.wav",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 44282,
+    "audio": {
+      "rate": 44100,
+      "channels": 2,
+      "valid_hops": 127,
+      "active_logmel_mae": 3.44844289624791e-06,
+      "active_logmel_p99": 2.7700657356355407e-05,
+      "maximum_logmel_error": 0.0046935434656312225
+    }
+  },
+  {
+    "file": "wav-48000-2ch.wav",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 44282,
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 127,
+      "active_logmel_mae": 3.84844734174252e-06,
+      "active_logmel_p99": 1.9986211925449027e-05,
+      "maximum_logmel_error": 0.0067658587019892025
+    }
+  },
+  {
+    "file": "wav-16000-1ch.wav",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 44282,
+    "audio": {
+      "rate": 16000,
+      "channels": 1,
+      "valid_hops": 127,
+      "active_logmel_mae": 1.1169611907531077e-05,
+      "active_logmel_p99": 6.506938119077432e-05,
+      "maximum_logmel_error": 0.003648918342439522
+    }
+  },
+  {
+    "file": "wav-48000-6ch.wav",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 44282,
+    "audio": {
+      "rate": 48000,
+      "channels": 6,
+      "valid_hops": 127,
+      "active_logmel_mae": 1.3366451808818975e-06,
+      "active_logmel_p99": 9.052386933827705e-06,
+      "maximum_logmel_error": 0.001257260582290698
+    }
+  },
+  {
+    "file": "audio-only.mp4",
+    "resolution": 224,
+    "epochs": 7,
+    "record_batches": 4,
+    "artifact_bytes": 98474,
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 327,
+      "active_logmel_mae": 0.0018429067787028373,
+      "active_logmel_p99": 0.02855380200495589,
+      "maximum_logmel_error": 0.9823455245636405
+    }
+  },
+  {
+    "file": "color709.mp4",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 1908186,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 3.994471171608893e-07,
+        "p99_255": 7.599592208862305e-06
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "P",
+        "mae_255": 0.035397645086050034,
+        "p99_255": 7.599592208862305e-06
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "P",
+        "mae_255": 0.039038848131895065,
+        "p99_255": 1.519918441772461e-05
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 128,
+      "active_logmel_mae": 0.0009412791820518776,
+      "active_logmel_p99": 0.007226317388794793,
+      "maximum_logmel_error": 0.7652813523286399
+    }
+  },
+  {
+    "file": "fullrange.mp4",
+    "resolution": 224,
+    "epochs": 3,
+    "record_batches": 2,
+    "artifact_bytes": 1908178,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "B",
+        "mae_255": 0.027562757954001427,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "B",
+        "mae_255": 0.049026791006326675,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 48000,
+      "channels": 2,
+      "valid_hops": 128,
+      "active_logmel_mae": 0.0009412791820518776,
+      "active_logmel_p99": 0.007226317388794793,
+      "maximum_logmel_error": 0.7652813523286399
+    }
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "resolution": 224,
+    "epochs": 5,
+    "record_batches": 3,
+    "artifact_bytes": 3177458,
+    "visual": [
+      {
+        "epoch": 0,
+        "source_frame": 0,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 1,
+        "source_frame": 15,
+        "type": "B",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 2,
+        "source_frame": 30,
+        "type": "I",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 3,
+        "source_frame": 45,
+        "type": "B",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      },
+      {
+        "epoch": 4,
+        "source_frame": 60,
+        "type": "B",
+        "mae_255": 0.0,
+        "p99_255": 0.0
+      }
+    ],
+    "audio": {
+      "rate": 44100,
+      "channels": 2,
+      "valid_hops": 227,
+      "active_logmel_mae": 1.630144943794707e-05,
+      "active_logmel_p99": 0.00014651484183678684,
+      "maximum_logmel_error": 0.015048174895563093
+    }
+  }
+]

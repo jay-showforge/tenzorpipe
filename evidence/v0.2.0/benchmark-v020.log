@@ -1,0 +1,50 @@
+full N2 v0.2.0                         r1 7.326s cpu 187% rss 77.1
+full N2 v0.1.9 (same toolchain)        r1 9.535s cpu 186% rss 81.0
+full N1 v0.2.0                         r1 11.083s cpu 120% rss 60.9
+full N1 v0.1.9 (same toolchain)        r1 11.224s cpu 156% rss 60.4
+audio-only v0.2.0                      r1 1.675s cpu 151% rss 10.8
+audio-only v0.2.0 inline decode        r1 2.236s cpu 100% rss 10.4
+audio-only v0.1.9 (same toolchain)     r1 6.204s cpu 100% rss 10.4
+audio-only v0.1.9 (bundled)            r1 6.874s cpu 100% rss 10.5
+audio-only v0.1.9 (bundled)            r2 6.941s cpu 100% rss 10.5
+audio-only v0.1.9 (same toolchain)     r2 6.298s cpu 100% rss 10.2
+audio-only v0.2.0 inline decode        r2 2.246s cpu 100% rss 10.5
+audio-only v0.2.0                      r2 1.684s cpu 150% rss 10.7
+full N1 v0.1.9 (same toolchain)        r2 11.395s cpu 154% rss 61.5
+full N1 v0.2.0                         r2 11.265s cpu 119% rss 61.0
+full N2 v0.1.9 (same toolchain)        r2 9.449s cpu 187% rss 80.8
+full N2 v0.2.0                         r2 7.079s cpu 188% rss 77.8
+full N2 v0.2.0                         r3 7.234s cpu 186% rss 77.2
+full N2 v0.1.9 (same toolchain)        r3 9.501s cpu 186% rss 80.8
+full N1 v0.2.0                         r3 11.217s cpu 119% rss 60.9
+full N1 v0.1.9 (same toolchain)        r3 11.431s cpu 154% rss 60.5
+audio-only v0.2.0                      r3 1.726s cpu 150% rss 10.7
+audio-only v0.2.0 inline decode        r3 2.240s cpu 100% rss 10.3
+audio-only v0.1.9 (same toolchain)     r3 6.275s cpu 100% rss 10.4
+audio-only v0.1.9 (bundled)            r3 6.943s cpu 100% rss 10.6
+audio-only v0.1.9 (bundled)            r4 6.907s cpu 100% rss 10.4
+audio-only v0.1.9 (same toolchain)     r4 6.293s cpu 100% rss 10.4
+audio-only v0.2.0 inline decode        r4 2.220s cpu 100% rss 10.4
+audio-only v0.2.0                      r4 1.665s cpu 149% rss 10.6
+full N1 v0.1.9 (same toolchain)        r4 11.122s cpu 155% rss 61.5
+full N1 v0.2.0                         r4 11.191s cpu 120% rss 61.2
+full N2 v0.1.9 (same toolchain)        r4 9.439s cpu 187% rss 81.2
+full N2 v0.2.0                         r4 7.207s cpu 186% rss 76.9
+full N2 v0.2.0                         r5 7.209s cpu 187% rss 77.6
+full N2 v0.1.9 (same toolchain)        r5 9.532s cpu 186% rss 81.0
+full N1 v0.2.0                         r5 11.195s cpu 120% rss 61.0
+full N1 v0.1.9 (same toolchain)        r5 11.314s cpu 156% rss 61.1
+audio-only v0.2.0                      r5 1.705s cpu 148% rss 10.6
+audio-only v0.2.0 inline decode        r5 2.249s cpu 100% rss 10.3
+audio-only v0.1.9 (same toolchain)     r5 6.394s cpu 100% rss 10.3
+audio-only v0.1.9 (bundled)            r5 6.999s cpu 100% rss 10.5
+
+identical outputs per input: {'a330.mp4': True, 'long-330.mp4': True}
+audio-only v0.1.9 (bundled)            median 6.941s [6.874-6.999] cpu 100% rss 10.5MiB | src 4.69 src_wait 0.00 resample 1.92 mel 0.30 vdec 0.00
+audio-only v0.1.9 (same toolchain)     median 6.293s [6.204-6.394] cpu 100% rss 10.4MiB | src 4.06 src_wait 0.00 resample 1.91 mel 0.30 vdec 0.00
+audio-only v0.2.0 inline decode        median 2.240s [2.220-2.249] cpu 100% rss 10.4MiB | src 1.49 src_wait 0.00 resample 0.43 mel 0.29 vdec 0.00
+audio-only v0.2.0                      median 1.684s [1.665-1.726] cpu 150% rss 10.7MiB | src 1.54 src_wait 0.90 resample 0.45 mel 0.30 vdec 0.00
+full N1 v0.1.9 (same toolchain)        median 11.314s [11.122-11.431] cpu 155% rss 61.1MiB | src 4.29 src_wait 0.00 resample 2.00 mel 0.32 vdec 10.55
+full N1 v0.2.0                         median 11.195s [11.083-11.265] cpu 120% rss 61.0MiB | src 1.62 src_wait 0.01 resample 0.47 mel 0.32 vdec 10.42
+full N2 v0.1.9 (same toolchain)        median 9.501s [9.439-9.535] cpu 186% rss 81.0MiB | src 5.61 src_wait 0.00 resample 2.65 mel 0.42 vdec 15.85
+full N2 v0.2.0                         median 7.209s [7.079-7.326] cpu 187% rss 77.2MiB | src 2.27 src_wait 1.56 resample 0.49 mel 0.31 vdec 12.68

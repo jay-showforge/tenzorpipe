@@ -1,0 +1,5 @@
+numpy==2.3.5
+pyarrow==25.0.1
+pillow==12.3.0
+psutil==7.2.2
+# Install torch==2.14.0+cpu from https://download.pytorch.org/whl/cpu

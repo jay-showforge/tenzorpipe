@@ -1,0 +1,25 @@
+0.05 OK  old 1 Error: decode AAC sample 57 | new 1 Error: decode AAC sample 57 0.05s
+0.09 OK  old 1 Error: decode AAC sample 110 | new 1 Error: decode OpenH264 access unit 71 0.03s
+0.13 OK  old 1 Error: decode AAC sample 165 | new 1 Error: decode OpenH264 access unit 106 0.08s
+0.17 OK  old 1 Error: decode AAC sample 220 | new 1 Error: decode OpenH264 access unit 142 0.04s
+0.21 OK  old 1 Error: decode OpenH264 access unit 180 | new 1 Error: decode OpenH264 access unit 180 0.02s
+0.25 OK  old 1 Error: decode AAC sample 332 | new 1 Error: decode OpenH264 access unit 213 0.06s
+0.28 OK  old 1 Error: decode OpenH264 access unit 249 | new 1 Error: decode OpenH264 access unit 249 0.11s
+0.32 OK  old 1 Error: decode AAC sample 445 | new 1 Error: decode OpenH264 access unit 286 0.12s
+0.36 OK  old 1 Error: decode AAC sample 499 | new 1 Error: decode OpenH264 access unit 320 0.20s
+0.40 OK  old 1 Error: decode OpenH264 access unit 359 | new 1 Error: decode OpenH264 access unit 359 0.14s
+0.44 OK  old 1 Error: decode AAC sample 615 | new 1 Error: decode OpenH264 access unit 394 0.13s
+0.48 OK  old 1 Error: decode AAC sample 668 | new 1 Error: decode OpenH264 access unit 428 0.16s
+0.52 OK  old 1 Error: decode OpenH264 access unit 463 | new 1 Error: decode OpenH264 access unit 463 0.23s
+0.56 OK  old 1 Error: invalid/truncated AVCC NAL payload | new 1 Error: invalid/truncated AVCC NAL payload 0.20s
+0.60 OK  old 1 Error: decode AAC sample 835 | new 1 Error: decode OpenH264 access unit 537 0.22s
+0.64 OK  old 1 Error: decode AAC sample 887 | new 1 Error: decode OpenH264 access unit 570 0.27s
+0.68 OK  old 1 Error: decode AAC sample 940 | new 1 Error: invalid/truncated AVCC NAL payload 0.29s
+0.72 OK  old 1 Error: decode AAC sample 1000 | new 1 Error: decode OpenH264 access unit 642 0.28s
+0.75 OK  old 1 Error: decode AAC sample 1054 | new 1 Error: decode OpenH264 access unit 675 0.34s
+0.79 OK  old 1 Error: decode AAC sample 1112 | new 1 Error: decode OpenH264 access unit 713 0.36s
+0.83 OK  old 1 Error: decode AAC sample 1169 | new 1 Error: decode OpenH264 access unit 750 0.37s
+0.87 OK  old 1 Error: decode AAC sample 1223 | new 1 Error: decode OpenH264 access unit 783 0.37s
+0.91 OK  old 1 Error: decode OpenH264 access unit 819 | new 1 Error: decode OpenH264 access unit 819 0.43s
+0.95 OK  old 1 Error: decode OpenH264 access unit 851 | new 1 Error: decode OpenH264 access unit 851 0.41s
+agree 24 /24

@@ -1,0 +1,12 @@
+VERIFY baseline720.mp4 224
+Traceback (most recent call last):
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/test_matrix.py", line 11, in <module>
+    results.append(verify(p,out,res,2))
+                   ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/verify_media.py", line 80, in verify
+    if 'video_tensor' in data:assert md['video_shape']==f'3,{res},{res}';result['visual']=visual(p,data,md)
+                                                                                          ^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/verify_media.py", line 38, in visual
+    assert mae<3.,f'{p.name} epoch {e} ({fs[idx]["pict_type"]}): MAE {mae}'
+           ^^^^^^
+AssertionError: baseline720.mp4 epoch 1 (P): MAE 5.500516891479492

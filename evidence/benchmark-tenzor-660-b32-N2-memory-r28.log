@@ -1,0 +1,4 @@
+video_mode=chunked workers=2 window=3 chunks=330 max_chunk_tensor_bytes=2408448 bound_bytes=7225344
+video 640x360, duration 660000ms, decoded 19800 access units, resized 1320 selected pictures
+TENZOR_PROFILE {"wall_seconds":14.708021391,"execution":"concurrent","queue_slots_per_track":2,"queued_payload_budget_used_bytes":1229824,"decoder_threads":0,"stages_seconds":{"setup":0.005651247,"video_parse":0.088769038,"video_decode":18.772203283,"video_resize":0.648925231,"audio_source":8.137443089,"audio_resample":4.728807025,"audio_mel":0.798687631,"arrow_pack":0.132220850,"arrow_write":2.277504174,"worker_send_wait":15.288074720,"collector_receive_wait":12.284417362,"final_sync":0.000005218,"video_window_wait":9.449696872,"video_reorder_wait":0.261440963}}
+TenzorPipe 0.1.9: 1320 epochs in 14.708s

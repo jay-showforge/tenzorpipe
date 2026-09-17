@@ -1,0 +1,12 @@
+PASS a330.mp4 [] rc 1 ['Error: Io error: File too large (os error 27)'] 0.49s
+PASS a330.mp4 ['--no-audio-decode-thread'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.62s
+PASS a330.mp4 ['--video-workers', '4'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.49s
+PASS a330.mp4 ['--execution', 'sequential'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.62s
+PASS long-30.mp4 [] rc 1 ['Error: Io error: File too large (os error 27)'] 0.60s
+PASS long-30.mp4 ['--no-audio-decode-thread'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.65s
+PASS long-30.mp4 ['--video-workers', '4'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.48s
+PASS long-30.mp4 ['--execution', 'sequential'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.67s
+PASS av-music.mp4 [] rc 1 ['Error: Io error: File too large (os error 27)'] 0.61s
+PASS av-music.mp4 ['--no-audio-decode-thread'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.61s
+PASS av-music.mp4 ['--video-workers', '4'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.48s
+PASS av-music.mp4 ['--execution', 'sequential'] rc 1 ['Error: Io error: File too large (os error 27)'] 0.73s

@@ -1,0 +1,331 @@
+--- a/src/video.rs
++++ b/src/video.rs
+@@ -16,16 +16,22 @@
+     pub height: usize,
+     pub duration_ms: u64,
+     pub sample_count: usize,
+-}
+-
+-/// Calls `on_frame(pts_ms, chw)` for decoded pictures in display order.
+-///
+-/// We feed *all* compressed samples into the decoder. The old v0.1.2 keyframe-only
+-/// path cannot reconstruct P/B frames and is intentionally gone.
+-pub fn decode_h264_mp4<F>(mp4: &Mp4<'_>, resolution: usize, mut on_frame: F) -> Result<VideoInfo>
++    pub resized_count: usize,
++}
++
++/// Decode every access unit, but convert only pictures selected by nearest-epoch PTS.
++/// The callback borrows one tensor, including when a sparse frame serves several epochs.
++pub fn decode_h264_mp4<F>(
++    mp4: &Mp4<'_>,
++    resolution: usize,
++    window_ms: u64,
++    audio_duration_ms: u64,
++    mut on_epoch: F,
++) -> Result<VideoInfo>
+ where
+-    F: FnMut(i64, Vec<f32>) -> Result<()>,
++    F: FnMut(usize, i64, &[f32]) -> Result<()>,
+ {
++    anyhow::ensure!(window_ms > 0, "epoch window must be positive");
+     let track = mp4
+         .tracks()
+         .iter()
+@@ -82,6 +88,29 @@
+         .context("initialize OpenH264 SPS/PPS")?;
+     let mut pts_ms = BinaryHeap::new();
+     let color = video_color(mp4)?;
++    // Metadata-only lookahead avoids copying a borrowed decoder picture just to
++    // learn its successor's PTS. The heap is capped, independent of clip duration.
++    let timestamps = track
++        .samples()
++        .map(|sample| {
++            let sample = sample.context("read H.264 presentation metadata")?;
++            Ok((timeline.pts_sec(sample.cts, track.timescale()) * 1000.).round() as i64)
++        })
++        .filter(|pts: &Result<i64>| match pts {
++            Ok(pts) => *pts >= 0 && (*pts as f64) < timeline.duration_sec * 1000.,
++            Err(_) => true,
++        });
++    let mut presentation = PresentationTimes::new(timestamps);
++    let mut current_pts = presentation.next_pts()?;
++    anyhow::ensure!(
++        current_pts.is_some(),
++        "H.264 decoder produced no display frames"
++    );
++    let mut next_pts = presentation.next_pts()?;
++    let duration_ms = (timeline.duration_sec * 1000.0).round() as u64;
++    let total_epochs = duration_ms.max(audio_duration_ms).div_ceil(window_ms) as usize;
++    let mut epoch = 0;
++    let mut resized_count = 0;
+     let mut out_index = 0usize;
+     let mut emit = |frame: openh264::decoder::DecodedYUV<'_>,
+                     pts_ms: &mut BinaryHeap<Reverse<i64>>|
+@@ -94,15 +123,28 @@
+             "midstream H.264 resolution changes unsupported"
+         );
+         if pts >= 0 && (pts as f64) < timeline.duration_sec * 1000. {
+-            let chw = yuv420_to_resized_chw(
+-                frame.y(),
+-                frame.u(),
+-                frame.v(),
+-                (w, h),
+-                (resolution, resolution),
+-                color,
++            anyhow::ensure!(
++                current_pts == Some(pts),
++                "decoded PTS disagrees with bounded presentation lookahead"
+             );
+-            on_frame(pts, chw)?;
++            let end = epoch_end(pts, next_pts, window_ms, total_epochs);
++            if epoch < end {
++                let chw = yuv420_to_resized_chw(
++                    frame.y(),
++                    frame.u(),
++                    frame.v(),
++                    (w, h),
++                    (resolution, resolution),
++                    color,
++                );
++                resized_count += 1;
++                while epoch < end {
++                    on_epoch(epoch, pts, &chw)?;
++                    epoch += 1;
++                }
++            }
++            current_pts = next_pts;
++            next_pts = presentation.next_pts()?;
+         }
+         Ok(())
+     };
+@@ -144,12 +186,58 @@
+         "H.264 picture count mismatch: {out_index} vs {} access units",
+         track.sample_count()
+     );
++    anyhow::ensure!(
++        current_pts.is_none() && epoch == total_epochs,
++        "incomplete H.264 presentation sequence"
++    );
+     Ok(VideoInfo {
+         width,
+         height,
+         duration_ms: (timeline.duration_sec * 1000.0).round() as u64,
+         sample_count: track.sample_count(),
++        resized_count,
+     })
++}
++
++// Keep the same earlier-picture tie break and integer midpoint as v0.1.4.
++fn epoch_end(pts: i64, next_pts: Option<i64>, window_ms: u64, total: usize) -> usize {
++    next_pts.map_or(total, |next| {
++        let midpoint = pts + (next - pts) / 2;
++        ((midpoint as u64 / window_ms + 1) as usize).min(total)
++    })
++}
++
++const MAX_REORDER: usize = 34;
++struct PresentationTimes<I> {
++    source: I,
++    heap: BinaryHeap<Reverse<i64>>,
++    previous: Option<i64>,
++}
++impl<I: Iterator<Item = Result<i64>>> PresentationTimes<I> {
++    fn new(source: I) -> Self {
++        Self {
++            source,
++            heap: BinaryHeap::new(),
++            previous: None,
++        }
++    }
++    fn next_pts(&mut self) -> Result<Option<i64>> {
++        while self.heap.len() < MAX_REORDER {
++            match self.source.next() {
++                Some(pts) => self.heap.push(Reverse(pts?)),
++                None => break,
++            }
++        }
++        let pts = self.heap.pop().map(|Reverse(pts)| pts);
++        if let (Some(previous), Some(pts)) = (self.previous, pts) {
++            anyhow::ensure!(
++                pts >= previous,
++                "H.264 presentation reordering exceeds supported lookahead"
++            );
++        }
++        self.previous = pts;
++        Ok(pts)
++    }
+ }
+ 
+ /// Resize YUV420 directly into normalized CHW RGB, avoiding an intermediate full-resolution RGB frame.
+@@ -192,8 +280,7 @@
+             let uu = *u.get(cy * u_stride + cx).unwrap_or(&128) as f32;
+             let vv = *v.get(cy * v_stride + cx).unwrap_or(&128) as f32;
+ 
+-            // BT.601 limited-range conversion (common SDR H.264 baseline). Metadata records this
+-            // choice so a future color-metadata-aware path can supersede it without ambiguity.
++            // Honor the SPS color matrix and range recorded in the Arrow metadata.
+             let c = if color.full {
+                 yy
+             } else {
+@@ -226,6 +313,79 @@
+ #[cfg(test)]
+ mod tests {
+     use super::*;
++
++    #[test]
++    fn selection_matches_legacy_midpoints_gaps_ties_and_tail() {
++        for pts in [
++            vec![0],
++            vec![0, 1000, 2000],
++            vec![0, 0, 33, 500, 501],
++            vec![80, 117, 401, 1200, 1337],
++        ] {
++            for window in [50, 330, 500, 1000] {
++                let total = 80;
++                let mut legacy = Vec::new();
++                for pair in pts.windows(2) {
++                    let midpoint = pair[0] + (pair[1] - pair[0]) / 2;
++                    while legacy.len() < total && (legacy.len() as u64 * window) as i64 <= midpoint
++                    {
++                        legacy.push(pair[0]);
++                    }
++                }
++                legacy.resize(total, *pts.last().unwrap());
++                let mut selected = Vec::new();
++                for (i, &p) in pts.iter().enumerate() {
++                    let end = epoch_end(p, pts.get(i + 1).copied(), window, total);
++                    selected.resize(end, p);
++                }
++                assert_eq!(selected, legacy);
++            }
++        }
++    }
++
++    #[test]
++    fn presentation_lookahead_orders_b_frames_with_bounded_memory() {
++        let input = (0..300).flat_map(|g| [g * 4, g * 4 + 3, g * 4 + 1, g * 4 + 2]);
++        let mut pts = PresentationTimes::new(input.map(Ok));
++        for expected in 0..1200 {
++            assert_eq!(pts.next_pts().unwrap(), Some(expected));
++            assert!(pts.heap.len() < MAX_REORDER);
++        }
++        assert_eq!(pts.next_pts().unwrap(), None);
++    }
++
++    #[test]
++    fn presentation_lookahead_rejects_excessive_reordering_and_parse_errors() {
++        let mut pts = PresentationTimes::new((1..=70).chain([0]).map(Ok));
++        let mut failed = false;
++        for _ in 0..72 {
++            if pts.next_pts().is_err() {
++                failed = true;
++                break;
++            }
++        }
++        assert!(failed);
++        let mut pts =
++            PresentationTimes::new([Ok(0), Err(anyhow::anyhow!("bad sample"))].into_iter());
++        assert!(pts.next_pts().is_err());
++    }
++
++    #[test]
++    fn thirty_fps_selects_exactly_two_pictures_per_second() {
++        let timestamps: Vec<i64> = (0..9900)
++            .map(|i| (i as f64 * 1000. / 30.).round() as i64)
++            .collect();
++        let mut epoch = 0;
++        let mut resized = 0;
++        for (i, &pts) in timestamps.iter().enumerate() {
++            let end = epoch_end(pts, timestamps.get(i + 1).copied(), 500, 660);
++            if epoch < end {
++                resized += 1;
++                epoch = end;
++            }
++        }
++        assert_eq!((epoch, resized), (660, 660));
++    }
+ 
+     #[test]
+     fn neutral_black_yuv_is_near_black_rgb() {
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -207,32 +207,25 @@
+         Ok(())
+     };
+     if has_video {
+-        let mut previous: Option<(i64, Vec<f32>)> = None;
+-        let info =
+-            video::decode_h264_mp4(mp4.as_ref().unwrap(), args.resolution, |pts, tensor| {
+-                if let Some((prev_pts, prev)) = previous.take() {
+-                    ensure!(
+-                        pts >= prev_pts,
+-                        "decoder produced non-monotonic presentation timestamps"
+-                    );
+-                    let midpoint = prev_pts + (pts - prev_pts) / 2;
+-                    while (epoch as u64 * window_ms) as i64 <= midpoint {
+-                        emit(epoch, Some((prev_pts, &prev)))?;
+-                        epoch += 1;
+-                    }
+-                }
+-                previous = Some((pts, tensor));
++        let info = video::decode_h264_mp4(
++            mp4.as_ref().unwrap(),
++            args.resolution,
++            window_ms,
++            audio_duration_ms,
++            |index, pts, tensor| {
++                ensure!(index == epoch, "non-contiguous video epoch sequence");
++                emit(index, Some((pts, tensor)))?;
++                epoch += 1;
+                 Ok(())
+-            })?;
+-        let total = info.duration_ms.max(audio_duration_ms).div_ceil(window_ms) as usize;
+-        let (last_pts, last) = previous.context("H.264 decoder produced no display frames")?;
+-        while epoch < total {
+-            emit(epoch, Some((last_pts, &last)))?;
+-            epoch += 1;
+-        }
++            },
++        )?;
++        ensure!(
++            epoch == info.duration_ms.max(audio_duration_ms).div_ceil(window_ms) as usize,
++            "incorrect synchronized epoch count"
++        );
+         eprintln!(
+-            "video {}x{}, decoded {} access units",
+-            info.width, info.height, info.sample_count
++            "video {}x{}, decoded {} access units, resized {} selected pictures",
++            info.width, info.height, info.sample_count, info.resized_count
+         );
+     } else {
+         let total = audio_duration_ms.div_ceil(window_ms) as usize;
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "tenzor-pipe"
+-version = "0.1.4"
++version = "0.1.5"
+ edition = "2024"
+ description = "High-throughput media-to-tensor preprocessing engine for multimodal AI"
+ license = "BUSL-1.1"
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1003,7 +1003,7 @@
+ 
+ [[package]]
+ name = "tenzor-pipe"
+-version = "0.1.4"
++version = "0.1.5"
+ dependencies = [
+  "anyhow",
+  "arrow",
+--- a/deny.toml
++++ b/deny.toml
+@@ -24,5 +24,5 @@
+ # Preserve the supplied project license; this exception cannot authorize dependencies.
+ [[licenses.exceptions]]
+ name = "tenzor-pipe"
+-version = "=0.1.4"
++version = "=0.1.5"
+ allow = ["BUSL-1.1"]

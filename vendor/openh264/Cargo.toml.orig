@@ -1,0 +1,45 @@
+[package]
+name = "openh264"
+description = "Idiomatic bindings for OpenH264."
+keywords = ["multimedia", "encoding", "video"]
+categories = ["api-bindings", "multimedia::video"]
+documentation = "https://docs.rs/openh264/"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+exclude = [
+    "**/*.h264",
+    "**/*.rgb",
+    "**/*.mp4",
+    "**/*.bmp"
+]
+
+[lints]
+workspace = true
+
+[features]
+default = ["source"]
+source = ["openh264-sys2/source"]
+libloading = ["openh264-sys2/libloading"]
+
+[dependencies]
+openh264-sys2.workspace = true
+wide.workspace = true
+
+[dev-dependencies]
+image.workspace = true
+image-compare.workspace = true
+mp4.workspace = true
+anyhow.workspace = true
+rand.workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[[example]]
+name = "mp4"

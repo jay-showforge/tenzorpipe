@@ -1,0 +1,142 @@
+[
+  {
+    "name": "epoch-patch-old-330-r0",
+    "artifact_path": "out/benchmark-masjy7bl/epoch-patch-old-330-r0.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/phase2-original/tenzor-v0.1.4",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-masjy7bl/epoch-patch-old-330-r0.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 19.112309766999715,
+    "peak_tree_rss_sampled_bytes": 60805120,
+    "rusage_maxrss_kib": 63184,
+    "cpu_seconds": 18.93738,
+    "cpu_percent_one_core": 99.08472723008207,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 17.26635890811035,
+    "epochs_per_second": 34.5327178162207,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "95163cf9b2fd5e0ac2a5431715fe153e53afeff5526024a090523f126eaac0dc",
+    "column_sha256": {
+      "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+      "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+      "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+    },
+    "all_columns_bit_identical": true
+  },
+  {
+    "name": "epoch-patch-new-330-r1",
+    "artifact_path": "out/benchmark-masjy7bl/epoch-patch-new-330-r1.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-masjy7bl/epoch-patch-new-330-r1.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 14.662139485999433,
+    "peak_tree_rss_sampled_bytes": 59748352,
+    "rusage_maxrss_kib": 527372,
+    "cpu_seconds": 14.616439000000002,
+    "cpu_percent_one_core": 99.68830956735155,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418574336,
+    "media_seconds_per_second": 22.50694725112321,
+    "epochs_per_second": 45.01389450224642,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+    "column_sha256": {
+      "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+      "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+      "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+    },
+    "all_columns_bit_identical": true,
+    "decoded": 9900,
+    "resized": 660
+  },
+  {
+    "name": "epoch-patch-old-330-r2",
+    "artifact_path": "out/benchmark-masjy7bl/epoch-patch-old-330-r2.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/phase2-original/tenzor-v0.1.4",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-masjy7bl/epoch-patch-old-330-r2.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 19.893561242000033,
+    "peak_tree_rss_sampled_bytes": 60768256,
+    "rusage_maxrss_kib": 527500,
+    "cpu_seconds": 19.875748,
+    "cpu_percent_one_core": 99.91045724903984,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 16.588281805637273,
+    "epochs_per_second": 33.176563611274545,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "95163cf9b2fd5e0ac2a5431715fe153e53afeff5526024a090523f126eaac0dc",
+    "column_sha256": {
+      "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+      "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+      "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+    },
+    "all_columns_bit_identical": true
+  },
+  {
+    "name": "epoch-patch-new-330-r3",
+    "artifact_path": "out/benchmark-masjy7bl/epoch-patch-new-330-r3.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-masjy7bl/epoch-patch-new-330-r3.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 16.115653196000494,
+    "peak_tree_rss_sampled_bytes": 59711488,
+    "rusage_maxrss_kib": 527500,
+    "cpu_seconds": 16.109922,
+    "cpu_percent_one_core": 99.96443708529348,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 20.4769856974769,
+    "epochs_per_second": 40.9539713949538,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+    "column_sha256": {
+      "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+      "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+      "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+      "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+    },
+    "all_columns_bit_identical": true,
+    "decoded": 9900,
+    "resized": 660
+  }
+]

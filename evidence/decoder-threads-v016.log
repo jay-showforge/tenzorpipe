@@ -1,0 +1,14 @@
+{"fixture": "baseline720.mp4", "threads": 0, "exit": 0, "seconds": 0.14321580800015, "stderr": "video 1280x720, duration 3300ms, decoded 99 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "baseline720.mp4", "threads": 1, "exit": 0, "seconds": 0.18469808400004695, "stderr": "video 1280x720, duration 3300ms, decoded 99 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "baseline720.mp4", "threads": 2, "timeout": true, "seconds": 15.022546059999968, "partial_output_present": true}
+{"fixture": "baseline720.mp4", "threads": 4, "timeout": true, "seconds": 15.036618957999963, "partial_output_present": true}
+{"fixture": "high-bframes.mp4", "threads": 0, "exit": 0, "seconds": 0.3800696040002549, "stderr": "video 1280x720, duration 3300ms, decoded 99 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "high-bframes.mp4", "threads": 1, "exit": 0, "seconds": 0.4020271630001844, "stderr": "video 1280x720, duration 3300ms, decoded 99 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "short.mp4", "threads": 0, "exit": 0, "seconds": 0.032349135000004026, "stderr": "video 1280x720, duration 134ms, decoded 4 access units, resized 1 selected pictures\n", "bit_identical": true}
+{"fixture": "short.mp4", "threads": 1, "exit": 0, "seconds": 0.031875659999968775, "stderr": "video 1280x720, duration 134ms, decoded 4 access units, resized 1 selected pictures\n", "bit_identical": true}
+{"fixture": "silent-video.mp4", "threads": 0, "exit": 0, "seconds": 0.16526450999981535, "stderr": "video 1280x720, duration 1300ms, decoded 39 access units, resized 3 selected pictures\n", "bit_identical": true}
+{"fixture": "silent-video.mp4", "threads": 1, "exit": 0, "seconds": 0.15960320900012448, "stderr": "video 1280x720, duration 1300ms, decoded 39 access units, resized 3 selected pictures\n", "bit_identical": true}
+{"fixture": "selection-vfr.mp4", "threads": 0, "exit": 0, "seconds": 0.020772292999936326, "stderr": "video 320x240, duration 3300ms, decoded 22 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "selection-vfr.mp4", "threads": 1, "exit": 0, "seconds": 0.021465024999997695, "stderr": "video 320x240, duration 3300ms, decoded 22 access units, resized 7 selected pictures\n", "bit_identical": true}
+{"fixture": "corrupt-nal.mp4", "threads": 0, "exit": 1, "seconds": 0.009348240999770496, "stderr": "Error: invalid/truncated AVCC NAL payload\n", "partial_output_present": false}
+{"fixture": "corrupt-nal.mp4", "threads": 1, "exit": 1, "seconds": 0.008886011999948096, "stderr": "Error: invalid/truncated AVCC NAL payload\n", "partial_output_present": false}

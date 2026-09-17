@@ -1,0 +1,89 @@
+{
+  "binary_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77",
+  "cases": [
+    {
+      "file": "audio-only.mp4",
+      "mode": "threaded",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "audio-only.mp4",
+      "mode": "inline",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "audio-only.mp4",
+      "mode": "N4",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "audio-only.mp4",
+      "mode": "sequential",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "high-bframes.mp4",
+      "mode": "threaded",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "high-bframes.mp4",
+      "mode": "inline",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "high-bframes.mp4",
+      "mode": "N4",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "high-bframes.mp4",
+      "mode": "sequential",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "wav-48000-2ch.wav",
+      "mode": "threaded",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "wav-48000-2ch.wav",
+      "mode": "inline",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "wav-48000-2ch.wav",
+      "mode": "N4",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    },
+    {
+      "file": "wav-48000-2ch.wav",
+      "mode": "sequential",
+      "error": "Error: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)",
+      "same_full_error": true,
+      "clean_exit": true
+    }
+  ]
+}

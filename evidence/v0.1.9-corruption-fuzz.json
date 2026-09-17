@@ -1,0 +1,386 @@
+[
+  {
+    "position": 0.05,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 57",
+      0.03423953056335449
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 57",
+      0.04703092575073242
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.08913043478260871,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 110",
+      0.07235598564147949
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 71",
+      0.026932239532470703
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.1282608695652174,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 165",
+      0.07998299598693848
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 106",
+      0.0758519172668457
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.1673913043478261,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 220",
+      0.10448932647705078
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 142",
+      0.03706097602844238
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.2065217391304348,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 180",
+      0.19556546211242676
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 180",
+      0.015273809432983398
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.2456521739130435,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 332",
+      0.16437125205993652
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 213",
+      0.06293940544128418
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.2847826086956522,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 249",
+      0.2570624351501465
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 249",
+      0.11105227470397949
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.32391304347826083,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 445",
+      0.24907612800598145
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 286",
+      0.12373018264770508
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.3630434782608696,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 499",
+      0.26138758659362793
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 320",
+      0.19906044006347656
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.4021739130434782,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 359",
+      0.3562343120574951
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 359",
+      0.13500499725341797
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.44130434782608696,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 615",
+      0.3515455722808838
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 394",
+      0.13368582725524902
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.48043478260869565,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 668",
+      0.35927796363830566
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 428",
+      0.16033673286437988
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.5195652173913043,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 463",
+      0.6280636787414551
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 463",
+      0.2300853729248047
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.5586956521739131,
+    "old": [
+      1,
+      null,
+      "Error: invalid/truncated AVCC NAL payload",
+      0.5123708248138428
+    ],
+    "new": [
+      1,
+      null,
+      "Error: invalid/truncated AVCC NAL payload",
+      0.1972208023071289
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.5978260869565217,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 835",
+      0.4919400215148926
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 537",
+      0.2188279628753662
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.6369565217391305,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 887",
+      0.4931786060333252
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 570",
+      0.2744147777557373
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.6760869565217392,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 940",
+      0.722416877746582
+    ],
+    "new": [
+      1,
+      null,
+      "Error: invalid/truncated AVCC NAL payload",
+      0.28584814071655273
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.7152173913043479,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1000",
+      0.562934398651123
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 642",
+      0.28324294090270996
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.7543478260869565,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1054",
+      0.5843312740325928
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 675",
+      0.3442840576171875
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.7934782608695653,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1112",
+      0.7249042987823486
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 713",
+      0.35779595375061035
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.832608695652174,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1169",
+      0.6480083465576172
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 750",
+      0.36998724937438965
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.8717391304347828,
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1223",
+      0.7584254741668701
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 783",
+      0.36847519874572754
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.9108695652173914,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 819",
+      0.7396841049194336
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 819",
+      0.4343757629394531
+    ],
+    "pass_gate": true
+  },
+  {
+    "position": 0.9500000000000001,
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 851",
+      0.9066994190216064
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 851",
+      0.41321849822998047
+    ],
+    "pass_gate": true
+  }
+]

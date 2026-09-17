@@ -1,0 +1,6 @@
+{
+  "binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+  "runs": 20,
+  "immediate_and_delayed_reopen": true,
+  "identical_columns": true
+}

@@ -1,0 +1,8 @@
+{
+  "binary_sha256": "95163cf9b2fd5e0ac2a5431715fe153e53afeff5526024a090523f126eaac0dc",
+  "passed_at_utc": "2026-09-16T07:00:01.038900+00:00",
+  "media_cases": 16,
+  "failure_cases": 12,
+  "pytorch_all_batch_checks": true,
+  "extra_window_ms": 330
+}

@@ -1,0 +1,5 @@
+   Compiling rusty_aac v0.5.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/rusty_aac)
+   Compiling openh264 v0.9.8 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/openh264)
+   Compiling rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/rust_h264)
+   Compiling tenzor-pipe v0.1.8 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8)
+    Finished `release` profile [optimized] target(s) in 38.16s

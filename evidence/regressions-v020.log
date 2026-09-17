@@ -1,0 +1,73 @@
+PASS high-bframes.mp4 160 0.05 99 66
+PASS high-bframes.mp4 160 0.33 99 10
+PASS high-bframes.mp4 160 0.5 99 7
+PASS high-bframes.mp4 224 0.05 99 66
+PASS high-bframes.mp4 224 0.33 99 10
+PASS high-bframes.mp4 224 0.5 99 7
+PASS high-bframes.mp4 336 0.05 99 66
+PASS high-bframes.mp4 336 0.33 99 10
+PASS high-bframes.mp4 336 0.5 99 7
+PASS short.mp4 160 0.05 4 3
+PASS short.mp4 160 0.33 4 1
+PASS short.mp4 160 0.5 4 1
+PASS short.mp4 224 0.05 4 3
+PASS short.mp4 224 0.33 4 1
+PASS short.mp4 224 0.5 4 1
+PASS short.mp4 336 0.05 4 3
+PASS short.mp4 336 0.33 4 1
+PASS short.mp4 336 0.5 4 1
+PASS selection-sparse.mp4 160 0.05 3 3
+PASS selection-sparse.mp4 160 0.33 3 3
+PASS selection-sparse.mp4 160 0.5 3 3
+PASS selection-sparse.mp4 224 0.05 3 3
+PASS selection-sparse.mp4 224 0.33 3 3
+PASS selection-sparse.mp4 224 0.5 3 3
+PASS selection-sparse.mp4 336 0.05 3 3
+PASS selection-sparse.mp4 336 0.33 3 3
+PASS selection-sparse.mp4 336 0.5 3 3
+PASS selection-vfr.mp4 160 0.05 22 22
+PASS selection-vfr.mp4 160 0.33 22 10
+PASS selection-vfr.mp4 160 0.5 22 7
+PASS selection-vfr.mp4 224 0.05 22 22
+PASS selection-vfr.mp4 224 0.33 22 10
+PASS selection-vfr.mp4 224 0.5 22 7
+PASS selection-vfr.mp4 336 0.05 22 22
+PASS selection-vfr.mp4 336 0.33 22 10
+PASS selection-vfr.mp4 336 0.5 22 7
+PASS baseline720.mp4 224 0.5 99 7
+PASS silent-video.mp4 224 0.5 39 3
+PASS color709.mp4 224 0.5 39 3
+PASS fullrange.mp4 224 0.5 39 3
+PASS sync-pulse.mp4 224 0.5 69 5
+PASS 41 old/new exact-value comparisons
+PASS 38 concurrency/budget/failure checks
+PASS dual-idr.mp4-160-.05 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=12288000 bound_bytes=36864000', 'split_sample': 40}
+PASS dual-idr.mp4-224-.33 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4214784 bound_bytes=12644352', 'split_sample': 40}
+PASS dual-idr.mp4-336-.5 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=5419008 bound_bytes=16257024', 'split_sample': 40}
+PASS dual-off-grid.mp4-160-.05 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=15360000 bound_bytes=46080000'}
+PASS dual-off-grid.mp4-224-.33 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4816896 bound_bytes=14450688'}
+PASS dual-off-grid.mp4-336-.5 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=6773760 bound_bytes=20321280'}
+PASS dual-audio-tail.mp4-160-.05 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=12288000 bound_bytes=36864000'}
+PASS dual-audio-tail.mp4-224-.33 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4214784 bound_bytes=12644352'}
+PASS dual-audio-tail.mp4-336-.5 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=5419008 bound_bytes=16257024'}
+PASS dual-sparse.mp4-160-.05 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=614400 bound_bytes=1843200'}
+PASS dual-sparse.mp4-224-.33 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=1204224 bound_bytes=3612672'}
+PASS dual-sparse.mp4-336-.5 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=8128512'}
+PASS dual-open-gop.mp4-160-.05 {'workers': 1, 'mode': 'video_mode=single_fallback reason="fewer than 2 IDR chunks"'}
+PASS dual-open-gop.mp4-224-.33 {'workers': 1, 'mode': 'video_mode=single_fallback reason="fewer than 2 IDR chunks"'}
+PASS dual-open-gop.mp4-336-.5 {'workers': 1, 'mode': 'video_mode=single_fallback reason="fewer than 2 IDR chunks"'}
+PASS dual-vfr.mp4-160-.05 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=12288000 bound_bytes=36864000'}
+PASS dual-vfr.mp4-224-.33 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=6021120 bound_bytes=18063360'}
+PASS dual-vfr.mp4-336-.5 {'workers': 2, 'mode': 'video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=9483264 bound_bytes=28449792'}
+PASS corrupt-worker0-q0
+PASS corrupt-worker0-q1
+PASS corrupt-worker0-q4
+PASS corrupt-worker1-q0
+PASS corrupt-worker1-q1
+PASS corrupt-worker1-q4
+PASS writer-failure-q0
+PASS writer-failure-q1
+PASS writer-failure-q4
+PASS invalid-workers-65
+PASS invalid-workers-999
+PASS 30 dual-decoder checks

@@ -1,0 +1,20 @@
+     Locking 1 package to latest Rust 1.98.1 compatible version
+      Adding rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe/vendor/rust_h264)
+   Compiling rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe/vendor/rust_h264)
+   Compiling tenzor-pipe v0.1.4 (/workspace/scratch/0c25025c9e95/tenzorpipe)
+error[E0603]: module `sps` is private
+   --> src/video.rs:195:28
+    |
+195 |         let s = rust_h264::sps::parse_sps(&nal.rbsp).map_err(anyhow::Error::msg)?;
+    |                            ^^^  --------- function `parse_sps` is not publicly re-exported
+    |                            |
+    |                            private module
+    |
+note: the module `sps` is defined here
+   --> vendor/rust_h264/src/lib.rs:102:1
+    |
+102 | mod sps;
+    | ^^^^^^^
+
+For more information about this error, try `rustc --explain E0603`.
+error: could not compile `tenzor-pipe` (bin "tenzor") due to 1 previous error

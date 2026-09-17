@@ -1,0 +1,46 @@
+[clip] video: synthetic-1080p30-h264-20s-video-only.mp4 1920x1080 600 frames 7940 kb/s, 40 epochs
+[clip] av: synthetic-1080p30-h264-aac-20s.mp4 1920x1080 600 frames 8138 kb/s, 40 epochs
+[run] video tenzorpipe-w1            ...   5013.1 ms  (283s)
+[run] video tenzorpipe-w6            ...   1461.4 ms  (84s)
+[run] video tenzorpipe-auto          ...   1021.6 ms  (59s)
+[run] video dali-nvdec               ...    441.7 ms  (27s)
+[run] video torchcodec-cuda          ...    276.0 ms  (18s)
+[run] video torchcodec-cpu           ...   2216.3 ms  (125s)
+[run] video torchvision-read_video   ... skipped: ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init_
+[run] video ffmpeg-pipe              ...    526.7 ms  (31s)
+[run] av    tenzorpipe-w1            ...   5171.0 ms  (291s)
+[run] av    tenzorpipe-w6            ...   1479.1 ms  (85s)
+[run] av    tenzorpipe-auto          ...   1077.9 ms  (62s)
+[run] av    dali-nvdec               ...    442.2 ms  (27s)
+[run] av    torchcodec-cuda          ...    312.3 ms  (21s)
+[run] av    torchcodec-cpu           ...   2318.0 ms  (130s)
+[run] av    torchvision-read_video   ... skipped: ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init_
+[run] av    ffmpeg-pipe              ...    604.2 ms  (35s)
+
+=== VIDEO scenario: 1920x1080, 600 frames, 50 measured iterations ===
+
+Contender        Decode            Audio  Latency ms (median)  p5–p95 ms      Source FPS  Epochs/s  Peak RSS MiB  RSS growth MiB  Child RSS MiB  VRAM torch MiB  VRAM NVML Δ MiB  CPU cores  Setup+cold s  Video MAE  Mel MAE
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+tenzorpipe-w1    CPU (OpenH264)    n/a    5013.1               4964.7–5185.8  119         8.0       1173          587             587            0               0 (no CUDA)      1.11       6.39          ref        —      
+tenzorpipe-w6    CPU (OpenH264)    n/a    1461.4               1409.6–1530.2  410         27.3      1173          610             587            0               0 (no CUDA)      4.91       2.84          0.0000     —      
+tenzorpipe-auto  CPU (OpenH264)    n/a    1021.6               1006.8–1046.2  586         39.1      1173          610             587            0               0 (no CUDA)      9.23       2.34          0.0000     —      
+dali-nvdec       GPU (NVDEC)       n/a    441.7                440.2–445.6    1364        90.9      1074          0               —              46              822              0.42       2.23          0.0799     —      
+torchcodec-cuda  GPU (NVDEC)       n/a    276.0                267.7–286.7    2173        144.8     1128          0               —              256             650              0.47       2.63          0.0047     —      
+torchcodec-cpu   CPU (libavcodec)  n/a    2216.3               2190.1–2261.6  270         18.0      1005          281             —              0               0 (no CUDA)      1.31       4.30          0.0070     —      
+ffmpeg-pipe      CPU (libavcodec)  n/a    526.7                518.4–556.8    1131        75.4      707           172             167            0               0 (no CUDA)      9.12       1.62          0.0466     —      
+torchvision-read_video: SKIPPED — ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init__.py)
+
+=== AV scenario: 1920x1080, 600 frames, 50 measured iterations ===
+
+Contender        Decode            Audio               Latency ms (median)  p5–p95 ms      Source FPS  Epochs/s  Peak RSS MiB  RSS growth MiB  Child RSS MiB  VRAM torch MiB  VRAM NVML Δ MiB  CPU cores  Setup+cold s  Video MAE  Mel MAE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+tenzorpipe-w1    CPU (OpenH264)    Log-Mel             5171.0               5011.7–5385.9  116         7.7       1174          610             587            0               0 (no CUDA)      1.14       6.39          ref        ref    
+tenzorpipe-w6    CPU (OpenH264)    Log-Mel             1479.1               1413.1–1550.8  405         27.0      1257          628             628            0               0 (no CUDA)      4.96       2.74          0.0000     0.000  
+tenzorpipe-auto  CPU (OpenH264)    Log-Mel             1077.9               1053.1–1097.6  557         37.1      1175          611             587            0               0 (no CUDA)      8.89       2.39          0.0000     0.000  
+dali-nvdec       GPU (NVDEC)       none (unsupported)  442.2                440.6–444.2    1367        91.2      1074          0               —              46              823              0.41       2.17          0.0799     —      
+torchcodec-cuda  GPU (NVDEC)       Log-Mel             312.3                307.7–322.7    1912        127.5     1398          0               —              288             665              0.54       2.92          0.0047     0.014  
+torchcodec-cpu   CPU (libavcodec)  Log-Mel             2318.0               2223.8–2372.6  260         17.3      1041          285             —              0               0 (no CUDA)      1.33       4.42          0.0070     0.014  
+ffmpeg-pipe      CPU (libavcodec)  Log-Mel             604.2                584.0–650.2    989         65.9      1162          593             593            0               0 (no CUDA)      10.69      1.80          0.0466     0.014  
+torchvision-read_video: SKIPPED — ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init__.py)
+
+wrote /mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/BENCHMARKS.md and /mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/bench/results/latest.json

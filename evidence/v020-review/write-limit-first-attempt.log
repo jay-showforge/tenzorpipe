@@ -1,0 +1,13 @@
+PASS audio-only.mp4 threaded
+PASS audio-only.mp4 inline
+PASS audio-only.mp4 N4
+PASS audio-only.mp4 sequential
+PASS high-bframes.mp4 threaded
+PASS high-bframes.mp4 inline
+PASS high-bframes.mp4 N4
+PASS high-bframes.mp4 sequential
+Traceback (most recent call last):
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/scripts/test_audio_write_failure.py", line 13, in <module>
+    assert p.returncode>0 and not out.exists() and 'panicked' not in p.stderr,(name,mode,p.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('wav-48000-2ch.wav', 'threaded', '')

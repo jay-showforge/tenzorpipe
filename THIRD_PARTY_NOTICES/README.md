@@ -1,0 +1,137 @@
+# Third-party notices
+
+Collected from the locked Cargo package sources. See evidence/dependency-inventory.json.
+- ahash 0.8.12: MIT OR Apache-2.0
+- aho-corasick 1.1.5: Unlicense OR MIT
+- android_system_properties 0.1.6: MIT OR Apache-2.0
+- anstream 1.0.0: MIT OR Apache-2.0
+- anstyle 1.0.14: MIT OR Apache-2.0
+- anstyle-parse 1.0.0: MIT OR Apache-2.0
+- anstyle-query 1.1.5: MIT OR Apache-2.0
+- anstyle-wincon 3.0.11: MIT OR Apache-2.0
+- anyhow 1.0.104: MIT OR Apache-2.0
+- arrow 60.0.0: Apache-2.0
+- arrow-arith 60.0.0: Apache-2.0
+- arrow-array 60.0.0: Apache-2.0 AND MIT
+- arrow-buffer 60.0.0: Apache-2.0
+- arrow-cast 60.0.0: Apache-2.0
+- arrow-cmp 60.0.0: Apache-2.0
+- arrow-data 60.0.0: Apache-2.0
+- arrow-ipc 60.0.0: Apache-2.0
+- arrow-ord 60.0.0: Apache-2.0
+- arrow-row 60.0.0: Apache-2.0
+- arrow-schema 60.0.0: Apache-2.0
+- arrow-select 60.0.0: Apache-2.0
+- arrow-string 60.0.0: Apache-2.0
+- atoi 3.1.0: MIT
+- autocfg 1.5.1: Apache-2.0 OR MIT
+- base64 0.23.1: MIT OR Apache-2.0
+- bitflags 2.13.2: MIT OR Apache-2.0
+- bumpalo 3.20.3: MIT OR Apache-2.0
+- bytemuck 1.25.2: Zlib OR Apache-2.0 OR MIT
+- bytes 1.12.1: MIT
+- cc 1.4.6: MIT OR Apache-2.0
+- cfg-if 1.0.4: MIT OR Apache-2.0
+- chrono 0.4.45: MIT OR Apache-2.0
+- clap 4.6.7: MIT OR Apache-2.0
+- clap_builder 4.6.7: MIT OR Apache-2.0
+- clap_derive 4.6.7: MIT OR Apache-2.0
+- clap_lex 1.1.1: MIT OR Apache-2.0
+- colorchoice 1.0.5: MIT OR Apache-2.0
+- const-random 0.1.18: MIT OR Apache-2.0
+- const-random-macro 0.1.16: MIT OR Apache-2.0
+- core-foundation-sys 0.8.7: MIT OR Apache-2.0
+- crossbeam-channel 0.5.17: MIT OR Apache-2.0
+- crossbeam-deque 0.8.8: MIT OR Apache-2.0
+- crossbeam-epoch 0.9.21: MIT OR Apache-2.0
+- crossbeam-utils 0.8.23: MIT OR Apache-2.0
+- crunchy 0.2.4: MIT
+- either 1.18.0: MIT OR Apache-2.0
+- find-msvc-tools 0.1.12: MIT OR Apache-2.0
+- flatbuffers 25.12.19: Apache-2.0
+- futures-core 0.3.34: MIT OR Apache-2.0
+- futures-task 0.3.34: MIT OR Apache-2.0
+- futures-util 0.3.34: MIT OR Apache-2.0
+- getrandom 0.2.17: MIT OR Apache-2.0
+- getrandom 0.3.4: MIT OR Apache-2.0
+- getrandom 0.4.3: MIT OR Apache-2.0
+- half 2.7.1: MIT OR Apache-2.0
+- hashbrown 0.17.1: MIT OR Apache-2.0
+- heck 0.5.0: MIT OR Apache-2.0
+- hound 3.5.1: Apache-2.0
+- iana-time-zone 0.1.65: MIT OR Apache-2.0
+- iana-time-zone-haiku 0.1.2: MIT OR Apache-2.0
+- is_terminal_polyfill 1.70.2: MIT OR Apache-2.0
+- jobserver 0.1.35: MIT OR Apache-2.0
+- js-sys 0.3.105: MIT OR Apache-2.0
+- lexical-core 1.0.6: MIT/Apache-2.0
+- lexical-parse-float 1.0.6: MIT/Apache-2.0
+- lexical-parse-integer 1.0.6: MIT/Apache-2.0
+- lexical-util 1.0.7: MIT/Apache-2.0
+- lexical-write-float 1.0.6: MIT/Apache-2.0
+- lexical-write-integer 1.0.6: MIT/Apache-2.0
+- libc 0.2.189: MIT OR Apache-2.0
+- libm 0.2.16: MIT
+- log 0.4.34: MIT OR Apache-2.0
+- memchr 2.8.3: Unlicense OR MIT
+- memmap2 0.9.11: MIT OR Apache-2.0
+- mp4io 0.1.2: MIT OR Apache-2.0
+- nasm-rs 0.3.2: MIT OR Apache-2.0
+- num-bigint 0.5.1: MIT OR Apache-2.0
+- num-complex 0.4.6: MIT OR Apache-2.0
+- num-integer 0.1.47: MIT OR Apache-2.0
+- num-traits 0.2.19: MIT OR Apache-2.0
+- once_cell 1.21.4: MIT OR Apache-2.0
+- once_cell_polyfill 1.70.2: MIT OR Apache-2.0
+- openh264 0.9.8: BSD-2-Clause
+- openh264-sys2 0.9.8: BSD-2-Clause
+- pin-project-lite 0.2.17: Apache-2.0 OR MIT
+- primal-check 0.3.4: MIT OR Apache-2.0
+- proc-macro2 1.0.107: MIT OR Apache-2.0
+- quote 1.0.47: MIT OR Apache-2.0
+- r-efi 5.3.0: MIT OR Apache-2.0 OR LGPL-2.1-or-later
+- r-efi 6.0.0: MIT OR Apache-2.0 OR LGPL-2.1-or-later
+- rayon 1.12.0: MIT OR Apache-2.0
+- rayon-core 1.13.0: MIT OR Apache-2.0
+- regex 1.13.1: MIT OR Apache-2.0
+- regex-automata 0.4.18: MIT OR Apache-2.0
+- regex-syntax 0.8.11: MIT OR Apache-2.0
+- rust_h264 0.4.0: MIT OR Apache-2.0
+- rustc_version 0.4.1: MIT OR Apache-2.0
+- rustfft 6.4.1: MIT OR Apache-2.0
+- rustversion 1.0.23: MIT OR Apache-2.0
+- rusty_aac 0.5.0: Apache-2.0
+- ryu 1.0.23: Apache-2.0 OR BSL-1.0
+- safe_arch 1.2.0: Zlib OR Apache-2.0 OR MIT
+- same-file 1.0.6: Unlicense/MIT
+- semver 1.0.28: MIT OR Apache-2.0
+- shlex 2.0.1: MIT OR Apache-2.0
+- slab 0.4.12: MIT
+- strength_reduce 0.2.4: MIT OR Apache-2.0
+- strsim 0.11.1: MIT
+- syn 2.0.119: MIT OR Apache-2.0
+- syn 3.0.5: MIT OR Apache-2.0
+- tiny-keccak 2.0.2: CC0-1.0
+- transpose 0.2.3: MIT OR Apache-2.0
+- unicode-ident 1.0.24: (MIT OR Apache-2.0) AND Unicode-3.0
+- utf8parse 0.2.2: Apache-2.0 OR MIT
+- version_check 0.9.5: MIT/Apache-2.0
+- walkdir 2.5.0: Unlicense/MIT
+- wasi 0.11.1+wasi-snapshot-preview1: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+- wasip2 1.0.4+wasi-0.2.12: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+- wasm-bindgen 0.2.128: MIT OR Apache-2.0
+- wasm-bindgen-macro 0.2.128: MIT OR Apache-2.0
+- wasm-bindgen-macro-support 0.2.128: MIT OR Apache-2.0
+- wasm-bindgen-shared 0.2.128: MIT OR Apache-2.0
+- wide 1.7.1: Zlib OR Apache-2.0 OR MIT
+- winapi-util 0.1.11: Unlicense OR MIT
+- windows-core 0.62.2: MIT OR Apache-2.0
+- windows-implement 0.60.2: MIT OR Apache-2.0
+- windows-interface 0.59.3: MIT OR Apache-2.0
+- windows-link 0.2.1: MIT OR Apache-2.0
+- windows-result 0.4.1: MIT OR Apache-2.0
+- windows-strings 0.5.1: MIT OR Apache-2.0
+- windows-sys 0.61.2: MIT OR Apache-2.0
+- wit-bindgen 0.57.1: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+- zerocopy 0.8.57: BSD-2-Clause OR Apache-2.0 OR MIT
+- zerocopy-derive 0.8.57: BSD-2-Clause OR Apache-2.0 OR MIT

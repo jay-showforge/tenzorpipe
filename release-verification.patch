@@ -1,0 +1,84 @@
+--- a/deny.toml
++++ b/deny.toml
+@@ -24,5 +24,5 @@
+ # Preserve the supplied project license; this exception cannot authorize dependencies.
+ [[licenses.exceptions]]
+ name = "tenzor-pipe"
+-version = "=0.1.9"
++version = "=0.2.0"
+ allow = ["BUSL-1.1"]
+--- a/scripts/test_audio_identity.py
++++ b/scripts/test_audio_identity.py
+@@ -7,11 +7,19 @@
+     p=subprocess.run([b,'-i',str(inp),'-o',str(o),*extra],capture_output=True,text=True,timeout=900)
+     h=None
+     if p.returncode==0:
+-        d=o.read_bytes()
+-        if b==NEW:
+-            assert d.count(b'0.2.0')==2 and b'0.1.9' not in d
+-            d=d.replace(b'0.2.0',b'0.1.9')
+-        h=hashlib.sha256(d).hexdigest()
++        digest=hashlib.sha256();tail=b'';count=0
++        with o.open('rb') as stream:
++            while chunk:=stream.read(1048576):
++                data=tail+chunk
++                if b==NEW:
++                    count+=data.count(b'0.2.0');data=data.replace(b'0.2.0',b'0.1.9')
++                digest.update(data[:-4]);tail=data[-4:]
++            digest.update(tail)
++        if b==NEW:assert count==2, 'unexpected version string count'
++        h=digest.hexdigest()
++    leftover=p.returncode!=0 and o.exists()
++    assert not leftover, (inp,extra,p.stderr)
++
+     o.unlink(missing_ok=True)
+     err=[l for l in p.stderr.splitlines() if l.startswith('Error')]
+     return p.returncode,h,(err[0] if err else ''),('panicked' in p.stderr)
+@@ -22,6 +30,7 @@
+ for f in files:
+     for s in settings:
+         r0=run(OLD,f,s,'old')
++        if os.environ.get('REQUIRE_SUCCESS')=='1':assert r0[0]==0,(f,r0)
+         for v in variants:
+             r=run(NEW,f,s+v,'new')
+             ok = r[0]==r0[0] and r[1]==r0[1] and r[2]==r0[2] and not r[3]
+@@ -30,3 +39,5 @@
+             print('PASS' if ok else 'FAIL', f.name, ' '.join(s), ' '.join(v), 'rc',r0[0],r[0], r0[2][:50], '|', r[2][:50], flush=True)
+ out=os.environ.get('RESULT',str(ROOT/'evidence/v0.2.0/audio-identity.json')); json.dump(rows,open(out,'w'),indent=1)
+ print('TOTAL',len(rows),'FAIL',bad,'SUCCESS_ARTIFACTS',sum(1 for x in rows if x['old_rc']==0 and x['ok']),'ERROR_AGREEMENTS',sum(1 for x in rows if x['old_rc']!=0 and x['ok']))
++
++assert bad==0, f"{bad} identity cases failed"
+--- a/scripts/fuzz_audio_corruption.py
++++ b/scripts/fuzz_audio_corruption.py
+@@ -1,4 +1,4 @@
+-import random, subprocess, hashlib, pathlib, time, os, sys
++import random, subprocess, hashlib, pathlib, time, os, sys, tempfile, json
+ ROOT=pathlib.Path(__file__).resolve().parents[1]
+ OLD=os.environ.get('OLD',str(ROOT/'reference/bin/tenzor-v0.1.9-linux-x86_64')); NEW=os.environ.get('NEW',str(ROOT/'target/release/tenzor'))
+ def run(b, inp, extra):
+@@ -11,8 +11,10 @@
+     left=o.exists() and p.returncode!=0; o.unlink(missing_ok=True)
+     err=[l for l in p.stderr.splitlines() if l.startswith('Error')]
+     return (p.returncode,h,err[0] if err else '',left or 'panicked' in p.stderr,time.time()-t)
+-random.seed(11); total=0; agree=0; exact=0
+-for src in sys.argv[1:]:
++sources=[pathlib.Path(x).resolve() for x in sys.argv[1:]]
++os.chdir(tempfile.mkdtemp(prefix="tenzor-audio-fuzz-"))
++random.seed(11); total=0; agree=0; exact=0; rows=[]
++for src in sources:
+     F=pathlib.Path(src).read_bytes()
+     cases=[]
+     for i in range(20):
+@@ -25,7 +27,11 @@
+         o=run(OLD,'fz.mp4',[]); n=run(NEW,'fz.mp4',[])
+         same_outcome = o[0]==n[0] and o[1]==n[1]
+         same_error = same_outcome and o[2]==n[2]
+-        clean = n[0]!='TIMEOUT' and not n[3]
++        clean = n[0]!='TIMEOUT' and o[0]!='TIMEOUT' and not n[3] and not o[3]
++        rows.append(dict(file=src.name,case=name,old=o,new=n,pass_gate=bool(same_error and clean)))
+         total+=1; agree+=same_outcome and clean; exact+=same_error and clean
+         print(pathlib.Path(src).name,name,'OK' if same_outcome and clean else 'DIFF','old',o[0],o[2][:55],'| new',n[0],n[2][:55],'| same_msg',same_error,f'{n[4]:.2f}s',flush=True)
+ print('cases',total,'same_outcome',agree,'same_error_text',exact)
++
++(ROOT/"evidence/v0.2.0/corruption-fuzz.json").write_text(json.dumps(rows,indent=2))
++assert total==agree==exact, f"corruption agreement failure: {total}/{agree}/{exact}"

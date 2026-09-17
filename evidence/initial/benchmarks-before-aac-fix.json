@@ -1,0 +1,49 @@
+[
+  {
+    "name": "tenzor-30-b32-r0",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-30.mp4",
+      "-o",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark/tenzor-30-b32-r0.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 30,
+    "batch_epochs": 32,
+    "wall_seconds": 63.06081041399966,
+    "peak_tree_rss_sampled_bytes": 38289408,
+    "rusage_maxrss_kib": 37384,
+    "cpu_seconds": 63.045647,
+    "cpu_percent_one_core": 99.9759542988742,
+    "artifact_bytes": 38054554,
+    "sampled_tree_write_bytes": 38064128,
+    "media_seconds_per_second": 0.4757312791105508,
+    "epochs_per_second": 0.9514625582211016,
+    "intermediate_media_files_bytes": 0
+  },
+  {
+    "name": "baseline-30-b32-r1",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/reference/ffmpeg_arrow_baseline.py",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-30.mp4",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark/baseline-30-b32-r1.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 30,
+    "batch_epochs": 32,
+    "wall_seconds": 1.0500934550000238,
+    "peak_tree_rss_sampled_bytes": 234115072,
+    "rusage_maxrss_kib": 170188,
+    "cpu_seconds": 1.381246,
+    "cpu_percent_one_core": 131.53553080663366,
+    "artifact_bytes": 36898626,
+    "sampled_tree_write_bytes": 36913152,
+    "media_seconds_per_second": 28.568885804549005,
+    "epochs_per_second": 57.13777160909801,
+    "intermediate_media_files_bytes": 0
+  }
+]

@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.9/scripts/audit_disk_writes.py", line 12, in <module>
+    assert proc.returncode==0,proc.stderr
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted
+strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
+strace: PTRACE_SETOPTIONS: Operation not permitted
+strace: cleanup: waitpid(-1, __WALL): No child processes
+

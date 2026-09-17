@@ -1,0 +1,19 @@
+VERIFY baseline720.mp4 224
+VERIFY high-bframes.mp4 160
+VERIFY high-bframes.mp4 224
+VERIFY high-bframes.mp4 336
+VERIFY short.mp4 224
+VERIFY silent-video.mp4 224
+VERIFY wav-44100-2ch.wav 224
+VERIFY wav-48000-2ch.wav 224
+VERIFY wav-16000-1ch.wav 224
+VERIFY wav-48000-6ch.wav 224
+VERIFY audio-only.mp4 224
+VERIFY color709.mp4 224
+VERIFY fullrange.mp4 224
+VERIFY sync-pulse.mp4 224
+VERIFY aac-6ch.mp4 224
+VERIFY tiny.wav 224
+/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.9/python/tenzor.py:62: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  "timestamp_ms": torch.from_numpy(rb.column("timestamp_ms").to_numpy(zero_copy_only=True)),
+PASS 16 media cases, 12 failure cases, PyTorch checks

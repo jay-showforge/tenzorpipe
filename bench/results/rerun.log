@@ -1,0 +1,38 @@
+[clip] video: synthetic-1080p30-h264-20s-video-only.mp4 1920x1080 600 frames 7940 kb/s, 40 epochs
+[clip] av: synthetic-1080p30-h264-aac-20s.mp4 1920x1080 600 frames 8138 kb/s, 40 epochs
+[run] video tenzorpipe-w1            ...   5022.5 ms  (284s)
+[run] video tenzorpipe-w6            ...   1468.8 ms  (85s)
+[run] video tenzorpipe-auto          ...   1031.5 ms  (60s)
+[run] video ffmpeg-pipe              ...    542.4 ms  (32s)
+[run] av    tenzorpipe-w1            ...   5120.7 ms  (289s)
+[run] av    tenzorpipe-w6            ...   1483.9 ms  (85s)
+[run] av    tenzorpipe-auto          ...   1073.2 ms  (62s)
+[run] av    ffmpeg-pipe              ...    592.0 ms  (34s)
+
+=== VIDEO scenario: 1920x1080, 600 frames, 50 measured iterations ===
+
+Contender        Decode            Audio  Latency ms (median)  p5–p95 ms      Source FPS  Epochs/s  Peak RSS MiB  RSS growth MiB  Child RSS MiB  VRAM torch MiB  VRAM NVML Δ MiB  CPU cores  Setup+cold s  Video MAE  Mel MAE
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+tenzorpipe-w1    CPU (OpenH264)    n/a    5022.5               4963.2–5187.4  119         7.9       674           110             87             0               0 (no CUDA)      1.11       6.21          ref        —      
+tenzorpipe-w6    CPU (OpenH264)    n/a    1468.8               1416.2–1559.9  406         27.1      889           324             301            0               0 (no CUDA)      4.92       3.06          0.0000     —      
+tenzorpipe-auto  CPU (OpenH264)    n/a    1031.5               1011.1–1079.2  580         38.6      1084          520             497            0               0 (no CUDA)      9.20       2.35          0.0000     —      
+dali-nvdec       GPU (NVDEC)       n/a    441.7                440.2–445.6    1364        90.9      1074          0               —              46              822              0.42       2.23          0.0799     —      
+torchcodec-cuda  GPU (NVDEC)       n/a    276.0                267.7–286.7    2173        144.8     1128          0               —              256             650              0.47       2.63          0.0047     —      
+torchcodec-cpu   CPU (libavcodec)  n/a    2216.3               2190.1–2261.6  270         18.0      1005          281             —              0               0 (no CUDA)      1.31       4.30          0.0070     —      
+ffmpeg-pipe      CPU (libavcodec)  n/a    542.4                525.3–585.1    1095        73.0      707           172             167            0               0 (no CUDA)      9.01       1.83          0.0466     —      
+torchvision-read_video: SKIPPED — ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init__.py)
+
+=== AV scenario: 1920x1080, 600 frames, 50 measured iterations ===
+
+Contender        Decode            Audio               Latency ms (median)  p5–p95 ms      Source FPS  Epochs/s  Peak RSS MiB  RSS growth MiB  Child RSS MiB  VRAM torch MiB  VRAM NVML Δ MiB  CPU cores  Setup+cold s  Video MAE  Mel MAE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+tenzorpipe-w1    CPU (OpenH264)    Log-Mel             5120.7               5006.5–5293.9  117         7.8       679           115             92             0               0 (no CUDA)      1.14       6.27          ref        ref    
+tenzorpipe-w6    CPU (OpenH264)    Log-Mel             1483.9               1424.5–1546.7  405         27.0      892           327             304            0               0 (no CUDA)      4.98       2.71          0.0000     0.000  
+tenzorpipe-auto  CPU (OpenH264)    Log-Mel             1073.2               1043.7–1101.6  558         37.2      1087          523             500            0               0 (no CUDA)      8.90       2.36          0.0000     0.000  
+dali-nvdec       GPU (NVDEC)       none (unsupported)  442.2                440.6–444.2    1367        91.2      1074          0               —              46              823              0.41       2.17          0.0799     —      
+torchcodec-cuda  GPU (NVDEC)       Log-Mel             312.3                307.7–322.7    1912        127.5     1398          0               —              288             665              0.54       2.92          0.0047     0.014  
+torchcodec-cpu   CPU (libavcodec)  Log-Mel             2318.0               2223.8–2372.6  260         17.3      1041          285             —              0               0 (no CUDA)      1.33       4.42          0.0070     0.014  
+ffmpeg-pipe      CPU (libavcodec)  Log-Mel             592.0                572.0–624.0    1012        67.5      787           191             168            0               0 (no CUDA)      10.90      1.72          0.0466     0.014  
+torchvision-read_video: SKIPPED — ImportError: cannot import name 'read_video' from 'torchvision.io' (/home/ftmon/.tenzor-bench/venv/lib/python3.12/site-packages/torchvision/io/__init__.py)
+
+wrote /mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/BENCHMARKS.md and /mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/bench/results/latest.json

@@ -1,0 +1,3 @@
+video_mode=chunked workers=4 window=5 chunks=15 max_chunk_tensor_bytes=2408448 bound_bytes=12042240
+video 640x360, duration 30000ms, decoded 900 access units, resized 60 selected pictures
+TenzorPipe 0.2.0: 60 epochs in 0.326s

@@ -1,0 +1,302 @@
+    Updating crates.io index
+     Locking 134 packages to latest Rust 1.98.1 compatible versions
+ Downloading crates ...
+  Downloaded anstyle-query v1.1.5
+  Downloaded ahash v0.8.12
+  Downloaded anstyle v1.0.14
+  Downloaded anyhow v1.0.104
+  Downloaded arrow-arith v60.0.0
+  Downloaded anstream v1.0.0
+  Downloaded cfg-if v1.0.4
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded clap_lex v1.1.1
+  Downloaded const-random v0.1.18
+  Downloaded equivalent v1.0.2
+  Downloaded colorchoice v1.0.5
+  Downloaded clap v4.6.7
+  Downloaded heck v0.5.0
+  Downloaded itoa v1.0.18
+  Downloaded rustc_version v0.4.1
+  Downloaded strsim v0.11.1
+  Downloaded primal-check v0.3.4
+  Downloaded transpose v0.2.3
+  Downloaded version_check v0.9.5
+  Downloaded is_terminal_polyfill v1.70.2
+  Downloaded rayon-core v1.13.0
+  Downloaded utf8parse v0.2.2
+  Downloaded unicode-ident v1.0.24
+  Downloaded anstyle-parse v1.0.0
+  Downloaded aho-corasick v1.1.5
+  Downloaded bytes v1.12.1
+  Downloaded atoi v3.1.0
+  Downloaded crossbeam-epoch v0.9.21
+  Downloaded arrow-data v60.0.0
+  Downloaded arrow-csv v60.0.0
+  Downloaded arrow-row v60.0.0
+  Downloaded arrow-string v60.0.0
+  Downloaded flatbuffers v25.12.19
+  Downloaded bitflags v2.13.2
+  Downloaded either v1.18.0
+  Downloaded lexical-write-integer v1.0.6
+  Downloaded autocfg v1.5.1
+  Downloaded crossbeam-deque v0.8.8
+  Downloaded csv-core v0.1.13
+  Downloaded crossbeam-utils v0.8.23
+  Downloaded arrow-ord v60.0.0
+  Downloaded arrow-json v60.0.0
+  Downloaded iana-time-zone v0.1.65
+  Downloaded getrandom v0.2.17
+  Downloaded hound v3.5.1
+  Downloaded lexical-parse-integer v1.0.6
+  Downloaded memmap2 v0.9.11
+  Downloaded indexmap v2.14.2
+  Downloaded simdutf8 v0.1.5
+  Downloaded ryu v1.0.23
+  Downloaded num-complex v0.4.6
+  Downloaded quote v1.0.47
+  Downloaded num-bigint v0.5.1
+  Downloaded strength_reduce v0.2.4
+  Downloaded semver v1.0.28
+  Downloaded proc-macro2 v1.0.107
+  Downloaded mp4io v0.1.2
+  Downloaded serde_core v1.0.229
+  Downloaded zmij v1.0.23
+  Downloaded tiny-keccak v2.0.2
+  Downloaded arrow v60.0.0
+  Downloaded base64 v0.23.1
+  Downloaded arrow-cmp v60.0.0
+  Downloaded half v2.7.1
+  Downloaded arrow-schema v60.0.0
+  Downloaded clap_derive v4.6.7
+  Downloaded arrow-buffer v60.0.0
+  Downloaded arrow-ipc v60.0.0
+  Downloaded lexical-util v1.0.7
+  Downloaded getrandom v0.3.4
+  Downloaded lexical-core v1.0.6
+  Downloaded lexical-parse-float v1.0.6
+  Downloaded num-integer v0.1.47
+  Downloaded memchr v2.8.3
+  Downloaded once_cell v1.21.4
+  Downloaded lexical-write-float v1.0.6
+  Downloaded hashbrown v0.17.1
+  Downloaded regex v1.13.1
+  Downloaded libm v0.2.16
+  Downloaded num-traits v0.2.19
+  Downloaded rayon v1.12.0
+  Downloaded rusty_aac v0.5.0
+  Downloaded serde_json v1.0.151
+  Downloaded rust_h264 v0.4.0
+  Downloaded zerocopy-derive v0.8.57
+  Downloaded arrow-cast v60.0.0
+  Downloaded arrow-select v60.0.0
+  Downloaded chrono v0.4.45
+  Downloaded clap_builder v4.6.7
+  Downloaded zerocopy v0.8.57
+  Downloaded arrow-array v60.0.0
+  Downloaded syn v3.0.5
+  Downloaded regex-syntax v0.8.11
+  Downloaded syn v2.0.119
+  Downloaded rustfft v6.4.1
+  Downloaded regex-automata v0.4.18
+  Downloaded csv v1.4.0
+  Downloaded libc v0.2.189
+   Compiling libm v0.2.16
+   Compiling autocfg v1.5.1
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling zerocopy v0.8.57
+   Compiling cfg-if v1.0.4
+   Compiling libc v0.2.189
+   Compiling getrandom v0.3.4
+   Compiling version_check v0.9.5
+   Compiling bytes v1.12.1
+   Compiling arrow-schema v60.0.0
+   Compiling hashbrown v0.17.1
+   Compiling ahash v0.8.12
+   Compiling num-traits v0.2.19
+   Compiling once_cell v1.21.4
+   Compiling iana-time-zone v0.1.65
+   Compiling memchr v2.8.3
+   Compiling lexical-util v1.0.7
+   Compiling serde_core v1.0.229
+   Compiling syn v2.0.119
+   Compiling crossbeam-utils v0.8.23
+   Compiling semver v1.0.28
+   Compiling lexical-write-integer v1.0.6
+   Compiling lexical-parse-integer v1.0.6
+   Compiling rustc_version v0.4.1
+   Compiling lexical-parse-float v1.0.6
+   Compiling lexical-write-float v1.0.6
+   Compiling aho-corasick v1.1.5
+   Compiling regex-syntax v0.8.11
+   Compiling zmij v1.0.23
+   Compiling ryu v1.0.23
+   Compiling itoa v1.0.18
+   Compiling crossbeam-epoch v0.9.21
+   Compiling lexical-core v1.0.6
+   Compiling num-integer v0.1.47
+   Compiling num-complex v0.4.6
+   Compiling chrono v0.4.45
+   Compiling num-bigint v0.5.1
+   Compiling atoi v3.1.0
+   Compiling flatbuffers v25.12.19
+   Compiling utf8parse v0.2.2
+   Compiling base64 v0.23.1
+   Compiling crossbeam-deque v0.8.8
+   Compiling serde_json v1.0.151
+   Compiling anstyle-parse v1.0.0
+   Compiling csv-core v0.1.13
+   Compiling regex-automata v0.4.18
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle-query v1.1.5
+   Compiling anstyle v1.0.14
+   Compiling equivalent v1.0.2
+   Compiling rayon-core v1.13.0
+   Compiling bitflags v2.13.2
+   Compiling colorchoice v1.0.5
+   Compiling anstream v1.0.0
+   Compiling indexmap v2.14.2
+   Compiling csv v1.4.0
+   Compiling zerocopy-derive v0.8.57
+   Compiling syn v3.0.5
+   Compiling anyhow v1.0.104
+   Compiling strsim v0.11.1
+   Compiling strength_reduce v0.2.4
+   Compiling clap_lex v1.1.1
+   Compiling simdutf8 v0.1.5
+   Compiling heck v0.5.0
+   Compiling clap_builder v4.6.7
+   Compiling transpose v0.2.3
+   Compiling primal-check v0.3.4
+   Compiling either v1.18.0
+   Compiling rustfft v6.4.1
+   Compiling rayon v1.12.0
+   Compiling memmap2 v0.9.11
+   Compiling regex v1.13.1
+   Compiling mp4io v0.1.2
+   Compiling rust_h264 v0.4.0
+   Compiling clap_derive v4.6.7
+   Compiling rusty_aac v0.5.0
+   Compiling hound v3.5.1
+   Compiling clap v4.6.7
+   Compiling half v2.7.1
+   Compiling arrow-buffer v60.0.0
+   Compiling arrow-data v60.0.0
+   Compiling arrow-array v60.0.0
+   Compiling arrow-cmp v60.0.0
+   Compiling arrow-arith v60.0.0
+   Compiling arrow-row v60.0.0
+   Compiling arrow-select v60.0.0
+   Compiling arrow-ord v60.0.0
+   Compiling arrow-string v60.0.0
+   Compiling arrow-ipc v60.0.0
+   Compiling arrow-cast v60.0.0
+   Compiling arrow-csv v60.0.0
+   Compiling arrow-json v60.0.0
+   Compiling arrow v60.0.0
+   Compiling tenzor-pipe v0.1.3 (/workspace/scratch/0c25025c9e95/tenzorpipe)
+error[E0308]: mismatched types
+  --> src/audio.rs:84:32
+   |
+84 |         .find(|t| t.codec() == Codec::Aac)
+   |                   ---------    ^^^^^^^^^^ expected `Option<Codec>`, found `Codec`
+   |                   |
+   |                   expected because this is `Option<Codec>`
+   |
+   = note: expected enum `Option<Codec>`
+              found enum `Codec`
+help: try wrapping the expression in `Some`
+   |
+84 |         .find(|t| t.codec() == Some(Codec::Aac))
+   |                                +++++          +
+
+error[E0308]: mismatched types
+  --> src/video.rs:34:64
+   |
+34 |         .find(|t| t.kind() == TrackKind::Video && t.codec() == Codec::H264)
+   |                                                   ---------    ^^^^^^^^^^^ expected `Option<Codec>`, found `Codec`
+   |                                                   |
+   |                                                   expected because this is `Option<Codec>`
+   |
+   = note: expected enum `Option<Codec>`
+              found enum `Codec`
+help: try wrapping the expression in `Some`
+   |
+34 |         .find(|t| t.kind() == TrackKind::Video && t.codec() == Some(Codec::H264))
+   |                                                                +++++           +
+
+error[E0599]: the method `context` exists for enum `Result<AvccConfig<'_>, &'static str>`, but its trait bounds were not satisfied
+  --> src/video.rs:49:47
+   |
+49 |     let config = parse_avcc_config(&avcc_raw).context("parse avcC configuration")?;
+   |                                               ^^^^^^^ method cannot be called on `Result<AvccConfig<'_>, &'static str>` due to unsatisfied trait bounds
+   |
+   = note: the following trait bounds were not satisfied:
+           `&str: anyhow::context::ext::StdError`
+           which is required by `Result<AvccConfig<'_>, &str>: anyhow::Context<AvccConfig<'_>, &str>`
+
+error[E0308]: arguments to this function are incorrect
+   --> src/video.rs:74:27
+    |
+ 74 |                 let chw = yuv420_to_resized_chw(
+    |                           ^^^^^^^^^^^^^^^^^^^^^
+...
+ 78 |                     frame.width,
+    |                     ----------- expected `usize`, found `u32`
+ 79 |                     frame.height,
+    |                     ------------ expected `usize`, found `u32`
+    |
+note: function defined here
+   --> src/video.rs:111:4
+    |
+111 | fn yuv420_to_resized_chw(
+    |    ^^^^^^^^^^^^^^^^^^^^^
+...
+115 |     src_w: usize,
+    |     ------------
+116 |     src_h: usize,
+    |     ------------
+help: you can convert a `u32` to a `usize` and panic if the converted value doesn't fit
+    |
+ 78 |                     frame.width.try_into().unwrap(),
+    |                                ++++++++++++++++++++
+help: you can convert a `u32` to a `usize` and panic if the converted value doesn't fit
+    |
+ 79 |                     frame.height.try_into().unwrap(),
+    |                                 ++++++++++++++++++++
+
+error[E0308]: arguments to this function are incorrect
+   --> src/video.rs:90:19
+    |
+ 90 |         let chw = yuv420_to_resized_chw(
+    |                   ^^^^^^^^^^^^^^^^^^^^^
+...
+ 94 |             frame.width,
+    |             ----------- expected `usize`, found `u32`
+ 95 |             frame.height,
+    |             ------------ expected `usize`, found `u32`
+    |
+note: function defined here
+   --> src/video.rs:111:4
+    |
+111 | fn yuv420_to_resized_chw(
+    |    ^^^^^^^^^^^^^^^^^^^^^
+...
+115 |     src_w: usize,
+    |     ------------
+116 |     src_h: usize,
+    |     ------------
+help: you can convert a `u32` to a `usize` and panic if the converted value doesn't fit
+    |
+ 94 |             frame.width.try_into().unwrap(),
+    |                        ++++++++++++++++++++
+help: you can convert a `u32` to a `usize` and panic if the converted value doesn't fit
+    |
+ 95 |             frame.height.try_into().unwrap(),
+    |                         ++++++++++++++++++++
+
+Some errors have detailed explanations: E0308, E0599.
+For more information about an error, try `rustc --explain E0308`.
+error: could not compile `tenzor-pipe` (bin "tenzor") due to 5 previous errors

@@ -1,0 +1,26 @@
+{
+  "version": "0.1.6",
+  "binary": "bin/tenzor-linux-x86_64",
+  "binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+  "unit_tests_passed": 17,
+  "media_cases_passed": 16,
+  "failure_cases_passed": 12,
+  "exact_old_new_regression_cases": 41,
+  "concurrency_budget_failure_checks": 38,
+  "main_measured_runs": 12,
+  "additional_measured_runs": 9,
+  "benchmark_values_verified": true,
+  "license_check": "PASS",
+  "platform": "Linux x86-64",
+  "reports": [
+    "TEST_REPORT.md",
+    "BENCHMARK_REPORT.md",
+    "BUILD_STATUS.md",
+    "DEPENDENCY_POLICY.md",
+    "CONCURRENCY_REPORT.md"
+  ],
+  "default_execution": "concurrent",
+  "decoder_threads": 0,
+  "experimental_decoder_threads": "source-only feature; 2/4 time out",
+  "long_fixtures": "Regenerate with scripts/generate_matrix.py --long --extended-memory"
+}

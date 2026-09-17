@@ -1,0 +1,169 @@
+PASS av-music.mp4 --resolution 224  rc 0 0  | 
+PASS av-music.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS av-music.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS av-music.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS av-music.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS av-music.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS av-music.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS av-music.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS av-music.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS av-music.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS av-music.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS av-music.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m22-mono.mp4 --resolution 224  rc 0 0  | 
+PASS m22-mono.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m22-mono.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m22-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m22-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m22-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m22-mono.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m22-mono.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m22-mono.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m22-mono.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m22-mono.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m22-mono.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m441.mp4 --resolution 224  rc 0 0  | 
+PASS m441.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m441.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m441.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m441.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m441.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m441.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m441.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m441.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m441.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m441.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m441.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m48-192k.mp4 --resolution 224  rc 0 0  | 
+PASS m48-192k.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m48-192k.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m48-192k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m48-192k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m48-192k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m48-192k.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m48-192k.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m48-192k.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m48-192k.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m48-192k.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m48-192k.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m48-32k.mp4 --resolution 224  rc 0 0  | 
+PASS m48-32k.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m48-32k.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m48-32k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m48-32k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m48-32k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m48-32k.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m48-32k.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m48-32k.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m48-32k.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m48-32k.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m48-32k.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m48-tools.mp4 --resolution 224  rc 0 0  | 
+PASS m48-tools.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m48-tools.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m48-tools.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m48-tools.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m48-tools.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m48-tools.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m48-tools.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m48-tools.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m48-tools.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m48-tools.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m48-tools.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m8-mono.mp4 --resolution 224  rc 0 0  | 
+PASS m8-mono.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m8-mono.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m8-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m8-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m8-mono.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m8-mono.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m8-mono.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m8-mono.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m8-mono.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m8-mono.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m8-mono.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS m96.mp4 --resolution 224  rc 0 0  | 
+PASS m96.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS m96.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS m96.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS m96.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS m96.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS m96.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS m96.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS m96.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS m96.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS m96.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS m96.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS music-441-s24.wav --resolution 224  rc 0 0  | 
+PASS music-441-s24.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS music-441-s24.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS music-441-s24.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS music-441-s24.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS music-441-s24.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS music-441-s24.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS music-441-s24.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS music-441-s24.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS music-441-s24.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS music-441-s24.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS music-441-s24.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS music-f32.wav --resolution 224  rc 0 0  | 
+PASS music-f32.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS music-f32.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS music-f32.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS music-f32.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS music-f32.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS music-f32.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS music-f32.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS music-f32.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS music-f32.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS music-f32.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS music-f32.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS music48k.wav --resolution 224  rc 0 0  | 
+PASS music48k.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS music48k.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS music48k.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS music48k.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS music48k.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS music48k.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS music48k.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS music48k.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS music48k.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS music48k.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS music48k.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS noise-320k.mp4 --resolution 224  rc 0 0  | 
+PASS noise-320k.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS noise-320k.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS noise-320k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS noise-320k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS noise-320k.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS noise-320k.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS noise-320k.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS noise-320k.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS noise-320k.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS noise-320k.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS noise-320k.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS pink-51.mp4 --resolution 224  rc 0 0  | 
+PASS pink-51.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS pink-51.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS pink-51.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS pink-51.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS pink-51.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS pink-51.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS pink-51.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS pink-51.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS pink-51.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS pink-51.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS pink-51.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS silence.mp4 --resolution 224  rc 0 0  | 
+PASS silence.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS silence.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS silence.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS silence.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS silence.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS silence.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS silence.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS silence.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS silence.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS silence.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS silence.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+TOTAL 168 FAIL 0 SUCCESS_ARTIFACTS 168 ERROR_AGREEMENTS 0

@@ -1,0 +1,26 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@1.98.1
+        with:
+          components: rustfmt,clippy
+      - run: sudo apt-get update && sudo apt-get install -y nasm ffmpeg
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --check
+      - run: cargo build --release --locked
+      - run: cargo test --all-targets --locked
+      - run: cargo install cargo-deny --version 0.20.2 --locked
+      - run: cargo deny check licenses
+      - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
+      - run: python3 -m pip install --break-system-packages torch==2.14.0+cpu --index-url https://download.pytorch.org/whl/cpu
+      - run: python3 scripts/generate_matrix.py
+      - run: python3 scripts/test_matrix.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-evidence
+          path: evidence/

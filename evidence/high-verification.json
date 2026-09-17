@@ -1,0 +1,66 @@
+{
+  "file": "high-bframes.mp4",
+  "resolution": 224,
+  "epochs": 7,
+  "record_batches": 4,
+  "artifact_bytes": 4445850,
+  "visual": [
+    {
+      "epoch": 0,
+      "source_frame": 0,
+      "type": "I",
+      "mae_255": 0.0,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 1,
+      "source_frame": 15,
+      "type": "P",
+      "mae_255": 0.0,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 2,
+      "source_frame": 30,
+      "type": "P",
+      "mae_255": 0.0,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 3,
+      "source_frame": 45,
+      "type": "B",
+      "mae_255": 0.0,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 4,
+      "source_frame": 60,
+      "type": "I",
+      "mae_255": 8.593731763539836e-05,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 5,
+      "source_frame": 75,
+      "type": "P",
+      "mae_255": 2.120532917615492e-05,
+      "p99_255": 0.0
+    },
+    {
+      "epoch": 6,
+      "source_frame": 90,
+      "type": "P",
+      "mae_255": 2.120532917615492e-05,
+      "p99_255": 0.0
+    }
+  ],
+  "audio": {
+    "rate": 48000,
+    "channels": 2,
+    "valid_hops": 327,
+    "active_logmel_mae": 0.0018429067787028373,
+    "active_logmel_p99": 0.02855380200495589,
+    "maximum_logmel_error": 0.9823455245636405
+  }
+}

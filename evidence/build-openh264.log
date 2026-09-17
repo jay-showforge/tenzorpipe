@@ -1,0 +1,17 @@
+   Compiling libc v0.2.189
+   Compiling same-file v1.0.6
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.12
+   Compiling log v0.4.34
+   Compiling bytemuck v1.25.2
+   Compiling rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe/vendor/rust_h264)
+   Compiling walkdir v2.5.0
+   Compiling nasm-rs v0.3.2
+   Compiling safe_arch v1.2.0
+   Compiling wide v1.7.1
+   Compiling jobserver v0.1.35
+   Compiling cc v1.4.6
+   Compiling openh264-sys2 v0.9.8
+   Compiling openh264 v0.9.8
+   Compiling tenzor-pipe v0.1.4 (/workspace/scratch/0c25025c9e95/tenzorpipe)
+    Finished `release` profile [optimized] target(s) in 31.85s

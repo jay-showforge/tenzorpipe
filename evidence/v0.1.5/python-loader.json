@@ -1,0 +1,7 @@
+{
+  "files_checked": 16,
+  "zero_copy_pointer_checks": true,
+  "all_batches": true,
+  "negative_index": true,
+  "copy_mode": true
+}

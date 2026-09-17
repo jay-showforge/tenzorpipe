@@ -1,0 +1,10 @@
+{
+  "binary_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77",
+  "old_binary_sha256": "675c64e599131174ac57d13e9561fdce3ecebbe31056219a932d47bd14cfe2c3",
+  "supplied_binary_sha256": "0da3d32239d2c21282109225b78630b506a70712e8333318b2a3270c2868a565",
+  "source_archive_sha256": "aed4c167a9dd56787d50e95eade49a7193976ca07c9034acbf4701bc9f509454",
+  "binary_archive_sha256": "56fa1f05cf6639e7d07ea916cc54bc79bb5e26e7fecee2a69d9218f48612dfa8",
+  "rust_version": "1.98.1",
+  "version": "0.2.0",
+  "engine_source_changes_from_supplied": "none; release gates and documentation repaired"
+}

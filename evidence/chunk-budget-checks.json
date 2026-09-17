@@ -1,0 +1,1241 @@
+[
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "baseline720.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "high-bframes.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 5419008,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 9031680,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 16257024,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 3686400,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 6144000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 11059200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 46964736,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 62619648,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "sync-pulse.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 62619648,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "fixture-h264-aac.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "corrupt-nal.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 10838016,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 5419008,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 18063360,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 9031680,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 32514048,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 16257024,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 9216000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 4608000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 15360000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 7680000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 27648000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 13824000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 12192768,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 20321280,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 36578304,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 54190080,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 54190080,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-720-g45.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 54190080,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 1806336,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 3010560,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 5419008,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 1843200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 3072000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 5529600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 4064256,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 6773760,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 12192768,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 18063360,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 30105600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "gen-baseline-g12.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 54190080,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "2",
+    "bound_bytes": 7225344,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "4",
+    "bound_bytes": 12042240,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224",
+    "workers": "8",
+    "bound_bytes": 21676032,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "2",
+    "bound_bytes": 6451200,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "4",
+    "bound_bytes": 10752000,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 160 --window-sec 0.33 --batch-epochs 2",
+    "workers": "8",
+    "bound_bytes": 19353600,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "2",
+    "bound_bytes": 8128512,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "4",
+    "bound_bytes": 13547520,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 336 --window-sec 1.0",
+    "workers": "8",
+    "bound_bytes": 24385536,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "2",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "4",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  },
+  {
+    "file": "long-30.mp4",
+    "settings": "--resolution 224 --window-sec 0.05 --execution sequential",
+    "workers": "8",
+    "bound_bytes": 48168960,
+    "budget_bytes": 67108864
+  }
+]

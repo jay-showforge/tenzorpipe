@@ -1,0 +1,41 @@
+   Compiling openh264 v0.9.8 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/vendor/openh264)
+   Compiling rusty_aac v0.5.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/vendor/rusty_aac)
+   Compiling rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/vendor/rust_h264)
+   Compiling tenzor-pipe v0.2.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0)
+    Finished `test` profile [unoptimized] target(s) in 14.44s
+     Running unittests src/main.rs (target/debug/deps/tenzor-83aded4392462ac8)
+
+running 30 tests
+test audio::tests::downmix_channels ... ok
+test audio::tests::mel_bank_covers_frequency_range ... ok
+test audio::tests::decode_thread_observes_pipeline_cancellation ... ok
+test concurrency::tests::byte_budget_scales_with_resolution_and_rendezvous ... ok
+test concurrency::tests::cancellation_wakes_blocked_receiver ... ok
+test concurrency::tests::full_and_rendezvous_queues_cancel_without_deadlock ... ok
+test audio::tests::short_final_window_is_analyzed_and_silence_is_floor ... ok
+test video::avcc_tests::converts_one_two_and_four_byte_lengths ... ok
+test video::avcc_tests::rejects_truncated_zero_and_invalid_nals ... ok
+test video::tests::neutral_black_yuv_is_near_black_rgb ... ok
+test video::tests::presentation_lookahead_orders_b_frames_with_bounded_memory ... ok
+test video::tests::presentation_lookahead_rejects_excessive_reordering_and_parse_errors ... ok
+test video::tests::selection_matches_legacy_midpoints_gaps_ties_and_tail ... ok
+test concurrency::tests::worker_and_collector_panics_join_without_deadlock ... ok
+test video::tests::thirty_fps_selects_exactly_two_pictures_per_second ... ok
+test video_parallel::planning_budget_tests::planning_cap_rejects_excess_and_overflow_before_allocation ... ok
+test video_parallel::regression_tests::regression_emitter_panic_cancels_before_join ... ok
+test video_parallel::tests::chunked_selection_matches_streaming_selection ... ok
+test video_parallel::tests::chunks_cut_only_at_idr_with_clean_presentation_boundary ... ok
+test video_parallel::tests::external_cancellation_stops_workers ... ok
+test video_parallel::tests::first_vcl_idr_detection ... ok
+test audio::tests::sinc_antialias_and_gain ... ok
+test audio::tests::decode_thread_exits_when_consumer_stops_early_errors_or_panics ... ok
+test video_parallel::tests::ordered_map_failures_and_panics_do_not_deadlock ... ok
+test audio::aac_transform_tests::fast_imdct_matches_direct_sum_for_long_short_dense_and_sparse_spectra ... ok
+test audio::tests::streaming_sinc_matches_whole_signal_across_boundaries ... ok
+test video_parallel::regression_tests::regression_budget_includes_emitting_chunk ... ok
+test video_parallel::tests::ordered_map_preserves_order_and_bounds_window ... ok
+test audio::tests::decode_thread_reports_source_error_and_panic_without_hanging ... ok
+test audio::tests::decode_thread_output_is_bit_identical_to_inline ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.52s
+

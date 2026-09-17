@@ -1,0 +1,36 @@
+{
+  "name": "tenzor-1320-b32",
+  "artifact_path": "out/benchmark-qf3ma0zu/tenzor-1320-b32.tenzor",
+  "command": [
+    "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+    "-i",
+    "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-1320.mp4",
+    "-o",
+    "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-qf3ma0zu/tenzor-1320-b32.tenzor",
+    "--batch-epochs",
+    "32"
+  ],
+  "media_seconds": 1320.010677,
+  "batch_epochs": 32,
+  "wall_seconds": 66.37560094499986,
+  "peak_tree_rss_sampled_bytes": 63197184,
+  "rusage_maxrss_kib": 61612,
+  "cpu_seconds": 66.10871,
+  "cpu_percent_one_core": 99.59790805476698,
+  "artifact_bytes": 1674865138,
+  "sampled_tree_write_bytes": 1674878976,
+  "media_seconds_per_second": 19.886986455968767,
+  "epochs_per_second": 39.78871697430483,
+  "intermediate_media_files_bytes": 0,
+  "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+  "nominal_target_seconds": 1320,
+  "source_durations_seconds": [
+    1320.010677,
+    1320.0
+  ],
+  "verification": {
+    "epochs": 2641,
+    "batches": 83,
+    "all_finite": true
+  }
+}

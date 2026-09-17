@@ -1,0 +1,38 @@
+   Compiling rusty_aac v0.5.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/rusty_aac)
+   Compiling openh264 v0.9.8 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/openh264)
+   Compiling rust_h264 v0.4.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8/vendor/rust_h264)
+warning: corrupt incremental compilation artifact found at `/workspace/scratch/0c25025c9e95/tenzorpipe/target/debug/incremental/rusty_aac-1no4s1mvv2uux/s-hmctomum2l-0qlbd6t-working/dep-graph.bin`. This file will automatically be ignored and deleted. If you see this message repeatedly or can provoke it without manually manipulating the compiler's artifacts, please file an issue. The incremental compilation system relies on hardlinks and filesystem locks behaving correctly, and may not deal well with OS crashes, so whatever information you can provide about your filesystem or other state may be very relevant
+
+warning: `rusty_aac` (lib) generated 1 warning
+   Compiling tenzor-pipe v0.1.8 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.1.8)
+    Finished `test` profile [unoptimized] target(s) in 13.12s
+     Running unittests src/main.rs (tenzorpipe-v0.1.8/target/debug/deps/tenzor-9c0454784f3ac3df)
+
+running 2 tests
+test video_parallel::regression_tests::regression_budget_includes_emitting_chunk ... FAILED
+test video_parallel::regression_tests::regression_emitter_panic_cancels_before_join ... FAILED
+
+failures:
+
+---- video_parallel::regression_tests::regression_budget_includes_emitting_chunk stdout ----
+
+thread 'video_parallel::regression_tests::regression_budget_includes_emitting_chunk' (68) panicked at src/video_parallel.rs:744:9:
+live chunk payloads exceeded budget: 3
+
+---- video_parallel::regression_tests::regression_emitter_panic_cancels_before_join stdout ----
+
+thread '<unnamed>' (70) panicked at src/video_parallel.rs:750:125:
+injected emitter panic
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'video_parallel::regression_tests::regression_emitter_panic_cancels_before_join' (69) panicked at src/video_parallel.rs:753:57:
+emitter panic stranded scoped workers: Timeout
+
+
+failures:
+    video_parallel::regression_tests::regression_budget_includes_emitting_chunk
+    video_parallel::regression_tests::regression_emitter_panic_cancels_before_join
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 23 filtered out; finished in 2.00s
+
+error: test failed, to rerun pass `--bin tenzor`

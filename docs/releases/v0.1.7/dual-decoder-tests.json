@@ -1,0 +1,1029 @@
+{
+  "binary_sha256": "4dd4030ecfe68ce801e3f2b496cffcc249f630ec0953a7c61d8dc60498c20936",
+  "old_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+  "cases": [
+    {
+      "name": "dual-idr.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 40,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.081754567,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.00612823,
+          "video_parse": 0.000211025,
+          "video_decode": 0.043427956,
+          "video_resize": 0.023527337,
+          "audio_source": 0.032485849,
+          "audio_resample": 0.029526793,
+          "audio_mel": 0.005187684,
+          "arrow_pack": 0.003122193,
+          "arrow_write": 0.006812596,
+          "worker_send_wait": 0.015169151,
+          "collector_receive_wait": 0.063886352,
+          "final_sync": 2.8734e-05,
+          "video_partition": 5.2219e-05,
+          "video_decode_worker_0": 0.018107973,
+          "video_decode_worker_1": 0.025329006,
+          "video_send_wait_worker_0": 0.000950086,
+          "video_send_wait_worker_1": 0.030018653,
+          "video_merge_receive_wait": 0.061027362,
+          "video_wall_worker_0": 0.032972828,
+          "video_wall_worker_1": 0.073800006
+        }
+      },
+      "logical_columns": {
+        "rows": 83,
+        "columns": {
+          "timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "audio_valid_frames": "e87b1aa93a250abbddf3124657fe8998b101b43a13fd0ad6a190aafd9d028f9c",
+          "video_timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "video_tensor": "af3e477c8927d3ec18b08069cf672fd1b34c3e9e7fe66bc9c22310e022404c93",
+          "audio_mel_tensor": "01c3dda0fb26ee837432714935feeeb7a8040393ed795ca3e0692f8702307953"
+        }
+      }
+    },
+    {
+      "name": "dual-idr.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 6,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.072494167,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004425928,
+          "video_parse": 0.000177729,
+          "video_decode": 0.040652805,
+          "video_resize": 0.006475664,
+          "audio_source": 0.028855583,
+          "audio_resample": 0.032943518,
+          "audio_mel": 0.005106557,
+          "arrow_pack": 0.002305575,
+          "arrow_write": 0.00177903,
+          "worker_send_wait": 0.052269135,
+          "collector_receive_wait": 0.063168395,
+          "final_sync": 3.035e-06,
+          "video_partition": 4.3366e-05,
+          "video_decode_worker_0": 0.016952901,
+          "video_decode_worker_1": 0.023711971,
+          "video_send_wait_worker_0": 6.0482e-05,
+          "video_send_wait_worker_1": 0.034386349,
+          "video_merge_receive_wait": 0.01373774,
+          "video_wall_worker_0": 0.023520133,
+          "video_wall_worker_1": 0.06450875
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "a1d5bb5877283bae220d16e9da877b5531b5124068e7bde8276fa1bc0bba58a1",
+          "audio_valid_frames": "77d0fd1980804b86d71da795524b22249bd03566136b241708b3b5bb5eb976db",
+          "video_timestamp_ms": "d6c2d2731f18132055c116b24908254f1f9a22ce1a1f7bc8218046ece64133b4",
+          "video_tensor": "4338939b0afe97aa4c3237a2d24ae6c401e0ada762ccb5bb98a992500addb7bb",
+          "audio_mel_tensor": "67f1bd00b9913475ce4aa4f4ae2f2f5625582f2e0fc5a26249ebf5622c653d42"
+        }
+      }
+    },
+    {
+      "name": "dual-idr.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 4,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.077117359,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004289262,
+          "video_parse": 0.000178458,
+          "video_decode": 0.039003472,
+          "video_resize": 0.01044884,
+          "audio_source": 0.03544683,
+          "audio_resample": 0.030577826,
+          "audio_mel": 0.005750362,
+          "arrow_pack": 0.00381799,
+          "arrow_write": 0.002745539,
+          "worker_send_wait": 0.046927337,
+          "collector_receive_wait": 0.065506042,
+          "final_sync": 3.015e-06,
+          "video_partition": 4.2074e-05,
+          "video_decode_worker_0": 0.017988246,
+          "video_decode_worker_1": 0.021025439,
+          "video_send_wait_worker_0": 6.667e-05,
+          "video_send_wait_worker_1": 0.032474365,
+          "video_merge_receive_wait": 0.023423581,
+          "video_wall_worker_0": 0.028114917,
+          "video_wall_worker_1": 0.063262141
+        }
+      },
+      "logical_columns": {
+        "rows": 9,
+        "columns": {
+          "timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "audio_valid_frames": "cf9ad5cdabfef3d2c93b1740feb2f693a0bc671fe91a8986fa7edee8743fe5a2",
+          "video_timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "video_tensor": "fff9dbbd98948533a763deb62db77abff1a0695920854cfc0b8fb371de452306",
+          "audio_mel_tensor": "a0956304103488b5d2c97faae7337dc354422bb6e8953fd7c9e903252d393b6e"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 74,
+        "split_epoch": 50,
+        "left_last_pts_ms": 2433,
+        "right_first_pts_ms": 2467,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.567545138,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004366688,
+          "video_parse": 0.000615238,
+          "video_decode": 0.430087893,
+          "video_resize": 0.032561012,
+          "audio_source": 0.250143071,
+          "audio_resample": 0.051431525,
+          "audio_mel": 0.032225154,
+          "arrow_pack": 0.027202238,
+          "arrow_write": 0.05505013,
+          "worker_send_wait": 0.313761059,
+          "collector_receive_wait": 0.467813652,
+          "final_sync": 3.225e-06,
+          "video_partition": 5.3441e-05,
+          "video_decode_worker_0": 0.03047499,
+          "video_decode_worker_1": 0.399732757,
+          "video_send_wait_worker_0": 0.007147108,
+          "video_send_wait_worker_1": 0.128862797,
+          "video_merge_receive_wait": 0.463128685,
+          "video_wall_worker_0": 0.056474749,
+          "video_wall_worker_1": 0.561604381
+        }
+      },
+      "logical_columns": {
+        "rows": 105,
+        "columns": {
+          "timestamp_ms": "e58c6bad08e32d15f51d3bfa978bcd255ba9a1ae1a98e15eab49b77d1a4d9ae8",
+          "audio_valid_frames": "a11e2deb62c7496d7ef7e3055a74c1789158ac1a941b671ce9dec91cced630a1",
+          "video_timestamp_ms": "c277863a082c0d971a007b669fb31bcc3b06aa2583e5a1aec41498a47df6c866",
+          "video_tensor": "63d65f26d799f20818ca0d205e2950cf612f6c8c14e47b1c1d51d97135d328b9",
+          "audio_mel_tensor": "f8aa948c4ed6210549db145f82f140af0fd6837e9b196a66a0950f3786b1e205"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 74,
+        "split_epoch": 8,
+        "left_last_pts_ms": 2433,
+        "right_first_pts_ms": 2467,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.091727607,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004500621,
+          "video_parse": 0.000282679,
+          "video_decode": 0.077493254,
+          "video_resize": 0.009525234,
+          "audio_source": 0.032693112,
+          "audio_resample": 0.037888061,
+          "audio_mel": 0.006581253,
+          "arrow_pack": 0.002239559,
+          "arrow_write": 0.003201568,
+          "worker_send_wait": 0.008645986,
+          "collector_receive_wait": 0.081153066,
+          "final_sync": 2.764e-06,
+          "video_partition": 0.000103867,
+          "video_decode_worker_0": 0.031069631,
+          "video_decode_worker_1": 0.046446685,
+          "video_send_wait_worker_0": 0.001084028,
+          "video_send_wait_worker_1": 0.032663879,
+          "video_merge_receive_wait": 0.083858622,
+          "video_wall_worker_0": 0.040972767,
+          "video_wall_worker_1": 0.086540724
+        }
+      },
+      "logical_columns": {
+        "rows": 16,
+        "columns": {
+          "timestamp_ms": "42e64bd733519e8c64b09e546e9a8aa3a0a04b02d819feadc6b051c4363db168",
+          "audio_valid_frames": "5e25b3aa50996c24135c0e041e9b315efb4a617bc9cf0bd099b612be75b10e2e",
+          "video_timestamp_ms": "916568894de7de0d7bfd9f503a24bd9372287af63aef2f1a3796429b4fa9b695",
+          "video_tensor": "284f677acc956549d72280758e87e8274d47a972037861f41877cdcba7a777c3",
+          "audio_mel_tensor": "1363ae298ff4394de4ca53663c37feddef49e3b45077736f19238d616823e3a6"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 74,
+        "split_epoch": 5,
+        "left_last_pts_ms": 2433,
+        "right_first_pts_ms": 2467,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.128953333,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.005963132,
+          "video_parse": 0.004275269,
+          "video_decode": 0.101899465,
+          "video_resize": 0.024688057,
+          "audio_source": 0.047344014,
+          "audio_resample": 0.041299502,
+          "audio_mel": 0.00738119,
+          "arrow_pack": 0.004531699,
+          "arrow_write": 0.003480358,
+          "worker_send_wait": 0.026088674,
+          "collector_receive_wait": 0.113542174,
+          "final_sync": 3.115e-06,
+          "video_partition": 0.000172812,
+          "video_decode_worker_0": 0.061543649,
+          "video_decode_worker_1": 0.040379478,
+          "video_send_wait_worker_0": 0.011380989,
+          "video_send_wait_worker_1": 0.055421494,
+          "video_merge_receive_wait": 0.110622189,
+          "video_wall_worker_0": 0.091163566,
+          "video_wall_worker_1": 0.113148038
+        }
+      },
+      "logical_columns": {
+        "rows": 11,
+        "columns": {
+          "timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "audio_valid_frames": "818b53868a06f13fc899a51ba21120fc594681b7ef58a7a00464e5435891f74c",
+          "video_timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "video_tensor": "ba99e3ff4a81c446793f4ef68ae9130d656d7672fa3a136239e85cf40002d21e",
+          "audio_mel_tensor": "5bab9fcc8c7ff7806ad925639691df2fb564ada0df999b6163a34065d0437659"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 40,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.160037817,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.005926266,
+          "video_parse": 0.000218509,
+          "video_decode": 0.043524608,
+          "video_resize": 0.024376261,
+          "audio_source": 0.051902214,
+          "audio_resample": 0.050645929,
+          "audio_mel": 0.007520112,
+          "arrow_pack": 0.003910573,
+          "arrow_write": 0.006423989,
+          "worker_send_wait": 0.135260438,
+          "collector_receive_wait": 0.141951425,
+          "final_sync": 2.865e-06,
+          "video_partition": 3.9971e-05,
+          "video_decode_worker_0": 0.020911413,
+          "video_decode_worker_1": 0.022619231,
+          "video_send_wait_worker_0": 0.032023389,
+          "video_send_wait_worker_1": 0.109670262,
+          "video_merge_receive_wait": 0.059390785,
+          "video_wall_worker_0": 0.067368156,
+          "video_wall_worker_1": 0.151958218
+        }
+      },
+      "logical_columns": {
+        "rows": 126,
+        "columns": {
+          "timestamp_ms": "2b6e01e8387098646c486e1f5475fca2f85440c52659468e33b5b3e592dfbb06",
+          "audio_valid_frames": "92c3b2656c2f240331a1b576ca4d3c7b99671c3ddfa6a7ca5107e3a07a782f55",
+          "video_timestamp_ms": "3246750f739c47bb9a30f7d1f8a1a6eb9bf7092044349719f0e13b82e2da84a4",
+          "video_tensor": "5e88aced4df292076c9349ecb0e68c663b8944d689b5c03e657e6ea4d5bb925a",
+          "audio_mel_tensor": "7024ee74f30a2ec387ec2231d4bc9afd59b25636b45216024cd6f2f4cc36b080"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 6,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.149953244,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004331075,
+          "video_parse": 0.000213978,
+          "video_decode": 0.043869066,
+          "video_resize": 0.015339322,
+          "audio_source": 0.060963591,
+          "audio_resample": 0.070943025,
+          "audio_mel": 0.008232565,
+          "arrow_pack": 0.00246604,
+          "arrow_write": 0.002179554,
+          "worker_send_wait": 0.109128952,
+          "collector_receive_wait": 0.140154454,
+          "final_sync": 2.584e-06,
+          "video_partition": 1.8347e-05,
+          "video_decode_worker_0": 0.021105131,
+          "video_decode_worker_1": 0.022773387,
+          "video_send_wait_worker_0": 0.015234552,
+          "video_send_wait_worker_1": 0.096666022,
+          "video_merge_receive_wait": 0.034112148,
+          "video_wall_worker_0": 0.043982505,
+          "video_wall_worker_1": 0.135410382
+        }
+      },
+      "logical_columns": {
+        "rows": 19,
+        "columns": {
+          "timestamp_ms": "a23517c39ad21e8a25ae93c044f3fb59e923333ca86a82d8501882b56f3fca34",
+          "audio_valid_frames": "31720d8fe364da72ae2f0e0f68f2ffcdf3ced207009d56bd807fa2a68845a331",
+          "video_timestamp_ms": "6a27eed8119089b0c81da66c517724c26a8b53febe37fefe61659548b7e12d0e",
+          "video_tensor": "b41c09f4eb64b1935503aa937ba8cb816f8627245eb7a5b724716cff13094787",
+          "audio_mel_tensor": "b6865321b8a53e6216053454efc750f4009ea842a768180c993720f4e3b4d982"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 4,
+        "left_last_pts_ms": 1950,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.101723822,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004472629,
+          "video_parse": 0.000166248,
+          "video_decode": 0.035616363,
+          "video_resize": 0.01029588,
+          "audio_source": 0.044082318,
+          "audio_resample": 0.044195704,
+          "audio_mel": 0.00801104,
+          "arrow_pack": 0.004626284,
+          "arrow_write": 0.002783416,
+          "worker_send_wait": 0.073051092,
+          "collector_receive_wait": 0.089141124,
+          "final_sync": 2.343e-06,
+          "video_partition": 4.4768e-05,
+          "video_decode_worker_0": 0.01644397,
+          "video_decode_worker_1": 0.019185719,
+          "video_send_wait_worker_0": 5.7926e-05,
+          "video_send_wait_worker_1": 0.054547114,
+          "video_merge_receive_wait": 0.021584959,
+          "video_wall_worker_0": 0.024611652,
+          "video_wall_worker_1": 0.08571247
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "16f43e0848394d15e7a194dfad82374c9d88408a78ad25458927a7582511b8a3",
+          "audio_valid_frames": "3eacdcedcde830ff2419b53c713c5fd4521ad1ab588e12767080fff2e759141b",
+          "video_timestamp_ms": "5ae1bb443cc8ad30c647b54b33ed17ffba44d5a107ec08bdf0c79d2c1df1768d",
+          "video_tensor": "10f65dd37fc821a2b5bfda47244f0f06bf7ecc1f421391b2d7a8333d91415429",
+          "audio_mel_tensor": "7d0e0fa1bfaaabf53f68efbc65c356e5ea7bc51cca8bce4ac66a3e9de15f2ebf"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 2,
+        "split_epoch": 31,
+        "left_last_pts_ms": 1000,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.108947378,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004800795,
+          "video_parse": 4e-05,
+          "video_decode": 0.006729049,
+          "video_resize": 0.001712717,
+          "audio_source": 0.041114922,
+          "audio_resample": 0.04971281,
+          "audio_mel": 0.008299339,
+          "arrow_pack": 0.003256069,
+          "arrow_write": 0.009190802,
+          "worker_send_wait": 0.094125701,
+          "collector_receive_wait": 0.089894791,
+          "final_sync": 2.814e-06,
+          "video_partition": 3.7757e-05,
+          "video_decode_worker_0": 0.002223532,
+          "video_decode_worker_1": 0.00450632,
+          "video_send_wait_worker_0": 0.018624805,
+          "video_send_wait_worker_1": 0.09273838,
+          "video_merge_receive_wait": 0.009425496,
+          "video_wall_worker_0": 0.025036423,
+          "video_wall_worker_1": 0.103210734
+        }
+      },
+      "logical_columns": {
+        "rows": 146,
+        "columns": {
+          "timestamp_ms": "cca75070ae1354b634bf005daaf9689fa267a44f33b8ac6ebddfa5f79873654d",
+          "audio_valid_frames": "1f9a5fd54befbcdec6703357d31c810716b07cff0629b919fed1af01e14949af",
+          "video_timestamp_ms": "4ed81516eae9f59bd6e378633ae519f8b6b5778c8aa9ea3505e82a16e5fb98c8",
+          "video_tensor": "e4b0c76ca8bc8e79b3a5a20fa255cc9fb8dead1aff09c8667d0f36d6f0e1d8e1",
+          "audio_mel_tensor": "e60e4052fd0e7c7f8b80519a97bdaee14f61c4df7fa92df44e01e0401db0132e"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 2,
+        "split_epoch": 5,
+        "left_last_pts_ms": 1000,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.112565125,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.006307813,
+          "video_parse": 4.5861e-05,
+          "video_decode": 0.00682898,
+          "video_resize": 0.003471787,
+          "audio_source": 0.042606955,
+          "audio_resample": 0.053431437,
+          "audio_mel": 0.009063743,
+          "arrow_pack": 0.002735519,
+          "arrow_write": 0.00259228,
+          "worker_send_wait": 0.094903481,
+          "collector_receive_wait": 0.100124694,
+          "final_sync": 2.944e-06,
+          "video_partition": 4.5829e-05,
+          "video_decode_worker_0": 0.002509183,
+          "video_decode_worker_1": 0.004321009,
+          "video_send_wait_worker_0": 0.005440792,
+          "video_send_wait_worker_1": 0.094743512,
+          "video_merge_receive_wait": 0.008319904,
+          "video_wall_worker_0": 0.015134911,
+          "video_wall_worker_1": 0.105258102
+        }
+      },
+      "logical_columns": {
+        "rows": 23,
+        "columns": {
+          "timestamp_ms": "0c9c4fb7aecf049f3ba322dcae988caccda031e38d1a95d33cfdef06542be76b",
+          "audio_valid_frames": "40b8f36832bae30aa88e5ec92b1233ed971e0a93624ce97497c728b5789799b5",
+          "video_timestamp_ms": "8fb7015507c5cf1adc1ffb37e07af48dc0adf821c0cdb2a3a7fdd097219e575c",
+          "video_tensor": "7aa6dc1ba6e5205189b60b0ef7975ac30ea0c3d054b7dc3e87b9334ee10e6626",
+          "audio_mel_tensor": "2281ed33df878c9ff7cb21b701633253305c6f801ad8e6e4ded61bdc27b437a8"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 2,
+        "split_epoch": 4,
+        "left_last_pts_ms": 1000,
+        "right_first_pts_ms": 2000,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.114036006,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004972364,
+          "video_parse": 4.2985e-05,
+          "video_decode": 0.006419051,
+          "video_resize": 0.007373453,
+          "audio_source": 0.043806712,
+          "audio_resample": 0.054664929,
+          "audio_mel": 0.009432205,
+          "arrow_pack": 0.004273228,
+          "arrow_write": 0.014793343,
+          "worker_send_wait": 0.093609792,
+          "collector_receive_wait": 0.089224409,
+          "final_sync": 3.134e-06,
+          "video_partition": 4.4066e-05,
+          "video_decode_worker_0": 0.002191873,
+          "video_decode_worker_1": 0.004228712,
+          "video_send_wait_worker_0": 0.006826587,
+          "video_send_wait_worker_1": 0.08185807,
+          "video_merge_receive_wait": 0.00666561,
+          "video_wall_worker_0": 0.016592494,
+          "video_wall_worker_1": 0.095600898
+        }
+      },
+      "logical_columns": {
+        "rows": 15,
+        "columns": {
+          "timestamp_ms": "a2cfa04b9dbcd7777e9a2fb73e0f4cc507fa08ae557fc0a9078a74b4724e44c3",
+          "audio_valid_frames": "759d7fbe9759dffb2c1be42987b556c5e88a97b5264700a62099ab79d3306c72",
+          "video_timestamp_ms": "c67e76420afde18898c31d1a054ff04283305c38a979fb80afb8d701ea0e15a1",
+          "video_tensor": "0a107bcbb46c1e4d3e2d0bec2fb20571089427482c8537061aadaf82f8360a01",
+          "audio_mel_tensor": "c097b4f5814c3a8b79cec8e746e76a66b859200899b783fb874696ae34df6999"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "fallback": "no eligible interior IDR with separated presentation ranges"
+      },
+      "profile": {
+        "wall_seconds": 0.070350496,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.00426818,
+          "video_parse": 0.000196647,
+          "video_decode": 0.03643783,
+          "video_resize": 0.018967693,
+          "audio_source": 0.027295456,
+          "audio_resample": 0.029648115,
+          "audio_mel": 0.005031521,
+          "arrow_pack": 0.001714871,
+          "arrow_write": 0.00552655,
+          "worker_send_wait": 0.009914645,
+          "collector_receive_wait": 0.057402137,
+          "final_sync": 2.925e-06,
+          "video_partition": 4.2935e-05,
+          "video_decode_worker_0": 0.0,
+          "video_decode_worker_1": 0.0,
+          "video_send_wait_worker_0": 0.0,
+          "video_send_wait_worker_1": 0.0,
+          "video_merge_receive_wait": 0.0,
+          "video_wall_worker_0": 0.0,
+          "video_wall_worker_1": 0.0
+        }
+      },
+      "logical_columns": {
+        "rows": 83,
+        "columns": {
+          "timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "audio_valid_frames": "e87b1aa93a250abbddf3124657fe8998b101b43a13fd0ad6a190aafd9d028f9c",
+          "video_timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "video_tensor": "f6ab005a46f7d79b64d9c0543ab46aec07dbdd2f1467bc693570834698f39610",
+          "audio_mel_tensor": "01c3dda0fb26ee837432714935feeeb7a8040393ed795ca3e0692f8702307953"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "fallback": "no eligible interior IDR with separated presentation ranges"
+      },
+      "profile": {
+        "wall_seconds": 0.062880782,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.00478425,
+          "video_parse": 0.000159037,
+          "video_decode": 0.036678614,
+          "video_resize": 0.005959089,
+          "audio_source": 0.023763123,
+          "audio_resample": 0.028605543,
+          "audio_mel": 0.004854835,
+          "arrow_pack": 0.003165212,
+          "arrow_write": 0.001391653,
+          "worker_send_wait": 0.01077195,
+          "collector_receive_wait": 0.052828059,
+          "final_sync": 3.255e-06,
+          "video_partition": 3.4863e-05,
+          "video_decode_worker_0": 0.0,
+          "video_decode_worker_1": 0.0,
+          "video_send_wait_worker_0": 0.0,
+          "video_send_wait_worker_1": 0.0,
+          "video_merge_receive_wait": 0.0,
+          "video_wall_worker_0": 0.0,
+          "video_wall_worker_1": 0.0
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "a1d5bb5877283bae220d16e9da877b5531b5124068e7bde8276fa1bc0bba58a1",
+          "audio_valid_frames": "77d0fd1980804b86d71da795524b22249bd03566136b241708b3b5bb5eb976db",
+          "video_timestamp_ms": "d6c2d2731f18132055c116b24908254f1f9a22ce1a1f7bc8218046ece64133b4",
+          "video_tensor": "f59acd41279a5b799e681ee1183a6c217d490882ad92023e3c182671c50de7a4",
+          "audio_mel_tensor": "67f1bd00b9913475ce4aa4f4ae2f2f5625582f2e0fc5a26249ebf5622c653d42"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "fallback": "no eligible interior IDR with separated presentation ranges"
+      },
+      "profile": {
+        "wall_seconds": 0.065806493,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004455984,
+          "video_parse": 0.000166314,
+          "video_decode": 0.035947772,
+          "video_resize": 0.008472423,
+          "audio_source": 0.024370041,
+          "audio_resample": 0.028610863,
+          "audio_mel": 0.005049811,
+          "arrow_pack": 0.006262484,
+          "arrow_write": 0.002974896,
+          "worker_send_wait": 0.009415422,
+          "collector_receive_wait": 0.051083777,
+          "final_sync": 2.704e-06,
+          "video_partition": 4.027e-05,
+          "video_decode_worker_0": 0.0,
+          "video_decode_worker_1": 0.0,
+          "video_send_wait_worker_0": 0.0,
+          "video_send_wait_worker_1": 0.0,
+          "video_merge_receive_wait": 0.0,
+          "video_wall_worker_0": 0.0,
+          "video_wall_worker_1": 0.0
+        }
+      },
+      "logical_columns": {
+        "rows": 9,
+        "columns": {
+          "timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "audio_valid_frames": "cf9ad5cdabfef3d2c93b1740feb2f693a0bc671fe91a8986fa7edee8743fe5a2",
+          "video_timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "video_tensor": "7cac33552cd826cdcaeab73c86756b246dc10fb795b34d4ca8c06f543bba82c1",
+          "audio_mel_tensor": "a0956304103488b5d2c97faae7337dc354422bb6e8953fd7c9e903252d393b6e"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 62,
+        "left_last_pts_ms": 3033,
+        "right_first_pts_ms": 3100,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.101421472,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004985434,
+          "video_parse": 0.000213012,
+          "video_decode": 0.037573719,
+          "video_resize": 0.0164881,
+          "audio_source": 0.039801107,
+          "audio_resample": 0.043970069,
+          "audio_mel": 0.006873297,
+          "arrow_pack": 0.002764388,
+          "arrow_write": 0.006656796,
+          "worker_send_wait": 0.073705925,
+          "collector_receive_wait": 0.085037246,
+          "final_sync": 2.815e-06,
+          "video_partition": 5.1358e-05,
+          "video_decode_worker_0": 0.020624774,
+          "video_decode_worker_1": 0.016955514,
+          "video_send_wait_worker_0": 0.026231803,
+          "video_send_wait_worker_1": 0.066766729,
+          "video_merge_receive_wait": 0.023520601,
+          "video_wall_worker_0": 0.061956895,
+          "video_wall_worker_1": 0.095274688
+        }
+      },
+      "logical_columns": {
+        "rows": 105,
+        "columns": {
+          "timestamp_ms": "e58c6bad08e32d15f51d3bfa978bcd255ba9a1ae1a98e15eab49b77d1a4d9ae8",
+          "audio_valid_frames": "a11e2deb62c7496d7ef7e3055a74c1789158ac1a941b671ce9dec91cced630a1",
+          "video_timestamp_ms": "33b5f95a810e2b3b91eb0c3eeaaf3b88ffe3239dac7966c06fe78c96c885b042",
+          "video_tensor": "21a2fd9edc87f9d2f861042035642dc3b3d5e9940fffbb31d6f024650338852a",
+          "audio_mel_tensor": "f8aa948c4ed6210549db145f82f140af0fd6837e9b196a66a0950f3786b1e205"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 10,
+        "left_last_pts_ms": 3033,
+        "right_first_pts_ms": 3100,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.082902383,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004376213,
+          "video_parse": 0.000162756,
+          "video_decode": 0.034532399,
+          "video_resize": 0.008654565,
+          "audio_source": 0.032070797,
+          "audio_resample": 0.039108196,
+          "audio_mel": 0.006319859,
+          "arrow_pack": 0.00243409,
+          "arrow_write": 0.00189349,
+          "worker_send_wait": 0.060576148,
+          "collector_receive_wait": 0.073580974,
+          "final_sync": 3.115e-06,
+          "video_partition": 7.933e-05,
+          "video_decode_worker_0": 0.020204469,
+          "video_decode_worker_1": 0.01434898,
+          "video_send_wait_worker_0": 0.01029551,
+          "video_send_wait_worker_1": 0.05372104,
+          "video_merge_receive_wait": 0.01592447,
+          "video_wall_worker_0": 0.040228191,
+          "video_wall_worker_1": 0.073543024
+        }
+      },
+      "logical_columns": {
+        "rows": 16,
+        "columns": {
+          "timestamp_ms": "42e64bd733519e8c64b09e546e9a8aa3a0a04b02d819feadc6b051c4363db168",
+          "audio_valid_frames": "5e25b3aa50996c24135c0e041e9b315efb4a617bc9cf0bd099b612be75b10e2e",
+          "video_timestamp_ms": "1970dd58108dccd4f263ff241cb5fdb9646c200fb2bfa8ef67fafdeb0dcba7f8",
+          "video_tensor": "51f0dc0f67ab867e8e2fec4bfe17866c74ab118a466124c523cc82f25ca3ed04",
+          "audio_mel_tensor": "1363ae298ff4394de4ca53663c37feddef49e3b45077736f19238d616823e3a6"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "split_sample": 40,
+        "split_epoch": 7,
+        "left_last_pts_ms": 3033,
+        "right_first_pts_ms": 3100,
+        "workers": 2
+      },
+      "profile": {
+        "wall_seconds": 0.083551918,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004852763,
+          "video_parse": 0.000228307,
+          "video_decode": 0.038400529,
+          "video_resize": 0.01390951,
+          "audio_source": 0.032836128,
+          "audio_resample": 0.038176905,
+          "audio_mel": 0.006264931,
+          "arrow_pack": 0.004961775,
+          "arrow_write": 0.00879527,
+          "worker_send_wait": 0.045708741,
+          "collector_receive_wait": 0.063583205,
+          "final_sync": 3.335e-06,
+          "video_partition": 5.8699e-05,
+          "video_decode_worker_0": 0.020924269,
+          "video_decode_worker_1": 0.017481797,
+          "video_send_wait_worker_0": 0.001099173,
+          "video_send_wait_worker_1": 0.039252798,
+          "video_merge_receive_wait": 0.029644186,
+          "video_wall_worker_0": 0.037831408,
+          "video_wall_worker_1": 0.066424057
+        }
+      },
+      "logical_columns": {
+        "rows": 11,
+        "columns": {
+          "timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "audio_valid_frames": "818b53868a06f13fc899a51ba21120fc594681b7ef58a7a00464e5435891f74c",
+          "video_timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "video_tensor": "cfa88c2ed256c40d5a2732a8069931b18c76e74e2c2e908b096558fafa2df045",
+          "audio_mel_tensor": "5bab9fcc8c7ff7806ad925639691df2fb564ada0df999b6163a34065d0437659"
+        }
+      }
+    },
+    {
+      "name": "boundary-oracle",
+      "frames": [
+        {
+          "sample_index": 39,
+          "pts_ms": 1900,
+          "epoch": 38,
+          "v016": {
+            "epoch": 38,
+            "source_frame": 38,
+            "type": "B",
+            "mae_255": 0.18879257142543793,
+            "p99_255": 3.181607246398926
+          },
+          "v017": {
+            "epoch": 38,
+            "source_frame": 38,
+            "type": "B",
+            "mae_255": 0.18879257142543793,
+            "p99_255": 3.181607246398926
+          },
+          "exact_match": true
+        },
+        {
+          "sample_index": 40,
+          "pts_ms": 2000,
+          "epoch": 40,
+          "v016": {
+            "epoch": 40,
+            "source_frame": 40,
+            "type": "I",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "v017": {
+            "epoch": 40,
+            "source_frame": 40,
+            "type": "I",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "exact_match": true
+        },
+        {
+          "sample_index": 41,
+          "pts_ms": 2200,
+          "epoch": 44,
+          "v016": {
+            "epoch": 44,
+            "source_frame": 44,
+            "type": "P",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "v017": {
+            "epoch": 44,
+            "source_frame": 44,
+            "type": "P",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "name": "corrupt-worker0-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.017321364999588695,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker0-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.017772638000678853,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker0-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.024560113000916317,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.05524787799913611,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.05263044200000877,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.05342907900012506,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "writer-failure-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.03489149599954544,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "writer-failure-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.03125243700014835,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "writer-failure-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.030401842001083423,
+      "error": "TENZOR_PARTITION {\"split_sample\":40,\"split_epoch\":4,\"left_last_pts_ms\":1950,\"right_first_pts_ms\":2000,\"workers\":2}\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "invalid-workers-0",
+      "exit": 1,
+      "elapsed_seconds": 0.0022300600012385985,
+      "error": "Error: --video-workers must be 1 or 2"
+    },
+    {
+      "name": "invalid-workers-3",
+      "exit": 1,
+      "elapsed_seconds": 0.001725737000015215,
+      "error": "Error: --video-workers must be 1 or 2"
+    }
+  ],
+  "directory": "/tmp/tenzor-v017-artifacts/dual-c02ad22q"
+}

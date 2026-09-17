@@ -1,0 +1,154 @@
+{
+  "dual-idr.mp4": {
+    "bytes": 175872,
+    "sha256": "3f6c9463bff573f921eabeb4ad164b362b5a6e1173fc127865cd9ac5dec2f3ee"
+  },
+  "fixture-h264-aac.mp4": {
+    "bytes": 661480,
+    "sha256": "de1466bfe7c77cebb8d59e0a62f9b062e419d76f1269d47835bc8022a75728d1"
+  },
+  "wav-44100-2ch.wav": {
+    "bytes": 224106,
+    "sha256": "47da012a9b7cc06f0733a927d77a6236ed6e9a77c6701eb04b4da7b53a28006e"
+  },
+  "unsupported.mp3": {
+    "bytes": 10,
+    "sha256": "77988a1cb24163518ebb44e1973a244c04ff234ae45fbea845db15d72be679dc"
+  },
+  "dual-audio-tail.mp4": {
+    "bytes": 194508,
+    "sha256": "7d1e0d169432dccb7feb01a695c576670ef5af1c5ef166f85093dc645ee0e0af"
+  },
+  "long-30.mp4": {
+    "bytes": 3327715,
+    "sha256": "56a4198f867f3f7eee4f80c9bf4ff72f453be17c27401b2764a5dba6620300e9"
+  },
+  "empty.mp4": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "baseline720.mp4": {
+    "bytes": 1509624,
+    "sha256": "478c66f28975e6df7228e3a6e4a105c840aad8a7ae4dbfc37f93d7b824e8d0ef"
+  },
+  "wav-16000-1ch.wav": {
+    "bytes": 40718,
+    "sha256": "bf8cd8c6b4d6e2389166fc0a0ca061fa69e6fa1e9ee2aea568196645b1d289c8"
+  },
+  "long-90.mp4": {
+    "bytes": 9982408,
+    "sha256": "9355c112c8c79407735297981653db0e8e7420210be9bcc8594d6647591eee4c"
+  },
+  "wav-48000-2ch.wav": {
+    "bytes": 243918,
+    "sha256": "d2b513214ce42c60676f0989e71fa7a1935bf297b8cb01af7625e2f78563adf3"
+  },
+  "dual-vfr.mp4": {
+    "bytes": 189558,
+    "sha256": "345e5cef2944acd1ee799c947e7211c4e5bcc7b43e2974f085a93c82b888e9d5"
+  },
+  "silent-video.mp4": {
+    "bytes": 441124,
+    "sha256": "e4d6ccfc257abc21e2c65327a233d406c8bf43704ed72bfbbbaff6bd2bfb38a0"
+  },
+  "gen-720-g45.mp4": {
+    "bytes": 4100721,
+    "sha256": "5fc4307fdd7cbe816b149664ae6fa77ea8a2b42f68178f3247088968c7810221"
+  },
+  "tiny.wav": {
+    "bytes": 1074,
+    "sha256": "f128995df642341688cb83c237dd439164f3d182cc1f1eb62b8cd560d6004a22"
+  },
+  "corrupt.mp4": {
+    "bytes": 300,
+    "sha256": "d10c60efb0f1edff9a8b657ebdf45580db22dcb0f2267de5587e09617f0aac38"
+  },
+  "long-330-video_only.mp4": {
+    "bytes": 30692209,
+    "sha256": "3f3871963ba3873711b21f1fc250d465ab454723212638eee4daae6f262d2b3a"
+  },
+  "color709.mp4": {
+    "bytes": 460192,
+    "sha256": "571eacaec272ee67ee6facc90eedf968b4a94a8bdfd98b34ea86182fe614aeb9"
+  },
+  "fixture.wav": {
+    "bytes": 264678,
+    "sha256": "aa98dedc65e29a26fc06742838bcd75332e66020aa6d85763672d61f1eec7924"
+  },
+  "short.mp4": {
+    "bytes": 57456,
+    "sha256": "76fbd8813534d6bc040ae08122ca1a5d6017c57cb5a5c80a0a328fcb3152822e"
+  },
+  "dual-sparse.mp4": {
+    "bytes": 103372,
+    "sha256": "3d939431e4c3ee9f3be3407af494bf261bcc453581bb8038c8895f7014420398"
+  },
+  "corrupt-nal.mp4": {
+    "bytes": 1186861,
+    "sha256": "71b988b5ec6a488ff5eabd49456fcd4bfccfa150d8fc2110fad1774f15654591"
+  },
+  "long-330.mp4": {
+    "bytes": 36601813,
+    "sha256": "8d71f58c5175bafd7cb11ed79d53b4514b0db9d3e281e3f0b185cee06f8f219b"
+  },
+  "gen-baseline-g12.mp4": {
+    "bytes": 949676,
+    "sha256": "70721d9b1d54704b8c86778651a49b89eef5ce0fe50a5f90c6134aeb9d7b4e05"
+  },
+  "dual-open-gop.mp4": {
+    "bytes": 184703,
+    "sha256": "df7c30a283cac6b0e325cc6c993b20f1b9d69df4df81308ae861061846ead9c0"
+  },
+  "long-330-audio_only.mp4": {
+    "bytes": 5727266,
+    "sha256": "d828c454c916f9fbf57519504caaa74ea3535e7e1cbf439a0078e69a327d33d0"
+  },
+  "high-bframes.mp4": {
+    "bytes": 1186861,
+    "sha256": "67701e035621774d3915e8ca8c0ae586ee0ea90349da317ccb6565e7bfad1c31"
+  },
+  "aac-6ch.mp4": {
+    "bytes": 55805,
+    "sha256": "2a5a2db246aeefcfe924524209464bfcf05824e1872744fc47fdad8adb4f6d14"
+  },
+  "sync-pulse.mp4": {
+    "bytes": 10827,
+    "sha256": "94a13b35984ec24dafc138eec7ac8e1e2e444fe8e3f0a1a3e48996406bddc8ce"
+  },
+  "gen-open-gop.mp4": {
+    "bytes": 6679511,
+    "sha256": "43030d4f65eeea167f0427404275bb3b5b2958f542e9acd82cc8053901bb9ad3"
+  },
+  "unsupported-mpeg4.mp4": {
+    "bytes": 369211,
+    "sha256": "46a2dca5847945865c82cd5b08b27bc3ac40f51acc565a9386fc43a088b343e6"
+  },
+  "dual-off-grid.mp4": {
+    "bytes": 263231,
+    "sha256": "271cb66cdfc7ab7db7a7d3603120e16bd6975e431dd5149f08aa2dc9292bb98a"
+  },
+  "audio-only.mp4": {
+    "bytes": 57382,
+    "sha256": "9a8765630bfb5f05137a310a5d6a6a16501d4d3307c11b41230a5b77849a6464"
+  },
+  "wav-48000-6ch.wav": {
+    "bytes": 731622,
+    "sha256": "ffe0a9d73de5d6b32690ec853ea0b668aed13dc63d33362a399e121b22a6a15b"
+  },
+  "long-660.mp4": {
+    "bytes": 73233096,
+    "sha256": "82fb522e1bd837461a08458865082607ab3f77261d32368f056ec83f30e52dbf"
+  },
+  "selection-sparse.mp4": {
+    "bytes": 56435,
+    "sha256": "1d3d70ce9c2be5c9ded85a6e5a411031ea22f045d9330d167c2804953acb9b9b"
+  },
+  "selection-vfr.mp4": {
+    "bytes": 62509,
+    "sha256": "62495d9a009a329dbe77d1395c57c78b6937d45b9c3cb0698c12c34d100a728f"
+  },
+  "fullrange.mp4": {
+    "bytes": 474972,
+    "sha256": "c52470dac7fd0aa7ab6c1c63f55299feee8932f5653630507db52bd3488f0fae"
+  }
+}

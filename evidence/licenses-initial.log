@@ -1,0 +1,72 @@
+error[rejected]: failed to satisfy license requirements
+  ┌─ /workspace/scratch/0c25025c9e95/tenzorpipe/Cargo.toml:6:12
+  │
+6 │ license = "BUSL-1.1"
+  │            ━━━━━━━━
+  │            │
+  │            rejected: license is not explicitly allowed
+  │
+  ├ BUSL-1.1 - Business Source License 1.1:
+  ├   - No additional metadata available for license
+  ├ tenzor-pipe v0.1.4
+
+error[rejected]: failed to satisfy license requirements
+   ┌─ /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tiny-keccak-2.0.2/Cargo.toml:22:12
+   │
+22 │ license = "CC0-1.0"
+   │            ━━━━━━━
+   │            │
+   │            rejected: license is not explicitly allowed
+   │
+   ├ CC0-1.0 - Creative Commons Zero v1.0 Universal:
+   ├   - FSF Free/Libre
+   ├ tiny-keccak v2.0.2
+     └── const-random-macro v0.1.16
+         └── const-random v0.1.18
+             └── ahash v0.8.12
+                 ├── arrow-array v60.0.0
+                 │   ├── arrow v60.0.0
+                 │   │   └── tenzor-pipe v0.1.4
+                 │   ├── arrow-arith v60.0.0
+                 │   │   └── arrow v60.0.0 (*)
+                 │   ├── arrow-cast v60.0.0
+                 │   │   └── arrow v60.0.0 (*)
+                 │   ├── arrow-cmp v60.0.0
+                 │   │   ├── arrow-ord v60.0.0
+                 │   │   │   ├── arrow v60.0.0 (*)
+                 │   │   │   └── arrow-cast v60.0.0 (*)
+                 │   │   └── arrow-select v60.0.0
+                 │   │       ├── arrow v60.0.0 (*)
+                 │   │       ├── arrow-cast v60.0.0 (*)
+                 │   │       ├── arrow-ipc v60.0.0
+                 │   │       │   └── arrow v60.0.0 (*)
+                 │   │       ├── arrow-ord v60.0.0 (*)
+                 │   │       └── arrow-string v60.0.0
+                 │   │           └── arrow v60.0.0 (*)
+                 │   ├── arrow-ipc v60.0.0 (*)
+                 │   ├── arrow-ord v60.0.0 (*)
+                 │   ├── arrow-row v60.0.0
+                 │   │   └── arrow v60.0.0 (*)
+                 │   ├── arrow-select v60.0.0 (*)
+                 │   └── arrow-string v60.0.0 (*)
+                 └── arrow-select v60.0.0 (*)
+
+warning[license-not-encountered]: license was not encountered
+  ┌─ tenzorpipe/deny.toml:8:4
+  │
+8 │   "BSD-3-Clause",
+  │    ━━━━━━━━━━━━ unmatched license allowance
+
+warning[license-not-encountered]: license was not encountered
+  ┌─ tenzorpipe/deny.toml:9:4
+  │
+9 │   "ISC",
+  │    ━━━ unmatched license allowance
+
+warning[license-not-encountered]: license was not encountered
+   ┌─ tenzorpipe/deny.toml:11:4
+   │
+11 │   "Zlib",
+   │    ━━━━ unmatched license allowance
+
+licenses FAILED

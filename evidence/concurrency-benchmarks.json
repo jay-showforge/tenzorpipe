@@ -1,0 +1,420 @@
+[
+  {
+    "name": "v016-old-330-0",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-330-0.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzor-v0.1.5",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-330-0.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 15.721206298000197,
+    "peak_tree_rss_sampled_bytes": 60604416,
+    "rusage_maxrss_kib": 59072,
+    "cpu_seconds": 15.709019,
+    "cpu_percent_one_core": 99.92247860775322,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 20.99075565479841,
+    "epochs_per_second": 41.98151130959682,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    }
+  },
+  {
+    "name": "v016-concurrent-330-1",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-330-1.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-330-1.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 10.288517211999988,
+    "peak_tree_rss_sampled_bytes": 63512576,
+    "rusage_maxrss_kib": 61784,
+    "cpu_seconds": 18.818119,
+    "cpu_percent_one_core": 182.9040921275957,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 32.07459279118523,
+    "epochs_per_second": 64.14918558237046,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    }
+  },
+  {
+    "name": "v016-old-330-2",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-330-2.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzor-v0.1.5",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-330-2.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 16.159320920000027,
+    "peak_tree_rss_sampled_bytes": 60276736,
+    "rusage_maxrss_kib": 58752,
+    "cpu_seconds": 16.143222,
+    "cpu_percent_one_core": 99.9003737837764,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 20.421650243455865,
+    "epochs_per_second": 40.84330048691173,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    }
+  },
+  {
+    "name": "v016-concurrent-330-3",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-330-3.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-330-3.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 10.514927701000033,
+    "peak_tree_rss_sampled_bytes": 63463424,
+    "rusage_maxrss_kib": 61736,
+    "cpu_seconds": 19.107288999999998,
+    "cpu_percent_one_core": 181.7158381239538,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 31.383953307507287,
+    "epochs_per_second": 62.767906615014574,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    }
+  },
+  {
+    "name": "v016-sequential-profile-330-4",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-sequential-profile-330-4.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-sequential-profile-330-4.tenzor",
+      "--batch-epochs",
+      "32",
+      "--execution",
+      "sequential",
+      "--profile"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 16.91700361400035,
+    "peak_tree_rss_sampled_bytes": 78131200,
+    "rusage_maxrss_kib": 76216,
+    "cpu_seconds": 16.901745,
+    "cpu_percent_one_core": 99.90980309309786,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 19.507000620777497,
+    "epochs_per_second": 39.01400124155499,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    "profile": {
+      "wall_seconds": 16.903626488,
+      "execution": "sequential",
+      "queue_slots_per_track": 0,
+      "queued_payload_budget_used_bytes": 0,
+      "decoder_threads": 0,
+      "stages_seconds": {
+        "setup": 0.005206731,
+        "video_parse": 0.026512913,
+        "video_decode": 8.769654774,
+        "video_resize": 0.297130618,
+        "audio_source": 3.848312279,
+        "audio_resample": 2.381293459,
+        "audio_mel": 0.398838866,
+        "arrow_pack": 0.080320623,
+        "arrow_write": 1.077974486,
+        "worker_send_wait": 0.0,
+        "collector_receive_wait": 0.0,
+        "final_sync": 4.688e-06
+      }
+    }
+  },
+  {
+    "name": "v016-concurrent-profile-330-5",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-profile-330-5.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-concurrent-profile-330-5.tenzor",
+      "--batch-epochs",
+      "32",
+      "--profile"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 10.092749852999987,
+    "peak_tree_rss_sampled_bytes": 63492096,
+    "rusage_maxrss_kib": 61764,
+    "cpu_seconds": 18.429173,
+    "cpu_percent_one_core": 182.5981349822326,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418566144,
+    "media_seconds_per_second": 32.69673823352614,
+    "epochs_per_second": 65.39347646705228,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    "profile": {
+      "wall_seconds": 10.085994251,
+      "execution": "concurrent",
+      "queue_slots_per_track": 2,
+      "queued_payload_budget_used_bytes": 1229824,
+      "decoder_threads": 0,
+      "stages_seconds": {
+        "setup": 0.005103723,
+        "video_parse": 0.028967063,
+        "video_decode": 9.432967198,
+        "video_resize": 0.294808853,
+        "audio_source": 4.537583266,
+        "audio_resample": 2.393418534,
+        "audio_mel": 0.407754237,
+        "arrow_pack": 0.074884091,
+        "arrow_write": 1.145946557,
+        "worker_send_wait": 2.913683298,
+        "collector_receive_wait": 8.855634757,
+        "final_sync": 3.525e-06
+      }
+    }
+  },
+  {
+    "name": "v016-rendezvous-330-6",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-rendezvous-330-6.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-rendezvous-330-6.tenzor",
+      "--batch-epochs",
+      "32",
+      "--queue-mib",
+      "0",
+      "--profile"
+    ],
+    "media_seconds": 330,
+    "batch_epochs": 32,
+    "wall_seconds": 11.394158902000072,
+    "peak_tree_rss_sampled_bytes": 62304256,
+    "rusage_maxrss_kib": 60652,
+    "cpu_seconds": 19.825461,
+    "cpu_percent_one_core": 173.99670454411464,
+    "artifact_bytes": 418560802,
+    "sampled_tree_write_bytes": 418574336,
+    "media_seconds_per_second": 28.962207990804263,
+    "epochs_per_second": 57.924415981608526,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 660,
+      "columns": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    "profile": {
+      "wall_seconds": 11.389353778,
+      "execution": "concurrent",
+      "queue_slots_per_track": 0,
+      "queued_payload_budget_used_bytes": 0,
+      "decoder_threads": 0,
+      "stages_seconds": {
+        "setup": 0.00515379,
+        "video_parse": 0.029988772,
+        "video_decode": 10.153936521,
+        "video_resize": 0.300032379,
+        "audio_source": 5.144963643,
+        "audio_resample": 2.449635742,
+        "audio_mel": 0.424113965,
+        "arrow_pack": 0.075224396,
+        "arrow_write": 1.104604766,
+        "worker_send_wait": 4.128215859,
+        "collector_receive_wait": 10.197985089,
+        "final_sync": 3.755e-06
+      }
+    }
+  },
+  {
+    "name": "v016-old-memory-660-7",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-memory-660-7.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzor-v0.1.5",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-660.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-old-memory-660-7.tenzor",
+      "--batch-epochs",
+      "32"
+    ],
+    "media_seconds": 660,
+    "batch_epochs": 32,
+    "wall_seconds": 30.583112031999917,
+    "peak_tree_rss_sampled_bytes": 61063168,
+    "rusage_maxrss_kib": 59520,
+    "cpu_seconds": 30.572101999999997,
+    "cpu_percent_one_core": 99.96399963486907,
+    "artifact_bytes": 837117658,
+    "sampled_tree_write_bytes": 837132288,
+    "media_seconds_per_second": 21.580537628395195,
+    "epochs_per_second": 43.16107525679039,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+    "logical_columns": {
+      "rows": 1320,
+      "columns": {
+        "timestamp_ms": "b58989da5524e38e90afcb47cc92618e9ae5a3ee18c49a2594fa076cf17609db",
+        "audio_valid_frames": "2fc18114dac6e9380725c97f367e5ec0df5d2f80c25a7a0a337000fbc5f8cb5a",
+        "video_timestamp_ms": "b58989da5524e38e90afcb47cc92618e9ae5a3ee18c49a2594fa076cf17609db",
+        "video_tensor": "9e2628abe7a331b86bdf98d1c82526c34376da0c544bec1bdeb3896780aae4b7",
+        "audio_mel_tensor": "ee750c3ecb1f2373fc51255e8ff00d1382aa4dd60699240aa4967d1b7678e577"
+      }
+    }
+  },
+  {
+    "name": "v016-resolution336-30-8",
+    "artifact_path": "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-resolution336-30-8.tenzor",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-30.mp4",
+      "-o",
+      "/tmp/tenzor-v016-artifacts/benchmark-o_1bxo8x/v016-resolution336-30-8.tenzor",
+      "--batch-epochs",
+      "32",
+      "--resolution",
+      "336",
+      "--profile"
+    ],
+    "media_seconds": 30,
+    "batch_epochs": 32,
+    "wall_seconds": 1.1824488729998848,
+    "peak_tree_rss_sampled_bytes": 70615040,
+    "rusage_maxrss_kib": 68688,
+    "cpu_seconds": 1.9060869999999999,
+    "cpu_percent_one_core": 161.19825926716288,
+    "artifact_bytes": 84624154,
+    "sampled_tree_write_bytes": 84635648,
+    "media_seconds_per_second": 25.371075811413053,
+    "epochs_per_second": 50.74215162282611,
+    "intermediate_media_files_bytes": 0,
+    "engine_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+    "logical_columns": {
+      "rows": 60,
+      "columns": {
+        "timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "audio_valid_frames": "70748a4ce6534be4a744c08fbe04b3c0efc003836e2b79fde43b1f68e5f4f6b0",
+        "video_timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "video_tensor": "51b49f5de4eb06df4cfce5294ea9e253920bc162df7bdcf1478f598465ff3d65",
+        "audio_mel_tensor": "fee36f690fa09296424347fdd788fb565fb8e270d00b570efb27e944b0cde99f"
+      }
+    },
+    "profile": {
+      "wall_seconds": 1.17201312,
+      "execution": "concurrent",
+      "queue_slots_per_track": 2,
+      "queued_payload_budget_used_bytes": 2735104,
+      "decoder_threads": 0,
+      "stages_seconds": {
+        "setup": 0.00516677,
+        "video_parse": 0.00220435,
+        "video_decode": 0.847365904,
+        "video_resize": 0.086533914,
+        "audio_source": 0.389712059,
+        "audio_resample": 0.226509039,
+        "audio_mel": 0.038735367,
+        "arrow_pack": 0.029412791,
+        "arrow_write": 0.237952006,
+        "worker_send_wait": 0.443442747,
+        "collector_receive_wait": 0.889678437,
+        "final_sync": 3.265e-06
+      }
+    }
+  }
+]

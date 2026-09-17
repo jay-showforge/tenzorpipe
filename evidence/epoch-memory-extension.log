@@ -1,0 +1,14 @@
+{"name": "tenzor-1320-b32", "artifact_path": "out/benchmark-qf3ma0zu/tenzor-1320-b32.tenzor", "command": ["/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/tenzor", "-i", "/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-1320.mp4", "-o", "/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-qf3ma0zu/tenzor-1320-b32.tenzor", "--batch-epochs", "32"], "media_seconds": 1320, "batch_epochs": 32, "wall_seconds": 66.37560094499986, "peak_tree_rss_sampled_bytes": 63197184, "rusage_maxrss_kib": 61612, "cpu_seconds": 66.10871, "cpu_percent_one_core": 99.59790805476698, "artifact_bytes": 1674865138, "sampled_tree_write_bytes": 1674878976, "media_seconds_per_second": 19.886825598668075, "epochs_per_second": 39.77365119733615, "intermediate_media_files_bytes": 0, "engine_binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d"}
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+AssertionError
+Traceback (most recent call last):
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/benchmark_epoch_memory.py", line 22, in <module>
+    result['verification']=json.loads(subprocess.check_output([sys.executable,'-c',code,str(out)]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-c', "import sys,json,math,pyarrow as pa,pyarrow.ipc as ipc,numpy as np\nr=ipc.open_file(pa.memory_map(sys.argv[1]));rows=0\nfor i in range(r.num_record_batches):\n b=r.get_batch(i);ts=b.column('timestamp_ms').to_numpy();assert np.array_equal(ts,np.arange(rows,rows+b.num_rows)*500)\n for name in b.schema.names:\n  col=b.column(name);values=col.values if pa.types.is_fixed_size_list(col.type) else col\n  assert np.isfinite(values.to_numpy()).all()\n rows+=b.num_rows\nassert rows==2640 and r.num_record_batches==83\nprint(json.dumps(dict(epochs=rows,batches=r.num_record_batches,all_finite=True)))\n", '/workspace/scratch/0c25025c9e95/tenzorpipe/out/benchmark-qf3ma0zu/tenzor-1320-b32.tenzor']' returned non-zero exit status 1.

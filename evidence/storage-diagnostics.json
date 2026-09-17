@@ -1,0 +1,30 @@
+{
+  "observations": [
+    {
+      "binary": "v0.1.5",
+      "sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+      "output_location": "workspace",
+      "result": "delayed reread failed after initial read passed",
+      "log": "publication-old-workspace.log"
+    },
+    {
+      "binary": "v0.1.6",
+      "sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+      "output_location": "workspace",
+      "result": "delayed reread failed after initial read passed",
+      "log": "initial/matrix-v016-footer-failure.log"
+    },
+    {
+      "binary": "v0.1.5",
+      "output_location": "/tmp",
+      "result": "20 immediate and delayed reopen comparisons passed"
+    },
+    {
+      "binary": "v0.1.6",
+      "output_location": "/tmp",
+      "result": "20 immediate and delayed reopen comparisons passed",
+      "evidence": "publication-new-tmp.json"
+    }
+  ],
+  "interpretation": "Failure depends on output location and reproduces on unchanged prior binary. Underlying workspace mechanism not proven; final media and benchmark outputs use /tmp. No engine publication workaround or weakened reader check was introduced."
+}

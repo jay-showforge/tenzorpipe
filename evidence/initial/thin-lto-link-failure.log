@@ -1,0 +1,157 @@
+   Compiling tenzor-pipe v0.1.4 (/workspace/scratch/0c25025c9e95/tenzorpipe)
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<95 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/rustceo4FUo/libopenh264_sys2-900d3ace3f629404.rlib" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-lstdc++" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/rustceo4FUo/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/build/openh264-sys2-7b134de4a7f6a4c8/out" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: undefined symbol: <alloc::sync::Arc<arrow_schema::field::Field>>::drop_slow
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<alloc::sync::Arc<arrow_schema::field::Field>>)
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType>)
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType>)
+          >>> referenced 14 more times
+          
+          rust-lld: error: undefined symbol: <alloc::sync::Arc<[(i8, alloc::sync::Arc<arrow_schema::field::Field>)]>>::drop_slow
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::fields::UnionFields>)
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType>)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::fields::UnionFields>)
+          >>> referenced 4 more times
+          
+          rust-lld: error: undefined symbol: <alloc::sync::Arc<str>>::drop_slow
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType>)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType> (.llvm.17847628395796959451))
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType> (.llvm.3385726840707202615))
+          
+          rust-lld: error: undefined symbol: <alloc::sync::Arc<[alloc::sync::Arc<arrow_schema::field::Field>]>>::drop_slow
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType>)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType> (.llvm.17847628395796959451))
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(core::ptr::drop_glue::<arrow_schema::datatype::DataType> (.llvm.3385726840707202615))
+          >>> referenced 2 more times
+          
+          rust-lld: error: undefined symbol: <arrow_schema::datatype::DataType as core::fmt::Display>::fmt
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_data::data::ArrayData>::check_bounds::<i8>)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_data::data::ArrayData>::check_bounds::<i8>)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_data::data::ArrayData>::check_bounds::<u8>)
+          >>> referenced 88 more times
+          
+          rust-lld: error: undefined symbol: <arrow_schema::field::Field>::fields
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_ipc::writer::IpcDataGenerator>::encode_all_dicts)
+          
+          rust-lld: error: undefined symbol: <alloc::sync::Arc<alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::string::String>>>::drop_slow
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(<alloc::sync::Arc<arrow_schema::schema::Schema>>::drop_slow)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(core::ptr::drop_glue::<arrow_ipc::writer::FileWriter<std::io::buffered::bufwriter::BufWriter<std::fs::File>>>)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          
+          rust-lld: error: undefined symbol: <arrow_schema::field::Field as core::fmt::Debug>::fmt
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<&alloc::sync::Arc<arrow_schema::field::Field> as core::fmt::Debug>::fmt)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<&alloc::sync::Arc<arrow_schema::field::Field> as core::fmt::Debug>::fmt)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::fmt::Debug>::fmt)
+          >>> referenced 9 more times
+          
+          rust-lld: error: undefined hidden symbol: <arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq (.llvm.13039864193148844150)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_data::data::ArrayData as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced 4 more times
+          
+          rust-lld: error: undefined hidden symbol: <alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::string::String> as core::cmp::PartialEq>::eq (.llvm.13039864193148844150)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_data::data::ArrayData as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced 4 more times
+          
+          rust-lld: error: undefined hidden symbol: anon.6836560adcb7b44107fe933b54e48b4c.10.llvm.13039864193148844150
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<&arrow_schema::fields::Fields as core::fmt::Debug>::fmt)
+          
+          rust-lld: error: undefined symbol: <arrow_schema::fields::Fields as core::fmt::Debug>::fmt
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::fmt::Debug>::fmt)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::fmt::Debug>::fmt)
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::fmt::Debug>::fmt)
+          >>> referenced 1 more times
+          
+          rust-lld: error: undefined symbol: <arrow_schema::field::Field as core::cmp::PartialEq>::eq
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq)
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(<arrow_schema::datatype::DataType as core::cmp::PartialEq>::eq (.llvm.17847628395796959451))
+          >>> referenced 3 more times
+          
+          rust-lld: error: undefined symbol: <arrow_schema::fields::UnionFields as core::fmt::Debug>::fmt
+          >>> referenced by arrow_data.cf4c731880b4d067-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_data-b44a67ab953c35c6.arrow_data.cf4c731880b4d067-cgu.0.rcgu.o.rcgu.o:(.data.rel.ro..Lanon.f17b2e0fd6699d9c50f6282964bfb97d.494+0x18)
+          >>> referenced by arrow_ipc.409f4147270ac59a-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_ipc-30f06f2ba5e21c9a.arrow_ipc.409f4147270ac59a-cgu.0.rcgu.o.rcgu.o:(.data.rel.ro..Lanon.6ca6189386cd0ae5d0dedac19a52bee3.400+0x18)
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(.data.rel.ro..Lanon.69b79cf7e4732d7b79e7d4ba225755ef.896+0x18)
+          
+          rust-lld: error: undefined symbol: <arrow_schema::datatype::DataType>::equals_datatype
+          >>> referenced by arrow_array.c3ca7bc680d4efe5-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.arrow_array-2d4c996948229a4b.arrow_array.c3ca7bc680d4efe5-cgu.0.rcgu.o.rcgu.o:(<<arrow_array::record_batch::RecordBatch>::try_new_impl::{closure#4} as core::ops::function::FnOnce<(&(usize, (&arrow_schema::datatype::DataType, &arrow_schema::datatype::DataType)),)>>::call_once)
+          
+          rust-lld: error: undefined symbol: <alloc::raw_vec::RawVec<arrow_schema::field::Field>>::grow_one
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced 1 more times
+          
+          rust-lld: error: undefined symbol: <arrow_schema::fields::Fields as core::convert::From<alloc::vec::Vec<arrow_schema::field::Field>>>::from
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          
+          rust-lld: error: undefined symbol: <arrow_schema::metadata::Metadata as core::convert::From<std::collections::hash::map::HashMap<alloc::string::String, alloc::string::String>>>::from
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          
+          rust-lld: error: undefined symbol: <arrow_schema::error::ArrowError as core::convert::From<core::io::error::Error>>::from
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(tenzor::run)
+          >>> referenced 7 more times
+          
+          rust-lld: error: undefined symbol: <hashbrown::raw::RawTable<(alloc::string::String, alloc::string::String)>>::reserve_rehash::<hashbrown::map::make_hasher<alloc::string::String, alloc::string::String, std::hash::random::RandomState>::{closure#0}>
+          >>> referenced by tenzor.5b501bddaa0b51d8-cgu.0
+          >>>               /workspace/scratch/0c25025c9e95/tenzorpipe/target/release/deps/tenzor-afe49691e4b2b4c6.tenzor.5b501bddaa0b51d8-cgu.0.rcgu.o:(<hashbrown::map::HashMap<alloc::string::String, alloc::string::String, std::hash::random::RandomState>>::insert)
+          
+          rust-lld: error: too many errors emitted, stopping now (use --error-limit=0 to see all errors)
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `tenzor-pipe` (bin "tenzor") due to 1 previous error

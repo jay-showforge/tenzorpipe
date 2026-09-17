@@ -1,0 +1,13 @@
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e739ba3c40] moov atom not found
+[in#0 @ 0x55e739ba3b40] Error opening input: Invalid data found when processing input
+Error opening input file /workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4.
+Error opening input files: Invalid data found when processing input
+Generated media fixtures in /workspace/scratch/0c25025c9e95/tenzorpipe/fixtures
+Traceback (most recent call last):
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/generate_matrix.py", line 41, in <module>
+    ff('long-330-video_only.mp4',['-i',str(d/'long-330.mp4'),'-map','0:v:0','-c','copy'])
+  File "/workspace/scratch/0c25025c9e95/tenzorpipe/scripts/generate_matrix.py", line 7, in ff
+    subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',*args,str(d/name)],check=True)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', '/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330.mp4', '-map', '0:v:0', '-c', 'copy', '/workspace/scratch/0c25025c9e95/tenzorpipe/fixtures/long-330-video_only.mp4']' returned non-zero exit status 183.

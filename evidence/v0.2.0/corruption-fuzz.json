@@ -1,0 +1,1750 @@
+[
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.03",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 472",
+      false,
+      0.20898723602294922
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 472",
+      false,
+      0.05174660682678223
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.08",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1246",
+      false,
+      0.5562524795532227
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1246",
+      false,
+      0.11429357528686523
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.13",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 2019",
+      false,
+      0.9532792568206787
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 2019",
+      false,
+      0.20412635803222656
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.18",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 2793",
+      false,
+      1.202986240386963
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 2793",
+      false,
+      0.2612302303314209
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.23",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 3567",
+      false,
+      1.5453977584838867
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 3567",
+      false,
+      0.3134951591491699
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.28",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 4340",
+      false,
+      1.890578031539917
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 4340",
+      false,
+      0.36782121658325195
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.33",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 5114",
+      false,
+      2.266895294189453
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 5114",
+      false,
+      0.5394530296325684
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.38",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 5888",
+      false,
+      2.650808334350586
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 5888",
+      false,
+      0.558211088180542
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.43",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 6662",
+      false,
+      2.9380013942718506
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 6662",
+      false,
+      0.6176986694335938
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.48",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 7435",
+      false,
+      3.3076846599578857
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 7435",
+      false,
+      0.6492776870727539
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.52",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 8208",
+      false,
+      3.6038577556610107
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 8208",
+      false,
+      0.8103015422821045
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.57",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 8982",
+      false,
+      3.831773281097412
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 8982",
+      false,
+      0.80307936668396
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.62",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 9757",
+      false,
+      4.350396633148193
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 9757",
+      false,
+      0.8923587799072266
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.67",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 10530",
+      false,
+      4.90633749961853
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 10530",
+      false,
+      0.94889235496521
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.72",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 11304",
+      false,
+      4.881362676620483
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 11304",
+      false,
+      1.1123147010803223
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.77",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 12077",
+      false,
+      5.1845011711120605
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 12077",
+      false,
+      1.079667091369629
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.82",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 12851",
+      false,
+      5.3813111782073975
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 12851",
+      false,
+      1.2314791679382324
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.87",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 13625",
+      false,
+      5.9282543659210205
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 13625",
+      false,
+      1.2880017757415771
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.92",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 14399",
+      false,
+      6.15218186378479
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 14399",
+      false,
+      1.2711100578308105
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "flip0.97",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 15173",
+      false,
+      6.555826187133789
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 15173",
+      false,
+      1.2666003704071045
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "trunc0.50",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0022869110107421875
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0022771358489990234
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "trunc0.90",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0017135143280029297
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0031065940856933594
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "long-330-audio_only.mp4",
+    "case": "trunc0.99",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.003916501998901367
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0022499561309814453
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.03",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 50",
+      false,
+      0.03515362739562988
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 50",
+      false,
+      0.015480518341064453
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.08",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 141",
+      false,
+      0.08957481384277344
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 141",
+      false,
+      0.024024248123168945
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.13",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 230",
+      false,
+      0.1329345703125
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 230",
+      false,
+      0.04263901710510254
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.18",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 324",
+      false,
+      0.21799325942993164
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 324",
+      false,
+      0.05080747604370117
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.23",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 419",
+      false,
+      0.24411678314208984
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 419",
+      false,
+      0.0713963508605957
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.28",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 514",
+      false,
+      0.3060159683227539
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 514",
+      false,
+      0.08192849159240723
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.33",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 609",
+      false,
+      0.3871338367462158
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 609",
+      false,
+      0.09112930297851562
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.38",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 703",
+      false,
+      0.407564640045166
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 703",
+      false,
+      0.08183693885803223
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.43",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 797",
+      false,
+      0.4521939754486084
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 797",
+      false,
+      0.09265375137329102
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.48",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 891",
+      false,
+      0.49307703971862793
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 891",
+      false,
+      0.09632658958435059
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.52",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 981",
+      false,
+      0.6016676425933838
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 981",
+      false,
+      0.12271714210510254
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.57",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1074",
+      false,
+      0.585578203201294
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1074",
+      false,
+      0.11730742454528809
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.62",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1166",
+      false,
+      0.6255922317504883
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1166",
+      false,
+      0.12963485717773438
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.67",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1258",
+      false,
+      0.7073779106140137
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1258",
+      false,
+      0.17317628860473633
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.72",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1352",
+      false,
+      0.7227709293365479
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1352",
+      false,
+      0.14709162712097168
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.77",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1446",
+      false,
+      0.7696094512939453
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1446",
+      false,
+      0.18780994415283203
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.82",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1540",
+      false,
+      0.9283106327056885
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1540",
+      false,
+      0.17513203620910645
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.87",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1633",
+      false,
+      0.935807466506958
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1633",
+      false,
+      0.22391176223754883
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.92",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1727",
+      false,
+      0.9658963680267334
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1727",
+      false,
+      0.19632649421691895
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "flip0.97",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1819",
+      false,
+      1.0357325077056885
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1819",
+      false,
+      0.23230910301208496
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "trunc0.50",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.007012605667114258
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.004300117492675781
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "trunc0.90",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0027582645416259766
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.004687070846557617
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "m48-tools.mp4",
+    "case": "trunc0.99",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.002194643020629883
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.003865480422973633
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.03",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 17",
+      false,
+      0.02427363395690918
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 17",
+      false,
+      0.012832403182983398
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.08",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 46",
+      false,
+      0.04442930221557617
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 46",
+      false,
+      0.018368005752563477
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.13",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 74",
+      false,
+      0.07074785232543945
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 74",
+      false,
+      0.03666806221008301
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.18",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 102",
+      false,
+      0.11501789093017578
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 102",
+      false,
+      0.04350018501281738
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.23",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 130",
+      false,
+      0.12032818794250488
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 130",
+      false,
+      0.04272603988647461
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.28",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 158",
+      false,
+      0.14625191688537598
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 158",
+      false,
+      4.884506464004517
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.33",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 186",
+      false,
+      24.918810606002808
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 186",
+      false,
+      0.11741304397583008
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.38",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 214",
+      false,
+      0.21875715255737305
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 214",
+      false,
+      0.0973048210144043
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.43",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 242",
+      false,
+      0.2684805393218994
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 242",
+      false,
+      0.08601212501525879
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.48",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 270",
+      false,
+      0.26876091957092285
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 270",
+      false,
+      0.09065461158752441
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.52",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 298",
+      false,
+      0.28949427604675293
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 298",
+      false,
+      0.08052587509155273
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.57",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 326",
+      false,
+      0.3426632881164551
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 326",
+      false,
+      0.09944033622741699
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.62",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 354",
+      false,
+      0.34572267532348633
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 354",
+      false,
+      0.14068007469177246
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.67",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 382",
+      false,
+      0.36710524559020996
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 382",
+      false,
+      0.1329493522644043
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.72",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 410",
+      false,
+      0.45531630516052246
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 410",
+      false,
+      0.11885547637939453
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.77",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 438",
+      false,
+      0.40090298652648926
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 438",
+      false,
+      0.15818524360656738
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.82",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 466",
+      false,
+      0.40482211112976074
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 466",
+      false,
+      0.12661337852478027
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.87",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 494",
+      false,
+      0.46956634521484375
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 494",
+      false,
+      0.15399718284606934
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.92",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 522",
+      false,
+      0.5268247127532959
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 522",
+      false,
+      0.15752840042114258
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "flip0.97",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 550",
+      false,
+      0.48537111282348633
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 550",
+      false,
+      0.15942907333374023
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "trunc0.50",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.002330780029296875
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.001989603042602539
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "trunc0.90",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.002159595489501953
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0016531944274902344
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "pink-51.mp4",
+    "case": "trunc0.99",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0015921592712402344
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0020818710327148438
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.03",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 39",
+      false,
+      0.06983733177185059
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 39",
+      false,
+      0.04947805404663086
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.08",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 97",
+      false,
+      0.1180715560913086
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 97",
+      false,
+      0.13231182098388672
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.13",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 158",
+      false,
+      0.1615738868713379
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 158",
+      false,
+      0.15875673294067383
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.18",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 216",
+      false,
+      0.3570408821105957
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 216",
+      false,
+      0.2923085689544678
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.23",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 432",
+      false,
+      0.27256178855895996
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 432",
+      false,
+      0.26042747497558594
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.28",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 525",
+      false,
+      0.3259892463684082
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 525",
+      false,
+      0.3133203983306885
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.33",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 400",
+      false,
+      0.465456485748291
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 400",
+      false,
+      0.4965052604675293
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.38",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 459",
+      false,
+      0.5196688175201416
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 459",
+      false,
+      0.4705386161804199
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.43",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 807",
+      false,
+      0.4507606029510498
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 807",
+      false,
+      0.4941258430480957
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.48",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 577",
+      false,
+      0.6606841087341309
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 577",
+      false,
+      0.5559256076812744
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.52",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 994",
+      false,
+      0.5976336002349854
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 994",
+      false,
+      0.6498160362243652
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.57",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1085",
+      false,
+      0.6904022693634033
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1085",
+      false,
+      0.6878349781036377
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.62",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1183",
+      false,
+      0.7994577884674072
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1183",
+      false,
+      0.8088030815124512
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.67",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1273",
+      false,
+      0.8335287570953369
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1273",
+      false,
+      0.7180302143096924
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.72",
+    "old": [
+      0,
+      "5693b6455739ca8224e9490f2a3f8dbcc1faf6998e85e30ba1849f963ec60603",
+      "",
+      false,
+      1.375340223312378
+    ],
+    "new": [
+      0,
+      "5693b6455739ca8224e9490f2a3f8dbcc1faf6998e85e30ba1849f963ec60603",
+      "",
+      false,
+      1.418933391571045
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.77",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1457",
+      false,
+      0.8679389953613281
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1457",
+      false,
+      0.940330982208252
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.82",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1551",
+      false,
+      1.0472731590270996
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1551",
+      false,
+      0.9490654468536377
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.87",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1643",
+      false,
+      1.1401762962341309
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1643",
+      false,
+      0.9336948394775391
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.92",
+    "old": [
+      1,
+      null,
+      "Error: decode AAC sample 1743",
+      false,
+      1.1744365692138672
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode AAC sample 1743",
+      false,
+      1.0852470397949219
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "flip0.97",
+    "old": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 1174",
+      false,
+      1.2733004093170166
+    ],
+    "new": [
+      1,
+      null,
+      "Error: decode OpenH264 access unit 1174",
+      false,
+      1.1607170104980469
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "trunc0.50",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.002293825149536133
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0016965866088867188
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "trunc0.90",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0023813247680664062
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.001756906509399414
+    ],
+    "pass_gate": true
+  },
+  {
+    "file": "av-music.mp4",
+    "case": "trunc0.99",
+    "old": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0021538734436035156
+    ],
+    "new": [
+      1,
+      null,
+      "Error: parse MP4",
+      false,
+      0.0019576549530029297
+    ],
+    "pass_gate": true
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "variant": "single",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/fixtures/long-30.mp4",
+      "-o",
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/single.tenzor",
+      "--video-workers",
+      "1"
+    ],
+    "writable_paths": [
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/single.tenzor"
+    ],
+    "artifact_bytes": 38054554,
+    "intermediate_media_files_bytes": 0,
+    "method": "LD_PRELOAD libc writable-open audit; descendant sentinel self-test passed",
+    "scope": "30-second dynamic-libc process tree; direct syscalls/static binaries can bypass interception; excluded from timing",
+    "strace_status": "Blocked by environment: PTRACE_TRACEME Operation not permitted"
+  },
+  {
+    "variant": "chunked",
+    "command": [
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/target/release/tenzor",
+      "-i",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/fixtures/long-30.mp4",
+      "-o",
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/chunked.tenzor",
+      "--video-workers",
+      "6"
+    ],
+    "writable_paths": [
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/chunked.tenzor"
+    ],
+    "artifact_bytes": 38054554,
+    "intermediate_media_files_bytes": 0,
+    "method": "LD_PRELOAD libc writable-open audit; descendant sentinel self-test passed",
+    "scope": "30-second dynamic-libc process tree; direct syscalls/static binaries can bypass interception; excluded from timing",
+    "strace_status": "Blocked by environment: PTRACE_TRACEME Operation not permitted"
+  },
+  {
+    "variant": "baseline",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/reference/ffmpeg_arrow_baseline.py",
+      "/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/fixtures/long-30.mp4",
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/baseline.tenzor"
+    ],
+    "writable_paths": [
+      "/tmp/tenzor-v020-artifacts/disk-audit-az6nl28r/baseline.tenzor"
+    ],
+    "artifact_bytes": 36898626,
+    "intermediate_media_files_bytes": 0,
+    "method": "LD_PRELOAD libc writable-open audit; descendant sentinel self-test passed",
+    "scope": "30-second dynamic-libc process tree; direct syscalls/static binaries can bypass interception; excluded from timing",
+    "strace_status": "Blocked by environment: PTRACE_TRACEME Operation not permitted"
+  }
+]

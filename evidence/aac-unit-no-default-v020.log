@@ -1,0 +1,115 @@
+   Compiling rusty_aac v0.5.0 (/workspace/scratch/0c25025c9e95/tenzorpipe-v0.2.0/vendor/rusty_aac)
+warning: unused variable: `sr`
+    --> src/encode.rs:4753:21
+     |
+4753 |     fn noise_signal(sr: u32, frames: usize) -> Vec<f32> {
+     |                     ^^ help: if this is intentional, prefix it with an underscore: `_sr`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rusty_aac` (lib test) generated 1 warning (run `cargo fix --lib -p rusty_aac --tests` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.61s
+     Running unittests src/lib.rs (vendor/rusty_aac/target/debug/deps/rusty_aac-24ca2b05aa55580e)
+
+running 98 tests
+test bits::tests::errors_past_end ... ok
+test bits::tests::reads_bits_msb_first ... ok
+test codebook::tests::book11_applies_escape_to_max_magnitude ... ok
+test codebook::tests::metadata_matches_spec ... ok
+test codebook::tests::escape_with_leading_ones ... ok
+test bits::tests::skip_and_align ... ok
+test codebook::tests::real_codebook1_decodes_codewords ... ok
+test codebook::tests::signed_pair_offsets_by_lav ... ok
+test codebook::tests::unsigned_pair_reads_sign_bits ... ok
+test decode::tests::scalefactors_accumulate_from_global_gain ... ok
+test dsp::tests::kbd_window_satisfies_princen_bradley ... ok
+test decode::tests::section_and_scalefactors_parse ... ok
+test dsp::tests::sine_window_satisfies_princen_bradley ... ok
+test dsp::tests::dequant_matches_spec_curve ... ok
+test bits::tests::fast_read_bits_matches_bitwise_reads_everywhere ... ok
+test dsp::tests::mdct_imdct_overlap_add_perfectly_reconstructs ... ok
+test dsp::tests::sf_gain_is_quarter_db_steps ... ok
+test encode::multichannel::element_plan_matches_iso_table ... ok
+test encode::multichannel::unsupported_channel_counts_are_rejected ... ok
+test dsp::tests::table_dequant_and_gain_are_bit_identical_to_formulas ... ok
+test encode::rung0::auto_gate_dispatches_both_ways ... ok
+test decode::tests::hand_built_frame_matches_independent_imdct ... ok
+test encode::rung0::shape_sine_is_byte_identical ... ok
+test encode::rung0::tdac_holds_across_every_shape_transition ... ok
+test encode::rung0::default_config_is_the_sine_arm ... ok
+test encode::rung123::a2_smr_varies_with_tonality ... ok
+test encode::rung123::a3_parcor_quantization_matches_the_decoder ... ok
+test encode::rung123::a2_changes_and_round_trips ... ok
+test dsp::tests::mdct_fast_matches_direct ... ok
+test encode::rung123::a1_short_block_psy_changes_and_round_trips ... ok
+test encode::rung_a6::a6_declines_on_tonal_content ... ok
+test encode::multichannel::element_sequence_matches_iso_table ... ok
+test encode::rung0::every_arm_round_trips ... ok
+test encode::rung_a6::a6_yields_to_tns ... ok
+test encode::rung123::a3_tns_actually_engages ... ok
+test encode::rung_a6::a6_off_is_byte_identical ... ok
+test encode::rung123::a3_tns_inverts_exactly ... ok
+test encode::tests::adts_header_roundtrips ... ok
+test encode::tests::audio_specific_config_roundtrips ... ok
+test encode::tests::avx512_trunc_identity_matches_round_clamp ... ok
+test encode::tests::bitwriter_msb_first ... ok
+test encode::tests::emit_aac_for_external_check ... ignored, writes an .aac for external ffmpeg validation; run explicitly
+test encode::tests::emit_stereo_aac_for_external_check ... ignored, writes an .aac for external ffmpeg validation; run explicitly
+test encode::tests::emit_transient_aac_for_external_check ... ignored, writes an .aac for external ffmpeg validation; run explicitly
+test encode::multichannel::supported_channel_counts_round_trip ... ok
+test encode::rung_a6::a6_fires_on_noise_and_round_trips ... ok
+test encode::tests::ics_info_short_grouping_roundtrips ... ok
+test encode::tests::ics_info_long_reencodes_bit_exact ... ok
+test encode::rung123::every_arm_off_is_byte_identical ... ok
+test encode::tests::profile_encode_hotpath ... ignored, profiling; run with --ignored --nocapture
+test encode::tests::psy_model_shapes_noise_below_flat ... ok
+test encode::tests::long_filterbank_reconstructs_via_decoder_math ... ok
+test encode::rung_a7::a7_declines_on_wide_stereo ... ok
+test encode::tests::short_block_sequence_reconstructs_via_decoder_math ... ok
+test encode::tests::spectral_encode_roundtrips_through_decoder ... ok
+test encode::rung_a7::a7_off_is_byte_identical ... ok
+test encode::tests::transient_is_detected ... ok
+test encode::tests::window_sequences_are_valid ... ok
+test huffman::tests::decodes_prefix_free_sequence ... ok
+test huffman::tests::structural_helpers ... ok
+test encode::tests::transient_encodes_short_and_decodes ... ok
+test ics::tests::parses_eight_short_all_grouped ... ok
+test ics::tests::parses_eight_short_split_groups ... ok
+test ics::tests::parses_only_long ... ok
+test ics::tests::rejects_prediction ... ok
+test latm::tests::finds_sync_after_garbage ... ok
+test encode::tests::stereo_ms_roundtrips_mono_content ... ok
+test latm::tests::payload_length_escape_is_exact ... ok
+test latm::tests::reader_carries_config_across_frames ... ok
+test latm::tests::loas_round_trips ... ok
+test latm::tests::truncated_frame_returns_again ... ok
+test latm::tests::unsupported_mux_shapes_are_refused ... ok
+test sbr::tests::backward_compatible_ps_signalling ... ok
+test sbr::tests::backward_compatible_signalling ... ok
+test sbr::tests::decoder_reports_he_aac_output_rate ... ok
+test sbr::tests::detects_sbr_fill_payload ... ok
+test sbr::tests::explicit_hierarchical_he_aac_v1 ... ok
+test sbr::tests::explicit_hierarchical_he_aac_v2 ... ok
+test sbr::tests::plain_aac_lc_has_no_sbr ... ok
+test encode::rung_a7::a7_fires_and_round_trips ... ok
+test sbr::tests::sbr_without_explicit_rate_doubles ... ok
+test swb::tests::all_long_tables_well_formed ... ok
+test swb::tests::all_short_tables_well_formed ... ok
+test swb::tests::known_band_counts ... ok
+test tables::tests::codebooks_are_structurally_valid ... ok
+test tests::adts_header_parses ... ok
+test tests::adts_stream_decodes_via_stream_decoder ... ok
+test tests::asc_mono_48000 ... ok
+test tests::asc_stereo_44100_aac_lc ... ok
+test tests::is_adts_detects_syncword ... ok
+test tests::sample_rate_table ... ok
+test sbr::tests::plain_aac_still_decodes_through_the_new_path ... ok
+test encode::tests::encodes_and_decodes_recognizable_tone ... ok
+test latm::tests::real_aac_survives_loas_carriage ... ok
+test encode::tests::stereo_direct_decode_amplitude ... ok
+test encode::multichannel::channel_order_survives_the_round_trip ... ok
+test encode::tests::rate_loop_respects_bitrate ... ok
+test huffman::tests::table_decode_matches_scan_for_every_book_on_random_and_truncated_streams ... ok
+
+test result: ok. 94 passed; 0 failed; 4 ignored; 0 measured; 0 filtered out; finished in 1.51s
+

@@ -1,0 +1,49 @@
+[package]
+name = "tenzor-pipe"
+version = "0.2.0"
+edition = "2024"
+description = "High-throughput media-to-tensor preprocessing engine for multimodal AI"
+license = "BUSL-1.1"
+publish = false
+
+[[bin]]
+name = "tenzor"
+path = "src/main.rs"
+
+[features]
+experimental-decoder-threads = []
+
+[dependencies]
+anyhow = "1.0"
+crossbeam-channel = "0.5"
+clap = { version = "4.5", features = ["derive"] }
+rusty_aac = { version = "0.5", default-features = false }
+hound = "3.5.1"
+rustfft = "6"
+rayon = "1.10"
+mp4io = "0.1.2"
+rust_h264 = { version = "0.4", features = ["dev-internals"] }
+openh264 = { version = "0.9", default-features = false, features = ["source"] }
+arrow = { version = "60", default-features = false, features = ["ipc"] }
+memmap2 = "0.9"
+
+[profile.release]
+opt-level = 3
+lto = false # Avoid observed Rust 1.98.1 ThinLTO unresolved-symbol link failures.
+codegen-units = 1
+panic = "unwind" # Join and report worker panics; ordinary errors clean partial output.
+strip = true
+
+[patch.crates-io]
+openh264 = { path = "vendor/openh264" }
+rusty_aac = { path = "vendor/rusty_aac" }
+rust_h264 = { path = "vendor/rust_h264" }
+
+# Keep verification builds small and avoid excessive parallel object-file writes.
+[profile.dev]
+debug = 0
+codegen-units = 1
+
+[profile.test]
+debug = 0
+codegen-units = 1

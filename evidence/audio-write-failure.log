@@ -1,0 +1,13 @@
+PASS audio-only.mp4 threaded
+PASS audio-only.mp4 inline
+PASS audio-only.mp4 N4
+PASS audio-only.mp4 sequential
+PASS high-bframes.mp4 threaded
+PASS high-bframes.mp4 inline
+PASS high-bframes.mp4 N4
+PASS high-bframes.mp4 sequential
+PASS wav-48000-2ch.wav threaded
+PASS wav-48000-2ch.wav inline
+PASS wav-48000-2ch.wav N4
+PASS wav-48000-2ch.wav sequential
+PASS 12 paired write-failure cases

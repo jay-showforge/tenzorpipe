@@ -1,0 +1,397 @@
+PASS gen-720-g45.mp4 --resolution 224  rc 0 0  | 
+PASS gen-720-g45.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS gen-720-g45.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS gen-720-g45.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS gen-720-g45.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS gen-720-g45.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS gen-720-g45.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS gen-720-g45.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS gen-720-g45.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS gen-720-g45.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 224  rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS gen-baseline-g12.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS gen-baseline-g12.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS gen-baseline-g12.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS gen-baseline-g12.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS gen-baseline-g12.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS gen-baseline-g12.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS gen-baseline-g12.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 224  rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS gen-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS gen-open-gop.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS gen-open-gop.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS gen-open-gop.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS gen-open-gop.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS gen-open-gop.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS gen-open-gop.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 224  rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS aac-6ch.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS aac-6ch.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS aac-6ch.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS aac-6ch.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS aac-6ch.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS aac-6ch.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS aac-6ch.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS audio-only.mp4 --resolution 224  rc 0 0  | 
+PASS audio-only.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS audio-only.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS audio-only.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS audio-only.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS audio-only.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS audio-only.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS audio-only.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS audio-only.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS audio-only.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS baseline720.mp4 --resolution 224  rc 0 0  | 
+PASS baseline720.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS baseline720.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS baseline720.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS baseline720.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS baseline720.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS baseline720.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS baseline720.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS baseline720.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS baseline720.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS color709.mp4 --resolution 224  rc 0 0  | 
+PASS color709.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS color709.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS color709.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS color709.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS color709.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS color709.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS color709.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS color709.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS color709.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS corrupt-nal.mp4 --resolution 224  rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --resolution 224 --no-audio-decode-thread rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --resolution 224 --video-workers 2 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --window-sec 0.05 --batch-epochs 7  rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --execution sequential --window-sec 1.0  rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt-nal.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS corrupt.mp4 --resolution 224  rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --resolution 224 --no-audio-decode-thread rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --resolution 224 --video-workers 2 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --window-sec 0.05 --batch-epochs 7  rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --execution sequential --window-sec 1.0  rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS corrupt.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS dual-audio-tail.mp4 --resolution 224  rc 0 0  | 
+PASS dual-audio-tail.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-audio-tail.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-audio-tail.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-audio-tail.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-audio-tail.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-audio-tail.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-audio-tail.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-audio-tail.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-audio-tail.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-audio-tail.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-audio-tail.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS dual-idr.mp4 --resolution 224  rc 0 0  | 
+PASS dual-idr.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-idr.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-idr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-idr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-idr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-idr.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-idr.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-idr.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-idr.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-idr.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-idr.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 224  rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-off-grid.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-off-grid.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-off-grid.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-off-grid.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-off-grid.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-off-grid.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-off-grid.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 224  rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-open-gop.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-open-gop.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-open-gop.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-open-gop.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-open-gop.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-open-gop.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-open-gop.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 224  rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-sparse.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-sparse.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-sparse.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-sparse.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-sparse.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-sparse.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 224  rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS dual-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS dual-vfr.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS dual-vfr.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS dual-vfr.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS dual-vfr.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS dual-vfr.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS dual-vfr.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS empty.mp4 --resolution 224  rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --resolution 224 --no-audio-decode-thread rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --resolution 224 --video-workers 2 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --window-sec 0.05 --batch-epochs 7  rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --execution sequential --window-sec 1.0  rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 1 1 Error: input file is empty | Error: input file is empty
+PASS empty.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS fixture-h264-aac.mp4 --resolution 224  rc 0 0  | 
+PASS fixture-h264-aac.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS fixture-h264-aac.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS fixture-h264-aac.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS fixture-h264-aac.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS fixture-h264-aac.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS fixture-h264-aac.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS fixture-h264-aac.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS fixture-h264-aac.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS fixture-h264-aac.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS fixture.wav --resolution 224  rc 0 0  | 
+PASS fixture.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS fixture.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS fixture.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS fixture.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS fixture.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS fixture.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS fixture.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS fixture.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS fixture.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS fixture.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS fixture.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS fullrange.mp4 --resolution 224  rc 0 0  | 
+PASS fullrange.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS fullrange.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS fullrange.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS fullrange.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS fullrange.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS fullrange.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS fullrange.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS fullrange.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS fullrange.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS high-bframes.mp4 --resolution 224  rc 0 0  | 
+PASS high-bframes.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS high-bframes.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS high-bframes.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS high-bframes.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS high-bframes.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS high-bframes.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS high-bframes.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS high-bframes.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS high-bframes.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS long-30.mp4 --resolution 224  rc 0 0  | 
+PASS long-30.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS long-30.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS long-30.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS long-30.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS long-30.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS long-30.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS long-30.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS long-30.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS long-30.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 224  rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS selection-sparse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS selection-sparse.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS selection-sparse.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS selection-sparse.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS selection-sparse.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS selection-sparse.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS selection-sparse.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 224  rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS selection-vfr.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS selection-vfr.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS selection-vfr.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS selection-vfr.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS selection-vfr.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS selection-vfr.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS selection-vfr.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS short.mp4 --resolution 224  rc 0 0  | 
+PASS short.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS short.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS short.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS short.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS short.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS short.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS short.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS short.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS short.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS silent-video.mp4 --resolution 224  rc 0 0  | 
+PASS silent-video.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS silent-video.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS silent-video.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS silent-video.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS silent-video.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS silent-video.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS silent-video.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS silent-video.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS silent-video.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 224  rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 224 --video-workers 2 rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS sync-pulse.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS sync-pulse.mp4 --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS sync-pulse.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS sync-pulse.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS sync-pulse.mp4 --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS sync-pulse.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS sync-pulse.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS tiny.wav --resolution 224  rc 0 0  | 
+PASS tiny.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS tiny.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS tiny.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS tiny.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS tiny.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS tiny.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS tiny.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS tiny.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS tiny.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS tiny.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS tiny.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS unsupported-mpeg4.mp4 --resolution 224  rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --resolution 224 --no-audio-decode-thread rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --resolution 224 --video-workers 2 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --window-sec 0.05 --batch-epochs 7  rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --execution sequential --window-sec 1.0  rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported-mpeg4.mp4 --execution sequential --window-sec 1.0 --video-workers 2 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS unsupported.mp3 --resolution 224  rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --resolution 224 --no-audio-decode-thread rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --resolution 224 --video-workers 2 rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --window-sec 0.05 --batch-epochs 7  rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --execution sequential --window-sec 1.0  rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS unsupported.mp3 --execution sequential --window-sec 1.0 --video-workers 2 rc 1 1 Error: unsupported extension 'mp3'; supports only  | Error: unsupported extension 'mp3'; supports only 
+PASS wav-16000-1ch.wav --resolution 224  rc 0 0  | 
+PASS wav-16000-1ch.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS wav-16000-1ch.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS wav-16000-1ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS wav-16000-1ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS wav-16000-1ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS wav-16000-1ch.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS wav-16000-1ch.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS wav-16000-1ch.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS wav-16000-1ch.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS wav-16000-1ch.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS wav-16000-1ch.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 224  rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS wav-44100-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS wav-44100-2ch.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS wav-44100-2ch.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS wav-44100-2ch.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS wav-44100-2ch.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS wav-44100-2ch.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS wav-44100-2ch.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 224  rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-2ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS wav-48000-2ch.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS wav-48000-2ch.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-2ch.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS wav-48000-2ch.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS wav-48000-2ch.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-2ch.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 224  rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 224 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 224 --video-workers 2 rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2  rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-6ch.wav --resolution 160 --window-sec 0.33 --batch-epochs 2 --video-workers 2 rc 0 0  | 
+PASS wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 7  rc 0 0  | 
+PASS wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 7 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 7 --video-workers 2 rc 0 0  | 
+PASS wav-48000-6ch.wav --execution sequential --window-sec 1.0  rc 0 0  | 
+PASS wav-48000-6ch.wav --execution sequential --window-sec 1.0 --no-audio-decode-thread rc 0 0  | 
+PASS wav-48000-6ch.wav --execution sequential --window-sec 1.0 --video-workers 2 rc 0 0  | 
+TOTAL 396 FAIL 0 SUCCESS_ARTIFACTS 336 ERROR_AGREEMENTS 60

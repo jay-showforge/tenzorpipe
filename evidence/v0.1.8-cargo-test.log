@@ -1,0 +1,30 @@
+    Finished `release` profile [optimized] target(s) in 0.07s
+     Running unittests src/main.rs (target/release/deps/tenzor-a2c16bc771a66267)
+
+running 23 tests
+test audio::tests::downmix_channels ... ok
+test audio::tests::mel_bank_covers_frequency_range ... ok
+test audio::tests::short_final_window_is_analyzed_and_silence_is_floor ... ok
+test audio::tests::sinc_antialias_and_gain ... ok
+test audio::aac_transform_tests::fast_imdct_matches_direct_sum_for_long_short_dense_and_sparse_spectra ... ok
+test concurrency::tests::byte_budget_scales_with_resolution_and_rendezvous ... ok
+test concurrency::tests::cancellation_wakes_blocked_receiver ... ok
+test audio::tests::streaming_sinc_matches_whole_signal_across_boundaries ... ok
+test concurrency::tests::full_and_rendezvous_queues_cancel_without_deadlock ... ok
+test video::avcc_tests::converts_one_two_and_four_byte_lengths ... ok
+test video::avcc_tests::rejects_truncated_zero_and_invalid_nals ... ok
+test video::tests::neutral_black_yuv_is_near_black_rgb ... ok
+test video::tests::presentation_lookahead_orders_b_frames_with_bounded_memory ... ok
+test video::tests::presentation_lookahead_rejects_excessive_reordering_and_parse_errors ... ok
+test concurrency::tests::worker_and_collector_panics_join_without_deadlock ... ok
+test video::tests::selection_matches_legacy_midpoints_gaps_ties_and_tail ... ok
+test video::tests::thirty_fps_selects_exactly_two_pictures_per_second ... ok
+test video_parallel::tests::chunks_cut_only_at_idr_with_clean_presentation_boundary ... ok
+test video_parallel::tests::chunked_selection_matches_streaming_selection ... ok
+test video_parallel::tests::first_vcl_idr_detection ... ok
+test video_parallel::tests::external_cancellation_stops_workers ... ok
+test video_parallel::tests::ordered_map_failures_and_panics_do_not_deadlock ... ok
+test video_parallel::tests::ordered_map_preserves_order_and_bounds_window ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+

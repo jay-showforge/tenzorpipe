@@ -1,0 +1,345 @@
+{
+  "artifacts": [
+    {
+      "name": "tenzor-330-b32-audio-thread-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-audio-inline-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-old-audio-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "baseline-330-b32-baseline-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "0554e4a0e57fb3ede09b5fe1d503bbe0091c28f52376f8365113c3304cdf46f2",
+        "audio_mel_tensor": "c8c50350fd83d3db00b86d9855e3ef7f8119a504c482bb9fb7a34bcc9d7a1363"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N8-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N6-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N4-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      },
+      "selected_long_visual": [
+        {
+          "epoch": 0,
+          "source_frame": 0,
+          "type": "I",
+          "mae_255": 0.0,
+          "p99_255": 0.0
+        },
+        {
+          "epoch": 1,
+          "source_frame": 4950,
+          "type": "B",
+          "mae_255": 0.19811715185642242,
+          "p99_255": 5.939479827880859
+        },
+        {
+          "epoch": 2,
+          "source_frame": 9885,
+          "type": "B",
+          "mae_255": 0.23191998898983002,
+          "p99_255": 7.375278949737549
+        }
+      ]
+    },
+    {
+      "name": "tenzor-330-b32-N3-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N2-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N1-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-old-N2-r1",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N1-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N2-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N3-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N4-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N6-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-N8-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-audio-thread-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-audio-inline-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-old-audio-profile-r6",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b2-N4-batch2-r7",
+      "epochs": 660,
+      "batches": 330,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b64-N4-batch64-r7",
+      "epochs": 660,
+      "batches": 11,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "f5479f10f9d89a7ef91ade41e13620a7ccc44dd8efaa06196baddead2b8d31e5",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "198905bb84f8788ccd8d09f66a48bd5da444cabbc2db86fadb96788d64673240"
+      }
+    },
+    {
+      "name": "tenzor-330-b32-video-N4-r8",
+      "epochs": 660,
+      "batches": 21,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "audio_valid_frames": "569cfdcf139f915b2f1dabdfbc86320ec1c7d54e28c12a93132dae8ef4f91c83",
+        "video_timestamp_ms": "7ed9bd3de62223d6e1da15d1d47568e6a2f456e69781528485f70621cd59307a",
+        "video_tensor": "efc746e4d729e8e632e306a4d42d89654ebdd668a708500e33cba5fc460e0013",
+        "audio_mel_tensor": "6f01995e371c0cbe917978dbaff3c7e4a7dd3ab104369946a93a0d18d90e8877"
+      }
+    },
+    {
+      "name": "tenzor-30-b32-N4-short-r9",
+      "epochs": 60,
+      "batches": 2,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "audio_valid_frames": "70748a4ce6534be4a744c08fbe04b3c0efc003836e2b79fde43b1f68e5f4f6b0",
+        "video_timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "video_tensor": "4bd1ac973bc12a8be858a564f1ea0358b90b8b114ef8e653792a7a1817102839",
+        "audio_mel_tensor": "fee36f690fa09296424347fdd788fb565fb8e270d00b570efb27e944b0cde99f"
+      }
+    },
+    {
+      "name": "baseline-30-b32-baseline-short-r9",
+      "epochs": 60,
+      "batches": 2,
+      "all_finite": true,
+      "tensor_hashes": {
+        "timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "audio_valid_frames": "70748a4ce6534be4a744c08fbe04b3c0efc003836e2b79fde43b1f68e5f4f6b0",
+        "video_timestamp_ms": "42d7cfb55632c06d33dc2b2e7edff257c6beba617984fefb0fd721a9be6ba887",
+        "video_tensor": "f248079c8053020b70dfcf1ab1fe684ac075c6cac6852f17c5d725ba65af2611",
+        "audio_mel_tensor": "07624e0d41198cba49f930c69506f75adae257d8158d0aa5ab337143ab2213ee"
+      }
+    }
+  ],
+  "all_long_batch_sizes_identical": true,
+  "baseline_visual_max_abs_normalized": 1.2055132389068604,
+  "baseline_worst_frame_mae_255": 0.2957168221473694,
+  "baseline_min_frame_psnr_db": 37.43984603881836,
+  "baseline_active_audio_logmel_mae": 8.110925771694598e-05
+}

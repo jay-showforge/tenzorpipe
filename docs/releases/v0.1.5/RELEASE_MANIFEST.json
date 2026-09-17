@@ -1,0 +1,23 @@
+{
+  "version": "0.1.5",
+  "binary": "bin/tenzor-linux-x86_64",
+  "binary_sha256": "ad8f8cdf7df93b3be2da5a6c5098196051c41a44f1784aadfdcb65da64dc249d",
+  "unit_tests_passed": 13,
+  "media_cases_passed": 16,
+  "failure_cases_passed": 12,
+  "exact_old_new_regression_cases": 41,
+  "main_measured_runs": 12,
+  "paired_measured_runs": 4,
+  "extended_memory_measured_runs": 1,
+  "benchmark_values_verified": true,
+  "license_check": "PASS",
+  "platform": "Linux x86-64",
+  "reports": [
+    "TEST_REPORT.md",
+    "BENCHMARK_REPORT.md",
+    "BUILD_STATUS.md",
+    "DEPENDENCY_POLICY.md",
+    "EPOCH_SELECTION_REPORT.md"
+  ],
+  "long_fixtures": "Regenerate with scripts/generate_matrix.py --long --extended-memory and scripts/benchmark_epoch_memory.py"
+}

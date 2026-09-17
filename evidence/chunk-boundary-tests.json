@@ -1,0 +1,897 @@
+{
+  "binary_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77",
+  "old_binary_sha256": "0e1a46ca8e67d872ac95d46b6541a283737d34dda6f27aaadaf6d9e6ad93f2d7",
+  "cases": [
+    {
+      "name": "dual-idr.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=12288000 bound_bytes=36864000",
+        "split_sample": 40
+      },
+      "profile": {
+        "wall_seconds": 0.082115982,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.006175374,
+          "video_parse": 0.000360276,
+          "video_decode": 0.051169457,
+          "video_resize": 0.037571124,
+          "audio_source": 0.011760036,
+          "audio_resample": 0.008643845,
+          "audio_mel": 0.005145307,
+          "arrow_pack": 0.001872234,
+          "arrow_write": 0.004284118,
+          "worker_send_wait": 0.079476061,
+          "collector_receive_wait": 0.06875097,
+          "final_sync": 3.064e-06,
+          "video_window_wait": 8.82e-07,
+          "video_reorder_wait": 0.045009707,
+          "audio_source_wait": 0.003060202
+        }
+      },
+      "logical_columns": {
+        "rows": 83,
+        "columns": {
+          "timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "audio_valid_frames": "e87b1aa93a250abbddf3124657fe8998b101b43a13fd0ad6a190aafd9d028f9c",
+          "video_timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "video_tensor": "af3e477c8927d3ec18b08069cf672fd1b34c3e9e7fe66bc9c22310e022404c93",
+          "audio_mel_tensor": "01c3dda0fb26ee837432714935feeeb7a8040393ed795ca3e0692f8702307953"
+        }
+      }
+    },
+    {
+      "name": "dual-idr.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4214784 bound_bytes=12644352",
+        "split_sample": 40
+      },
+      "profile": {
+        "wall_seconds": 0.041140149,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004310658,
+          "video_parse": 0.000280626,
+          "video_decode": 0.040460118,
+          "video_resize": 0.008801527,
+          "audio_source": 0.010268456,
+          "audio_resample": 0.007836362,
+          "audio_mel": 0.005081934,
+          "arrow_pack": 0.002142773,
+          "arrow_write": 0.001609228,
+          "worker_send_wait": 0.026639429,
+          "collector_receive_wait": 0.032215885,
+          "final_sync": 3.074e-06,
+          "video_window_wait": 9.11e-07,
+          "video_reorder_wait": 0.026933515,
+          "audio_source_wait": 0.001834888
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "a1d5bb5877283bae220d16e9da877b5531b5124068e7bde8276fa1bc0bba58a1",
+          "audio_valid_frames": "77d0fd1980804b86d71da795524b22249bd03566136b241708b3b5bb5eb976db",
+          "video_timestamp_ms": "d6c2d2731f18132055c116b24908254f1f9a22ce1a1f7bc8218046ece64133b4",
+          "video_tensor": "4338939b0afe97aa4c3237a2d24ae6c401e0ada762ccb5bb98a992500addb7bb",
+          "audio_mel_tensor": "67f1bd00b9913475ce4aa4f4ae2f2f5625582f2e0fc5a26249ebf5622c653d42"
+        }
+      }
+    },
+    {
+      "name": "dual-idr.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=5419008 bound_bytes=16257024",
+        "split_sample": 40
+      },
+      "profile": {
+        "wall_seconds": 0.054606191,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004680566,
+          "video_parse": 0.000295124,
+          "video_decode": 0.056522188,
+          "video_resize": 0.014528131,
+          "audio_source": 0.016232494,
+          "audio_resample": 0.011580974,
+          "audio_mel": 0.00561101,
+          "arrow_pack": 0.003216598,
+          "arrow_write": 0.006843383,
+          "worker_send_wait": 0.034484225,
+          "collector_receive_wait": 0.039519004,
+          "final_sync": 2.714e-06,
+          "video_window_wait": 1.101e-06,
+          "video_reorder_wait": 0.036416949,
+          "audio_source_wait": 0.002708592
+        }
+      },
+      "logical_columns": {
+        "rows": 9,
+        "columns": {
+          "timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "audio_valid_frames": "cf9ad5cdabfef3d2c93b1740feb2f693a0bc671fe91a8986fa7edee8743fe5a2",
+          "video_timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "video_tensor": "fff9dbbd98948533a763deb62db77abff1a0695920854cfc0b8fb371de452306",
+          "audio_mel_tensor": "a0956304103488b5d2c97faae7337dc354422bb6e8953fd7c9e903252d393b6e"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=15360000 bound_bytes=46080000"
+      },
+      "profile": {
+        "wall_seconds": 0.309616573,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004743992,
+          "video_parse": 0.000385877,
+          "video_decode": 0.109982893,
+          "video_resize": 0.077394584,
+          "audio_source": 0.021762902,
+          "audio_resample": 0.013118753,
+          "audio_mel": 0.007462966,
+          "arrow_pack": 0.008052449,
+          "arrow_write": 0.018718165,
+          "worker_send_wait": 0.443601779,
+          "collector_receive_wait": 0.276810914,
+          "final_sync": 2.744e-06,
+          "video_window_wait": 8e-07,
+          "video_reorder_wait": 0.092913096,
+          "audio_source_wait": 0.008437603
+        }
+      },
+      "logical_columns": {
+        "rows": 105,
+        "columns": {
+          "timestamp_ms": "e58c6bad08e32d15f51d3bfa978bcd255ba9a1ae1a98e15eab49b77d1a4d9ae8",
+          "audio_valid_frames": "a11e2deb62c7496d7ef7e3055a74c1789158ac1a941b671ce9dec91cced630a1",
+          "video_timestamp_ms": "c277863a082c0d971a007b669fb31bcc3b06aa2583e5a1aec41498a47df6c866",
+          "video_tensor": "ca5dcdbb49d64722ef29f475d14ee73d9cc1157d657123e61cd8d908ae989e5e",
+          "audio_mel_tensor": "f8aa948c4ed6210549db145f82f140af0fd6837e9b196a66a0950f3786b1e205"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4816896 bound_bytes=14450688"
+      },
+      "profile": {
+        "wall_seconds": 0.056199314,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004469839,
+          "video_parse": 0.000457315,
+          "video_decode": 0.069564198,
+          "video_resize": 0.010050857,
+          "audio_source": 0.014517385,
+          "audio_resample": 0.009113971,
+          "audio_mel": 0.006301967,
+          "arrow_pack": 0.001992128,
+          "arrow_write": 0.00197437,
+          "worker_send_wait": 0.041123358,
+          "collector_receive_wait": 0.047009146,
+          "final_sync": 3.826e-06,
+          "video_window_wait": 8.52e-07,
+          "video_reorder_wait": 0.039328441,
+          "audio_source_wait": 0.001415089
+        }
+      },
+      "logical_columns": {
+        "rows": 16,
+        "columns": {
+          "timestamp_ms": "42e64bd733519e8c64b09e546e9a8aa3a0a04b02d819feadc6b051c4363db168",
+          "audio_valid_frames": "5e25b3aa50996c24135c0e041e9b315efb4a617bc9cf0bd099b612be75b10e2e",
+          "video_timestamp_ms": "916568894de7de0d7bfd9f503a24bd9372287af63aef2f1a3796429b4fa9b695",
+          "video_tensor": "a163ba80ed7ba983f7313fab30b32d9a892e46f410b74708a2ecb1f4c7965f63",
+          "audio_mel_tensor": "1363ae298ff4394de4ca53663c37feddef49e3b45077736f19238d616823e3a6"
+        }
+      }
+    },
+    {
+      "name": "dual-off-grid.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=6773760 bound_bytes=20321280"
+      },
+      "profile": {
+        "wall_seconds": 0.060776013,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.005902712,
+          "video_parse": 0.000381448,
+          "video_decode": 0.063196216,
+          "video_resize": 0.015572712,
+          "audio_source": 0.011714926,
+          "audio_resample": 0.009099095,
+          "audio_mel": 0.00641176,
+          "arrow_pack": 0.003916913,
+          "arrow_write": 0.009567628,
+          "worker_send_wait": 0.045991763,
+          "collector_receive_wait": 0.040856017,
+          "final_sync": 3.154e-06,
+          "video_window_wait": 1.894e-06,
+          "video_reorder_wait": 0.0387588,
+          "audio_source_wait": 0.001529956
+        }
+      },
+      "logical_columns": {
+        "rows": 11,
+        "columns": {
+          "timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "audio_valid_frames": "818b53868a06f13fc899a51ba21120fc594681b7ef58a7a00464e5435891f74c",
+          "video_timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "video_tensor": "ba99e3ff4a81c446793f4ef68ae9130d656d7672fa3a136239e85cf40002d21e",
+          "audio_mel_tensor": "5bab9fcc8c7ff7806ad925639691df2fb564ada0df999b6163a34065d0437659"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=12288000 bound_bytes=36864000"
+      },
+      "profile": {
+        "wall_seconds": 0.074426844,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004540255,
+          "video_parse": 0.000276965,
+          "video_decode": 0.045117543,
+          "video_resize": 0.029502467,
+          "audio_source": 0.01985122,
+          "audio_resample": 0.012921615,
+          "audio_mel": 0.010469153,
+          "arrow_pack": 0.002438175,
+          "arrow_write": 0.00974925,
+          "worker_send_wait": 0.071426461,
+          "collector_receive_wait": 0.055867204,
+          "final_sync": 2.814e-06,
+          "video_window_wait": 5.81e-07,
+          "video_reorder_wait": 0.033672752,
+          "audio_source_wait": 0.002338166
+        }
+      },
+      "logical_columns": {
+        "rows": 126,
+        "columns": {
+          "timestamp_ms": "2b6e01e8387098646c486e1f5475fca2f85440c52659468e33b5b3e592dfbb06",
+          "audio_valid_frames": "92c3b2656c2f240331a1b576ca4d3c7b99671c3ddfa6a7ca5107e3a07a782f55",
+          "video_timestamp_ms": "3246750f739c47bb9a30f7d1f8a1a6eb9bf7092044349719f0e13b82e2da84a4",
+          "video_tensor": "553714c00b6328059dc0a85c08248436bc14294f5c8c322d7e42c0271d40c966",
+          "audio_mel_tensor": "7024ee74f30a2ec387ec2231d4bc9afd59b25636b45216024cd6f2f4cc36b080"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=4214784 bound_bytes=12644352"
+      },
+      "profile": {
+        "wall_seconds": 0.057969937,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004531252,
+          "video_parse": 0.000278661,
+          "video_decode": 0.047699614,
+          "video_resize": 0.01165664,
+          "audio_source": 0.017793284,
+          "audio_resample": 0.013196039,
+          "audio_mel": 0.007899208,
+          "arrow_pack": 0.001923893,
+          "arrow_write": 0.001677419,
+          "worker_send_wait": 0.04536466,
+          "collector_receive_wait": 0.049288369,
+          "final_sync": 3.645e-06,
+          "video_window_wait": 5.7e-07,
+          "video_reorder_wait": 0.030826114,
+          "audio_source_wait": 0.002595961
+        }
+      },
+      "logical_columns": {
+        "rows": 19,
+        "columns": {
+          "timestamp_ms": "a23517c39ad21e8a25ae93c044f3fb59e923333ca86a82d8501882b56f3fca34",
+          "audio_valid_frames": "31720d8fe364da72ae2f0e0f68f2ffcdf3ced207009d56bd807fa2a68845a331",
+          "video_timestamp_ms": "6a27eed8119089b0c81da66c517724c26a8b53febe37fefe61659548b7e12d0e",
+          "video_tensor": "ba614cf97b66728cc4ad57fe962d926ccf0db69858881fc03058bd34d845684b",
+          "audio_mel_tensor": "b6865321b8a53e6216053454efc750f4009ea842a768180c993720f4e3b4d982"
+        }
+      }
+    },
+    {
+      "name": "dual-audio-tail.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=5419008 bound_bytes=16257024"
+      },
+      "profile": {
+        "wall_seconds": 0.054388388,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004372432,
+          "video_parse": 0.000301506,
+          "video_decode": 0.040259306,
+          "video_resize": 0.012772484,
+          "audio_source": 0.022672197,
+          "audio_resample": 0.010706101,
+          "audio_mel": 0.007381516,
+          "arrow_pack": 0.004940538,
+          "arrow_write": 0.00290754,
+          "worker_send_wait": 0.034986405,
+          "collector_receive_wait": 0.040711889,
+          "final_sync": 3.095e-06,
+          "video_window_wait": 4.2e-07,
+          "video_reorder_wait": 0.027280449,
+          "audio_source_wait": 0.008722484
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "16f43e0848394d15e7a194dfad82374c9d88408a78ad25458927a7582511b8a3",
+          "audio_valid_frames": "3eacdcedcde830ff2419b53c713c5fd4521ad1ab588e12767080fff2e759141b",
+          "video_timestamp_ms": "5ae1bb443cc8ad30c647b54b33ed17ffba44d5a107ec08bdf0c79d2c1df1768d",
+          "video_tensor": "31f4b10e053ec6fdc520e88693d0bd34428592e2360eba04d28467026fa74ea9",
+          "audio_mel_tensor": "7d0e0fa1bfaaabf53f68efbc65c356e5ea7bc51cca8bce4ac66a3e9de15f2ebf"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=614400 bound_bytes=1843200"
+      },
+      "profile": {
+        "wall_seconds": 0.037167418,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004562719,
+          "video_parse": 0.000105669,
+          "video_decode": 0.006801481,
+          "video_resize": 0.001981732,
+          "audio_source": 0.017275158,
+          "audio_resample": 0.013219635,
+          "audio_mel": 0.008689185,
+          "arrow_pack": 0.002211959,
+          "arrow_write": 0.00722339,
+          "worker_send_wait": 0.030081108,
+          "collector_receive_wait": 0.021160937,
+          "final_sync": 2.924e-06,
+          "video_window_wait": 6.22e-07,
+          "video_reorder_wait": 0.004939557,
+          "audio_source_wait": 0.002544631
+        }
+      },
+      "logical_columns": {
+        "rows": 146,
+        "columns": {
+          "timestamp_ms": "cca75070ae1354b634bf005daaf9689fa267a44f33b8ac6ebddfa5f79873654d",
+          "audio_valid_frames": "1f9a5fd54befbcdec6703357d31c810716b07cff0629b919fed1af01e14949af",
+          "video_timestamp_ms": "4ed81516eae9f59bd6e378633ae519f8b6b5778c8aa9ea3505e82a16e5fb98c8",
+          "video_tensor": "e4b0c76ca8bc8e79b3a5a20fa255cc9fb8dead1aff09c8667d0f36d6f0e1d8e1",
+          "audio_mel_tensor": "e60e4052fd0e7c7f8b80519a97bdaee14f61c4df7fa92df44e01e0401db0132e"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=1204224 bound_bytes=3612672"
+      },
+      "profile": {
+        "wall_seconds": 0.035757796,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004952398,
+          "video_parse": 0.000120952,
+          "video_decode": 0.008787098,
+          "video_resize": 0.003827579,
+          "audio_source": 0.025287098,
+          "audio_resample": 0.013313555,
+          "audio_mel": 0.008769201,
+          "arrow_pack": 0.002736501,
+          "arrow_write": 0.002272608,
+          "worker_send_wait": 0.02146867,
+          "collector_receive_wait": 0.025130602,
+          "final_sync": 2.904e-06,
+          "video_window_wait": 8.21e-07,
+          "video_reorder_wait": 0.00737181,
+          "audio_source_wait": 0.002483022
+        }
+      },
+      "logical_columns": {
+        "rows": 23,
+        "columns": {
+          "timestamp_ms": "0c9c4fb7aecf049f3ba322dcae988caccda031e38d1a95d33cfdef06542be76b",
+          "audio_valid_frames": "40b8f36832bae30aa88e5ec92b1233ed971e0a93624ce97497c728b5789799b5",
+          "video_timestamp_ms": "8fb7015507c5cf1adc1ffb37e07af48dc0adf821c0cdb2a3a7fdd097219e575c",
+          "video_tensor": "7aa6dc1ba6e5205189b60b0ef7975ac30ea0c3d054b7dc3e87b9334ee10e6626",
+          "audio_mel_tensor": "2281ed33df878c9ff7cb21b701633253305c6f801ad8e6e4ded61bdc27b437a8"
+        }
+      }
+    },
+    {
+      "name": "dual-sparse.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2709504 bound_bytes=8128512"
+      },
+      "profile": {
+        "wall_seconds": 0.035037683,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004322538,
+          "video_parse": 9.6085e-05,
+          "video_decode": 0.007774331,
+          "video_resize": 0.009190939,
+          "audio_source": 0.02541086,
+          "audio_resample": 0.015149701,
+          "audio_mel": 0.009534703,
+          "arrow_pack": 0.003637853,
+          "arrow_write": 0.013164169,
+          "worker_send_wait": 0.02040451,
+          "collector_receive_wait": 0.012831559,
+          "final_sync": 2.904e-06,
+          "video_window_wait": 6.23e-07,
+          "video_reorder_wait": 0.009656832,
+          "audio_source_wait": 0.000953278
+        }
+      },
+      "logical_columns": {
+        "rows": 15,
+        "columns": {
+          "timestamp_ms": "a2cfa04b9dbcd7777e9a2fb73e0f4cc507fa08ae557fc0a9078a74b4724e44c3",
+          "audio_valid_frames": "759d7fbe9759dffb2c1be42987b556c5e88a97b5264700a62099ab79d3306c72",
+          "video_timestamp_ms": "c67e76420afde18898c31d1a054ff04283305c38a979fb80afb8d701ea0e15a1",
+          "video_tensor": "0a107bcbb46c1e4d3e2d0bec2fb20571089427482c8537061aadaf82f8360a01",
+          "audio_mel_tensor": "c097b4f5814c3a8b79cec8e746e76a66b859200899b783fb874696ae34df6999"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "mode": "video_mode=single_fallback reason=\"fewer than 2 IDR chunks\""
+      },
+      "profile": {
+        "wall_seconds": 0.070480487,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.00446957,
+          "video_parse": 0.000333703,
+          "video_decode": 0.034703353,
+          "video_resize": 0.01776907,
+          "audio_source": 0.010324355,
+          "audio_resample": 0.007850874,
+          "audio_mel": 0.004979589,
+          "arrow_pack": 0.002260598,
+          "arrow_write": 0.004611533,
+          "worker_send_wait": 0.051436221,
+          "collector_receive_wait": 0.057667624,
+          "final_sync": 2.684e-06,
+          "video_window_wait": 0.0,
+          "video_reorder_wait": 0.0,
+          "audio_source_wait": 0.001703493
+        }
+      },
+      "logical_columns": {
+        "rows": 83,
+        "columns": {
+          "timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "audio_valid_frames": "e87b1aa93a250abbddf3124657fe8998b101b43a13fd0ad6a190aafd9d028f9c",
+          "video_timestamp_ms": "663132cde3edafacf76948e40f02e8558d8ad61764b4d17462dff429ea927b31",
+          "video_tensor": "f6ab005a46f7d79b64d9c0543ab46aec07dbdd2f1467bc693570834698f39610",
+          "audio_mel_tensor": "01c3dda0fb26ee837432714935feeeb7a8040393ed795ca3e0692f8702307953"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "mode": "video_mode=single_fallback reason=\"fewer than 2 IDR chunks\""
+      },
+      "profile": {
+        "wall_seconds": 0.04893557,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004296087,
+          "video_parse": 0.000221417,
+          "video_decode": 0.034621228,
+          "video_resize": 0.005675343,
+          "audio_source": 0.010480876,
+          "audio_resample": 0.007640516,
+          "audio_mel": 0.004996438,
+          "arrow_pack": 0.002453536,
+          "arrow_write": 0.00141167,
+          "worker_send_wait": 0.028741292,
+          "collector_receive_wait": 0.040114018,
+          "final_sync": 3.184e-06,
+          "video_window_wait": 0.0,
+          "video_reorder_wait": 0.0,
+          "audio_source_wait": 0.002169607
+        }
+      },
+      "logical_columns": {
+        "rows": 13,
+        "columns": {
+          "timestamp_ms": "a1d5bb5877283bae220d16e9da877b5531b5124068e7bde8276fa1bc0bba58a1",
+          "audio_valid_frames": "77d0fd1980804b86d71da795524b22249bd03566136b241708b3b5bb5eb976db",
+          "video_timestamp_ms": "d6c2d2731f18132055c116b24908254f1f9a22ce1a1f7bc8218046ece64133b4",
+          "video_tensor": "f59acd41279a5b799e681ee1183a6c217d490882ad92023e3c182671c50de7a4",
+          "audio_mel_tensor": "67f1bd00b9913475ce4aa4f4ae2f2f5625582f2e0fc5a26249ebf5622c653d42"
+        }
+      }
+    },
+    {
+      "name": "dual-open-gop.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 1,
+        "mode": "video_mode=single_fallback reason=\"fewer than 2 IDR chunks\""
+      },
+      "profile": {
+        "wall_seconds": 0.065295567,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004607607,
+          "video_parse": 0.000604225,
+          "video_decode": 0.040390464,
+          "video_resize": 0.009941711,
+          "audio_source": 0.009682996,
+          "audio_resample": 0.00817096,
+          "audio_mel": 0.005404415,
+          "arrow_pack": 0.004734017,
+          "arrow_write": 0.014055763,
+          "worker_send_wait": 0.037084041,
+          "collector_receive_wait": 0.040503684,
+          "final_sync": 3.455e-06,
+          "video_window_wait": 0.0,
+          "video_reorder_wait": 0.0,
+          "audio_source_wait": 0.001280947
+        }
+      },
+      "logical_columns": {
+        "rows": 9,
+        "columns": {
+          "timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "audio_valid_frames": "cf9ad5cdabfef3d2c93b1740feb2f693a0bc671fe91a8986fa7edee8743fe5a2",
+          "video_timestamp_ms": "6bd2e1016a033ecf4d4573580a9ea749edd7087ff6ab95268c37c3ba689f6371",
+          "video_tensor": "7cac33552cd826cdcaeab73c86756b246dc10fb795b34d4ca8c06f543bba82c1",
+          "audio_mel_tensor": "a0956304103488b5d2c97faae7337dc354422bb6e8953fd7c9e903252d393b6e"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-160-.05",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=12288000 bound_bytes=36864000"
+      },
+      "profile": {
+        "wall_seconds": 0.063676052,
+        "execution": "concurrent",
+        "queue_slots_per_track": 0,
+        "queued_payload_budget_used_bytes": 0,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004705354,
+          "video_parse": 0.000223724,
+          "video_decode": 0.036018281,
+          "video_resize": 0.024627631,
+          "audio_source": 0.01473694,
+          "audio_resample": 0.009435086,
+          "audio_mel": 0.006604896,
+          "arrow_pack": 0.001704381,
+          "arrow_write": 0.006651935,
+          "worker_send_wait": 0.054912187,
+          "collector_receive_wait": 0.049205037,
+          "final_sync": 3.035e-06,
+          "video_window_wait": 8.71e-07,
+          "video_reorder_wait": 0.037687142,
+          "audio_source_wait": 0.001781371
+        }
+      },
+      "logical_columns": {
+        "rows": 105,
+        "columns": {
+          "timestamp_ms": "e58c6bad08e32d15f51d3bfa978bcd255ba9a1ae1a98e15eab49b77d1a4d9ae8",
+          "audio_valid_frames": "a11e2deb62c7496d7ef7e3055a74c1789158ac1a941b671ce9dec91cced630a1",
+          "video_timestamp_ms": "33b5f95a810e2b3b91eb0c3eeaaf3b88ffe3239dac7966c06fe78c96c885b042",
+          "video_tensor": "21a2fd9edc87f9d2f861042035642dc3b3d5e9940fffbb31d6f024650338852a",
+          "audio_mel_tensor": "f8aa948c4ed6210549db145f82f140af0fd6837e9b196a66a0950f3786b1e205"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-224-.33",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=6021120 bound_bytes=18063360"
+      },
+      "profile": {
+        "wall_seconds": 0.051161086,
+        "execution": "concurrent",
+        "queue_slots_per_track": 1,
+        "queued_payload_budget_used_bytes": 610560,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004372441,
+          "video_parse": 0.000223705,
+          "video_decode": 0.032845193,
+          "video_resize": 0.01007395,
+          "audio_source": 0.01388409,
+          "audio_resample": 0.010865018,
+          "audio_mel": 0.007331722,
+          "arrow_pack": 0.00157323,
+          "arrow_write": 0.00156794,
+          "worker_send_wait": 0.039944827,
+          "collector_receive_wait": 0.043200395,
+          "final_sync": 3.225e-06,
+          "video_window_wait": 8.93e-07,
+          "video_reorder_wait": 0.028986355,
+          "audio_source_wait": 0.001934864
+        }
+      },
+      "logical_columns": {
+        "rows": 16,
+        "columns": {
+          "timestamp_ms": "42e64bd733519e8c64b09e546e9a8aa3a0a04b02d819feadc6b051c4363db168",
+          "audio_valid_frames": "5e25b3aa50996c24135c0e041e9b315efb4a617bc9cf0bd099b612be75b10e2e",
+          "video_timestamp_ms": "1970dd58108dccd4f263ff241cb5fdb9646c200fb2bfa8ef67fafdeb0dcba7f8",
+          "video_tensor": "51f0dc0f67ab867e8e2fec4bfe17866c74ab118a466124c523cc82f25ca3ed04",
+          "audio_mel_tensor": "1363ae298ff4394de4ca53663c37feddef49e3b45077736f19238d616823e3a6"
+        }
+      }
+    },
+    {
+      "name": "dual-vfr.mp4-336-.5",
+      "all_columns_bit_identical": true,
+      "partition": {
+        "workers": 2,
+        "mode": "video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=9483264 bound_bytes=28449792"
+      },
+      "profile": {
+        "wall_seconds": 0.048921474,
+        "execution": "concurrent",
+        "queue_slots_per_track": 2,
+        "queued_payload_budget_used_bytes": 2735104,
+        "decoder_threads": 0,
+        "stages_seconds": {
+          "setup": 0.004422077,
+          "video_parse": 0.000290215,
+          "video_decode": 0.033406371,
+          "video_resize": 0.013892233,
+          "audio_source": 0.014653358,
+          "audio_resample": 0.010232155,
+          "audio_mel": 0.006503068,
+          "arrow_pack": 0.003204841,
+          "arrow_write": 0.008538632,
+          "worker_send_wait": 0.03450743,
+          "collector_receive_wait": 0.031931394,
+          "final_sync": 3.505e-06,
+          "video_window_wait": 9.61e-07,
+          "video_reorder_wait": 0.029683839,
+          "audio_source_wait": 0.00124525
+        }
+      },
+      "logical_columns": {
+        "rows": 11,
+        "columns": {
+          "timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "audio_valid_frames": "818b53868a06f13fc899a51ba21120fc594681b7ef58a7a00464e5435891f74c",
+          "video_timestamp_ms": "a989c9a71176cd66460794a985e6df18755655b861d85023d4b261866a1c50af",
+          "video_tensor": "cfa88c2ed256c40d5a2732a8069931b18c76e74e2c2e908b096558fafa2df045",
+          "audio_mel_tensor": "5bab9fcc8c7ff7806ad925639691df2fb564ada0df999b6163a34065d0437659"
+        }
+      }
+    },
+    {
+      "name": "boundary-oracle",
+      "frames": [
+        {
+          "sample_index": 39,
+          "pts_ms": 1900,
+          "epoch": 38,
+          "v016": {
+            "epoch": 38,
+            "source_frame": 38,
+            "type": "B",
+            "mae_255": 0.18879257142543793,
+            "p99_255": 3.181607246398926
+          },
+          "v017": {
+            "epoch": 38,
+            "source_frame": 38,
+            "type": "B",
+            "mae_255": 0.18879257142543793,
+            "p99_255": 3.181607246398926
+          },
+          "exact_match": true
+        },
+        {
+          "sample_index": 40,
+          "pts_ms": 2000,
+          "epoch": 40,
+          "v016": {
+            "epoch": 40,
+            "source_frame": 40,
+            "type": "I",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "v017": {
+            "epoch": 40,
+            "source_frame": 40,
+            "type": "I",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "exact_match": true
+        },
+        {
+          "sample_index": 41,
+          "pts_ms": 2200,
+          "epoch": 44,
+          "v016": {
+            "epoch": 44,
+            "source_frame": 44,
+            "type": "P",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "v017": {
+            "epoch": 44,
+            "source_frame": 44,
+            "type": "P",
+            "mae_255": 0.0,
+            "p99_255": 0.0
+          },
+          "exact_match": true
+        }
+      ]
+    },
+    {
+      "name": "corrupt-worker0-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.016122403998451773,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker0-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.017975891998503357,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker0-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.06141968000156339,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.06331606199819362,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.032181611997657456,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "corrupt-worker1-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.023992366001039045,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: invalid/truncated AVCC NAL payload"
+    },
+    {
+      "name": "writer-failure-q0",
+      "exit": 1,
+      "elapsed_seconds": 0.04709491399989929,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "writer-failure-q1",
+      "exit": 1,
+      "elapsed_seconds": 0.040476461999787716,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "writer-failure-q4",
+      "exit": 1,
+      "elapsed_seconds": 0.034740735001832945,
+      "error": "video_mode=chunked workers=2 window=3 chunks=3 max_chunk_tensor_bytes=2408448 bound_bytes=7225344\nError: Io error: File too large (os error 27)\n\nCaused by:\n    File too large (os error 27)"
+    },
+    {
+      "name": "invalid-workers-65",
+      "exit": 1,
+      "elapsed_seconds": 0.0027464369995868765,
+      "error": "Error: --video-workers must be 0..64"
+    },
+    {
+      "name": "invalid-workers-999",
+      "exit": 1,
+      "elapsed_seconds": 0.00271754400091595,
+      "error": "Error: --video-workers must be 0..64"
+    }
+  ],
+  "directory": "/tmp/tenzor-v020-artifacts/dual-4wg8if1c"
+}

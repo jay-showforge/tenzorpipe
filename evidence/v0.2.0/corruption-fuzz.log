@@ -1,0 +1,93 @@
+a330.mp4 flip0.03 OK old 1 Error: decode AAC sample 472 | new 1 Error: decode AAC sample 472 | same_msg True 0.13s
+a330.mp4 flip0.08 OK old 1 Error: decode AAC sample 1246 | new 1 Error: decode AAC sample 1246 | same_msg True 0.21s
+a330.mp4 flip0.13 OK old 1 Error: decode AAC sample 2019 | new 1 Error: decode AAC sample 2019 | same_msg True 0.29s
+a330.mp4 flip0.18 OK old 1 Error: decode AAC sample 2793 | new 1 Error: decode AAC sample 2793 | same_msg True 0.38s
+a330.mp4 flip0.23 OK old 1 Error: decode AAC sample 3567 | new 1 Error: decode AAC sample 3567 | same_msg True 0.47s
+a330.mp4 flip0.28 OK old 1 Error: decode AAC sample 4340 | new 1 Error: decode AAC sample 4340 | same_msg True 0.53s
+a330.mp4 flip0.33 OK old 1 Error: decode AAC sample 5114 | new 1 Error: decode AAC sample 5114 | same_msg True 0.64s
+a330.mp4 flip0.38 OK old 1 Error: decode AAC sample 5888 | new 1 Error: decode AAC sample 5888 | same_msg True 0.70s
+a330.mp4 flip0.43 OK old 1 Error: decode AAC sample 6662 | new 1 Error: decode AAC sample 6662 | same_msg True 0.81s
+a330.mp4 flip0.48 OK old 1 Error: decode AAC sample 7435 | new 1 Error: decode AAC sample 7435 | same_msg True 0.88s
+a330.mp4 flip0.52 OK old 1 Error: decode AAC sample 8208 | new 1 Error: decode AAC sample 8208 | same_msg True 0.97s
+a330.mp4 flip0.57 OK old 1 Error: decode AAC sample 8982 | new 1 Error: decode AAC sample 8982 | same_msg True 1.08s
+a330.mp4 flip0.62 OK old 1 Error: decode AAC sample 9757 | new 1 Error: decode AAC sample 9757 | same_msg True 1.12s
+a330.mp4 flip0.67 OK old 1 Error: decode AAC sample 10530 | new 1 Error: decode AAC sample 10530 | same_msg True 1.28s
+a330.mp4 flip0.72 OK old 1 Error: decode AAC sample 11304 | new 1 Error: decode AAC sample 11304 | same_msg True 1.35s
+a330.mp4 flip0.77 OK old 1 Error: decode AAC sample 12077 | new 1 Error: decode AAC sample 12077 | same_msg True 1.40s
+a330.mp4 flip0.82 OK old 1 Error: decode AAC sample 12851 | new 1 Error: decode AAC sample 12851 | same_msg True 1.46s
+a330.mp4 flip0.87 OK old 1 Error: decode AAC sample 13625 | new 1 Error: decode AAC sample 13625 | same_msg True 1.55s
+a330.mp4 flip0.92 OK old 1 Error: decode AAC sample 14399 | new 1 Error: decode AAC sample 14399 | same_msg True 1.70s
+a330.mp4 flip0.97 OK old 1 Error: decode AAC sample 15173 | new 1 Error: decode AAC sample 15173 | same_msg True 1.75s
+a330.mp4 trunc0.50 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+a330.mp4 trunc0.90 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+a330.mp4 trunc0.99 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+m48-tools.mp4 flip0.03 OK old 1 Error: decode AAC sample 50 | new 1 Error: decode AAC sample 50 | same_msg True 0.08s
+m48-tools.mp4 flip0.08 OK old 1 Error: decode AAC sample 141 | new 1 Error: decode AAC sample 141 | same_msg True 0.09s
+m48-tools.mp4 flip0.13 OK old 1 Error: decode AAC sample 230 | new 1 Error: decode AAC sample 230 | same_msg True 0.10s
+m48-tools.mp4 flip0.18 OK old 1 Error: decode AAC sample 324 | new 1 Error: decode AAC sample 324 | same_msg True 0.12s
+m48-tools.mp4 flip0.23 OK old 1 Error: decode AAC sample 419 | new 1 Error: decode AAC sample 419 | same_msg True 0.13s
+m48-tools.mp4 flip0.28 OK old 1 Error: decode AAC sample 514 | new 1 Error: decode AAC sample 514 | same_msg True 0.14s
+m48-tools.mp4 flip0.33 OK old 1 Error: decode AAC sample 609 | new 1 Error: decode AAC sample 609 | same_msg True 0.15s
+m48-tools.mp4 flip0.38 OK old 1 Error: decode AAC sample 703 | new 1 Error: decode AAC sample 703 | same_msg True 0.17s
+m48-tools.mp4 flip0.43 OK old 1 Error: decode AAC sample 797 | new 1 Error: decode AAC sample 797 | same_msg True 0.18s
+m48-tools.mp4 flip0.48 OK old 1 Error: decode AAC sample 891 | new 1 Error: decode AAC sample 891 | same_msg True 0.19s
+m48-tools.mp4 flip0.52 OK old 1 Error: decode AAC sample 981 | new 1 Error: decode AAC sample 981 | same_msg True 0.22s
+m48-tools.mp4 flip0.57 OK old 1 Error: decode AAC sample 1074 | new 1 Error: decode AAC sample 1074 | same_msg True 0.23s
+m48-tools.mp4 flip0.62 OK old 1 Error: decode AAC sample 1166 | new 1 Error: decode AAC sample 1166 | same_msg True 0.23s
+m48-tools.mp4 flip0.67 OK old 1 Error: decode AAC sample 1258 | new 1 Error: decode AAC sample 1258 | same_msg True 0.24s
+m48-tools.mp4 flip0.72 OK old 1 Error: decode AAC sample 1352 | new 1 Error: decode AAC sample 1352 | same_msg True 0.26s
+m48-tools.mp4 flip0.77 OK old 1 Error: decode AAC sample 1446 | new 1 Error: decode AAC sample 1446 | same_msg True 0.27s
+m48-tools.mp4 flip0.82 OK old 1 Error: decode AAC sample 1540 | new 1 Error: decode AAC sample 1540 | same_msg True 0.27s
+m48-tools.mp4 flip0.87 OK old 1 Error: decode AAC sample 1633 | new 1 Error: decode AAC sample 1633 | same_msg True 0.31s
+m48-tools.mp4 flip0.92 OK old 1 Error: decode AAC sample 1727 | new 1 Error: decode AAC sample 1727 | same_msg True 0.30s
+m48-tools.mp4 flip0.97 OK old 1 Error: decode AAC sample 1819 | new 1 Error: decode AAC sample 1819 | same_msg True 0.31s
+m48-tools.mp4 trunc0.50 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+m48-tools.mp4 trunc0.90 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+m48-tools.mp4 trunc0.99 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+pink-51.mp4 flip0.03 OK old 1 Error: decode AAC sample 18 | new 1 Error: decode AAC sample 18 | same_msg True 0.08s
+pink-51.mp4 flip0.08 OK old 1 Error: decode AAC sample 46 | new 1 Error: decode AAC sample 46 | same_msg True 0.09s
+pink-51.mp4 flip0.13 OK old 1 Error: decode AAC sample 74 | new 1 Error: decode AAC sample 74 | same_msg True 0.09s
+pink-51.mp4 flip0.18 OK old 1 Error: decode AAC sample 102 | new 1 Error: decode AAC sample 102 | same_msg True 0.10s
+pink-51.mp4 flip0.23 OK old 1 Error: decode AAC sample 130 | new 1 Error: decode AAC sample 130 | same_msg True 0.11s
+pink-51.mp4 flip0.28 OK old 1 Error: decode AAC sample 158 | new 1 Error: decode AAC sample 158 | same_msg True 0.12s
+pink-51.mp4 flip0.33 OK old 1 Error: decode AAC sample 186 | new 1 Error: decode AAC sample 186 | same_msg True 0.12s
+pink-51.mp4 flip0.38 OK old 1 Error: decode AAC sample 214 | new 1 Error: decode AAC sample 214 | same_msg True 0.15s
+pink-51.mp4 flip0.43 OK old 1 Error: decode AAC sample 242 | new 1 Error: decode AAC sample 242 | same_msg True 0.16s
+pink-51.mp4 flip0.48 OK old 1 Error: decode AAC sample 271 | new 1 Error: decode AAC sample 271 | same_msg True 0.16s
+pink-51.mp4 flip0.52 OK old 1 Error: decode AAC sample 298 | new 1 Error: decode AAC sample 298 | same_msg True 0.16s
+pink-51.mp4 flip0.57 OK old 1 Error: decode AAC sample 326 | new 1 Error: decode AAC sample 326 | same_msg True 0.17s
+pink-51.mp4 flip0.62 OK old 1 Error: decode AAC sample 354 | new 1 Error: decode AAC sample 354 | same_msg True 0.17s
+pink-51.mp4 flip0.67 OK old 1 Error: decode AAC sample 382 | new 1 Error: decode AAC sample 382 | same_msg True 0.19s
+pink-51.mp4 flip0.72 OK old 1 Error: decode AAC sample 410 | new 1 Error: decode AAC sample 410 | same_msg True 0.20s
+pink-51.mp4 flip0.77 OK old 1 Error: decode AAC sample 438 | new 1 Error: decode AAC sample 438 | same_msg True 0.19s
+pink-51.mp4 flip0.82 OK old 1 Error: decode AAC sample 466 | new 1 Error: decode AAC sample 466 | same_msg True 0.21s
+pink-51.mp4 flip0.87 OK old 1 Error: decode AAC sample 494 | new 1 Error: decode AAC sample 494 | same_msg True 0.21s
+pink-51.mp4 flip0.92 OK old 1 Error: decode AAC sample 522 | new 1 Error: decode AAC sample 522 | same_msg True 0.24s
+pink-51.mp4 flip0.97 OK old 1 Error: decode AAC sample 551 | new 1 Error: decode AAC sample 551 | same_msg True 0.25s
+pink-51.mp4 trunc0.50 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+pink-51.mp4 trunc0.90 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+pink-51.mp4 trunc0.99 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.07s
+av-music.mp4 flip0.03 OK old 1 Error: decode AAC sample 57 | new 1 Error: decode AAC sample 57 | same_msg True 0.09s
+av-music.mp4 flip0.08 OK old 1 Error: decode AAC sample 149 | new 1 Error: decode AAC sample 149 | same_msg True 0.13s
+av-music.mp4 flip0.13 OK old 1 Error: decode OpenH264 access unit 157 | new 1 Error: decode OpenH264 access unit 157 | same_msg True 0.25s
+av-music.mp4 flip0.18 OK old 1 Error: decode OpenH264 access unit 217 | new 1 Error: decode OpenH264 access unit 217 | same_msg True 0.32s
+av-music.mp4 flip0.23 OK old 1 Error: decode AAC sample 431 | new 1 Error: decode AAC sample 431 | same_msg True 0.34s
+av-music.mp4 flip0.28 OK old 1 Error: decode OpenH264 access unit 338 | new 1 Error: decode OpenH264 access unit 338 | same_msg True 0.45s
+av-music.mp4 flip0.33 OK old 1 Error: decode AAC sample 623 | new 1 Error: decode AAC sample 623 | same_msg True 0.47s
+av-music.mp4 flip0.38 OK old 1 Error: decode AAC sample 713 | new 1 Error: decode AAC sample 713 | same_msg True 0.54s
+av-music.mp4 flip0.43 OK old 1 Error: decode OpenH264 access unit 517 | new 1 Error: decode OpenH264 access unit 517 | same_msg True 0.66s
+av-music.mp4 flip0.48 OK old 1 Error: decode AAC sample 898 | new 1 Error: decode AAC sample 898 | same_msg True 0.67s
+av-music.mp4 flip0.52 OK old 1 Error: decode AAC sample 993 | new 1 Error: decode AAC sample 993 | same_msg True 0.73s
+av-music.mp4 flip0.57 OK old 1 Error: decode AAC sample 1087 | new 1 Error: decode AAC sample 1087 | same_msg True 0.79s
+av-music.mp4 flip0.62 OK old 1 Error: decode OpenH264 access unit 758 | new 1 Error: decode OpenH264 access unit 758 | same_msg True 0.93s
+av-music.mp4 flip0.67 OK old 1 Error: decode OpenH264 access unit 816 | new 1 Error: decode OpenH264 access unit 816 | same_msg True 0.98s
+av-music.mp4 flip0.72 OK old 0  | new 0  | same_msg True 1.50s
+av-music.mp4 flip0.77 OK old 1 Error: decode OpenH264 access unit 934 | new 1 Error: decode OpenH264 access unit 934 | same_msg True 1.11s
+av-music.mp4 flip0.82 OK old 1 Error: decode AAC sample 1553 | new 1 Error: decode AAC sample 1553 | same_msg True 1.12s
+av-music.mp4 flip0.87 OK old 1 Error: decode AAC sample 1646 | new 1 Error: decode AAC sample 1646 | same_msg True 1.19s
+av-music.mp4 flip0.92 OK old 1 Error: decode OpenH264 access unit 1118 | new 1 Error: decode OpenH264 access unit 1118 | same_msg True 1.28s
+av-music.mp4 flip0.97 OK old 1 Error: decode OpenH264 access unit 1175 | new 1 Error: decode OpenH264 access unit 1175 | same_msg True 1.34s
+av-music.mp4 trunc0.50 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+av-music.mp4 trunc0.90 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+av-music.mp4 trunc0.99 OK old 1 Error: parse MP4 | new 1 Error: parse MP4 | same_msg True 0.06s
+cases 92 same_outcome 92 same_error_text 92
