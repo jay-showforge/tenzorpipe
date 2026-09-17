@@ -33,6 +33,7 @@ if [ "$TARGET" != "$ROOT/target" ]; then
 fi
 gate unit-tests   cargo test --locked --workspace --all-targets
 gate aac-tests    cargo test --locked --manifest-path vendor/rusty_aac/Cargo.toml --lib
+gate aac-tests-no-default cargo test --locked --manifest-path vendor/rusty_aac/Cargo.toml --lib --no-default-features
 gate fmt          cargo fmt --all --check
 gate clippy       cargo clippy --locked --workspace --all-targets -- -D warnings
 gate licenses     cargo deny check licenses

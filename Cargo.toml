@@ -17,8 +17,8 @@ path = "src/main.rs"
 [workspace]
 # The Python extension is a separate member so plain `cargo build` never needs Python.
 members = [".", "bindings/python"]
-# Vendored crates are path dependencies with their own test lockfiles, not members.
-exclude = ["vendor"]
+# Vendored crates are path dependencies, not members. vendor/rusty_aac declares its own empty
+# [workspace] so its unit tests still run standalone with its own lockfile.
 
 [features]
 experimental-decoder-threads = []

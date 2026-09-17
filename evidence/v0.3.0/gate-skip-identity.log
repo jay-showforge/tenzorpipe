@@ -1,0 +1,122 @@
+44 media x 4 settings x 6 variants = 1056 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
+PASS same-error corrupt-nal.mp4 [] default rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [] w1 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [] w2-chunk250 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [] w8 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [] w1-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [] w4-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] default rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w2-chunk250 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w8 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w4-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] default rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] w1 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] w2-chunk250 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] w8 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] w1-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--window-sec 0.05 --batch-epochs 7] w4-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] default rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] w1 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] w2-chunk250 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt-nal.mp4 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
+PASS same-error corrupt.mp4 [] default rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [] w1 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [] w2-chunk250 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [] w8 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [] w1-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [] w4-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] default rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w2-chunk250 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w8 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w4-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] default rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] w1 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] w2-chunk250 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] w8 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] w1-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--window-sec 0.05 --batch-epochs 7] w4-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] default rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] w1 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] w2-chunk250 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error corrupt.mp4 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: parse MP4 | Error: parse MP4
+PASS same-error empty.mp4 [] default rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [] w1 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [] w2-chunk250 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [] w8 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [] w1-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [] w4-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] default rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w2-chunk250 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w8 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w4-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] default rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] w1 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] w2-chunk250 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] w8 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] w1-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--window-sec 0.05 --batch-epochs 7] w4-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] default rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] w1 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] w2-chunk250 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error empty.mp4 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: input file is empty | Error: input file is empty
+PASS same-error unsupported-mpeg4.mp4 [] default rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [] w1 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [] w2-chunk250 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [] w8 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [] w1-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [] w4-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] default rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w2-chunk250 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w8 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w4-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] default rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] w1 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] w2-chunk250 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] w8 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] w1-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--window-sec 0.05 --batch-epochs 7] w4-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] default rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] w1 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] w2-chunk250 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported-mpeg4.mp4 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: no supported H.264 video track found | Error: no supported H.264 video track found
+PASS same-error unsupported.mp3 [] default rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [] w1 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [] w2-chunk250 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [] w8 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [] w1-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [] w4-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] default rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w2-chunk250 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w8 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w1-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--resolution 160 --window-sec 0.33 --batch-epochs 2] w4-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] default rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] w1 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] w2-chunk250 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] w8 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] w1-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--window-sec 0.05 --batch-epochs 7] w4-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] default rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w1 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w2-chunk250 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
+TOTAL 1056 FAIL 0 kinds={'identical': 936, 'same-error': 120} identical-with-skips=396 skipped-access-units=93716

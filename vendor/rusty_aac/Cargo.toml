@@ -73,3 +73,7 @@ rustfft = "6.4.1"
 
 [dev-dependencies.rusty_alloc-api]
 version = "0.3"
+
+# TenzorPipe: standalone workspace so `cargo test --manifest-path vendor/rusty_aac/Cargo.toml`
+# uses this crate's lockfile instead of joining the parent workspace.
+[workspace]

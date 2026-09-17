@@ -1,8 +1,8 @@
 {
- "old_binary": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/bin/tenzor-linux-x86_64",
+ "old_binary": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64",
  "new_binary": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor",
  "old_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77",
- "new_sha256": "152c4f57c0fd199520da1e8c8aa79651722f61467706ab13b03b9abbf5b2a440",
+ "new_sha256": "451c1f5d14b608ccdb93eac5ebba9ab1884d6ab2f548ce207ad6c686d81ecc39",
  "cases": 1056,
  "failures": 0,
  "kinds": {

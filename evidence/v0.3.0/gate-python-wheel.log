@@ -1,0 +1,49 @@
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at /home/ftmon/.tenzor-bench/venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.9 support
+📡 Using build options locked, bindings from pyproject.toml
+   Compiling pyo3-ffi v0.29.2
+   Compiling pyo3 v0.29.2
+   Compiling tenzorpipe-python v0.3.0 (/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/bindings/python)
+    Finished `release` profile [optimized] target(s) in 4.99s
+📦 Built wheel for abi3 Python ≥ 3.9 to dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl
+built dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl (3.3M)
+tenzorpipe/__init__.py
+tenzorpipe/_engine.abi3.so
+tenzorpipe-0.3.0.dist-info/METADATA
+tenzorpipe-0.3.0.dist-info/entry_points.txt
+tenzorpipe-0.3.0.dist-info/licenses/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/atoi-3.1.0/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/bytes-1.12.1/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/crunchy-0.2.4/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/flatbuffers-25.12.19/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/openh264-0.9.8/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/openh264-sys2-0.9.8/upstream/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/rusty_aac-0.5.0/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/slab-0.4.12/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/strsim-0.11.1/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/target-lexicon-0.13.5/LICENSE
+tenzorpipe-0.3.0.dist-info/licenses/THIRD_PARTY_NOTICES/tiny-keccak-2.0.2/LICENSE
+== smoke 1: wheel without torch
+video_mode=chunked workers=2 window=17 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=40943616
+video 1280x720, duration 3300ms, decoded 60 access units, resized 7 selected pictures, skipped_nonref=39
+version 0.3.0 | epochs 7 | rows 7 | columns ['timestamp_ms', 'audio_valid_frames', 'video_timestamp_ms', 'video_tensor', 'audio_mel_tensor']
+existing output rejected: output already exists; choose a new path
+torch-free install: TenzorDataset batches are PyTorch tensors: pip install 'tenzorpipe[torch]'
+video_mode=chunked workers=2 window=3 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=7225344
+video 1280x720, duration 3300ms, decoded 60 access units, resized 7 selected pictures, skipped_nonref=39
+TenzorPipe 0.3.0: 7 epochs in 0.144s
+tenzor 0.3.0
+python ingest == wheel CLI output (byte-identical)
+TenzorPipe 0.3.0: 7 epochs in 0.151s
+python ingest == target/release/tenzor output (byte-identical)
+== smoke 2: wheel with CPU torch
+video_mode=chunked workers=2 window=17 chunks=2 max_chunk_tensor_bytes=2150400 bound_bytes=36556800
+video 1280x720, duration 3300ms, decoded 63 access units, resized 10 selected pictures, skipped_nonref=36
+video (10, 3, 160, 160) torch.float32 | audio (10, 33, 64) | rows 10
+== smoke 3: pip install . (source build through maturin)
+video_mode=chunked workers=2 window=17 chunks=2 max_chunk_tensor_bytes=2408448 bound_bytes=40943616
+video 1280x720, duration 3300ms, decoded 60 access units, resized 7 selected pictures, skipped_nonref=39
+source install 0.3.0 7 epochs
+pip install . output == wheel output (byte-identical)
+WHEEL_SMOKE PASS dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl
