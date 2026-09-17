@@ -6,9 +6,19 @@ description = "High-throughput media-to-tensor preprocessing engine for multimod
 license = "BUSL-1.1"
 publish = false
 
+[lib]
+name = "tenzor_pipe"
+path = "src/lib.rs"
+
 [[bin]]
 name = "tenzor"
 path = "src/main.rs"
+
+[workspace]
+# The Python extension is a separate member so plain `cargo build` never needs Python.
+members = [".", "bindings/python"]
+# Vendored crates are path dependencies with their own test lockfiles, not members.
+exclude = ["vendor"]
 
 [features]
 experimental-decoder-threads = []

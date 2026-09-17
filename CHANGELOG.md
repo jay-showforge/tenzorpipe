@@ -20,6 +20,12 @@
   the chunked corruption fuzz now checks both strict (`--no-skip-nonref`) and default semantics.
 - Add the competitor benchmark suite (`bench/`) with results in BENCHMARKS.md, and a file-level
   batching scaffold (`python/tenzor_batch.py`, docs/FILE_BATCHING.md).
+- Python package `tenzorpipe` (PyO3 0.29 + maturin, abi3 wheel for CPython 3.9+):
+  `tenzorpipe.ingest()` runs the engine in-process with the GIL released, `tenzorpipe.load()`
+  returns the zero-copy `TenzorDataset`, and the wheel installs the `tenzor` command. PyTorch is
+  now an optional extra; `python/tenzor.py` remains as a compatibility shim.
+- The engine is a library crate (`tenzor_pipe::convert`); the `tenzor` binary and the Python
+  extension (workspace member `bindings/python`) share it.
 
 ## 0.2.0 — independent EPYC verification
 

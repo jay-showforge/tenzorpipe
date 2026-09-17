@@ -1,0 +1,19 @@
+[package]
+name = "tenzorpipe-python"
+version = "0.3.0"
+edition = "2024"
+description = "Python bindings for the TenzorPipe engine"
+license = "BUSL-1.1"
+publish = false
+
+[lib]
+name = "_engine"
+crate-type = ["cdylib"]
+# An extension module cannot link a test executable without libpython; tested from Python.
+test = false
+doctest = false
+
+[dependencies]
+anyhow = "1.0"
+pyo3 = { version = "0.29", features = ["abi3-py39"] }
+tenzor-pipe = { path = "../.." }

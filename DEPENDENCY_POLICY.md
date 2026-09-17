@@ -15,6 +15,8 @@ dependencies are not authorized. BUSL-1.1 is not a dependency allowlist entry.
 - mp4io 0.1.2: MIT OR Apache-2.0; hound 3.5.1: Apache-2.0; crossbeam-channel 0.5.17: MIT OR Apache-2.0.
 - The vendor AAC test-only rusty_alloc/rusty_alloc-api 0.3.2 dependencies declare MIT; they are not in the production engine graph. The vendor test lockfile is retained.
 - Arrow defaults are disabled; IPC is explicit. CC0 covers transitive tiny-keccak.
+- PyO3 0.29.2 (MIT OR Apache-2.0) is used only by the Python extension (`bindings/python`), which never links libpython. The wheel carries LICENSE and THIRD_PARTY_NOTICES in its dist-info.
+- Curated notices: flatbuffers (upstream Apache-2.0 LICENSE) and the openh264 wrapper, whose crate declares BSD-2-Clause without shipping a license file (see THIRD_PARTY_NOTICES/openh264-0.9.8/LICENSE).
 
 THIRD_PARTY_NOTICES and vendor license files accompany the repository/binaries.
 FFmpeg and Python are independent external test/baseline tools, not bundled engine

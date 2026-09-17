@@ -190,19 +190,34 @@ payload ceiling. MP4 index allocation is capped at 16 MiB; over-limit inputs fai
 
 ## Python / PyTorch
 
+The `tenzorpipe` package runs the engine in-process through PyO3 (the GIL is released while
+decoding) and reads the output as zero-copy PyTorch tensors. One abi3 wheel supports
+CPython 3.9+ on Linux x86-64 with glibc 2.34 or newer.
+
 ```sh
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r python/requirements-test.txt
-python -m pip install torch==2.14.0+cpu --index-url https://download.pytorch.org/whl/cpu
-PYTHONPATH=python python - <<'PY'
-from tenzor import TenzorDataset
-with TenzorDataset('example.tenzor') as data:
-    print(len(data), data.video_shape, data.audio_shape)
-    for batch in data.iter_batches():
-        print(batch['timestamp_ms'], batch['audio'].shape)
-PY
+pip install "dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl[torch]"  # built wheel
+pip install ".[torch]"                                                         # from source
+pip install "tenzorpipe[torch]"                                                # once published on PyPI
 ```
+
+```python
+import tenzorpipe as tp
+
+info = tp.ingest("fixtures/high-bframes.mp4", "example.tenzor", resolution=160)
+with tp.load("example.tenzor") as data:
+    print(info["epochs"], data.video_shape, data.audio_shape)
+    for batch in data.iter_batches():
+        print(batch["timestamp_ms"], batch["video"].shape, batch["audio"].shape)
+```
+
+`tp.ingest()` accepts the CLI options as keyword arguments (`video_workers`, `window_sec`,
+`batch_epochs`, `skip_nonref=False`, ...); options left unset use the CLI defaults, because the
+arguments are parsed by the same definition. Failures raise `tenzorpipe.TenzorError` and
+remove the partial output. The wheel also installs the `tenzor` command. Without the
+`torch` extra, read files with PyArrow (`data.reader`, or `pyarrow.ipc.open_file`).
+
+Building from source (`pip install .`) needs Rust 1.98.1 and NASM; `scripts/build_wheel.sh`
+builds the release wheel and smoke-tests it in fresh virtual environments.
 
 `iter_batches()` visits the whole file; `get_batch(0)` is just one batch.
 `copy=False` wraps read-only Arrow/NumPy buffers without copying tensor payloads.

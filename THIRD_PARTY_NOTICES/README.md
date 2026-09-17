@@ -86,8 +86,14 @@ Collected from the locked Cargo package sources. See evidence/dependency-invento
 - openh264 0.9.8: BSD-2-Clause
 - openh264-sys2 0.9.8: BSD-2-Clause
 - pin-project-lite 0.2.17: Apache-2.0 OR MIT
+- portable-atomic 1.15.0: Apache-2.0 OR MIT
 - primal-check 0.3.4: MIT OR Apache-2.0
 - proc-macro2 1.0.107: MIT OR Apache-2.0
+- pyo3 0.29.2: MIT OR Apache-2.0
+- pyo3-build-config 0.29.2: MIT OR Apache-2.0
+- pyo3-ffi 0.29.2: MIT OR Apache-2.0
+- pyo3-macros 0.29.2: MIT OR Apache-2.0
+- pyo3-macros-backend 0.29.2: MIT OR Apache-2.0
 - quote 1.0.47: MIT OR Apache-2.0
 - r-efi 5.3.0: MIT OR Apache-2.0 OR LGPL-2.1-or-later
 - r-efi 6.0.0: MIT OR Apache-2.0 OR LGPL-2.1-or-later
@@ -111,6 +117,7 @@ Collected from the locked Cargo package sources. See evidence/dependency-invento
 - strsim 0.11.1: MIT
 - syn 2.0.119: MIT OR Apache-2.0
 - syn 3.0.5: MIT OR Apache-2.0
+- target-lexicon 0.13.5: Apache-2.0 WITH LLVM-exception
 - tiny-keccak 2.0.2: CC0-1.0
 - transpose 0.2.3: MIT OR Apache-2.0
 - unicode-ident 1.0.24: (MIT OR Apache-2.0) AND Unicode-3.0

@@ -1,0 +1,5 @@
+[env]
+# The bindings crate is a Python extension module: never link libpython (the interpreter
+# supplies those symbols at import time). maturin sets this too; plain `cargo build
+# --workspace` needs it as well.
+PYO3_BUILD_EXTENSION_MODULE = "1"

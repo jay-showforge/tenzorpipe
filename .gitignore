@@ -3,3 +3,6 @@
 __pycache__/
 *.pyc
 /fixtures/long-*.mp4
+/dist/
+*.egg-info/
+python/tenzorpipe/_engine*.so

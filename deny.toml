@@ -26,3 +26,8 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 name = "tenzor-pipe"
 version = "=0.3.0"
 allow = ["BUSL-1.1"]
+
+[[licenses.exceptions]]
+name = "tenzorpipe-python"
+version = "=0.3.0"
+allow = ["BUSL-1.1"]
