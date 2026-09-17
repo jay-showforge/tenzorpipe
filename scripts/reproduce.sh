@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Historical: reproduces the v0.2.0 EPYC evidence (write_reports.py asserts version 0.2.0).
+# v0.3.0 verification is scripts/release_gates.sh.
 cd "$(dirname "$0")/.."
 export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-2}"
 export TENZOR_OUTPUT_ROOT="${TENZOR_OUTPUT_ROOT:-/tmp/tenzor-artifacts}"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run the existing v0.2.0 regression scripts against target/release/tenzor on a scratch copy of
+# Run the existing regression scripts against target/release/tenzor on a scratch copy of
 # the repository, because several scripts regenerate committed fixtures with the local FFmpeg.
 set -uo pipefail
 SRC="$(cd "$(dirname "$0")/.." && pwd)"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """A/B two or more tenzor binaries: median wall time, peak RSS and output bytes.
 
-    python bench/ab_binaries.py --bin release=bin/tenzor-linux-x86_64 --bin new=target/release/tenzor \
+    python bench/ab_binaries.py --bin release=reference/bin/tenzor-v0.2.0-linux-x86_64 --bin new=target/release/tenzor \
         --clip ~/.tenzor-bench/clips/synthetic-1080p30-h264-20s-video-only.mp4 --workers 1,0 --reps 5
 
 Runs are interleaved (A B A B ...) so thermal/background drift hits every binary equally.

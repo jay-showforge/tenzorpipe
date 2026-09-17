@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Non-reference skip gate: new binary vs the v0.2.0 release binary, byte for byte.
 
-Both binaries report version 0.2.0, so successful artifacts must be byte-identical with no
-version-string substitution. Failures must agree on exit status and the first error line.
+Successful artifacts must be byte-identical after replacing the new engine version string
+(read from Cargo.toml, embedded exactly twice) with "0.2.0". Failures must agree on exit
+status and the first error line.
 
     python3 scripts/test_skip_identity.py [media ...]
         (default: every committed fixture + $TENZOR_GEN_FIXTURES from gen_skip_fixtures.sh)
 
-Environment: OLD (default bin/tenzor-linux-x86_64), NEW (default target/release/tenzor),
+Environment: OLD (default reference/bin/tenzor-v0.2.0-linux-x86_64), NEW (default target/release/tenzor),
 RESULT (JSON path), JOBS (parallel cases, default 4).
 """
 import concurrent.futures
@@ -19,9 +20,12 @@ import re
 import subprocess
 import sys
 import tempfile
+import tomllib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-OLD = os.environ.get("OLD", str(ROOT / "bin/tenzor-linux-x86_64"))
+OLD = os.environ.get("OLD", str(ROOT / "reference/bin/tenzor-v0.2.0-linux-x86_64"))
+NEW_VERSION = tomllib.loads((ROOT / "Cargo.toml").read_text())["package"]["version"].encode()
+OLD_VERSION = b"0.2.0"
 NEW = os.environ.get("NEW", str(ROOT / "target/release/tenzor"))
 GEN = pathlib.Path(os.environ.get("TENZOR_GEN_FIXTURES", "/tmp/tenzor-skip-fixtures"))
 # Disk, not tmpfs: long-330 at 0.05 s windows writes ~4 GiB per artifact.
@@ -55,11 +59,12 @@ def run(binary, media, args, tag):
         return {"rc": "TIMEOUT", "sha256": None, "error": "", "skipped": None, "panic": False, "leftover": False}
     digest = None
     if p.returncode == 0:
-        h = hashlib.sha256()
-        with out.open("rb") as f:
-            while chunk := f.read(1 << 20):
-                h.update(chunk)
-        digest = h.hexdigest()
+        data = out.read_bytes()
+        if binary == NEW and NEW_VERSION != OLD_VERSION:
+            if data.count(NEW_VERSION) != 2:
+                raise AssertionError(f"expected 2 version strings in {out}, found {data.count(NEW_VERSION)}")
+            data = data.replace(NEW_VERSION, OLD_VERSION)
+        digest = hashlib.sha256(data).hexdigest()
     leftover = p.returncode != 0 and out.exists()
     out.unlink(missing_ok=True)
     err = next((l for l in p.stderr.splitlines() if l.startswith("Error")), "")
@@ -115,7 +120,7 @@ def main():
                   new_sha256=hashlib.sha256(pathlib.Path(NEW).read_bytes()).hexdigest(),
                   cases=len(rows), failures=fails, kinds=summary,
                   identical_cases_with_skipping=exercised, skipped_access_units_total=skipped_total, rows=rows)
-    path = pathlib.Path(os.environ.get("RESULT", ROOT / "evidence/v0.2.1/skip-identity.json"))
+    path = pathlib.Path(os.environ.get("RESULT", ROOT / "evidence/v0.3.0/skip-identity.json"))
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=1))
     print(f"TOTAL {len(rows)} FAIL {fails} kinds={summary} identical-with-skips={exercised} "

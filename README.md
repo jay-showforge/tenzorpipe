@@ -1,8 +1,8 @@
-# TenzorPipe 0.2.0
+# TenzorPipe 0.3.0
 
 MP4 H.264/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in batched
 Apache Arrow IPC (`.tenzor`). This release runs audio and video concurrently through bounded queues,
-preserving the independently verified v0.1.6 tensor values. Read **V0.2.0_REPORT.md** for the current release's results and limits; earlier
+preserving the independently verified v0.1.6 tensor values. See **CHANGELOG.md** for 0.3.0 changes and **BENCHMARKS.md** for current measurements; earlier
 build, test and benchmark reports are in docs/releases/.
 
 ## Build
@@ -81,7 +81,7 @@ configuration. Do not enable that feature in deployments. See docs/releases/v0.1
 
 `--video-workers N` decodes H.264 with N independent OpenH264 instances over
 IDR-aligned chunks. `1` runs the single-decoder path. `0` and the **default** (since
-the 0.2.1 candidate) pick `available_parallelism()`, clamped to 1–16 and further capped at
+0.3.0) pick `available_parallelism()`, clamped to 1–16 and further capped at
 the clip's number of chunks. The default falls back to one decoder when the experimental
 `--decoder-threads` is set.
 
@@ -114,7 +114,7 @@ docs/FILE_BATCHING.md and `python/tenzor_batch.py`). BENCHMARKS.md has current m
 - On Linux, indexing releases mapped source pages every 128 samples so residency
   does not grow with input file size before decoding begins.
 - Each worker adds decoder state and allocator overhead to RSS. Queue, chunk and
-  batch budgets are separate. See BENCHMARK_REPORT.md for current measured RSS.
+  batch budgets are separate. See BENCHMARKS.md for current measured RSS.
 - Worker and emitter panics cancel before scoped joins; partial thread-start
   failures also trigger cancellation. Native faults remain process-level failures.
 

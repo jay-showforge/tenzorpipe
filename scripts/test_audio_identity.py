@@ -2,6 +2,10 @@ import subprocess, hashlib, pathlib, json, sys, os, tempfile
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OLD=os.environ.get('OLD', str(ROOT/'reference/bin/tenzor-v0.1.9-linux-x86_64')); NEW=os.environ.get('NEW', str(ROOT/'target/release/tenzor'))
 OUT=pathlib.Path(tempfile.mkdtemp(prefix='id20-'))
+import tomllib
+# Artifacts embed the engine version; the comparison below substitutes it with the oracle's.
+NEW_VERSION = tomllib.loads((ROOT/'Cargo.toml').read_text())['package']['version'].encode()
+
 def run(b, inp, extra, tag):
     o=OUT/f'{tag}.tenzor'; o.unlink(missing_ok=True)
     p=subprocess.run([b,'-i',str(inp),'-o',str(o),*extra],capture_output=True,text=True,timeout=900)
@@ -12,7 +16,7 @@ def run(b, inp, extra, tag):
             while chunk:=stream.read(1048576):
                 data=tail+chunk
                 if b==NEW:
-                    count+=data.count(b'0.2.0');data=data.replace(b'0.2.0',b'0.1.9')
+                    count+=data.count(NEW_VERSION);data=data.replace(NEW_VERSION,b'0.1.9')
                 digest.update(data[:-4]);tail=data[-4:]
             digest.update(tail)
         if b==NEW:assert count==2, 'unexpected version string count'

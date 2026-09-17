@@ -1,13 +1,14 @@
 import random, subprocess, hashlib, pathlib, time
 ROOT=pathlib.Path(__file__).resolve().parents[1]; F=(ROOT/'fixtures/long-30.mp4').read_bytes(); import os,tempfile,json
 OLD=os.environ['TENZOR_OLD_BINARY']; NEW=str(ROOT/'target/release/tenzor'); OUT=pathlib.Path(tempfile.mkdtemp(prefix='tenzor-fuzz-'));os.chdir(OUT)
+import tomllib;NEW_VERSION=tomllib.loads((ROOT/'Cargo.toml').read_text())['package']['version'].encode()
 def run(b, inp, extra):
     o=pathlib.Path('fz.tenzor'); o.unlink(missing_ok=True); t=time.time()
     try: p=subprocess.run([b,'-i',inp,'-o',str(o),*extra],capture_output=True,text=True,timeout=60)
     except subprocess.TimeoutExpired: return ('TIMEOUT',None,'',60)
     data=o.read_bytes() if p.returncode==0 and o.exists() else None
     # Compare logical content with the v0.1.9 oracle: only the embedded version string differs.
-    h=hashlib.sha256(data.replace(b'0.2.0',b'0.1.9') if b==NEW else data).hexdigest() if data is not None else None
+    h=hashlib.sha256(data.replace(NEW_VERSION,b'0.1.9') if b==NEW else data).hexdigest() if data is not None else None
     left=o.exists() and p.returncode!=0
     o.unlink(missing_ok=True)
     err=[l for l in p.stderr.splitlines() if l.startswith('Error')]

@@ -117,10 +117,11 @@ python bench/gpu_bench.py --iters 50 --warmup 5 --seconds 20 --tenzor-bin target
 ```
 
 <!-- ANALYSIS -->
-## Analysis — v0.2.1 candidate (skip non-reference pictures, AVX2 build, auto default)
+## Analysis — v0.3.0 (skip non-reference pictures, AVX2 build, auto default)
 
 *Written 2026-09-16 from the tables above. Rows named `tenzorpipe-default/-w1/-w6/-auto` are the
-candidate built from this tree (`target/release/tenzor`). `tenzorpipe-v020-auto` is the untouched
+v0.3.0 engine built from this tree before the version bump (it still embedded "0.2.0"; the
+engine code is unchanged by the bump and later packaging, which were re-verified). `tenzorpipe-v020-auto` is the untouched
 v0.2.0 release binary, run in the same session. `ffmpeg-pipe` was re-measured in the same session.
 The DALI and TorchCodec rows come from the earlier v0.2.0 run on the same machine and clips; nothing
 they depend on changed. The analysis of the v0.2.0 release itself is archived in
@@ -142,7 +143,7 @@ TenzorPipe takes 688 ms to FFmpeg's 609 ms, 1.13× slower. That puts TenzorPipe 
 (442 ms) and 2.26× behind TorchCodec-CUDA (276 ms), still with zero VRAM. Every output tensor stayed
 byte-identical to v0.2.0.
 
-### Where the speedup came from (interleaved A/B, 5 runs each, `evidence/v0.2.1/ab-attribution.txt`)
+### Where the speedup came from (interleaved A/B, 5 runs each, `evidence/v0.3.0/ab-attribution.txt`)
 
 | Build | 1 worker | auto workers | Output |
 |---|---:|---:|---|
@@ -227,5 +228,5 @@ must either fail or match the clean output.
   B-pyramid-free encodes gain more.
 - **Carried-over rows:** the DALI and TorchCodec rows are from an earlier session. Same-session release
   and FFmpeg rows reproduced their earlier medians within 3% (release 0.1%, FFmpeg 2.2% video / 2.8% A/V).
-- **Version string:** the candidate still reports version 0.2.0 so identity gates can compare bytes
-  directly. Bump the version (and the version-substitution identity scripts) at release.
+- **Version string:** these measurements and the first identity gate ran before the 0.3.0 bump. The
+  identity scripts now substitute the version string read from Cargo.toml.

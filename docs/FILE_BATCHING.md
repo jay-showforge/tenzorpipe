@@ -38,7 +38,7 @@ python python/tenzor_batch.py --out-dir out/ --max-rss-mib 4096 clips/*.mp4 -- -
 | `tenzor_batch.py` default (16 files × 1 worker) | 0.41 s | 4.8× sequential, lowest RAM |
 
 All modes produced byte-identical outputs. Raw output of the second run:
-`evidence/v0.2.1/file-batching-demo.txt`.
+`evidence/v0.3.0/file-batching-demo.txt`.
 One synthetic clip type; long 1080p files shift the balance back toward more workers per file.
 
 ## Next steps (not implemented)

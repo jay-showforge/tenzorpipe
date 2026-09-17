@@ -40,9 +40,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BENCH_HOME = Path(os.environ.get("BENCH_HOME", Path.home() / ".tenzor-bench"))
-RELEASE_BIN = ROOT / "bin" / "tenzor-linux-x86_64"  # untouched v0.2.0 release binary
+RELEASE_BIN = ROOT / "reference" / "bin" / "tenzor-v0.2.0-linux-x86_64"  # untouched v0.2.0 release
+CURRENT_BIN = ROOT / "bin" / "tenzor-linux-x86_64"
 # Binary under test; --tenzor-bin overrides (worker processes inherit it via this variable).
-TENZOR_BIN = Path(os.environ.get("TENZOR_BIN", RELEASE_BIN))
+TENZOR_BIN = Path(os.environ.get("TENZOR_BIN", CURRENT_BIN))
 RES = 224
 EPOCH_S = 0.5
 MEL_ROWS = 50
@@ -650,7 +651,7 @@ def write_markdown(path, rows, results, clips, env, args):
            "```sh", "bash bench/setup_wsl.sh && . ~/.tenzor-bench/env.sh",
            "cargo build --release --locked && mkdir -p target/release  # CARGO_TARGET_DIR may differ",
            f"python bench/gpu_bench.py --iters {args.iters} --warmup {args.warmup} --seconds {args.seconds}"
-           + (f" --tenzor-bin {os.path.relpath(TENZOR_BIN, ROOT)}" if TENZOR_BIN != RELEASE_BIN else ""), "```", "",
+           + (f" --tenzor-bin {os.path.relpath(TENZOR_BIN, ROOT)}" if TENZOR_BIN != CURRENT_BIN else ""), "```", "",
            "<!-- ANALYSIS -->", ""]
     old = path.read_text() if path.exists() else ""
     if "<!-- ANALYSIS -->" in old:  # keep hand-written analysis across reruns

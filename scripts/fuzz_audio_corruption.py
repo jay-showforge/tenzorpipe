@@ -1,13 +1,14 @@
 import random, subprocess, hashlib, pathlib, time, os, sys, tempfile, json
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OLD=os.environ.get('OLD',str(ROOT/'reference/bin/tenzor-v0.1.9-linux-x86_64')); NEW=os.environ.get('NEW',str(ROOT/'target/release/tenzor'))
+import tomllib;NEW_VERSION=tomllib.loads((ROOT/'Cargo.toml').read_text())['package']['version'].encode()
 def run(b, inp, extra):
     o=pathlib.Path(f'fz-{os.getpid()}.tenzor'); o.unlink(missing_ok=True); t=time.time()
     try: p=subprocess.run([b,'-i',inp,'-o',str(o),*extra],capture_output=True,text=True,timeout=120)
     except subprocess.TimeoutExpired: return ('TIMEOUT',None,'',False,120)
     h=None
     if p.returncode==0:
-        d=o.read_bytes().replace(b'0.2.0',b'0.1.9'); h=hashlib.sha256(d).hexdigest()
+        d=o.read_bytes().replace(NEW_VERSION,b'0.1.9'); h=hashlib.sha256(d).hexdigest()
     left=o.exists() and p.returncode!=0; o.unlink(missing_ok=True)
     err=[l for l in p.stderr.splitlines() if l.startswith('Error')]
     return (p.returncode,h,err[0] if err else '',left or 'panicked' in p.stderr,time.time()-t)

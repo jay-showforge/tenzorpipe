@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — 0.2.1 candidate
+## 0.3.0 — 2026-09-16
 
 - Skip decoding access units whose slices are all non-reference (`nal_ref_idc == 0`) and that no
   epoch selects, in both the chunked and single-decoder paths. Output is byte-identical to 0.2.0
