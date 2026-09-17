@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TenzorPipe — zero-VRAM media ingestion engine</title>
+<meta name="description" content="MP4 and WAV to synchronized RGB and Log-Mel tensors in Apache Arrow. CPU decoding, zero GPU memory, millisecond re-reads, bit-exact reproducibility.">
+<meta property="og:title" content="TenzorPipe — zero-VRAM media ingestion engine">
+<meta property="og:description" content="Decode once on the CPU, then memory-map Apache Arrow tensors for every training epoch.">
+<meta property="og:image" content="assets/banner.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1220'/><path d='M20 50h60M50 20v60' stroke='%2322D3EE' stroke-width='10' stroke-linecap='round'/></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: { colors: { ink: '#0B1220', slate850: '#131C2E' } } } };
+</script>
+</head>
+<body class="bg-ink text-slate-200 antialiased">
+
+<!-- Hero -->
+<header class="mx-auto max-w-6xl px-6 pt-12 pb-10">
+  <img src="assets/banner.png" alt="TenzorPipe — zero-VRAM media ingestion engine"
+       class="w-full max-w-3xl mx-auto rounded-2xl ring-1 ring-cyan-400/20 shadow-2xl shadow-cyan-500/10">
+  <h1 class="mt-10 text-4xl sm:text-5xl font-extrabold tracking-tight text-white text-center">
+    Decode once. <span class="text-cyan-400">Train forever.</span>
+  </h1>
+  <p class="mt-5 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto text-center">
+    TenzorPipe turns MP4 (H.264/AAC) and WAV into synchronized RGB and Log-Mel tensors in batched
+    Apache Arrow IPC — decoded on the CPU, with <strong class="text-white">no GPU memory</strong>,
+    no FFmpeg runtime dependency, and byte-identical output every run.
+  </p>
+  <div class="mt-7 flex flex-wrap gap-2 justify-center text-xs font-semibold">
+    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-orange-400/30 text-orange-300">Rust 1.98.1</span>
+    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-sky-400/30 text-sky-300">PyO3 · abi3-py39</span>
+    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-cyan-400/30 text-cyan-300">Apache Arrow IPC</span>
+    <span class="px-3 py-1 rounded-full bg-slate850 ring-1 ring-amber-400/30 text-amber-300">BSL 1.1 → Apache-2.0</span>
+  </div>
+  <div class="mt-8 flex flex-wrap gap-3 justify-center">
+    <a href="#quickstart" class="px-5 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-ink font-semibold transition">Quickstart</a>
+    <a href="#benchmarks" class="px-5 py-3 rounded-xl bg-slate850 hover:bg-slate-800 ring-1 ring-slate-700 font-semibold transition">Benchmarks</a>
+    <a href="#enterprise" class="px-5 py-3 rounded-xl bg-slate850 hover:bg-slate-800 ring-1 ring-slate-700 font-semibold transition">Commercial use</a>
+  </div>
+</header>
+
+<!-- Demo video -->
+<section class="mx-auto max-w-5xl px-6 py-10">
+  <h2 class="text-2xl font-bold text-white">See it side by side</h2>
+  <p class="mt-2 text-slate-400">Narrated, 25 seconds. Every figure on screen was measured on the machine that produced the video.</p>
+  <div class="mt-6 rounded-2xl overflow-hidden ring-1 ring-slate-700 bg-slate850">
+    <video class="w-full" controls preload="metadata" poster="assets/banner.png">
+      <source src="assets/tenzorpipe_demo.mp4" type="video/mp4">
+      Your browser cannot play embedded video —
+      <a class="text-cyan-400 underline" href="assets/tenzorpipe_demo.mp4">download the MP4</a>.
+    </video>
+  </div>
+</section>
+
+<!-- Benchmarks -->
+<section id="benchmarks" class="mx-auto max-w-6xl px-6 py-10">
+  <h2 class="text-2xl font-bold text-white">Measured, not marketed</h2>
+  <p class="mt-2 text-slate-400">
+    One 20-second 1080p30 H.264 clip at 8 Mb/s, Intel i5-14400F + RTX 5060 (8 GB) under WSL2,
+    50 measured iterations per contender. Full method, raw numbers and caveats:
+    <a class="text-cyan-400 underline" href="https://github.com/tenzorpipe/tenzorpipe/blob/main/BENCHMARKS.md">BENCHMARKS.md</a>.
+  </p>
+  <div class="mt-6 overflow-x-auto rounded-2xl ring-1 ring-slate-700">
+    <table class="w-full text-left border-collapse bg-slate850/60">
+      <thead class="bg-slate850 text-slate-300 text-sm uppercase tracking-wide">
+        <tr>
+          <th class="px-5 py-4 font-semibold">Metric</th>
+          <th class="px-5 py-4 font-semibold text-cyan-300">TenzorPipe 0.3.0</th>
+          <th class="px-5 py-4 font-semibold">FFmpeg pipe</th>
+          <th class="px-5 py-4 font-semibold">NVIDIA DALI</th>
+          <th class="px-5 py-4 font-semibold">TorchCodec (CUDA)</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-800 text-lg">
+        <tr>
+          <td class="px-5 py-4 text-slate-300">First-pass ingest</td>
+          <td class="px-5 py-4 text-cyan-300 font-bold">646 ms</td>
+          <td class="px-5 py-4">554 ms</td>
+          <td class="px-5 py-4">442 ms</td>
+          <td class="px-5 py-4">276 ms</td>
+        </tr>
+        <tr class="bg-cyan-500/5">
+          <td class="px-5 py-4 text-slate-300">Every later training epoch</td>
+          <td class="px-5 py-4 text-cyan-300 font-bold">2.8 ms <span class="text-sm font-normal text-slate-400">Arrow re-read</span></td>
+          <td class="px-5 py-4 text-slate-400">decode again</td>
+          <td class="px-5 py-4 text-slate-400">decode again</td>
+          <td class="px-5 py-4 text-slate-400">decode again</td>
+        </tr>
+        <tr>
+          <td class="px-5 py-4 text-slate-300">GPU memory during decode</td>
+          <td class="px-5 py-4 text-emerald-400 font-bold">0 MiB</td>
+          <td class="px-5 py-4 text-emerald-400">0 MiB</td>
+          <td class="px-5 py-4 text-rose-300">822 MiB</td>
+          <td class="px-5 py-4 text-rose-300">650 MiB</td>
+        </tr>
+        <tr>
+          <td class="px-5 py-4 text-slate-300">Output reproducibility</td>
+          <td class="px-5 py-4 text-cyan-300 font-bold">1,056 / 1,056 byte-identical</td>
+          <td class="px-5 py-4 text-slate-400" colspan="3">differ from each other by colour conversion and resampling</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-sm text-slate-500">
+    TenzorPipe is not the fastest first pass — GPU decoders are. It wins from the second epoch
+    onward, and it never takes VRAM away from your model.
+  </p>
+</section>
+
+<!-- Quickstart -->
+<section id="quickstart" class="mx-auto max-w-5xl px-6 py-10">
+  <h2 class="text-2xl font-bold text-white">Three lines</h2>
+  <pre class="mt-6 rounded-2xl bg-slate850 ring-1 ring-slate-700 p-6 overflow-x-auto text-sm leading-relaxed"><code class="text-slate-200"><span class="text-slate-500"># 1. install (Linux x86-64, CPython 3.9+)</span>
+pip install tenzorpipe
+
+<span class="text-slate-500"># 2. decode once into Apache Arrow</span>
+python -c <span class="text-cyan-300">"import tenzorpipe as tp; tp.ingest('clip.mp4', 'clip.tenzor')"</span>
+
+<span class="text-slate-500"># 3. memory-map tensors for every epoch</span>
+python -c <span class="text-cyan-300">"import tenzorpipe as tp; d = tp.load('clip.tenzor'); print(len(d), d[0]['video'].shape)"</span></code></pre>
+  <div class="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
+    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+      <div class="text-cyan-300 font-semibold">Tensor contract</div>
+      <p class="mt-2 text-slate-400">224×224 RGB CHW float32 in [-1, 1] and 64-band Log-Mel, one row per 0.5 s epoch.</p>
+    </div>
+    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+      <div class="text-cyan-300 font-semibold">No runtime deps</div>
+      <p class="mt-2 text-slate-400">OpenH264 and the AAC decoder are compiled in. No FFmpeg, no CUDA, no system codecs.</p>
+    </div>
+    <div class="rounded-xl bg-slate850 ring-1 ring-slate-700 p-5">
+      <div class="text-cyan-300 font-semibold">Bit-exact</div>
+      <p class="mt-2 text-slate-400">Same bytes on every worker count, verified against the previous release on 1,056 cases.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Enterprise -->
+<section id="enterprise" class="mx-auto max-w-5xl px-6 py-10">
+  <div class="rounded-2xl bg-gradient-to-br from-slate850 to-ink ring-1 ring-amber-400/30 p-8">
+    <h2 class="text-2xl font-bold text-white">Commercial &amp; enterprise licensing</h2>
+    <p class="mt-3 text-slate-300">
+      TenzorPipe is released under the <strong>Business Source License 1.1</strong>. It converts to
+      <strong>Apache-2.0 on 16 September 2030</strong>.
+    </p>
+    <div class="mt-6 grid md:grid-cols-2 gap-4">
+      <div class="rounded-xl bg-ink/60 ring-1 ring-emerald-400/25 p-5">
+        <div class="text-emerald-300 font-semibold">Free for production</div>
+        <ul class="mt-3 space-y-2 text-slate-300 text-sm list-disc list-inside">
+          <li>Individuals and entities under <strong>US$100,000</strong> annual gross revenue</li>
+          <li>Revenue counted across parents, subsidiaries and affiliates under common control</li>
+          <li>Non-production use — testing, evaluation, academic research — always unrestricted</li>
+        </ul>
+      </div>
+      <div class="rounded-xl bg-ink/60 ring-1 ring-amber-400/25 p-5">
+        <div class="text-amber-300 font-semibold">Commercial license required</div>
+        <ul class="mt-3 space-y-2 text-slate-300 text-sm list-disc list-inside">
+          <li>Organizations at or above US$100,000 annual gross revenue</li>
+          <li>Embedded, bundled or OEM distribution on hardware devices</li>
+          <li>Terms negotiated directly with the licensor</li>
+        </ul>
+      </div>
+    </div>
+    <a href="mailto:licensing@tenzorpipe.org?subject=TenzorPipe%20commercial%20license"
+       class="mt-7 inline-block px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-ink font-bold transition">
+      licensing@tenzorpipe.org
+    </a>
+  </div>
+</section>
+
+<footer class="mx-auto max-w-6xl px-6 py-12 text-sm text-slate-500 border-t border-slate-800">
+  <p>© 2026 Jonathan Tyler Montgomery. TenzorPipe 0.3.0 — Business Source License 1.1.</p>
+  <p class="mt-2">
+    Third-party components (OpenH264, Apache Arrow, and others) remain under their own licenses;
+    see THIRD_PARTY_NOTICES. H.264 patent licensing is the deploying party's responsibility.
+  </p>
+</footer>
+
+</body>
+</html>

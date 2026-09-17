@@ -69,8 +69,12 @@ docker run --rm -v "$PWD":/io -w /io quay.io/pypa/manylinux_2_28_x86_64 bash -eu
 
 - The abi3 wheel needs only one interpreter; `cp312` is simply one present in the image.
 - Keep `CARGO_TARGET_DIR` inside the container, so container and host build caches never mix.
-- `quay.io/pypa/manylinux2014_x86_64` (glibc 2.17) is based on CentOS 7, whose package mirrors
-  are archived. Prefer route A for `manylinux_2_17`.
+- This same recipe builds a `manylinux2014` (glibc 2.17) wheel: swap the image for
+  `quay.io/pypa/manylinux2014_x86_64` and pass `--compatibility manylinux2014`. That image is
+  based on CentOS 7, whose package mirrors are archived, so install NASM from source exactly as
+  above rather than with `yum`, and expect `curl` to need `--insecure` only if the container's CA
+  bundle is stale. Route A reaches the same glibc 2.17 floor without a container and is the
+  verified path here.
 - This route was **not run** on the release machine, which has no container runtime. Route A is the
   verified one; treat B as a starting point and apply the checklist.
 

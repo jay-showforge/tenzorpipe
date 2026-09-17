@@ -1,9 +1,29 @@
-# TenzorPipe 0.3.0
+<p align="center">
+  <img src="assets/banner.png" alt="TenzorPipe — zero-VRAM media ingestion engine" width="820">
+</p>
+
+<p align="center">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-22D3EE">
+  <img alt="Rust" src="https://img.shields.io/badge/Rust-1.98.1-000000?logo=rust">
+  <img alt="PyO3" src="https://img.shields.io/badge/PyO3-abi3--py39-3776AB?logo=python&logoColor=white">
+  <img alt="Apache Arrow" src="https://img.shields.io/badge/Apache%20Arrow-IPC-1868F2">
+  <img alt="License" src="https://img.shields.io/badge/license-BSL%201.1-F97316">
+</p>
 
 MP4 H.264/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in batched
 Apache Arrow IPC (`.tenzor`), decoded on the CPU with no FFmpeg or CUDA runtime dependency.
+Decode once, then memory-map the tensors for every training epoch that follows.
+
+**▶ [Watch the 25-second explainer](assets/tenzorpipe_demo.mp4)** — side-by-side against GPU
+decoders, narrated, with the numbers measured on the machine that built it.
 
 ## Quickstart
+
+```sh
+pip install tenzorpipe                                   # 1. install (PyPI publication pending)
+python -c "import tenzorpipe as tp; tp.ingest('clip.mp4', 'clip.tenzor')"   # 2. decode once
+python -c "import tenzorpipe as tp; d=tp.load('clip.tenzor'); print(len(d), d[0]['video'].shape)"  # 3. train
+```
 
 **Install** (Linux x86-64, CPython 3.9+; the wheel below needs glibc 2.34+, see [docs/PACKAGING.md](docs/PACKAGING.md) for older distributions):
 
@@ -21,6 +41,23 @@ tp.ingest("clip.mp4", "clip.tenzor")                # decode once: 224×224 RGB 
 with tp.load("clip.tenzor") as data:                # memory-mapped Arrow, zero-copy tensor views
     for batch in data.iter_batches():
         video, mel = batch["video"], batch["audio"]  # float32 [B,3,224,224] and [B,50,64]
+```
+
+**Command line** (the wheel installs a `tenzor` binary):
+
+```sh
+tenzor -i clip.mp4 -o clip.tenzor                                     # defaults: 224px, 0.5 s epochs
+tenzor -i clip.mp4 -o small.tenzor --resolution 160 --window-sec 0.25 --video-workers 4
+tenzor -i clip.mp4 -o clip.tenzor --profile --quiet                   # stage timers, no diagnostics
+tenzor --help
+```
+
+**Reproduce the comparison yourself** (writes `benchmark_results.json`):
+
+```sh
+python scripts/generate_benchmark_assets.py     # 10 s 1080p30 H.264/AAC test clip
+python scripts/run_side_by_side_demo.py         # measures TenzorPipe vs TorchCodec CUDA vs FFmpeg
+python scripts/produce_demo_video.py            # narrated video from those measurements
 ```
 
 **Benchmark highlights.** One 20 s 1080p30 H.264 clip, Intel i5-14400F + RTX 5060 8 GB under

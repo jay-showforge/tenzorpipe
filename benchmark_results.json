@@ -1,0 +1,68 @@
+{
+  "generated": "2026-09-17T15:20:40",
+  "host": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "cpu_count": 16
+  },
+  "clip": {
+    "frames": 300,
+    "fps": 30.0,
+    "duration_s": 10.0,
+    "width": 1920,
+    "height": 1080,
+    "bitrate_mbps": 8.09,
+    "epochs": 20,
+    "path": "tests/data/benchmark_1080p.mp4"
+  },
+  "settings": {
+    "resolution": 224,
+    "epoch_seconds": 0.5,
+    "ingest_iterations": 5,
+    "epoch_iterations": 10
+  },
+  "results": {
+    "TenzorPipe": {
+      "ingest_ms": 581.6678990000028,
+      "epoch_ms": 0.7111630000018465,
+      "vram_mib": 0.0,
+      "cpu_cores": 4.495088127777046,
+      "epoch_rows": 20,
+      "api": "tenzorpipe python package",
+      "artifact_mib": 12.099916458129883,
+      "note": "decoded once; later epochs memory-map Apache Arrow tensors"
+    },
+    "TorchCodec CUDA": {
+      "ingest_ms": 273.7340105000001,
+      "epoch_ms": 273.7340105000001,
+      "vram_mib": 336.13671875,
+      "cpu_cores": NaN,
+      "note": "GPU decode; every epoch decodes the clip again"
+    },
+    "FFmpeg pipe": {
+      "ingest_ms": 458.14041149999696,
+      "epoch_ms": 458.14041149999696,
+      "vram_mib": 0.0,
+      "cpu_cores": 6.729596159069106,
+      "note": "CPU decode; every epoch decodes the clip again"
+    }
+  },
+  "parity": {
+    "verified": true,
+    "cases": 1056,
+    "failures": 0,
+    "kinds": {
+      "identical": 936,
+      "same-error": 120
+    },
+    "binary_sha256": "8cb48b48c597991a526b5ece5921fa683fd1fbbde47cf3fc5295db47354fe713",
+    "binary_matches_bin_dir": true,
+    "source": "evidence/v0.3.0/skip-identity.json",
+    "detail": "1056 recorded cases, 0 failures, binary matches bin/tenzor-linux-x86_64"
+  },
+  "measurement_notes": [
+    "Latencies are medians of live runs on this host.",
+    "TenzorPipe's epoch time re-reads the Arrow artifact; the others decode the clip again.",
+    "GPU memory is device-wide NVML delta (WSL2 exposes no per-process accounting).",
+    "Parity is read from recorded gate evidence, not re-run here."
+  ]
+}
