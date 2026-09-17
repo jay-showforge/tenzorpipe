@@ -5,7 +5,7 @@ Apache Arrow IPC (`.tenzor`), decoded on the CPU with no FFmpeg or CUDA runtime 
 
 ## Quickstart
 
-**Install** (Linux x86-64, glibc 2.34+, CPython 3.9+):
+**Install** (Linux x86-64, CPython 3.9+; the wheel below needs glibc 2.34+, see [docs/PACKAGING.md](docs/PACKAGING.md) for older distributions):
 
 ```sh
 pip install "tenzorpipe[torch]"                                               # from PyPI, once published
@@ -37,24 +37,25 @@ fastest first-pass decoder. Its advantages are zero VRAM, byte-exact reproducibl
 near-free re-reads for multi-epoch training; the first pass is 7.9× faster than v0.2.0.
 
 **License:** Business Source License 1.1. Production use is permitted for individuals and
-organizations with under US$100,000 annual gross revenue, and non-production use is unrestricted.
-It converts to Apache-2.0 on 2030-09-16. See [LICENSE](LICENSE).
+organizations whose annual gross revenue, combined with their parents, subsidiaries and affiliates,
+is under US$100,000; non-production use is unrestricted. Larger organizations and embedded
+hardware/OEM deployments need a commercial license (licensing@tenzorpipe.org). Converts to
+Apache-2.0 on 2030-09-16. See [LICENSE](LICENSE).
 
 See **CHANGELOG.md** for 0.3.0 changes. Earlier build, test and benchmark reports are in
 docs/releases/.
 
 ## Build
 
-Linux x86-64 is the tested target. Extract the complete ZIP, or both split archives into the same parent folder first. Install a C/C++
-compiler, NASM, and Rust 1.98.1.
+Linux x86-64 is the tested target. Install a C/C++ compiler, NASM, and Rust 1.98.1.
 On a conventional Debian/Ubuntu host:
 
 ```sh
 sudo apt-get update
 sudo apt-get install -y build-essential nasm ffmpeg strace python3-venv
 rustup toolchain install 1.98.1 --profile minimal --component rustfmt,clippy
-cargo build --release --locked
-cargo test --locked --all-targets
+cargo build --release --locked --workspace
+cargo test --locked --workspace --all-targets
 cargo install cargo-deny --version 0.20.2 --locked
 cargo deny check licenses
 ```
@@ -100,7 +101,9 @@ state, worker/collector working tensors, allocator overhead and Arrow batches ar
 additional bounded memory, not included in that payload budget. Default 224/0.5s
 queues use 1,229,824 payload bytes across both tracks.
 
-`--profile` prints JSON on stderr with wall-clock stage durations. Audio source
+`--quiet` (`-q`) suppresses the diagnostic lines on stderr (decoder mode and the per-video
+summary); errors and `--profile` output are still reported. `--profile` prints JSON on stderr
+with wall-clock stage durations. Audio source
 reading/decoding/downmix is excluded from the resampling timer. Channel send/receive
 waits are separate. Stage durations overlap across threads and are not CPU time or
 an additive decomposition of total latency. Frame copying, scheduling and other
@@ -174,7 +177,7 @@ benchmark clip 265 of 600 access units are skipped. The log reports
 - Trade-off: corrupt *slice data* inside a skipped picture is no longer detected, because
   that picture is never decoded. Use `--no-skip-nonref` to validate every picture.
 
-## Audio execution in 0.2.0
+## Audio execution
 
 Concurrent mode now separates audio decoding from resampling/Mel processing.
 A bounded 32-chunk queue preserves PCM order. Its queued mono payload is at most
@@ -250,12 +253,14 @@ with tp.load("example.tenzor") as data:
 
 `tp.ingest()` accepts the CLI options as keyword arguments (`video_workers`, `window_sec`,
 `batch_epochs`, `skip_nonref=False`, ...); options left unset use the CLI defaults, because the
-arguments are parsed by the same definition. Failures raise `tenzorpipe.TenzorError` and
+arguments are parsed by the same definition. It is silent by default: pass `verbose=True` to see
+the engine's stderr diagnostics, and `profile=True` to get stage timers back as `info["profile"]`. Failures raise `tenzorpipe.TenzorError` and
 remove the partial output. The wheel also installs the `tenzor` command. Without the
 `torch` extra, read files with PyArrow (`data.reader`, or `pyarrow.ipc.open_file`).
 
 Building from source (`pip install .`) needs Rust 1.98.1 and NASM; `scripts/build_wheel.sh`
-builds the release wheel and smoke-tests it in fresh virtual environments.
+builds the release wheel and smoke-tests it in fresh virtual environments. Wheels for older
+glibc (`manylinux_2_28`, `manylinux_2_17`) are covered in [docs/PACKAGING.md](docs/PACKAGING.md).
 
 `iter_batches()` visits the whole file; `get_batch(0)` is just one batch.
 `copy=False` wraps read-only Arrow/NumPy buffers without copying tensor payloads.
@@ -266,15 +271,20 @@ No GPU transfer is zero-copy; moving to CUDA allocates GPU storage normally.
 ## Reproduce verification and benchmarks
 
 ```sh
-# After the build/test dependencies above are installed:
-bash scripts/reproduce.sh
+# After the build/test dependencies above are installed (plus FFmpeg for test media):
+bash scripts/release_gates.sh          # full 0.3.0 gates, ~25 minutes
+QUICK=1 bash scripts/release_gates.sh  # everything except the byte-identity matrix
 ```
 
-The script contains every exact command, including the generated/repository audio identity matrices,
-22-minute memory comparison, baseline benchmark, and write audit. It uses the
-included v0.1.6 and v0.1.9 Linux comparison binaries in `reference/bin/`.
-These are regression references; deploy `bin/tenzor-linux-x86_64` or your rebuilt
-v0.2.0 binary. Allow roughly 15 GiB free for regenerated test outputs.
+The gates build and test the workspace, run the vendored AAC tests, fmt, clippy and the
+license check, compare 1,056 conversions byte for byte against the v0.2.0 release binary
+(`scripts/test_skip_identity.py`), run the existing regression suites on a scratch copy of the
+repository, and build and smoke-test the wheel. Logs go to `evidence/v0.3.0/`. The comparison
+binaries in `reference/bin/` (v0.1.6, v0.1.8, v0.1.9, v0.2.0) are regression oracles; deploy
+`bin/tenzor-linux-x86_64` or your own 0.3.0 build. Allow roughly 15 GiB free for generated
+test outputs. `scripts/reproduce.sh` is the historical v0.2.0 EPYC evidence pipeline.
+
+Competitor benchmarks (DALI, TorchCodec, FFmpeg) live in `bench/`; see BENCHMARKS.md.
 
 Test outputs default to `out/`. Set `TENZOR_OUTPUT_ROOT=/tmp/tenzor-artifacts`
 to choose another output filesystem. Final recorded runs used this override after

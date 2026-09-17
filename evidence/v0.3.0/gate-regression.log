@@ -1,10 +1,10 @@
-matrix-default               PASS  (7s)  PASS 16 media cases, 12 failure cases, PyTorch checks
-matrix-w4                    PASS  (7s)  PASS 16 media cases, 12 failure cases, PyTorch checks
-epoch-selection-w1           PASS  (14s)  PASS 41 old/new exact-value comparisons
-epoch-selection-w4           PASS  (13s)  PASS 41 old/new exact-value comparisons
+matrix-default               PASS  (10s)  PASS 16 media cases, 12 failure cases, PyTorch checks
+matrix-w4                    PASS  (8s)  PASS 16 media cases, 12 failure cases, PyTorch checks
+epoch-selection-w1           PASS  (9s)  PASS 41 old/new exact-value comparisons
+epoch-selection-w4           PASS  (14s)  PASS 41 old/new exact-value comparisons
 concurrency                  PASS  (10s)  PASS 38 concurrency/budget/failure checks
 chunk-boundaries             PASS  (10s)  PASS 30 dual-decoder checks
-audio-identity-repo          PASS  (91s)  TOTAL 396 FAIL 0 SUCCESS_ARTIFACTS 336 ERROR_AGREEMENTS 60
+audio-identity-repo          PASS  (89s)  TOTAL 396 FAIL 0 SUCCESS_ARTIFACTS 336 ERROR_AGREEMENTS 60
 audio-write-failure          PASS  (1s)  PASS 12 paired write-failure cases
 chunked-corruption-fuzz      PASS  (14s)  strict agree 24 /24; default succeeded with clean-identical output 2 /24
 ALL_GATES PASS  logs: /home/ftmon/.tenzor-build/repo-copy/evidence/gate-*.log

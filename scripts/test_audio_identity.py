@@ -41,7 +41,7 @@ for f in files:
             bad+=not ok
             rows.append(dict(file=f.name,settings=' '.join(s),variant=' '.join(v),old_rc=r0[0],new_rc=r[0],same_bytes=r[1]==r0[1],old_error=r0[2],new_error=r[2],ok=ok))
             print('PASS' if ok else 'FAIL', f.name, ' '.join(s), ' '.join(v), 'rc',r0[0],r[0], r0[2][:50], '|', r[2][:50], flush=True)
-out=os.environ.get('RESULT',str(ROOT/'evidence/v0.2.0/audio-identity.json')); json.dump(rows,open(out,'w'),indent=1)
+out=os.environ.get('RESULT',str(ROOT/'evidence/v0.3.0/audio-identity.json')); json.dump(rows,open(out,'w'),indent=1)
 print('TOTAL',len(rows),'FAIL',bad,'SUCCESS_ARTIFACTS',sum(1 for x in rows if x['old_rc']==0 and x['ok']),'ERROR_AGREEMENTS',sum(1 for x in rows if x['old_rc']!=0 and x['ok']))
 
 assert bad==0, f"{bad} identity cases failed"

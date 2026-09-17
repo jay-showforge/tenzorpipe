@@ -4,6 +4,8 @@
 #   2. install the wheel with CPU torch: TenzorDataset tensors have the documented shapes
 #   3. `pip install .` from this source tree: output byte-identical to the wheel's
 # Requires Rust 1.98.1, NASM and python3. Wheels land in dist/.
+# COMPATIBILITY=manylinux_2_28 (or manylinux_2_17) builds a broader wheel with `maturin --zig`
+# instead of linking against the host glibc; see docs/PACKAGING.md.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT="$PWD"
@@ -11,6 +13,7 @@ WORK="${WHEEL_WORK:-$HOME/.tenzor-build/wheel}"
 PY="${PYTHON:-python3}"
 TORCH_INDEX="${TORCH_INDEX:-https://download.pytorch.org/whl/cpu}"
 CLIP="${SMOKE_CLIP:-$ROOT/fixtures/high-bframes.mp4}"
+COMPAT="${COMPATIBILITY:-}"
 mkdir -p "$WORK" dist
 
 venv() {  # venv <dir>: create a virtual environment with pip even where ensurepip is missing
@@ -25,7 +28,12 @@ venv() {  # venv <dir>: create a virtual environment with pip even where ensurep
 venv "$WORK/build-venv"
 "$WORK/build-venv/bin/pip" install --quiet "maturin>=1.15,<2"
 rm -f dist/tenzorpipe-*.whl
-"$WORK/build-venv/bin/maturin" build --release --out dist
+if [ -n "$COMPAT" ]; then
+  "$WORK/build-venv/bin/pip" install --quiet ziglang
+  PATH="$WORK/build-venv/bin:$PATH" CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$ROOT/target}-zig"     maturin build --release --zig --compatibility "$COMPAT" --target x86_64-unknown-linux-gnu --out dist
+else
+  "$WORK/build-venv/bin/maturin" build --release --out dist
+fi
 WHEEL=$(ls dist/tenzorpipe-*.whl)
 echo "built $WHEEL ($(du -h "$WHEEL" | cut -f1))"
 "$WORK/build-venv/bin/python" -m zipfile -l "$WHEEL" | awk '{print $1}' | grep -E "_engine|__init__|LICENSE$|METADATA|entry_points" 
@@ -51,6 +59,14 @@ try:
 except ImportError as e:
     print('torch-free install:', e)
 " "$CLIP" "$OUT"
+# Engine diagnostics are written by Rust straight to file descriptor 2, so check a subprocess.
+"$WORK/smoke-arrow/bin/python" -c "import tenzorpipe as tp, sys; r = tp.ingest(sys.argv[1], sys.argv[2] + '/quiet.tenzor', video_workers=2, profile=True); assert r['profile']['wall_seconds'] > 0" "$CLIP" "$OUT" 2> "$OUT/quiet.stderr"
+[ ! -s "$OUT/quiet.stderr" ] || { echo "stderr not quiet:"; cat "$OUT/quiet.stderr"; exit 1; }
+echo "default ingest: stderr empty, profile returned as a dict"
+"$WORK/smoke-arrow/bin/python" -c "import tenzorpipe as tp, sys; tp.ingest(sys.argv[1], sys.argv[2] + '/verbose.tenzor', video_workers=2, profile=True, verbose=True)" "$CLIP" "$OUT" 2> "$OUT/verbose.stderr"
+grep -q "^video_mode=" "$OUT/verbose.stderr" && grep -q "skipped_nonref=" "$OUT/verbose.stderr" && grep -q "^TENZOR_PROFILE {" "$OUT/verbose.stderr"
+echo "verbose=True: $(wc -l < "$OUT/verbose.stderr") diagnostic lines on stderr"
+cmp "$OUT/quiet.tenzor" "$OUT/verbose.tenzor" && echo "quiet and verbose outputs byte-identical"
 "$WORK/smoke-arrow/bin/tenzor" -i "$CLIP" -o "$OUT/cli.tenzor" --video-workers 2
 "$WORK/smoke-arrow/bin/tenzor" --version
 cmp "$OUT/a.tenzor" "$OUT/cli.tenzor" && echo "python ingest == wheel CLI output (byte-identical)"

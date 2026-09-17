@@ -50,6 +50,29 @@ VARIANTS = [
 ]
 
 
+def substituted_sha256(path, substitute):
+    """SHA-256 of a file, optionally with NEW_VERSION replaced by OLD_VERSION, in bounded memory.
+
+    Artifacts reach several GiB (330 s at 0.05 s windows), so hash in chunks and carry the last
+    len-1 bytes forward so a version string split across a chunk boundary is still found.
+    """
+    assert len(NEW_VERSION) == len(OLD_VERSION)
+    keep = len(NEW_VERSION) - 1
+    digest, tail, count = hashlib.sha256(), b"", 0
+    with open(path, "rb") as f:
+        while chunk := f.read(1 << 20):
+            data = tail + chunk
+            if substitute:
+                count += data.count(NEW_VERSION)
+                data = data.replace(NEW_VERSION, OLD_VERSION)
+            digest.update(data[:-keep])
+            tail = data[-keep:]
+    digest.update(tail)
+    if substitute and count != 2:
+        raise AssertionError(f"expected 2 version strings in {path}, found {count}")
+    return digest.hexdigest()
+
+
 def run(binary, media, args, tag):
     out = OUT / f"{tag}.tenzor"
     out.unlink(missing_ok=True)
@@ -59,12 +82,7 @@ def run(binary, media, args, tag):
         return {"rc": "TIMEOUT", "sha256": None, "error": "", "skipped": None, "panic": False, "leftover": False}
     digest = None
     if p.returncode == 0:
-        data = out.read_bytes()
-        if binary == NEW and NEW_VERSION != OLD_VERSION:
-            if data.count(NEW_VERSION) != 2:
-                raise AssertionError(f"expected 2 version strings in {out}, found {data.count(NEW_VERSION)}")
-            data = data.replace(NEW_VERSION, OLD_VERSION)
-        digest = hashlib.sha256(data).hexdigest()
+        digest = substituted_sha256(out, binary == NEW and NEW_VERSION != OLD_VERSION)
     leftover = p.returncode != 0 and out.exists()
     out.unlink(missing_ok=True)
     err = next((l for l in p.stderr.splitlines() if l.startswith("Error")), "")

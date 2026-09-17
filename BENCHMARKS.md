@@ -102,7 +102,7 @@ Generated 2026-09-16 21:49 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
   "pyarrow": "25.0.1",
   "ffmpeg": "ffmpeg version n8.1.2-53-g1005b294ff-20260916 Copyright (c) 2000-2026 the FFmpeg developers",
   "torch_cuda": "13.0",
-  "tenzor_bin": "/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor",
+  "tenzor_bin": "target/release/tenzor",
   "tenzor_sha256": "451c1f5d14b608ccdb93eac5ebba9ab1884d6ab2f548ce207ad6c686d81ecc39",
   "release_sha256": "c914ddbd5663c9837c501020e58f98b1cdb150708ae0b37fcbc5df8374858b77"
 }

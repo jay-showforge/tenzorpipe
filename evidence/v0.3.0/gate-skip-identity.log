@@ -1,4 +1,4 @@
-44 media x 4 settings x 6 variants = 1056 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
+29 media x 4 settings x 6 variants = 696 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
 PASS same-error corrupt-nal.mp4 [] default rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
 PASS same-error corrupt-nal.mp4 [] w1 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
 PASS same-error corrupt-nal.mp4 [] w2-chunk250 rc 1 1 Error: invalid/truncated AVCC NAL payload | Error: invalid/truncated AVCC NAL payload
@@ -119,4 +119,10 @@ PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w2-chu
 PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w8 rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
 PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w1-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
 PASS same-error unsupported.mp3 [--execution sequential --window-sec 1.0] w4-noskip rc 1 1 Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and | Error: unsupported extension 'mp3'; supports only MP4 H.264/AAC-LC and
-TOTAL 1056 FAIL 0 kinds={'identical': 936, 'same-error': 120} identical-with-skips=396 skipped-access-units=93716
+TOTAL 696 FAIL 0 kinds={'identical': 576, 'same-error': 120} identical-with-skips=172 skipped-access-units=4660
+12 media x 4 settings x 6 variants = 288 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
+TOTAL 288 FAIL 0 kinds={'identical': 288} identical-with-skips=176 skipped-access-units=27164
+2 media x 4 settings x 6 variants = 48 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
+TOTAL 48 FAIL 0 kinds={'identical': 48} identical-with-skips=32 skipped-access-units=7160
+1 media x 4 settings x 6 variants = 24 cases (OLD=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/reference/bin/tenzor-v0.2.0-linux-x86_64, NEW=/mnt/c/Users/ftmon/TenzorPipe/tenzorpipe-v0.2.0/target/release/tenzor)
+TOTAL 24 FAIL 0 kinds={'identical': 24} identical-with-skips=16 skipped-access-units=54732

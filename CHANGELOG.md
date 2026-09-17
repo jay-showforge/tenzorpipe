@@ -3,8 +3,16 @@
 ## 0.3.0 — 2026-09-16
 
 - License the project under the Business Source License 1.1 (LICENSE): Additional Use Grant
-  for production use below US$100,000 annual gross revenue; Change Date 2030-09-16; Change
-  License Apache-2.0.
+  for production use below US$100,000 annual gross revenue, aggregated across parents,
+  subsidiaries and affiliates under common control; larger organizations and embedded
+  hardware/OEM production use need a commercial license (licensing@tenzorpipe.org); Change
+  Date 2030-09-16; Change License Apache-2.0.
+- `--quiet`/`-q` suppresses engine diagnostics on stderr; `--profile` JSON is returned to the
+  caller instead of printed by the engine. `tenzorpipe.ingest()` is silent unless
+  `verbose=True` and returns stage timers as `info["profile"]` when `profile=True`.
+- docs/PACKAGING.md and `COMPATIBILITY=manylinux_2_28|manylinux_2_17 scripts/build_wheel.sh`
+  for wheels that install on older glibc (zig cross-linking; outputs verified byte-identical
+  with `scripts/check_wheel_identity.py`).
 - Skip decoding access units whose slices are all non-reference (`nal_ref_idc == 0`) and that no
   epoch selects, in both the chunked and single-decoder paths. Output is byte-identical to 0.2.0
   (1,056-case gate against the release binary). 1080p benchmark: 1 worker 5.02 s → 2.99 s, auto

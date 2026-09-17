@@ -70,6 +70,7 @@ impl Metrics {
             );
         }
     }
+    /// Profile JSON for `--profile` runs; `None` when profiling is off.
     pub fn report(
         &self,
         elapsed: f64,
@@ -77,9 +78,9 @@ impl Metrics {
         slots: usize,
         queue_bytes: usize,
         threads: usize,
-    ) {
+    ) -> Option<String> {
         if !self.enabled {
-            return;
+            return None;
         }
         let stages = NAMES
             .iter()
@@ -92,8 +93,8 @@ impl Metrics {
             })
             .collect::<Vec<_>>()
             .join(",");
-        eprintln!(
-            "TENZOR_PROFILE {{\"wall_seconds\":{elapsed:.9},\"execution\":\"{mode}\",\"queue_slots_per_track\":{slots},\"queued_payload_budget_used_bytes\":{queue_bytes},\"decoder_threads\":{threads},\"stages_seconds\":{{{stages}}}}}"
-        );
+        Some(format!(
+            "{{\"wall_seconds\":{elapsed:.9},\"execution\":\"{mode}\",\"queue_slots_per_track\":{slots},\"queued_payload_budget_used_bytes\":{queue_bytes},\"decoder_threads\":{threads},\"stages_seconds\":{{{stages}}}}}"
+        ))
     }
 }

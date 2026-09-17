@@ -1,2 +1,2 @@
-451c1f5d14b608ccdb93eac5ebba9ab1884d6ab2f548ce207ad6c686d81ecc39  bin/tenzor-linux-x86_64
-5bd48991b1b60f016d66d9f5a384464ec0b52eb1d331a3941bb8c86dc4e5a3a9  dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl
+8cb48b48c597991a526b5ece5921fa683fd1fbbde47cf3fc5295db47354fe713  bin/tenzor-linux-x86_64
+3b1078b73f486643b65259effe26b1680819bd44925c2bc2889bfaa6ae7711c0  dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl

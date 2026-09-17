@@ -42,6 +42,10 @@ pub struct Cli {
     /// Print active-stage and channel-wait wall-clock timers as JSON on stderr.
     #[arg(long)]
     profile: bool,
+    /// Suppress diagnostic messages on stderr (decoder mode and per-video summary).
+    /// Errors are still reported, and --profile output is still produced.
+    #[arg(short, long)]
+    quiet: bool,
     /// Nonzero values require the experimental-decoder-threads build feature.
     #[arg(long, default_value_t = 0)]
     decoder_threads: usize,
@@ -75,10 +79,12 @@ where
 }
 
 /// Result of a successful conversion.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Debug)]
 pub struct Summary {
     pub epochs: usize,
     pub seconds: f64,
+    /// Stage-timer JSON when `--profile` was requested; the caller decides where to print it.
+    pub profile: Option<String>,
 }
 
 /// Validate options, convert the input and publish a verified Arrow file.
@@ -183,7 +189,7 @@ pub fn convert(args: &Cli) -> Result<Summary> {
     );
     drop(reader);
     guard.completed = true;
-    metrics.report(
+    let profile = metrics.report(
         start.elapsed().as_secs_f64(),
         match args.execution {
             Execution::Sequential => "sequential",
@@ -196,6 +202,7 @@ pub fn convert(args: &Cli) -> Result<Summary> {
     Ok(Summary {
         epochs,
         seconds: start.elapsed().as_secs_f64(),
+        profile,
     })
 }
 fn run(
@@ -336,6 +343,7 @@ fn run(
         audio_duration_ms,
         decoder_threads: args.decoder_threads,
         skip_nonref: !args.no_skip_nonref,
+        diagnostics: !args.quiet,
     };
     let epoch = match args.execution {
         Execution::Sequential => {
@@ -362,7 +370,7 @@ fn run(
                         Ok(())
                     },
                 )?;
-                log_video(&info);
+                log_video(args, &info);
             } else {
                 while epoch < total {
                     emit(epoch, None)?;
@@ -425,7 +433,7 @@ fn run(
                             )
                         },
                     )?;
-                    log_video(&info);
+                    log_video(args, &info);
                     cancel.send(&tx, Message::End(total), &video_metrics)
                 }
             });
@@ -553,7 +561,10 @@ where
         on_epoch,
     )
 }
-fn log_video(info: &video::VideoInfo) {
+fn log_video(args: &Cli, info: &video::VideoInfo) {
+    if args.quiet {
+        return;
+    }
     eprintln!(
         "video {}x{}, duration {}ms, decoded {} access units, resized {} selected pictures, skipped_nonref={}",
         info.width,

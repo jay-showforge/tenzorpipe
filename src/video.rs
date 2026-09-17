@@ -33,6 +33,8 @@ pub struct VideoConfig {
     pub decoder_threads: usize,
     /// Skip decoding access units that no picture references and no epoch selects.
     pub skip_nonref: bool,
+    /// Print decoder-mode diagnostics on stderr.
+    pub diagnostics: bool,
 }
 
 /// True when no other picture can depend on this access unit: every VCL NAL is a
@@ -131,6 +133,7 @@ where
         audio_duration_ms,
         decoder_threads,
         skip_nonref,
+        ..
     } = config;
     anyhow::ensure!(window_ms > 0, "epoch window must be positive");
     let track = mp4

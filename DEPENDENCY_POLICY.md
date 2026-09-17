@@ -30,8 +30,9 @@ cargo metadata --locked --format-version 1 > evidence/cargo-metadata.json
 
 **Project license:** Business Source License 1.1 (see LICENSE). Licensor Jonathan Tyler
 Montgomery; Additional Use Grant for production use by individuals and legal entities with
-aggregate annual gross revenue below US$100,000; Change Date 2030-09-16; Change License
-Apache-2.0. Third-party components keep their own licenses. `publish=false` remains for
+annual gross revenue below US$100,000, aggregated across parents, subsidiaries and affiliates
+under common control, excluding embedded hardware/OEM production use (commercial license:
+licensing@tenzorpipe.org); Change Date 2030-09-16; Change License Apache-2.0. Third-party components keep their own licenses. `publish=false` remains for
 crates.io. Dependency license compliance is not a codec patent determination: OpenH264 is
 built from source, so Cisco's patent-license coverage for its prebuilt binaries does not apply
 to these builds.

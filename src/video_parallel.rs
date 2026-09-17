@@ -317,7 +317,9 @@ where
     F: FnMut(usize, i64, &[f32]) -> Result<()>,
 {
     let fallback = |reason: &str, on_epoch: F| {
-        eprintln!("video_mode=single_fallback reason=\"{reason}\"");
+        if config.diagnostics {
+            eprintln!("video_mode=single_fallback reason=\"{reason}\"");
+        }
         decode_h264_mp4(mp4, config, metrics, cancel, on_epoch)
     };
     if par.workers < 2 {
@@ -450,11 +452,13 @@ where
     if workers < 2 {
         return fallback("byte budget allows fewer than 2 in-flight chunks", on_epoch);
     }
-    eprintln!(
-        "video_mode=chunked workers={workers} window={window} chunks={} max_chunk_tensor_bytes={max_chunk_bytes} bound_bytes={}",
-        chunks.len(),
-        window * max_chunk_bytes
-    );
+    if config.diagnostics {
+        eprintln!(
+            "video_mode=chunked workers={workers} window={window} chunks={} max_chunk_tensor_bytes={max_chunk_bytes} bound_bytes={}",
+            chunks.len(),
+            window * max_chunk_bytes
+        );
+    }
 
     drop(presented);
     drop(idr);

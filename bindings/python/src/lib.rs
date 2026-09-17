@@ -18,14 +18,15 @@ fn parse(argv: Vec<String>) -> PyResult<tenzor_pipe::Cli> {
 }
 
 /// Convert one input. `argv` excludes the program name, e.g. `["-i", "a.mp4", "-o", "a.tenzor"]`.
-/// Returns `(epochs, seconds)`. The GIL is released while decoding.
+/// Returns `(epochs, seconds, profile_json_or_None)`. The GIL is released while decoding.
+/// Nothing is printed except the engine's own diagnostics, which `--quiet` suppresses.
 #[pyfunction]
-fn convert(py: Python<'_>, argv: Vec<String>) -> PyResult<(usize, f64)> {
+fn convert(py: Python<'_>, argv: Vec<String>) -> PyResult<(usize, f64, Option<String>)> {
     let cli = parse(argv)?;
     let summary = py
         .detach(|| tenzor_pipe::convert(&cli))
         .map_err(|e| TenzorError::new_err(format!("{e:#}")))?;
-    Ok((summary.epochs, summary.seconds))
+    Ok((summary.epochs, summary.seconds, summary.profile))
 }
 
 /// Behave like the `tenzor` binary: print usage errors, help, the summary line or the error
@@ -41,6 +42,9 @@ fn run_cli(py: Python<'_>, argv: Vec<String>) -> i32 {
     };
     match py.detach(|| tenzor_pipe::convert(&cli)) {
         Ok(summary) => {
+            if let Some(profile) = &summary.profile {
+                eprintln!("TENZOR_PROFILE {profile}");
+            }
             println!(
                 "TenzorPipe {}: {} epochs in {:.3}s",
                 env!("CARGO_PKG_VERSION"),

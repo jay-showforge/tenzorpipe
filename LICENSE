@@ -11,14 +11,30 @@ Licensed Work:        TenzorPipe 0.3.0
                       Work and remain under their own licenses.
 Additional Use Grant: You may make production use of the Licensed Work, provided
                       that you are an individual or a legal entity whose aggregate
-                      annual gross revenue is less than US$100,000.
+                      annual gross revenue is less than US$100,000. Gross revenue
+                      is aggregated across you and every parent, subsidiary and
+                      affiliated entity under common control with you, whether
+                      control is held directly or indirectly. "Control" means
+                      ownership of more than 50% of the voting interests of an
+                      entity, or the power to direct its management and policies.
+
+                      This production-use grant does not extend to (a) any
+                      individual or legal entity whose aggregate annual gross
+                      revenue, calculated as above, is US$100,000 or more, or
+                      (b) production use of the Licensed Work embedded in,
+                      bundled with, or distributed on hardware devices, including
+                      OEM products. Such production use requires a separate
+                      Commercial License Agreement with the Licensor.
+
                       Non-production use, including testing, evaluation and
                       academic research, is not restricted by this License.
+
+                      Commercial licensing inquiries: licensing@tenzorpipe.org
 Change Date:          2030-09-16
 Change License:       Apache License, Version 2.0
 
 For information about alternative licensing arrangements for the Licensed Work,
-please contact the Licensor.
+please contact licensing@tenzorpipe.org.
 
 Notice
 

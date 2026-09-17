@@ -34,5 +34,5 @@ for src in sources:
         print(pathlib.Path(src).name,name,'OK' if same_outcome and clean else 'DIFF','old',o[0],o[2][:55],'| new',n[0],n[2][:55],'| same_msg',same_error,f'{n[4]:.2f}s',flush=True)
 print('cases',total,'same_outcome',agree,'same_error_text',exact)
 
-(ROOT/"evidence/v0.2.0/corruption-fuzz.json").write_text(json.dumps(rows,indent=2))
+(ROOT/"evidence/v0.3.0/corruption-fuzz.json").write_text(json.dumps(rows,indent=2))
 assert total==agree==exact, f"corruption agreement failure: {total}/{agree}/{exact}"

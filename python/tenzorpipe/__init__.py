@@ -11,7 +11,9 @@ Options left as ``None`` use the engine defaults (the same as the ``tenzor`` CLI
 from __future__ import annotations
 
 import importlib
+import json
 import os
+import sys
 from typing import Optional, Union
 
 from .dataset import TenzorDataset
@@ -50,11 +52,16 @@ def ingest(
     skip_nonref: bool = True,
     audio_decode_thread: bool = True,
     profile: bool = False,
+    verbose: bool = False,
 ) -> dict:
     """Convert ``input`` (MP4 or WAV) into a new ``.tenzor`` Arrow IPC file at ``output``.
 
     ``output`` must not exist. On failure a ``tenzorpipe.TenzorError`` is raised and any
-    partial output is removed. Returns ``{"output", "epochs", "seconds"}``.
+    partial output is removed. Returns ``{"output", "epochs", "seconds"}``, plus ``"profile"``
+    (a dict of stage timers) when ``profile=True``.
+
+    The engine is silent unless ``verbose=True``, which prints its diagnostics (decoder mode,
+    per-video summary and any profile JSON) on stderr, as the ``tenzor`` command does.
     """
     argv = ["-i", os.fspath(input), "-o", os.fspath(output)]
     options = {
@@ -77,8 +84,15 @@ def ingest(
         argv.append("--no-audio-decode-thread")
     if profile:
         argv.append("--profile")
-    epochs, seconds = _native().convert(argv)
-    return {"output": os.fspath(output), "epochs": epochs, "seconds": seconds}
+    if not verbose:
+        argv.append("--quiet")
+    epochs, seconds, profile_json = _native().convert(argv)
+    result = {"output": os.fspath(output), "epochs": epochs, "seconds": seconds}
+    if profile_json is not None:
+        result["profile"] = json.loads(profile_json)
+        if verbose:
+            print(f"TENZOR_PROFILE {profile_json}", file=sys.stderr, flush=True)
+    return result
 
 
 def load(path: PathLike, *, copy: bool = False) -> TenzorDataset:

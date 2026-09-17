@@ -576,7 +576,7 @@ def environment():
         info["torch_cuda"] = torch.version.cuda
     except Exception:
         pass
-    info["tenzor_bin"] = str(TENZOR_BIN)
+    info["tenzor_bin"] = os.path.relpath(TENZOR_BIN, ROOT)
     info["tenzor_sha256"] = sh(["sha256sum", str(TENZOR_BIN)]).split()[0]
     info["release_sha256"] = sh(["sha256sum", str(RELEASE_BIN)]).split()[0]
     return info
