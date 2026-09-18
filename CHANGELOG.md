@@ -1,12 +1,23 @@
 # Changelog
 
-## Unreleased
+## 0.3.1 — 2026-09-18
+
+- **Cross-architecture behaviour is now measured rather than assumed.** Video tensors are
+  bit-identical on x86-64 and aarch64 and are gated at zero difference. Log-Mel audio is not:
+  RustFFT selects AVX2 on one and NEON on the other, and across the 21 cases the coefficients
+  differ by a median of 2e-4 log10 units, 1.4e-2 at the 99.9th percentile and 2.8e-2 at worst.
+  `scripts/test_arch_tolerance.py` reports that distribution and bounds it; binary determinism
+  is now a per-architecture guarantee, verified 21/21 on x86-64 and 21/21 on ARM64 hardware.
+  The earlier claim that byte-identity spanned architectures was never exercised on ARM.
+- Fixed two release gates that could not pass as written: the NEON symbol check inspected a
+  stripped binary, and `hevc-av.mp4` re-encoded its audio with FFmpeg's native AAC encoder,
+  making recorded digests depend on the runner's FFmpeg build.
 
 - **ARM64 (aarch64) support, verified.** The engine builds on ARM with no source changes:
   H.264 uses the vendored OpenH264's ARM64 NEON assembly (NASM is x86-only), and the H.265
   decoder, its kernels and RustFFT all have NEON paths. New gates: `scripts/test_arch_identity.py`
-  checks this machine's tensors against digests recorded on x86-64
-  (`evidence/arch-digests.json`, 21 cases across H.264, H.265, WAV and AAC), and
+  checks this machine's tensors against digests recorded for its own architecture
+  (`evidence/arch-digests-<machine>.json`, 21 cases across H.264, H.265, WAV and AAC), and
   `scripts/check_arm64_openh264.sh` cross-compiles the vendored decoder for aarch64 and
   decodes under emulation from an x86-64 host, requiring pictures identical to the host
   build's. A new `arm64` CI workflow runs the full suite, the FFmpeg oracle, the identity

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.3.0-22D3EE">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.1-22D3EE">
   <img alt="Rust" src="https://img.shields.io/badge/Rust-1.98.1-000000?logo=rust">
   <img alt="PyO3" src="https://img.shields.io/badge/PyO3-abi3--py39-3776AB?logo=python&logoColor=white">
   <img alt="Apache Arrow" src="https://img.shields.io/badge/Apache%20Arrow-IPC-1868F2">
@@ -29,7 +29,7 @@ python -c "import tenzorpipe as tp; d=tp.load('clip.tenzor'); print(len(d), d[0]
 
 ```sh
 pip install "tenzorpipe[torch]"                                               # from PyPI, once published
-pip install "dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl[torch]" # release wheel
+pip install "dist/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl[torch]" # release wheel
 pip install ".[torch]"                                                        # from source (Rust 1.98.1 + NASM)
 ```
 
@@ -380,13 +380,35 @@ cargo build --release --locked        # on the ARM machine
 - **H.265** (`rusty_h265`) and its kernels (`rusty_h265-accel`) have NEON paths; NEON is
   mandatory on aarch64, so there is no runtime probe. RustFFT's NEON backend is on by
   default for the Mel stage. The AAC decoder is scalar Rust on every architecture.
-- **Determinism across machines** is a gate, not a hope: `evidence/arch-digests.json`
-  records tensor digests produced on x86-64, and `scripts/test_arch_identity.py` checks
-  them on any other machine. The `arm64` CI workflow runs it on every push.
+- **Determinism is measured, and its scope differs by tensor.** Within one architecture the
+  engine is bit-exact: identical bytes for any worker count, chunk size or repeat, verified
+  21/21 on x86-64 and 21/21 on real ARM64 hardware against per-architecture digests in
+  `evidence/arch-digests-<machine>.json`.
+
+  Across architectures, **video tensors are bit-identical**. H.264 and H.265 decoding are exact
+  by specification and the resize and colour conversion are integer and scalar, so
+  `scripts/test_arch_tolerance.py` gates video at zero difference and treats any drift as a
+  defect. **Log-Mel audio is not bit-identical**, because RustFFT selects AVX2 on x86-64 and
+  NEON on aarch64. Measured across all 21 cases on GitHub's runners, decoding byte-identical
+  fixtures:
+
+  | x86-64 vs aarch64, log-Mel coefficients | |
+  |---|---|
+  | values that differ at all | 4–95%, depending on the clip |
+  | median difference | 2e-4 log10 units (~0.05% in amplitude) |
+  | 99.9th percentile | 1.4e-2 log10 units |
+  | worst case | 2.8e-2 log10 units (~6.6% in amplitude) |
+
+  That is a numerical difference from a different FFT backend, not rounding at the scale of a
+  ULP, and it is spread across the spectrogram rather than confined to quiet bins. The gate
+  bounds it at 5e-2 so a regression is caught. If you need identical Mel bytes across machines,
+  keep ingestion on one architecture; mixing architectures is safe for the video path.
 
 ```sh
-python3 scripts/test_arch_identity.py            # verify this machine
-python3 scripts/test_arch_identity.py --record   # re-record (reference machine only)
+python3 scripts/test_arch_identity.py             # bit-exactness on this architecture
+python3 scripts/test_arch_identity.py --record    # re-record this architecture's digests
+python3 scripts/test_arch_tolerance.py --dump ref # on one machine, then on the other:
+python3 scripts/test_arch_tolerance.py --compare ref
 ```
 
 Without ARM hardware, the part of the port that can actually break — the per-architecture
@@ -457,7 +479,7 @@ decoding) and reads the output as zero-copy PyTorch tensors. One abi3 wheel supp
 CPython 3.9+ on Linux x86-64 with glibc 2.34 or newer.
 
 ```sh
-pip install "dist/tenzorpipe-0.3.0-cp39-abi3-manylinux_2_34_x86_64.whl[torch]"  # built wheel
+pip install "dist/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl[torch]"  # built wheel
 pip install ".[torch]"                                                         # from source
 pip install "tenzorpipe[torch]"                                                # once published on PyPI
 ```

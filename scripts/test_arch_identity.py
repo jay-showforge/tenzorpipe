@@ -9,7 +9,7 @@ Silicon laptop or a Jetson is caught against that architecture's own reference.
 Cross-architecture agreement is a numeric claim, not a byte one, and lives in
 scripts/test_arch_tolerance.py.
 
-    python3 scripts/test_arch_identity.py --record    # write evidence/arch-digests.json
+    python3 scripts/test_arch_identity.py --record    # write evidence/arch-digests-<machine>.json
     python3 scripts/test_arch_identity.py             # verify this machine against it
 
 Records the host architecture, the fixture digests, and the decode settings used. A
