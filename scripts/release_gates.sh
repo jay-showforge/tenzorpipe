@@ -42,6 +42,13 @@ gate tail-fixtures python3 scripts/gen_short_tail_fixtures.py
 gate audio-tail   python3 scripts/test_audio_tail_tolerance.py
 gate hevc-fixtures bash scripts/gen_hevc_fixtures.sh
 gate hevc-fidelity python3 scripts/test_hevc_fidelity.py
+gate arch-identity python3 scripts/test_arch_identity.py
+if command -v aarch64-linux-gnu-g++ >/dev/null && command -v qemu-aarch64-static >/dev/null; then
+  gate arm64-openh264 bash scripts/check_arm64_openh264.sh
+else
+  printf "%-26s %-9s %5ss  %s\n" "arm64-openh264" "SKIP" "0" \
+    "install g++-aarch64-linux-gnu and qemu-user-static to run it"
+fi
 if [ -z "${QUICK:-}" ]; then
   gate skip-identity env RESULT="$EVID/skip-identity.json" python3 scripts/test_skip_identity.py
 fi

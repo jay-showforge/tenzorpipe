@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **ARM64 (aarch64) support, verified.** The engine builds on ARM with no source changes:
+  H.264 uses the vendored OpenH264's ARM64 NEON assembly (NASM is x86-only), and the H.265
+  decoder, its kernels and RustFFT all have NEON paths. New gates: `scripts/test_arch_identity.py`
+  checks this machine's tensors against digests recorded on x86-64
+  (`evidence/arch-digests.json`, 21 cases across H.264, H.265, WAV and AAC), and
+  `scripts/check_arm64_openh264.sh` cross-compiles the vendored decoder for aarch64 and
+  decodes under emulation from an x86-64 host, requiring pictures identical to the host
+  build's. A new `arm64` CI workflow runs the full suite, the FFmpeg oracle, the identity
+  gate and an aarch64 wheel build on native ARM64 runners; the x86-64 workflow now runs the
+  identity, H.265 and audio-tail gates too.
+- `--profile` JSON records `"arch"`, so benchmark evidence says which machine produced it.
+- `scripts/build_wheel.sh` accepts `WHEEL_TARGET` for cross-architecture wheels.
+
 - **H.265 / HEVC support.** MP4 files with an H.265 video track convert like H.264 ones:
   same epoch selection, nearest-picture rule, resize and colour conversion. The decoder is
   `rusty_h265` 0.6.0 (Apache-2.0, pure Rust, no FFI, `forbid(unsafe_code)` outside its SIMD

@@ -20,7 +20,13 @@ jobs:
       - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
       - run: python3 -m pip install --break-system-packages torch==2.14.0+cpu --index-url https://download.pytorch.org/whl/cpu
       - run: python3 scripts/generate_matrix.py
+      - run: bash scripts/gen_hevc_fixtures.sh
+      - run: python3 scripts/gen_short_tail_fixtures.py
       - run: python3 scripts/test_matrix.py
+      - run: python3 scripts/test_hevc_fidelity.py
+      - run: python3 scripts/test_audio_tail_tolerance.py
+      # The digests other architectures are checked against must hold here first.
+      - run: python3 scripts/test_arch_identity.py
       - run: bash scripts/build_wheel.sh
       - uses: actions/upload-artifact@v4
         if: always()

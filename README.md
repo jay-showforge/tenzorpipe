@@ -321,6 +321,52 @@ Error: video track is H.265/HEVC; TenzorPipe decodes H.264/AVC. Convert with
 `ffmpeg -i INPUT -c:v libx264 -crf 18 -preset veryfast -c:a copy OUTPUT.mp4`.
 ```
 
+## ARM64 (Jetson, Graviton, Apple Silicon)
+
+The engine builds and runs on aarch64 with no source changes and no extra flags:
+
+```sh
+cargo build --release --locked        # on the ARM machine
+```
+
+- **H.264** uses the vendored OpenH264's ARM64 **NEON assembly** (`codec/*/arm64/*.S`,
+  selected by `build.rs` from the target architecture and compiled by the C compiler).
+  NASM is an x86-only build dependency and is not needed on ARM.
+- **H.265** (`rusty_h265`) and its kernels (`rusty_h265-accel`) have NEON paths; NEON is
+  mandatory on aarch64, so there is no runtime probe. RustFFT's NEON backend is on by
+  default for the Mel stage. The AAC decoder is scalar Rust on every architecture.
+- **Determinism across machines** is a gate, not a hope: `evidence/arch-digests.json`
+  records tensor digests produced on x86-64, and `scripts/test_arch_identity.py` checks
+  them on any other machine. The `arm64` CI workflow runs it on every push.
+
+```sh
+python3 scripts/test_arch_identity.py            # verify this machine
+python3 scripts/test_arch_identity.py --record   # re-record (reference machine only)
+```
+
+Without ARM hardware, the part of the port that can actually break — the per-architecture
+assembly and the `build.rs` selection around it — is checkable from an x86-64 box:
+
+```sh
+sudo apt-get install -y g++-aarch64-linux-gnu qemu-user-static ffmpeg
+bash scripts/check_arm64_openh264.sh
+```
+
+It cross-compiles the vendored OpenH264 with its NEON assembly, decodes the fixtures under
+emulation, and compares the decoded pictures against the host build's, which must match
+exactly. `scripts/release_gates.sh` runs it when those tools are installed and skips it
+otherwise.
+
+ARM64 wheels build the same way as x86-64 ones:
+
+```sh
+WHEEL_TARGET=aarch64-unknown-linux-gnu bash scripts/build_wheel.sh
+COMPATIBILITY=manylinux_2_28 WHEEL_TARGET=aarch64-unknown-linux-gnu bash scripts/build_wheel.sh
+```
+
+Benchmarks are per-machine: compare an ARM number only against another ARM number. The
+`--profile` JSON records `"arch"` so evidence files say which machine produced them.
+
 ## Tensor contract
 
 One row represents an epoch start, normally every 500 ms. Each row contains:

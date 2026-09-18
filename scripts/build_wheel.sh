@@ -6,6 +6,8 @@
 # Requires Rust 1.98.1, NASM and python3. Wheels land in dist/.
 # COMPATIBILITY=manylinux_2_28 (or manylinux_2_17) builds a broader wheel with `maturin --zig`
 # instead of linking against the host glibc; see docs/PACKAGING.md.
+# WHEEL_TARGET overrides the Rust target triple (for example aarch64-unknown-linux-gnu on an
+# ARM64 runner); it defaults to this machine's own target.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT="$PWD"
@@ -30,9 +32,13 @@ venv "$WORK/build-venv"
 rm -f dist/tenzorpipe-*.whl
 if [ -n "$COMPAT" ]; then
   "$WORK/build-venv/bin/pip" install --quiet ziglang
-  PATH="$WORK/build-venv/bin:$PATH" CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$ROOT/target}-zig"     maturin build --release --zig --compatibility "$COMPAT" --target x86_64-unknown-linux-gnu --out dist
+  PATH="$WORK/build-venv/bin:$PATH" CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$ROOT/target}-zig"     maturin build --release --zig --compatibility "$COMPAT" --target "${WHEEL_TARGET:-$(rustc -vV | awk '/^host:/{print $2}')}" --out dist
 else
-  "$WORK/build-venv/bin/maturin" build --release --out dist
+  if [ -n "${WHEEL_TARGET:-}" ]; then
+    "$WORK/build-venv/bin/maturin" build --release --target "$WHEEL_TARGET" --out dist
+  else
+    "$WORK/build-venv/bin/maturin" build --release --out dist
+  fi
 fi
 WHEEL=$(ls dist/tenzorpipe-*.whl)
 echo "built $WHEEL ($(du -h "$WHEEL" | cut -f1))"

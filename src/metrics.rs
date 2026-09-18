@@ -93,8 +93,11 @@ impl Metrics {
             })
             .collect::<Vec<_>>()
             .join(",");
+        // The architecture belongs in the evidence: the same input must give the same
+        // tensors on x86-64 and aarch64, and benchmark numbers never compare across them.
+        let arch = std::env::consts::ARCH;
         Some(format!(
-            "{{\"wall_seconds\":{elapsed:.9},\"execution\":\"{mode}\",\"queue_slots_per_track\":{slots},\"queued_payload_budget_used_bytes\":{queue_bytes},\"decoder_threads\":{threads},\"stages_seconds\":{{{stages}}}}}"
+            "{{\"wall_seconds\":{elapsed:.9},\"arch\":\"{arch}\",\"execution\":\"{mode}\",\"queue_slots_per_track\":{slots},\"queued_payload_budget_used_bytes\":{queue_bytes},\"decoder_threads\":{threads},\"stages_seconds\":{{{stages}}}}}"
         ))
     }
 }
