@@ -1,17 +1,41 @@
 name: arm64
 
-# Native ARM64 verification. The engine's determinism promise spans machines, so this
-# runs the same gates as the x86-64 job and then checks the tensors byte for byte
-# against the digests recorded on x86-64 (evidence/arch-digests.json).
+# Native ARM64 verification.
+#
+# Binary determinism is an intra-architecture guarantee, so the ARM job compares its tensors
+# against digests recorded on ARM. Agreement with x86-64 is a numeric claim rather than a byte
+# one — RustFFT selects AVX2 on one and NEON on the other, and they round differently — so it is
+# measured in ULP against reference tensors dumped by the x86-64 job in this same run, which
+# keeps both sides on fixtures built by the same FFmpeg.
 on:
   push:
   pull_request:
   workflow_dispatch:
 
 jobs:
+  x86-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@1.98.1
+      - run: sudo apt-get update && sudo apt-get install -y nasm ffmpeg
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release --locked --workspace
+      - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
+      - run: python3 scripts/generate_matrix.py
+      - run: bash scripts/gen_hevc_fixtures.sh
+      - run: python3 scripts/gen_short_tail_fixtures.py
+      - name: Dump the reference tensors the ARM job measures itself against
+        run: python3 scripts/test_arch_tolerance.py --dump reference-tensors
+      - uses: actions/upload-artifact@v4
+        with:
+          name: x86-reference-tensors
+          path: reference-tensors/
+
   linux-arm64:
     # GitHub's ARM64 Linux runner. Self-hosted Graviton or Jetson runners work too.
     runs-on: ubuntu-24.04-arm
+    needs: x86-reference
     steps:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@1.98.1
@@ -29,13 +53,12 @@ jobs:
       - name: Confirm the ARM64 build really carries NEON assembly
         run: |
           set -eu
-          # [profile.release] sets strip = true, so the linked binary carries no symbol
-          # table and `nm` on it can never match. Inspect the OpenH264 objects the build
-          # script produced instead: the aarch64 .S kernels this job exists to exercise
-          # are compiled into those.
+          # [profile.release] sets strip = true, so the linked binary carries no symbol table
+          # and nm on it can never match. Inspect the OpenH264 objects the build script
+          # produced instead: the aarch64 .S kernels this job exercises compile into those.
           objs=$(find target/release/build -path '*openh264*' -name '*.o')
           [ -n "$objs" ] || { echo 'no OpenH264 build objects found'; exit 1; }
-          count=$(nm $objs 2>/dev/null | grep -ci 'aarch64\|neon' || true)
+          count=$(nm $objs 2>/dev/null | grep -ciE 'aarch64|neon' || true)
           [ "$count" -gt 0 ] || { echo 'no NEON symbols in the OpenH264 objects'; exit 1; }
           echo "NEON symbols present: $count"
       - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
@@ -46,7 +69,16 @@ jobs:
         run: |
           python3 scripts/test_hevc_fidelity.py
           python3 scripts/test_audio_tail_tolerance.py
-      - name: Cross-architecture tensor identity vs the recorded x86-64 digests
+      - uses: actions/download-artifact@v4
+        with:
+          name: x86-reference-tensors
+          path: reference-tensors
+      - name: Agreement with x86-64, measured in ULP
+        run: python3 scripts/test_arch_tolerance.py --compare reference-tensors
+      - name: Record this architecture's digests for review
+        if: always()
+        run: python3 scripts/test_arch_identity.py --record --out recorded/arch-digests-aarch64.json
+      - name: Binary determinism on this architecture
         run: python3 scripts/test_arch_identity.py
       - run: python3 scripts/test_concurrency.py
       - name: Build the aarch64 wheel
@@ -57,6 +89,7 @@ jobs:
           name: arm64-evidence
           path: |
             evidence/
+            recorded/
             dist/
 
   cross-check-arm64-assembly:

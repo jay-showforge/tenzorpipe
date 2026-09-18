@@ -63,15 +63,43 @@ python scripts/produce_demo_video.py            # narrated video from those meas
 **Benchmark highlights.** One 20 s 1080p30 H.264 clip, Intel i5-14400F + RTX 5060 8 GB under
 WSL2, 50 measured iterations each. All tables, methods and caveats are in [BENCHMARKS.md](BENCHMARKS.md).
 
+**Pass 1 — ingest from MP4.** Every contender decodes the clip and produces 224² tensors. This is
+a like-for-like decode race, and TenzorPipe does not win it:
+
 | | TenzorPipe 0.3.0 | FFmpeg pipe | NVIDIA DALI | TorchCodec (CUDA) |
 |---|---:|---:|---:|---:|
-| Ingest one clip into 224² tensors, default settings | 646 ms¹ | 554 ms | 442 ms | 276 ms |
+| Ingest one clip into 224² tensors | 646 ms¹ | 554 ms | 442 ms | **276 ms** |
 | GPU memory used | **0 MiB** | 0 MiB | 822 MiB | 650 MiB |
-| Every later epoch over the same clip | **2.8 ms** re-read | decode again | decode again | decode again |
 
-¹ 625 ms in an earlier run of the same engine, where FFmpeg took 531 ms. TenzorPipe is not the
-fastest first-pass decoder. Its advantages are zero VRAM, byte-exact reproducible tensors and
-near-free re-reads for multi-epoch training; the first pass is 7.9× faster than v0.2.0.
+**Pass 2 and later — re-read the cache.** TenzorPipe writes a `.tenzor` file on the first pass and
+memory-maps it afterwards. The other three have no cache and decode the MP4 again every epoch:
+
+| | TenzorPipe 0.3.0 | FFmpeg pipe | NVIDIA DALI | TorchCodec (CUDA) |
+|---|---:|---:|---:|---:|
+| Each later epoch over the same clip | **2.8 ms** re-read² | 554 ms | 442 ms | 276 ms |
+
+**Total for N epochs.** Arithmetic from the two measured passes above, not a separate measurement:
+
+| Epochs | TenzorPipe | FFmpeg pipe | NVIDIA DALI | TorchCodec (CUDA) |
+|---:|---:|---:|---:|---:|
+| 1 | 646 ms | 554 ms | 442 ms | **276 ms** |
+| 2 | **649 ms** | 1.11 s | 884 ms | 552 ms |
+| 3 | **652 ms** | 1.66 s | 1.33 s | 828 ms |
+| 10 | **671 ms** | 5.54 s | 4.42 s | 2.76 s |
+| 50 | **783 ms** | 27.7 s | 22.1 s | 13.8 s |
+
+TenzorPipe loses the single pass and leads from the third epoch against every contender, or the
+second against FFmpeg and DALI. Nothing prevents those tools from writing a tensor cache of their
+own — the claim is that TenzorPipe ships one that is byte-exact and reproducible, not that caching
+is unavailable elsewhere.
+
+¹ 625 ms in an earlier run of the same engine, where FFmpeg took 531 ms. The first pass is 7.9×
+faster than v0.2.0.
+
+² Measured reading from `/dev/shm` (tmpfs), so it excludes disk I/O entirely and is a floor rather
+than a cold-storage figure; cold NVMe re-reads are not yet measured. The cache costs about 23 MiB
+for this 20-second clip — 40 epochs × (3×224×224 + 50×64) float32 — or roughly 4 GiB per hour of
+1080p footage. That storage is the trade you are making for the re-read speed.
 
 ## How it works
 

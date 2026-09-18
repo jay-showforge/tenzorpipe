@@ -11,6 +11,40 @@ Generated 2026-09-16 21:49 by `bench/gpu_bench.py` — 5 warm-up + **50 measured
 | `synthetic-1080p30-h264-20s-video-only.mp4` (video) | 1920×1080 @ 30/1 | 600 | 7940 kb/s | High | 40 |
 | `synthetic-1080p30-h264-aac-20s.mp4` (av) | 1920×1080 @ 30/1 | 600 | 8138 kb/s | High | 40 |
 
+## Passes: what these tables measure
+
+Every latency in Scenarios 1 and 2 below is **Pass 1** — decode the MP4 and produce tensors. A
+TenzorPipe iteration re-runs the engine CLI *and* re-loads the Arrow file, so it is measured the
+same way as every other contender. None of these numbers is a cache hit.
+
+**Pass 2 and later** is where the designs diverge. TenzorPipe re-reads the `.tenzor` written in
+Pass 1 (2.8 ms median, video-only defaults; see "TenzorPipe internals" below). DALI, TorchCodec
+and the FFmpeg pipe keep no cache, so for them every epoch repeats Pass 1.
+
+| Epochs over one clip | TenzorPipe (default) | FFmpeg pipe | NVIDIA DALI | TorchCodec (CUDA) |
+|---:|---:|---:|---:|---:|
+| 1 | 646 ms | 554 ms | 442 ms | **276 ms** |
+| 2 | **649 ms** | 1.11 s | 884 ms | 552 ms |
+| 3 | **652 ms** | 1.66 s | 1.33 s | 828 ms |
+| 10 | **671 ms** | 5.54 s | 4.42 s | 2.76 s |
+| 50 | **783 ms** | 27.7 s | 22.1 s | 13.8 s |
+
+Those totals are arithmetic — `pass1 + (N−1) × pass2` against `N × pass1` — not separately
+measured runs. Nothing stops DALI, TorchCodec or an FFmpeg script from writing a tensor cache of
+its own. The claim here is that TenzorPipe ships one whose bytes are reproducible across runs,
+workers and architectures, not that caching is unavailable elsewhere.
+
+### Storage medium, stated plainly
+
+Artifacts are written to and re-read from `/dev/shm`, which is a RAM disk. **The 2.8 ms re-read
+therefore contains no disk I/O at all.** It is a floor, not a cold-storage measurement, and cold
+NVMe or SSD re-reads are not measured anywhere in this report. Treat that column as the best case
+for caching; your real figure sits between it and your device's mmap and page-fault cost.
+
+The cache is not free in space either: 40 epochs × (3×224×224 + 50×64) float32 is about 23 MiB
+for this 20-second clip, or roughly 4 GiB per hour of 1080p footage at 0.5 s epochs. For a large
+corpus that storage cost, not the decode time, is the thing to budget for.
+
 ## Scenario 1 — video only (all contenders)
 
 | Contender | Decode | Audio | Latency ms (median) | p5–p95 ms | Source FPS | Epochs/s | Peak RSS MiB | RSS growth MiB | Child RSS MiB | VRAM torch MiB | VRAM NVML Δ MiB | CPU cores | Setup+cold s | Video MAE | Mel MAE |

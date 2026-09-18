@@ -20,11 +20,12 @@
   "audio-only.mp4": "2c513a7ff5d108754c2c0a63b6b59b5bb5984d64a70d4aeb085e1cebb09e8c7e",
   "wav-44100-2ch.wav": "578fa6b4134b544443514356c24e189c1c0014cc87c2db2dbfd892a1c9f3c0d3",
   "wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 4": "b999d442fec011a5a8fa97ede941880cfefb53e502b4d66addf16c95b4b28daf",
-  "hevc-av.mp4": "9b74ee785a049cb94c7ede3bf8ef7870a80c6da29d37417bb749e1507faf87c0",
-  "hevc-av.mp4 --video-workers 1": "9b74ee785a049cb94c7ede3bf8ef7870a80c6da29d37417bb749e1507faf87c0",
-  "hevc-av.mp4 --video-workers 4 --chunk-target-ms 500": "9b74ee785a049cb94c7ede3bf8ef7870a80c6da29d37417bb749e1507faf87c0",
-  "hevc-av.mp4 --no-skip-nonref": "9b74ee785a049cb94c7ede3bf8ef7870a80c6da29d37417bb749e1507faf87c0",
+  "hevc-av.mp4": "f8ba0aca0f0618559427ef57abdaad0a11467e514cd6dcbb145d5d38bb0f8c68",
+  "hevc-av.mp4 --video-workers 1": "f8ba0aca0f0618559427ef57abdaad0a11467e514cd6dcbb145d5d38bb0f8c68",
+  "hevc-av.mp4 --video-workers 4 --chunk-target-ms 500": "f8ba0aca0f0618559427ef57abdaad0a11467e514cd6dcbb145d5d38bb0f8c68",
+  "hevc-av.mp4 --no-skip-nonref": "f8ba0aca0f0618559427ef57abdaad0a11467e514cd6dcbb145d5d38bb0f8c68",
   "hevc-720.mp4": "4c5b22fc854a325a6561d97cfbbed5e583cc7cbc04070deddf924dbb47c2ee51",
   "hevc-bt709.mp4 --execution sequential": "9c19054fe42c5808a07868c64e2399a6adcfce520bcfdd7327ae38c0cea10117"
- }
+ },
+ "note": "The hevc-av.mp4 digests were re-recorded on a GitHub ubuntu-latest x86-64 runner after scripts/gen_hevc_fixtures.sh stopped re-encoding that fixture's audio with FFmpeg's native AAC encoder, whose output changes between FFmpeg versions. The other entries are unchanged and still match on that runner."
 }
