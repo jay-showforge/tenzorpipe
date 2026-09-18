@@ -31,6 +31,14 @@ jobs:
         with:
           name: x86-reference-tensors
           path: reference-tensors/
+      # The fixtures themselves travel with the tensors. generate_matrix.py and
+      # gen_hevc_fixtures.sh re-encode over the committed files, and x264/x265 use
+      # per-architecture assembly, so a runner that builds its own fixtures is decoding
+      # different video. Sharing the bytes is what makes the comparison about the engine.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: x86-fixtures
+          path: fixtures/
 
   linux-arm64:
     # GitHub's ARM64 Linux runner. Self-hosted Graviton or Jetson runners work too.
@@ -62,9 +70,12 @@ jobs:
           [ "$count" -gt 0 ] || { echo 'no NEON symbols in the OpenH264 objects'; exit 1; }
           echo "NEON symbols present: $count"
       - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
-      - run: python3 scripts/generate_matrix.py
-      - run: bash scripts/gen_hevc_fixtures.sh
-      - run: python3 scripts/gen_short_tail_fixtures.py
+      # Deliberately NOT regenerating fixtures here: these are the byte-identical files the
+      # x86-64 job measured, so any difference below is the engine and not the encoder.
+      - uses: actions/download-artifact@v4
+        with:
+          name: x86-fixtures
+          path: fixtures
       - name: Independent FFmpeg oracle (H.264 and H.265)
         run: |
           python3 scripts/test_hevc_fidelity.py

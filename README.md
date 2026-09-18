@@ -93,6 +93,23 @@ second against FFmpeg and DALI. Nothing prevents those tools from writing a tens
 own — the claim is that TenzorPipe ships one that is byte-exact and reproducible, not that caching
 is unavailable elsewhere.
 
+**Where each design wins.** Dedicated silicon beats a CPU decoder at raw first-pass throughput,
+and NVDEC-backed readers (DALI, TorchCodec) will keep that lead on single-stream jobs. TenzorPipe
+competes on operational properties instead:
+
+- **0 MiB VRAM.** The decode path allocates no GPU memory at all, so it never contends with the
+  model for an 8 GB card, and the same binary runs on hosts with no GPU.
+- **Bounded host memory that does not grow with clip length.** Engine RSS is 87 MiB at one worker
+  on the 1080p clip above, and about 500 MiB at eight. On a 2-core box a 330-second 640×360 clip
+  holds at 58 MiB and a 22-minute one at 119 MiB.
+- **Amortised across epochs.** Decode once; every later epoch is a memory-mapped read.
+- **Self-contained.** No FFmpeg, no CUDA, no system codec packages — one static binary plus a
+  wheel, which is what makes air-gapped and embedded deployment straightforward.
+
+If your workload is a single pass over each clip on a machine with a spare GPU, use NVDEC and be
+happy. TenzorPipe is aimed at repeated passes, GPU-constrained hosts, and deployments where the
+dependency footprint is itself the problem.
+
 ¹ 625 ms in an earlier run of the same engine, where FFmpeg took 531 ms. The first pass is 7.9×
 faster than v0.2.0.
 
