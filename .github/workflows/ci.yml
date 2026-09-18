@@ -25,8 +25,13 @@ jobs:
       - run: python3 scripts/test_matrix.py
       - run: python3 scripts/test_hevc_fidelity.py
       - run: python3 scripts/test_audio_tail_tolerance.py
-      # The digests other architectures are checked against must hold here first.
-      - run: python3 scripts/test_arch_identity.py
+      # Recorded for review, never fed back into the gate below: the engine version
+      # string is embedded in every artifact, so a version bump changes all of them.
+      - name: Record this architecture's digests for review
+        if: always()
+        run: python3 scripts/test_arch_identity.py --record --out recorded/arch-digests-x86_64.json
+      - name: Binary determinism on this architecture
+        run: python3 scripts/test_arch_identity.py
       - run: bash scripts/build_wheel.sh
       - uses: actions/upload-artifact@v4
         if: always()
@@ -34,4 +39,5 @@ jobs:
           name: verification-evidence
           path: |
             evidence/
+            recorded/
             dist/
