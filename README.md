@@ -20,17 +20,20 @@ decoders, narrated, with the numbers measured on the machine that built it.
 ## Quickstart
 
 ```sh
-pip install tenzorpipe                                   # 1. install (PyPI publication pending)
+pip install https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl  # 1. install
 python -c "import tenzorpipe as tp; tp.ingest('clip.mp4', 'clip.tenzor')"   # 2. decode once
 python -c "import tenzorpipe as tp; d=tp.load('clip.tenzor'); print(len(d), d[0]['video'].shape)"  # 3. train
 ```
 
-**Install** (Linux x86-64, CPython 3.9+; the wheel below needs glibc 2.34+, see [docs/PACKAGING.md](docs/PACKAGING.md) for older distributions):
+**Install** (Linux x86-64 or ARM64, CPython 3.9+; the wheels below need glibc 2.34+, see [docs/PACKAGING.md](docs/PACKAGING.md) for older distributions):
 
 ```sh
-pip install "tenzorpipe[torch]"                                               # from PyPI, once published
-pip install "dist/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl[torch]" # release wheel
-pip install ".[torch]"                                                        # from source (Rust 1.98.1 + NASM)
+# Linux x86-64, with the PyTorch extra:
+pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl"
+# Linux ARM64 (Jetson, Graviton, ARM servers):
+pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_aarch64.whl"
+# or from source, needing Rust 1.98.1 (plus NASM on x86-64):
+pip install ".[torch]"
 ```
 
 **Ingest an MP4 and read it as PyTorch tensors:**
