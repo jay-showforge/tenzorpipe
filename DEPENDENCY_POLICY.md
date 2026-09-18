@@ -12,6 +12,10 @@ dependencies are not authorized. BUSL-1.1 is not a dependency allowlist entry.
 - rusty_aac 0.5.0: Apache-2.0. Vendored Huffman, bit-reader, table and FFT-buffer patches retain the original references/tests and license.
 - RustFFT 6.4.1: MIT OR Apache-2.0. No smaller-FFT algorithm or new DSP dependency was introduced.
 - rust_h264 0.4.0: MIT OR Apache-2.0; used for patched SPS/VUI metadata, not its decoder.
+- rusty_h265 0.6.0 and rusty_h265-accel 0.6.0: Apache-2.0. Pure-Rust HEVC decode, no C/FFI and
+  no FFmpeg linkage; the decoder crate forbids `unsafe`, and the accel crate confines it to
+  runtime-dispatched SIMD kernels whose output is identical to the scalar path (verified on
+  the H.265 fixtures). Used unmodified, so nothing is vendored.
 - mp4io 0.1.2: MIT OR Apache-2.0; hound 3.5.1: Apache-2.0; crossbeam-channel 0.5.17: MIT OR Apache-2.0.
 - The vendor AAC test-only rusty_alloc/rusty_alloc-api 0.3.2 dependencies declare MIT; they are not in the production engine graph. The vendor test lockfile is retained.
 - Arrow defaults are disabled; IPC is explicit. CC0 covers transitive tiny-keccak.

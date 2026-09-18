@@ -36,6 +36,7 @@ rust_h264 = { version = "0.4", features = ["dev-internals"] }
 openh264 = { version = "0.9", default-features = false, features = ["source"] }
 arrow = { version = "60", default-features = false, features = ["ipc"] }
 memmap2 = "0.9"
+rusty_h265 = "0.6.0"
 
 [profile.release]
 opt-level = 3

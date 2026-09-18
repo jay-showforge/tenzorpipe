@@ -40,6 +40,8 @@ gate licenses     cargo deny check licenses
 gate skip-fixtures bash scripts/gen_skip_fixtures.sh "$TENZOR_GEN_FIXTURES"
 gate tail-fixtures python3 scripts/gen_short_tail_fixtures.py
 gate audio-tail   python3 scripts/test_audio_tail_tolerance.py
+gate hevc-fixtures bash scripts/gen_hevc_fixtures.sh
+gate hevc-fidelity python3 scripts/test_hevc_fidelity.py
 if [ -z "${QUICK:-}" ]; then
   gate skip-identity env RESULT="$EVID/skip-identity.json" python3 scripts/test_skip_identity.py
 fi

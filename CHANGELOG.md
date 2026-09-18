@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+- **H.265 / HEVC support.** MP4 files with an H.265 video track convert like H.264 ones:
+  same epoch selection, nearest-picture rule, resize and colour conversion. The decoder is
+  `rusty_h265` 0.6.0 (Apache-2.0, pure Rust, no FFI, `forbid(unsafe_code)` outside its SIMD
+  kernels), so the engine still links no FFmpeg and no GPL/LGPL code. Scope: Main profile,
+  8-bit 4:2:0; Main 10, Main Intra/Still Picture, the range extensions, interlaced content
+  and 4:2:2/4:4:4 are refused up front with the `ffmpeg` command that converts them.
+  Video tensors match an independent FFmpeg decode exactly (max |delta| 2.4e-7 across the
+  fixtures). H.264 output is unchanged: 576 byte-identical artifacts in the 864-case gate.
+- H.265 uses the same worker pool, chunk budget and skip policy as H.264. Chunks start at
+  IRAP access units: a chunk decodes through the next chunk's IRAP and the RASL pictures
+  that follow it, so open-GOP encodes (x265's default, where the only IDR is frame 0) also
+  parallelise. Access units whose slices are all sub-layer non-reference at the stream's
+  highest `TemporalId`, and that no epoch selects, are never decoded.
+- Measured on a 2-core sandbox with a 330-second 640x360 clip: H.265 7.01 s at one worker,
+  5.30 s at two, 5.15 s at four; 8.33 s with `--no-skip-nonref` at two workers (skipping
+  removes 5,939 of 9,900 access units). The same clip in H.264 takes 4.88 s at two workers,
+  so H.265 costs about 8% more end to end here. A 22-minute H.265 clip converts in 21.4 s at
+  119 MiB peak RSS.
+- H.265 memory is bounded by the same budgets as H.264: converted tensors are handed to the
+  collector as they are produced rather than buffered per decode pass (a 330-second clip at
+  one worker went from 423 MiB to 58 MiB), and peak RSS no longer grows with clip length.
+- New: `scripts/gen_hevc_fixtures.sh` and `scripts/test_hevc_fidelity.py` (FFmpeg-oracle
+  comparison plus the expected refusals), both wired into `scripts/release_gates.sh`.
 - Accept an audio track that ends slightly before the duration its container declares:
   the gap is padded with silence and reported once on stderr, and its frames are not
   counted as valid audio. `--audio-tail-tolerance-ms` (default 25 ms, `0` restores the

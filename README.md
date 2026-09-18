@@ -10,7 +10,7 @@
   <img alt="License" src="https://img.shields.io/badge/license-BSL%201.1-F97316">
 </p>
 
-MP4 H.264/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in batched
+MP4 H.264/H.265/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in batched
 Apache Arrow IPC (`.tenzor`), decoded on the CPU with no FFmpeg or CUDA runtime dependency.
 Decode once, then memory-map the tensors for every training epoch that follows.
 
@@ -254,6 +254,38 @@ benchmark clip 265 of 600 access units are skipped. The log reports
   malformed units are always decoded, so framing errors are reported as before.
 - Trade-off: corrupt *slice data* inside a skipped picture is no longer detected, because
   that picture is never decoded. Use `--no-skip-nonref` to validate every picture.
+
+## H.265 / HEVC
+
+MP4 files with an H.265 video track are decoded by `rusty_h265` (Apache-2.0, pure Rust, no
+FFI) and follow the same selection, resize and colour path as H.264, so the tensor contract
+is unchanged.
+
+```sh
+./target/release/tenzor -i clip-hevc.mp4 -o clip.tenzor
+```
+
+Scope: **Main profile, 8-bit 4:2:0**. Main 10, Main Intra / Still Picture, the range and
+screen-content extensions, interlaced coding and 4:2:2 / 4:4:4 are refused before decoding,
+naming the profile and the `ffmpeg` command that converts the file.
+
+`--video-workers`, `--chunk-target-ms`, `--video-buffer-mib` and `--no-skip-nonref` work the
+same way as for H.264:
+
+- **Chunks start at IRAP access units.** An IDR resets the decoder outright; a CRA does too,
+  but the RASL pictures that follow it present *before* it and reference the previous GOP, so
+  each chunk decodes through the next chunk's IRAP and its RASL run and hands out only the
+  pictures inside its own presentation interval. Open-GOP encodes — x265's default, where the
+  only IDR is the first frame — parallelise because of this.
+- **Unused sub-layer non-reference pictures are never decoded.** A sub-layer non-reference
+  picture at the stream's highest `TemporalId` cannot be referenced by anything, so when no
+  epoch selects it the access unit is skipped. Typical B-pyramid encodes skip about 60% of
+  their access units; `--no-skip-nonref` decodes everything.
+- Every worker count, chunk size and skip setting produces identical tensors, and the chunk
+  plan falls back to one decoder (logging the reason) when a clip cannot be partitioned.
+
+`scripts/test_hevc_fidelity.py` compares the tensors against an independent FFmpeg decode and
+checks that identity.
 
 ## Audio execution
 

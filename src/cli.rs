@@ -3,7 +3,7 @@
 use crate::concurrency::{self, AudioEpoch, Cancellation, Message, VideoEpoch};
 use crate::metrics::{Metrics, Stage};
 use crate::storage::{BatchAccumulator, TenzorMetadata, TenzorWriter};
-use crate::{audio, media, video, video_parallel};
+use crate::{audio, media, video, video_hevc, video_parallel};
 use anyhow::{Context, Result, bail, ensure};
 use clap::{Parser, ValueEnum};
 use memmap2::Mmap;
@@ -18,7 +18,7 @@ enum Execution {
 #[command(
     name = "tenzor",
     version,
-    about = "MP4 H.264/AAC-LC and WAV to synchronized Arrow tensors"
+    about = "MP4 H.264/H.265/AAC-LC and WAV to synchronized Arrow tensors"
 )]
 pub struct Cli {
     #[arg(short, long)]
@@ -276,8 +276,11 @@ fn run(
         // Name the codec here rather than letting the decoder report a missing track.
         if let Some(t) = video.first() {
             ensure!(
-                t.codec() == Some(mp4io::Codec::H264),
-                "video track is {}; TenzorPipe decodes H.264/AVC. Convert with \
+                matches!(
+                    t.codec(),
+                    Some(mp4io::Codec::H264) | Some(mp4io::Codec::H265)
+                ),
+                "video track is {}; TenzorPipe decodes H.264/AVC and H.265/HEVC. Convert with \
                  `ffmpeg -i INPUT -c:v libx264 -crf 18 -preset veryfast -c:a copy OUTPUT.mp4`.",
                 media::codec_name(t.codec())
             );
@@ -293,7 +296,14 @@ fn run(
         .as_ref()
         .map_or(0, |a| (a.total_samples as u64 * 1000).div_ceil(16000));
     let video_matrix = if has_video {
-        video::video_color(mp4.as_ref().unwrap())?.description()
+        {
+            let m = mp4.as_ref().unwrap();
+            if video_hevc::hevc_track(m).is_some() {
+                video_hevc::video_color(m)?.description()
+            } else {
+                video::video_color(m)?.description()
+            }
+        }
     } else {
         "none".into()
     };
@@ -565,6 +575,22 @@ fn decode_video<F>(
 where
     F: FnMut(usize, i64, &[f32]) -> Result<()>,
 {
+    if video_hevc::hevc_track(mp4).is_some() {
+        // H.265 has its own decoder; the chunked H.264 worker pool does not apply.
+        return video_hevc::decode_hevc_mp4(
+            mp4,
+            config,
+            video_parallel::ParallelConfig {
+                workers: video_workers(args),
+                chunk_target_ms: args.chunk_target_ms,
+                buffer_bytes: args.video_buffer_mib * 1024 * 1024,
+            },
+            metrics,
+            cancel,
+            input_mapping,
+            on_epoch,
+        );
+    }
     let workers = video_workers(args);
     if workers <= 1 {
         // Unchanged v0.1.6 single-decoder path.

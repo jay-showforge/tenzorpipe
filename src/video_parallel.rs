@@ -131,12 +131,12 @@ const PLAN_BUDGET_BYTES: usize = 32 * 1024 * 1024;
 // Conservative simultaneous vector-payload allowance, including capacities and
 // per-chunk containers. Allocator bookkeeping is additional bounded overhead.
 const PLAN_BYTES_PER_SAMPLE: usize = 192;
-fn plan_fits_budget(samples: usize) -> bool {
+pub(crate) fn plan_fits_budget(samples: usize) -> bool {
     samples
         .checked_mul(PLAN_BYTES_PER_SAMPLE)
         .is_some_and(|bytes| bytes <= PLAN_BUDGET_BYTES)
 }
-fn release_index_pages(mapping: Option<&memmap2::Mmap>) -> Result<()> {
+pub(crate) fn release_index_pages(mapping: Option<&memmap2::Mmap>) -> Result<()> {
     #[cfg(unix)]
     if let Some(mapping) = mapping {
         // Input must stay immutable, as with existing batch-level page release.

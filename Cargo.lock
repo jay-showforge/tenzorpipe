@@ -994,6 +994,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "rusty_h265"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "153eb6abc0c03ba508fecda4ce5b4e7b268a2e697b67ce186fb821db25475e85"
+dependencies = [
+ "rusty_h265-accel",
+]
+
+[[package]]
+name = "rusty_h265-accel"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bba7bb825f634907ff7684a14f4abd999d477e8f7b7a9a8ebbf79ba3ffe0b329"
+
+[[package]]
 name = "ryu"
 version = "1.0.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1091,6 +1106,7 @@ dependencies = [
  "rust_h264",
  "rustfft",
  "rusty_aac",
+ "rusty_h265",
 ]
 
 [[package]]

@@ -66,6 +66,9 @@ EXPECTED_ERROR_CHANGES = [
 # Fixtures whose audio ends before its declared duration: within the default tolerance the
 # new engine converts them (padding with silence) where the old binary failed.
 EXPECTED_NEW_SUCCESS = ("audio-tail-short.mp4",)
+# H.265 clips: the old binary has no HEVC decoder, so it fails where this one converts or
+# refuses by profile/bit depth. scripts/test_hevc_fidelity.py checks their pixels.
+EXPECTED_HEVC_PREFIX = "hevc-"
 
 
 def expected_message_change(old_error, new_error):
@@ -129,8 +132,9 @@ def case(media, s_index, variant):
         and new["rc"] == old["rc"]
         and expected_message_change(old["error"], new["error"])
     )
-    newly_accepted = (
-        old["rc"] != 0 and new["rc"] == 0 and media.name in EXPECTED_NEW_SUCCESS
+    newly_accepted = old["rc"] != 0 and (
+        (new["rc"] == 0 and media.name in EXPECTED_NEW_SUCCESS)
+        or media.name.startswith(EXPECTED_HEVC_PREFIX)
     )
     # Resource exhaustion in the test environment proves nothing about identity.
     infra = any(word in old["error"] + new["error"] for word in ("No space left", "Cannot allocate"))
@@ -142,6 +146,7 @@ def case(media, s_index, variant):
         else "identical" if same_success
         else "same-error" if same_failure
         else "expected-message-change" if reworded
+        else "expected-hevc" if newly_accepted and media.name.startswith(EXPECTED_HEVC_PREFIX)
         else "expected-new-success" if newly_accepted
         else "new-succeeds-where-old-failed" if old["rc"] != 0 and new["rc"] == 0
         else "MISMATCH"
