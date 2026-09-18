@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+- Accept an audio track that ends slightly before the duration its container declares:
+  the gap is padded with silence and reported once on stderr, and its frames are not
+  counted as valid audio. `--audio-tail-tolerance-ms` (default 25 ms, `0` restores the
+  strict check) bounds what is accepted; longer gaps are still an error. Container
+  durations are rounded and editors trim tails, so sub-millisecond shortfalls are normal
+  in real files and previously rejected them outright.
+- Unsupported inputs now name what was found and how to convert it: video codec
+  (for example "video track is H.265/HEVC"), audio codec, HE-AAC, and unsupported
+  file extensions all include the matching `ffmpeg` command.
+- `tenzorpipe.ingest(audio_tail_tolerance_ms=...)` exposes the same option.
+- New: `scripts/gen_short_tail_fixtures.py` (derives short-tail fixtures from an existing
+  fixture, no FFmpeg needed) and `scripts/test_audio_tail_tolerance.py` (end-to-end policy
+  and message checks, plus an optional byte-identity pass against a previous binary).
+- Output for files that already converted is unchanged: 145 fixture/setting cases are
+  byte-identical to the 0.3.0 binary, with differences only in the two message texts above.
+
 ## 0.3.0 — 2026-09-16
 
 - License the project under the Business Source License 1.1 (LICENSE): Additional Use Grant

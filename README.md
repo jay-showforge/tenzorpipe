@@ -269,6 +269,26 @@ preserve the previous arithmetic and tensor values. The new `audio_source_wait`
 profile timer measures consumer wait; `audio_source` is decode/downmix work on its
 own thread. Stage timers overlap and cannot be added to recover wall time.
 
+### Short audio tails and unsupported inputs
+
+Container durations are rounded and editors trim tails, so a file's audio can end a
+fraction of a millisecond before the duration its container declares. The engine pads
+gaps up to `--audio-tail-tolerance-ms` (default 25 ms) with silence, prints one note on
+stderr and does not count the padded frames as valid audio. `0` requires an exact match;
+longer gaps remain an error that names the gap and the fix.
+
+```sh
+./target/release/tenzor -i clip.mp4 -o clip.tenzor --audio-tail-tolerance-ms 50
+```
+
+Unsupported inputs name what was found and the conversion command, for example a
+H.265/HEVC video track, Opus or HE-AAC audio, or a non-MP4/WAV extension:
+
+```
+Error: video track is H.265/HEVC; TenzorPipe decodes H.264/AVC. Convert with
+`ffmpeg -i INPUT -c:v libx264 -crf 18 -preset veryfast -c:a copy OUTPUT.mp4`.
+```
+
 ## Tensor contract
 
 One row represents an epoch start, normally every 500 ms. Each row contains:

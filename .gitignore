@@ -3,6 +3,8 @@
 __pycache__/
 *.pyc
 /fixtures/long-*.mp4
+# Derived by scripts/gen_short_tail_fixtures.py from a committed fixture.
+/fixtures/audio-tail-*.mp4
 /dist/
 *.egg-info/
 python/tenzorpipe/_engine*.so

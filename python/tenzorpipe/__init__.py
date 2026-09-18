@@ -49,6 +49,7 @@ def ingest(
     queue_depth: Optional[int] = None,
     chunk_target_ms: Optional[int] = None,
     video_buffer_mib: Optional[int] = None,
+    audio_tail_tolerance_ms: Optional[int] = None,
     skip_nonref: bool = True,
     audio_decode_thread: bool = True,
     profile: bool = False,
@@ -59,6 +60,10 @@ def ingest(
     ``output`` must not exist. On failure a ``tenzorpipe.TenzorError`` is raised and any
     partial output is removed. Returns ``{"output", "epochs", "seconds"}``, plus ``"profile"``
     (a dict of stage timers) when ``profile=True``.
+
+    ``audio_tail_tolerance_ms`` accepts an audio track that ends slightly before the duration
+    its container declares (default 25 ms), padding the gap with silence; ``0`` requires an
+    exact match. Larger gaps raise ``TenzorError``.
 
     The engine is silent unless ``verbose=True``, which prints its diagnostics (decoder mode,
     per-video summary and any profile JSON) on stderr, as the ``tenzor`` command does.
@@ -74,6 +79,7 @@ def ingest(
         "--queue-depth": queue_depth,
         "--chunk-target-ms": chunk_target_ms,
         "--video-buffer-mib": video_buffer_mib,
+        "--audio-tail-tolerance-ms": audio_tail_tolerance_ms,
     }
     for flag, value in options.items():
         if value is not None:

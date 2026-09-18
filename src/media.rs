@@ -1,6 +1,23 @@
 //! Common MP4 presentation timeline, including encoder priming edits.
 use anyhow::{Result, ensure};
-use mp4io::Track;
+use mp4io::{Codec, Track};
+
+/// A human name for a track's codec, for messages that tell a user what to convert.
+pub fn codec_name(codec: Option<Codec>) -> String {
+    match codec {
+        Some(Codec::H264) => "H.264/AVC".into(),
+        Some(Codec::H265) => "H.265/HEVC".into(),
+        Some(Codec::Av1) => "AV1".into(),
+        Some(Codec::Vp8) => "VP8".into(),
+        Some(Codec::Vp9) => "VP9".into(),
+        Some(Codec::Aac) => "AAC".into(),
+        Some(Codec::Opus) => "Opus".into(),
+        Some(Codec::Flac) => "FLAC".into(),
+        Some(Codec::Mp4v) => "MPEG-4 Part 2".into(),
+        Some(other) => format!("{other:?}"),
+        None => "an unrecognized codec".into(),
+    }
+}
 
 #[derive(Clone, Copy)]
 pub struct Timeline {

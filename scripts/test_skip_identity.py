@@ -50,6 +50,31 @@ VARIANTS = [
 ]
 
 
+# Error texts this release deliberately rewrote, and the fixtures whose acceptance this
+# release deliberately changed. A case only passes through here when the old binary's
+# message starts with the recorded text and the new one contains every recorded marker,
+# so an unrelated regression still fails the gate. Successful artifacts are never
+# excused: they must stay byte-identical.
+EXPECTED_ERROR_CHANGES = [
+    # (old message prefix, markers required in the new message)
+    ("Error: no supported H.264 video track found", ("video track is", "ffmpeg")),
+    ("Error: unsupported extension", ("TenzorPipe reads", "ffmpeg")),
+    ("Error: MP4 audio codec unsupported", ("audio track is", "ffmpeg")),
+    ("Error: only AAC-LC supported", ("HE-AAC", "ffmpeg")),
+    ("Error: audio ended before declared duration", ("--audio-tail-tolerance-ms", "ffmpeg")),
+]
+# Fixtures whose audio ends before its declared duration: within the default tolerance the
+# new engine converts them (padding with silence) where the old binary failed.
+EXPECTED_NEW_SUCCESS = ("audio-tail-short.mp4",)
+
+
+def expected_message_change(old_error, new_error):
+    return any(
+        old_error.startswith(prefix) and all(marker in new_error for marker in markers)
+        for prefix, markers in EXPECTED_ERROR_CHANGES
+    )
+
+
 def substituted_sha256(path, substitute):
     """SHA-256 of a file, optionally with NEW_VERSION replaced by OLD_VERSION, in bounded memory.
 
@@ -99,11 +124,28 @@ def case(media, s_index, variant):
     new = run(NEW, media, settings + new_args, tag + "-new")
     same_success = old["rc"] == 0 and new["rc"] == 0 and old["sha256"] == new["sha256"]
     same_failure = old["rc"] != 0 and new["rc"] == old["rc"] and new["error"] == old["error"]
+    reworded = (
+        old["rc"] != 0
+        and new["rc"] == old["rc"]
+        and expected_message_change(old["error"], new["error"])
+    )
+    newly_accepted = (
+        old["rc"] != 0 and new["rc"] == 0 and media.name in EXPECTED_NEW_SUCCESS
+    )
     # Resource exhaustion in the test environment proves nothing about identity.
     infra = any(word in old["error"] + new["error"] for word in ("No space left", "Cannot allocate"))
-    ok = (same_success or same_failure) and not (new["panic"] or new["leftover"] or infra)
-    kind = "INFRASTRUCTURE" if infra else "identical" if same_success else "same-error" if same_failure else (
-        "new-succeeds-where-old-failed" if old["rc"] != 0 and new["rc"] == 0 else "MISMATCH")
+    ok = (same_success or same_failure or reworded or newly_accepted) and not (
+        new["panic"] or new["leftover"] or infra
+    )
+    kind = (
+        "INFRASTRUCTURE" if infra
+        else "identical" if same_success
+        else "same-error" if same_failure
+        else "expected-message-change" if reworded
+        else "expected-new-success" if newly_accepted
+        else "new-succeeds-where-old-failed" if old["rc"] != 0 and new["rc"] == 0
+        else "MISMATCH"
+    )
     return dict(file=str(media), settings=" ".join(settings), variant=label, ok=ok, kind=kind,
                 old_rc=old["rc"], new_rc=new["rc"], old_error=old["error"], new_error=new["error"],
                 skipped_nonref=new["skipped"])

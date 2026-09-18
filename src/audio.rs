@@ -13,6 +13,11 @@ pub const TARGET_SAMPLE_RATE: u32 = 16_000;
 pub const N_FFT: usize = 400;
 pub const HOP_LENGTH: usize = 160;
 pub const N_MELS: usize = 64;
+/// Default allowance for a source that ends slightly before its container's declared
+/// duration. Container durations are rounded and editors trim tails, so real files are
+/// routinely short by a fraction of a millisecond. Gaps up to this are padded with
+/// silence; anything longer is still an error.
+pub const DEFAULT_TAIL_TOLERANCE_MS: u64 = 25;
 /// Consumed source samples are released in blocks of this size (bounded buffer).
 const INPUT_DRAIN_SAMPLES: usize = 1 << 15;
 
@@ -92,6 +97,11 @@ impl MonoSource for AacSource<'_, '_> {
         }
     }
 }
+/// Tolerance in source samples, rounded down, and never negative.
+fn tolerance_samples(tolerance_ms: u64, rate: u32) -> usize {
+    (tolerance_ms.saturating_mul(rate as u64) / 1000) as usize
+}
+
 fn downmix(samples: &[f32], channels: usize) -> Vec<f32> {
     samples
         .chunks_exact(channels)
@@ -230,6 +240,14 @@ pub struct AudioStream<'a> {
     /// Timer charged while waiting for source PCM: `AudioSource` when decoding
     /// inline, `AudioSourceWait` when a decode thread feeds this stream.
     source_stage: Stage,
+    /// Largest accepted shortfall between decoded and declared source samples.
+    tail_tolerance: usize,
+    /// How far the source actually fell short, in source samples (0 when exact).
+    short_tail: usize,
+    /// Last output sample backed by real audio when the source ended short.
+    available_samples: Option<usize>,
+    /// Print a note when a short tail is padded.
+    tail_diagnostics: bool,
 }
 impl<'a> AudioStream<'a> {
     pub fn wav(path: &Path) -> Result<Self> {
@@ -251,7 +269,9 @@ impl<'a> AudioStream<'a> {
     pub fn aac(track: &'a Track<'a>, movie_scale: u32) -> Result<Self> {
         ensure!(
             track.codec() == Some(Codec::Aac),
-            "MP4 audio codec unsupported: only AAC-LC is supported"
+            "audio track is {}; TenzorPipe reads AAC-LC in MP4 and PCM in WAV. \
+             Convert with `ffmpeg -i INPUT -c:v copy -c:a aac OUTPUT.mp4`.",
+            crate::media::codec_name(track.codec())
         );
         let raw = match track.sample_entry() {
             Some(SampleEntry::Audio(a)) => match &a.config {
@@ -267,7 +287,8 @@ impl<'a> AudioStream<'a> {
                 && !decoder
                     .sbr_config()
                     .is_some_and(|s| s.sbr_present || s.ps_present),
-            "only AAC-LC supported; HE-AAC/SBR is unsupported"
+            "audio track is HE-AAC (SBR/PS); TenzorPipe reads plain AAC-LC. \
+             Convert with `ffmpeg -i INPUT -c:v copy -c:a aac -profile:a aac_low OUTPUT.mp4`."
         );
         ensure!(
             (1..=6).contains(&cfg.channels),
@@ -327,8 +348,55 @@ impl<'a> AudioStream<'a> {
             next_frame: 0,
             metrics: Metrics::new(false),
             source_stage: Stage::AudioSource,
+            tail_tolerance: tolerance_samples(DEFAULT_TAIL_TOLERANCE_MS, rate),
+            short_tail: 0,
+            available_samples: None,
+            tail_diagnostics: false,
         })
     }
+    /// Accept a source that ends up to `tolerance_ms` before its declared duration,
+    /// padding the gap with silence. `diagnostics` prints a note when that happens.
+    pub fn set_tail_tolerance(&mut self, tolerance_ms: u64, diagnostics: bool) {
+        self.tail_tolerance = tolerance_samples(tolerance_ms, self.sinc.from_rate);
+        self.tail_diagnostics = diagnostics;
+    }
+
+    /// Called once, when the source reports end of stream.
+    fn finish_source(&mut self) -> Result<()> {
+        self.ended = true;
+        let missing = self.source_len.saturating_sub(self.read);
+        let rate = self.sinc.from_rate;
+        let millis = |samples: usize| samples as f64 * 1000. / rate as f64;
+        ensure!(
+            missing <= self.tail_tolerance,
+            "audio ends {missing} samples ({:.3} ms) before the duration the container declares \
+             ({} of {} samples at {rate} Hz). Allow a longer gap with \
+             --audio-tail-tolerance-ms (currently {:.0} ms), or rewrite the file with \
+             `ffmpeg -i INPUT -c:v copy -c:a aac OUTPUT.mp4`.",
+            millis(missing),
+            self.read,
+            self.source_len,
+            millis(self.tail_tolerance)
+        );
+        if missing > 0 {
+            self.short_tail = missing;
+            // Real audio stops here; later output samples are silence and are not
+            // counted as valid frames.
+            self.available_samples = Some(
+                self.delay_samples
+                    + (self.read as u64 * TARGET_SAMPLE_RATE as u64 / rate as u64) as usize,
+            );
+            if self.tail_diagnostics {
+                eprintln!(
+                    "note: audio ends {missing} samples ({:.3} ms) before its declared duration; \
+                     padded with silence",
+                    millis(missing)
+                );
+            }
+        }
+        Ok(())
+    }
+
     fn next_sample(&mut self) -> Result<f32> {
         let pos = self.output_pos;
         self.output_pos += 1;
@@ -348,15 +416,7 @@ impl<'a> AudioStream<'a> {
                     self.read += chunk.len();
                     self.input.extend(chunk);
                 }
-                None => {
-                    self.ended = true;
-                    ensure!(
-                        self.read >= self.source_len,
-                        "audio ended before declared duration ({} < {} samples)",
-                        self.read,
-                        self.source_len
-                    );
-                }
+                None => self.finish_source()?,
             }
         }
         let phase =
@@ -423,7 +483,10 @@ impl<'a> AudioStream<'a> {
             if let Some(cancel) = cancel {
                 cancel.check()?;
             }
-            if self.next_frame * HOP_LENGTH < self.total_samples {
+            let audio_end = self
+                .available_samples
+                .map_or(self.total_samples, |end| end.min(self.total_samples));
+            if self.next_frame * HOP_LENGTH < audio_end {
                 valid += 1;
             }
             let source_before = self.metrics.nanos(self.source_stage);
@@ -675,6 +738,100 @@ mod tests {
         let len = x.len();
         AudioStream::new(Box::new(ChunkSource { x, pos: 0, chunk }), 48000, len, 0).unwrap()
     }
+    /// A 48 kHz stream whose source is `short_by` samples shorter than declared.
+    fn short_tail_stream(
+        samples: usize,
+        short_by: usize,
+        tolerance_ms: u64,
+    ) -> AudioStream<'static> {
+        let x: Vec<f32> = (0..samples - short_by)
+            .map(|i| (i as f32 * 0.01).sin() * 0.5)
+            .collect();
+        let mut s = AudioStream::new(
+            Box::new(ChunkSource {
+                x,
+                pos: 0,
+                chunk: 1024,
+            }),
+            48000,
+            samples,
+            0,
+        )
+        .unwrap();
+        s.set_tail_tolerance(tolerance_ms, false);
+        s
+    }
+
+    #[test]
+    fn short_tail_within_tolerance_is_padded_with_silence() {
+        // 17 samples at 48 kHz is 0.354 ms: the rounding gap real containers produce.
+        let mut s = short_tail_stream(48_000, 17, DEFAULT_TAIL_TOLERANCE_MS);
+        let mut frames = 0;
+        let mut valid = 0;
+        for _ in 0..2 {
+            let (out, v) = s.epoch(50).unwrap();
+            assert_eq!(out.len(), 50 * N_MELS);
+            assert!(out.iter().all(|x| x.is_finite()));
+            frames += 50;
+            valid += v;
+        }
+        assert_eq!(frames, 100);
+        assert_eq!(s.short_tail, 17);
+        // 48 kHz -> 16 kHz: the last real output sample is 15994, inside frame 99.
+        assert_eq!(s.available_samples, Some(15_994));
+        assert_eq!(valid, 100);
+    }
+
+    #[test]
+    fn padded_tail_frames_are_reported_invalid() {
+        // A 0.5 s gap would need a larger tolerance; 20 ms is within the default.
+        let mut s = short_tail_stream(48_000, 960, DEFAULT_TAIL_TOLERANCE_MS);
+        let (_, valid) = s.epoch(100).unwrap();
+        // Real audio stops at output sample 15680, so frames from hop 98 are silence.
+        assert_eq!(s.available_samples, Some(15_680));
+        assert_eq!(valid, 98);
+    }
+
+    #[test]
+    fn short_tail_beyond_tolerance_is_rejected_with_guidance() {
+        let mut s = short_tail_stream(48_000, 48_00 * 2, DEFAULT_TAIL_TOLERANCE_MS);
+        let message = (0..4)
+            .map(|_| s.epoch(50))
+            .find_map(|r| r.err())
+            .expect("a 200 ms gap must be rejected")
+            .to_string();
+        assert!(message.contains("--audio-tail-tolerance-ms"), "{message}");
+        assert!(message.contains("ffmpeg"), "{message}");
+        assert!(message.contains("200.000 ms"), "{message}");
+    }
+
+    #[test]
+    fn zero_tolerance_restores_the_strict_check() {
+        let mut s = short_tail_stream(48_000, 1, 0);
+        let err = (0..4)
+            .map(|_| s.epoch(50))
+            .find_map(|r| r.err())
+            .expect("a one-sample gap must be rejected at tolerance 0");
+        assert!(err.to_string().contains("1 samples"), "{err}");
+    }
+
+    #[test]
+    fn exact_sources_are_unaffected_by_the_tolerance() {
+        let x: Vec<f32> = (0..48_000).map(|i| (i as f32 * 0.01).sin() * 0.5).collect();
+        let mut strict = stream_48k(x.clone(), 1024);
+        strict.set_tail_tolerance(0, false);
+        let mut lenient = stream_48k(x, 1024);
+        lenient.set_tail_tolerance(1000, false);
+        for _ in 0..2 {
+            let (a, va) = strict.epoch(50).unwrap();
+            let (b, vb) = lenient.epoch(50).unwrap();
+            assert_eq!(va, vb);
+            assert!(a.iter().zip(&b).all(|(p, q)| p.to_bits() == q.to_bits()));
+        }
+        assert_eq!(strict.short_tail, 0);
+        assert_eq!(lenient.short_tail, 0);
+    }
+
     fn run_with_timeout<T: Send + 'static>(f: impl FnOnce() -> T + Send + 'static) -> T {
         let (tx, rx) = std::sync::mpsc::channel();
         std::thread::spawn(move || {

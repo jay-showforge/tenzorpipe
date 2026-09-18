@@ -68,6 +68,11 @@ pub struct Cli {
     /// Upper bound for decoded video tensors waiting in the chunk reorder window (MiB).
     #[arg(long, default_value_t = 64)]
     video_buffer_mib: usize,
+    /// Accept an audio track that ends this many milliseconds before the duration its
+    /// container declares, padding the gap with silence. Container durations are rounded
+    /// and editors trim tails, so small gaps are normal. 0 requires an exact match.
+    #[arg(long, default_value_t = audio::DEFAULT_TAIL_TOLERANCE_MS)]
+    audio_tail_tolerance_ms: u64,
 }
 /// Parse command-line style arguments; the first item is the program name.
 pub fn parse_args<I, T>(args: I) -> std::result::Result<Cli, clap::Error>
@@ -110,6 +115,10 @@ pub fn convert(args: &Cli) -> Result<Summary> {
     ensure!(
         (1..=1024).contains(&args.video_buffer_mib),
         "--video-buffer-mib must be 1..1024"
+    );
+    ensure!(
+        args.audio_tail_tolerance_ms <= 1000,
+        "--audio-tail-tolerance-ms must be 0..1000"
     );
     ensure!(
         args.video_workers.is_none_or(|n| n == 1) || args.decoder_threads == 0,
@@ -160,7 +169,8 @@ pub fn convert(args: &Cli) -> Result<Summary> {
         .to_ascii_lowercase();
     ensure!(
         matches!(ext.as_str(), "mp4" | "wav"),
-        "unsupported extension '{ext}'; supports only MP4 H.264/AAC-LC and WAV"
+        "unsupported extension '{ext}'; TenzorPipe reads .mp4 (H.264 video, AAC-LC audio) \
+         and .wav. Convert with `ffmpeg -i INPUT -c:v libx264 -c:a aac OUTPUT.mp4`."
     );
     let start = Instant::now();
     // Reserve the final path exactly once. A failed ordinary run removes it.
@@ -244,21 +254,34 @@ fn run(
             .first()
             .map(|t| audio::AudioStream::aac(t, m.timescale()))
             .transpose()?
+            .map(|mut stream| {
+                stream.set_tail_tolerance(args.audio_tail_tolerance_ms, !args.quiet);
+                stream
+            })
     } else {
-        Some(audio::AudioStream::wav(&args.input)?)
+        let mut stream = audio::AudioStream::wav(&args.input)?;
+        stream.set_tail_tolerance(args.audio_tail_tolerance_ms, !args.quiet);
+        Some(stream)
     };
     let has_video = mp4
         .as_ref()
         .is_some_and(|m| m.tracks().iter().any(|t| t.kind() == TrackKind::Video));
     if let Some(m) = &mp4 {
-        ensure!(
-            m.tracks()
-                .iter()
-                .filter(|t| t.kind() == TrackKind::Video)
-                .count()
-                <= 1,
-            "multiple video tracks unsupported"
-        );
+        let video: Vec<_> = m
+            .tracks()
+            .iter()
+            .filter(|t| t.kind() == TrackKind::Video)
+            .collect();
+        ensure!(video.len() <= 1, "multiple video tracks unsupported");
+        // Name the codec here rather than letting the decoder report a missing track.
+        if let Some(t) = video.first() {
+            ensure!(
+                t.codec() == Some(mp4io::Codec::H264),
+                "video track is {}; TenzorPipe decodes H.264/AVC. Convert with \
+                 `ffmpeg -i INPUT -c:v libx264 -crf 18 -preset veryfast -c:a copy OUTPUT.mp4`.",
+                media::codec_name(t.codec())
+            );
+        }
     }
     ensure!(
         has_video || audio.is_some(),
