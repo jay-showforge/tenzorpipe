@@ -29,10 +29,15 @@ jobs:
       - name: Confirm the ARM64 build really carries NEON assembly
         run: |
           set -eu
-          # OpenH264's aarch64 kernels are the assembly this job exists to exercise.
-          nm -C target/release/tenzor | grep -qi "AArch64\|_neon" \
-            || { echo "no NEON symbols found in the binary"; exit 1; }
-          echo "NEON symbols present: $(nm -C target/release/tenzor | grep -ci 'AArch64\|_neon')"
+          # [profile.release] sets strip = true, so the linked binary carries no symbol
+          # table and `nm` on it can never match. Inspect the OpenH264 objects the build
+          # script produced instead: the aarch64 .S kernels this job exists to exercise
+          # are compiled into those.
+          objs=$(find target/release/build -path '*openh264*' -name '*.o')
+          [ -n "$objs" ] || { echo 'no OpenH264 build objects found'; exit 1; }
+          count=$(nm $objs 2>/dev/null | grep -ci 'aarch64\|neon' || true)
+          [ "$count" -gt 0 ] || { echo 'no NEON symbols in the OpenH264 objects'; exit 1; }
+          echo "NEON symbols present: $count"
       - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
       - run: python3 scripts/generate_matrix.py
       - run: bash scripts/gen_hevc_fixtures.sh

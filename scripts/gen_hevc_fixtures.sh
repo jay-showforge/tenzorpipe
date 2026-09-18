@@ -4,10 +4,13 @@ set -euo pipefail
 cd "$(dirname "$0")/../fixtures"
 F="ffmpeg -hide_banner -loglevel error -y"
 # Main profile 8-bit 4:2:0, B-pyramid, 2 s keyframe interval, with AAC audio.
+# The audio is copied from a committed fixture rather than re-encoded: FFmpeg's native AAC
+# encoder changes its output between versions, so re-encoding would make the recorded
+# cross-architecture digests depend on the runner's FFmpeg build instead of on the CPU.
 $F -f lavfi -i testsrc2=size=640x360:rate=30:duration=6 \
-   -f lavfi -i "aevalsrc=0.3*sin(2*PI*440*t)|0.2*sin(2*PI*880*t):s=48000:d=6" \
-   -c:v libx265 -preset medium -x265-params "keyint=60:bframes=4" -pix_fmt yuv420p \
-   -tag:v hvc1 -c:a aac -movflags +faststart hevc-av.mp4
+   -i fixture-h264-aac.mp4 \
+   -map 0:v -map 1:a -c:v libx265 -preset medium -x265-params "keyint=60:bframes=4" \
+   -pix_fmt yuv420p -tag:v hvc1 -c:a copy -shortest -movflags +faststart hevc-av.mp4
 # Video only, larger frame, closed GOP.
 $F -f lavfi -i testsrc2=size=1280x720:rate=30:duration=4 \
    -c:v libx265 -preset veryfast -x265-params "keyint=30:bframes=3:open-gop=0" \
