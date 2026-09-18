@@ -1,0 +1,30 @@
+{
+ "recorded_on": {
+  "machine": "aarch64",
+  "system": "Linux",
+  "python": "3.12.3"
+ },
+ "digests": {
+  "fixture-h264-aac.mp4": "5c176567f158dc4c0d0b095eb7186f06c15a4b846d56b154ac6a28002a293dde",
+  "fixture-h264-aac.mp4 --video-workers 1": "5c176567f158dc4c0d0b095eb7186f06c15a4b846d56b154ac6a28002a293dde",
+  "fixture-h264-aac.mp4 --video-workers 4 --chunk-target-ms 250": "5c176567f158dc4c0d0b095eb7186f06c15a4b846d56b154ac6a28002a293dde",
+  "fixture-h264-aac.mp4 --no-skip-nonref": "5c176567f158dc4c0d0b095eb7186f06c15a4b846d56b154ac6a28002a293dde",
+  "high-bframes.mp4 --resolution 160 --window-sec 0.33": "6ba804287cd06b6bfe7474f412922b747cd1e879e4277ab79b90a0121d2945ae",
+  "baseline720.mp4": "7bc497e9f8d1cecdb246de7c2dab9712fa7d7865a452c8c8c7c5ac533106b284",
+  "color709.mp4": "4b60bfe054eeb1c856364bda601afe337b1939ce714d35948fa8e1d8828af66d",
+  "fullrange.mp4": "8c5b8df9125008cab16c2ddbd8b83144e3c7cbfc758df1c8ecb2186630bab07a",
+  "selection-vfr.mp4": "197a920b409296134a67c1ae4d835f9e5922b067d6ec2ac10fd9033882787acd",
+  "selection-sparse.mp4": "b28d9ac0b1b57fe6ecf764bc983f09480076430b013facc26e6e5d82865c3807",
+  "sync-pulse.mp4": "60090c9958f09687f3948d79d434d786f1be9d7ebeb0ab4387a123233b37d0dd",
+  "aac-6ch.mp4": "76e751683d8769753df3fcff30aeabafe69fea6bbc4c4c26a15152c69e637940",
+  "audio-only.mp4": "630e52e295a5164f58209109c92b28df6bd90ffd32243929c7a007210cc01167",
+  "wav-44100-2ch.wav": "76597169ea295603a0f6609abc669f674055ddff98670edb7686e5ad63b0c49b",
+  "wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 4": "9210ccf9849b52633066d2175399909acf0670137b5d19154080661e3dee500b",
+  "hevc-av.mp4": "81744920a0a8985072f7e70af77a288ec9dc6c5071de4d481e502d4aecf33e92",
+  "hevc-av.mp4 --video-workers 1": "81744920a0a8985072f7e70af77a288ec9dc6c5071de4d481e502d4aecf33e92",
+  "hevc-av.mp4 --video-workers 4 --chunk-target-ms 500": "81744920a0a8985072f7e70af77a288ec9dc6c5071de4d481e502d4aecf33e92",
+  "hevc-av.mp4 --no-skip-nonref": "81744920a0a8985072f7e70af77a288ec9dc6c5071de4d481e502d4aecf33e92",
+  "hevc-720.mp4": "4c5b22fc854a325a6561d97cfbbed5e583cc7cbc04070deddf924dbb47c2ee51",
+  "hevc-bt709.mp4 --execution sequential": "9c19054fe42c5808a07868c64e2399a6adcfce520bcfdd7327ae38c0cea10117"
+ }
+}

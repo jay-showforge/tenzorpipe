@@ -33,6 +33,22 @@ from test_arch_identity import CASES  # noqa: E402  (same case list as the ident
 
 BINARY = ROOT / "target/release/tenzor"
 
+# What each tensor is allowed to differ by between architectures.
+#
+# Video is bit-identical on x86-64 and aarch64 and must stay that way: H.264 and H.265
+# decoding are exact by specification, and the resize and colour conversion are integer
+# and scalar. Any drift there is a defect, not rounding.
+#
+# Log-Mel goes through RustFFT, which selects AVX2 on x86-64 and NEON on aarch64. Those
+# round differently, and taking a log magnifies the disagreement in near-silent bins where
+# the linear amplitudes are tiny. The limit below carries headroom over the measured worst
+# case; the printed distribution is what the claim in README.md is written from.
+LIMITS = {
+    "video_tensor": {"max_abs": 0.0, "max_ulp": 0},
+    "audio_mel_tensor": {"max_abs": 5e-2, "max_ulp": None},
+}
+DEFAULT_LIMIT = {"max_abs": 1e-6, "max_ulp": 2}
+
 
 def read_tenzor(path: pathlib.Path) -> dict[str, np.ndarray]:
     """Same reader the H.265 fidelity gate uses, so both gates see identical arrays."""
@@ -127,24 +143,37 @@ def main() -> int:
             if not (np.isfinite(mine).all() and np.isfinite(theirs).all()):
                 failures.append(f"{key} [{name}]: non-finite values present")
                 continue
-            delta = float(np.abs(mine - theirs).max())
+            diff = np.abs(mine.astype(np.float64) - theirs.astype(np.float64))
             ulps = int(ulp_distance(mine, theirs).max())
+            delta = float(diff.max())
+            differing = int(np.count_nonzero(diff))
             compared += 1
             worst_abs, worst_ulp = max(worst_abs, delta), max(worst_ulp, ulps)
-            flag = "" if (ulps <= args.max_ulp and delta <= args.max_abs) else "  <-- OVER THRESHOLD"
-            if ulps or delta:
-                print(f"  {key} [{name}]: max|delta| {delta:.3e}, max {ulps} ULP{flag}")
-            if flag:
-                failures.append(f"{key} [{name}]: {delta:.3e} abs, {ulps} ULP")
+            limit = LIMITS.get(name, DEFAULT_LIMIT)
+            over = delta > limit['max_abs'] or (
+                limit['max_ulp'] is not None and ulps > limit['max_ulp'])
+            if differing:
+                pct = 100.0 * differing / diff.size
+                print(
+                    f"  {key} [{name}]: {pct:.2f}% of {diff.size:,} values differ, "
+                    f"p50 {np.percentile(diff, 50):.3e}, p99.9 {np.percentile(diff, 99.9):.3e}, "
+                    f"max {delta:.3e} ({ulps} ULP)"
+                    + ("  <-- OVER LIMIT" if over else "")
+                )
+            if over:
+                failures.append(
+                    f"{key} [{name}]: max {delta:.3e} abs / {ulps} ULP exceeds "
+                    f"{limit['max_abs']:.0e} abs"
+                )
 
     if args.dump:
         print(f"wrote reference tensors for {len(CASES) - skipped} cases into {target}")
         return 0
 
     print(
-        f"\n{compared} tensor columns compared, {skipped} skipped: "
-        f"worst {worst_ulp} ULP, worst |delta| {worst_abs:.3e} "
-        f"(limits: {args.max_ulp} ULP, {args.max_abs:.0e})"
+        f"{compared} tensor columns compared, {skipped} skipped: "
+        f"worst {worst_ulp} ULP, worst |delta| {worst_abs:.3e}. "
+        f"Limits: video exact, Mel {LIMITS['audio_mel_tensor']['max_abs']:.0e}"
     )
     for f in failures:
         print(f"FAIL {f}")
