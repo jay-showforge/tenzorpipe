@@ -14,8 +14,8 @@ MP4 H.264/H.265/AAC-LC and WAV → synchronized RGB/CHW and Log-Mel tensors in b
 Apache Arrow IPC (`.tenzor`), decoded on the CPU with no FFmpeg or CUDA runtime dependency.
 Decode once, then memory-map the tensors for every training epoch that follows.
 
-**▶ [Watch the 25-second explainer](assets/tenzorpipe_demo.mp4)** — side-by-side against GPU
-decoders, narrated, with the numbers measured on the machine that built it.
+**▶ [Watch the Robotics & Edge Showcase (3 min)](docs/assets/tenzorpipe-robotics-showcase.mp4)** —
+measured benchmarks, multi-epoch reuse, and zero-VRAM ingestion for edge and offline systems.
 
 ## Quickstart
 
