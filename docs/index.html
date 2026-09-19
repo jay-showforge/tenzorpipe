@@ -202,6 +202,21 @@ tailwind.config = { theme: { extend: {
     TenzorPipe is not the fastest first pass — GPU decoders are. It wins from the second epoch
     onward, and it never takes VRAM away from your model.
   </p>
+  <div class="mt-6 rounded-xl border border-line bg-panel/60 p-5">
+    <p class="text-sm font-semibold text-slate-200">Re-reads: why the video says 25&nbsp;ms and this table says 2.8&nbsp;ms</p>
+    <p class="mt-2 text-sm text-slate-400">
+      They measure different operations on different storage. The showcase figure is a full
+      <em>reopen&nbsp;+&nbsp;read</em> cycle in a fresh process, including repeated mapping overhead on
+      Windows-backed WSL storage. The table’s figure is the <em>Arrow&nbsp;&rarr;&nbsp;torch</em> load of an
+      already-prepared file from <code class="font-mono text-cyan-300">/dev/shm</code>, a RAM disk, which is
+      what a training loop repeats on every epoch after the first.
+    </p>
+    <p class="mt-2 text-sm text-slate-400">
+      Neither is a cold-storage measurement. The RAM-disk figure excludes disk I/O entirely, and the
+      showcase figure is explicitly not a cold-SSD benchmark. Cold NVMe re-reads remain unmeasured, so
+      treat both as bounds rather than as what your own hardware will do.
+    </p>
+  </div>
 </section>
 
 <!-- Use cases -->
