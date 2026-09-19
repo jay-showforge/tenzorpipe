@@ -2,6 +2,50 @@
 
 ## Unreleased
 
+- **Runtime-dispatched SIMD for the 8x8 inverse transform.** Upstream OpenH264 has
+  MMX/SSE2/AVX2 assembly for the 4x4 transform and only C for the 8x8 one, which
+  High-profile streams use for most residual blocks; it measured 4.30% of all first-pass
+  instructions. The vendored tree now carries SSE2 and AVX2 clones of the same 128-bit
+  integer body, selected from the CPUID flags OpenH264 already detects, so binaries keep
+  running on pre-AVX2 CPUs and MSVC/non-x86 builds keep the C version. Measured
+  **−2.73% of first-pass instructions** (5,052,675,826 → 4,914,597,280 on a 2 s 1080p clip
+  at one worker) with every artifact byte-identical. No wall-time figure is claimed: on the
+  2-core sandbox this was measured on, run-to-run spread is about ±6%, so a 2.73% saving is
+  below the noise floor there. Gates: 24/24 on `test_arch_identity.py`,
+  912/912 on `test_skip_identity.py` against the v0.2.0 release binary, 8/8 HEVC fidelity,
+  38 concurrency checks, and the aarch64 cross-decode check unchanged at 3/3.
+  `scripts/test_idct8x8_simd.sh` compares both clones against the real upstream C function
+  over a million random, sparse, DC-only and saturation-corner blocks, because artifact
+  digests alone would never exercise the SSE2 clone on an AVX2 machine. It runs in both CI
+  workflows and in `release_gates.sh`.
+- `openh264-sys2`'s build script now emits `cargo:rerun-if-changed=upstream`. Without it
+  cargo never noticed an edit to the vendored C++, relinked the previously compiled objects
+  and silently shipped the old kernels.
+- **A standard-GOP benchmark clip.** `tests/data/benchmark_1080p_gop250.mp4` is the same
+  content as `benchmark_1080p.mp4` at x264's default 250-frame GOP. Chunks are IDR-aligned,
+  so the worker count cannot exceed the keyframe count: the 2-second-GOP clip yields 5
+  chunks and the default-GOP one yields 2, whatever the core count, while libavcodec's
+  frame threading has no such cap. Both clips are kept — the first for continuity with the
+  recorded history, the second because it is what real media looks like.
+  `scripts/generate_benchmark_assets.py --all` builds them, `bench/gpu_bench.py --gop 250`
+  runs the competitive benchmark on default-GOP media, and the generated report now states
+  each clip's GOP and keyframe count so numbers cannot be compared across them by accident.
+  Both 1080p clips are also pinned by `test_arch_identity.py`, which is what covers the new
+  8x8 kernel by digest rather than only by differential test.
+- **Host memory restated from measurement.** README and BENCHMARKS now give the measured
+  table rather than a single figure: peak RSS runs from 29 MiB (720p, one worker) to
+  234 MiB (1080p, four workers), scaling with resolution, epochs per chunk (so with GOP
+  length) and worker count. It is close to flat in clip length — 119 → 146 → 161 MiB for
+  10 s → 60 s → 180 s at two workers, while the artifact grows from 12 MiB to 218 MiB.
+  The "~58 MiB flat" figure was a 640x360 measurement and does not hold above 720p.
+- `test_arch_identity.py` records each fixture's SHA-256 alongside its digest. The
+  generated H.265 fixtures depend on the runner's x265 build, so a regenerated
+  `hevc-av.mp4` used to look exactly like an engine regression; it is now reported as
+  fixture drift and skipped. The four `hevc-av.mp4` digests in
+  `evidence/arch-digests-x86_64.json` are re-recorded against the fixture whose hash is now
+  stored with them; the other 18 are unchanged, which is what proves the SIMD kernel
+  changed nothing.
+
 - **Strict audio-tail rejection now has a fixture that actually triggers it.** The
   independent stress test could not exercise `--audio-tail-tolerance-ms 0` cleanly,
   because a normal FFmpeg mux reconciles the trailing AAC access units against the edit

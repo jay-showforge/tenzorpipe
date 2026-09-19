@@ -1,5 +1,12 @@
 # First-pass ingest: where the time actually goes
 
+> **Follow-through.** Recommendation 1 shipped: the SSE2/AVX2 8x8 inverse transform with
+> CPUID dispatch, measured at −2.73% of first-pass instructions with every artifact digest
+> unchanged, gated by `scripts/test_idct8x8_simd.sh`. Recommendation 5 shipped:
+> `tests/data/benchmark_1080p_gop250.mp4` and `bench/gpu_bench.py --gop`. Recommendation 2
+> stands — none of the three proposed micro-optimisations was built. Recommendations 3 and 4
+> remain open decisions. The measurements below are unchanged and are the reason for all of it.
+
 Measured against released v0.3.1 (`222e5b4`), before any production patch. The short
 version: **93% of first-pass instructions are inside the H.264 decoder**, and the three
 optimisations the directive proposes — a fused SIMD YUV→CHW kernel, arena-allocated NAL

@@ -13,6 +13,11 @@ dependencies are not authorized. BUSL-1.1 is not a dependency allowlist entry.
   its NEON assembly. NASM is an x86-only build dependency. `scripts/check_arm64_openh264.sh`
   verifies the aarch64 build and its decoded output from an x86-64 host.
 - Source-built OpenH264 wrapper/sys 0.9.8: BSD-2-Clause; both vendored (vendor/openh264, vendor/openh264-sys2) with TENZORPIPE_PATCH.md build notes; retained NASM assembly and source notices. No downloaded codec binary or FFmpeg engine linkage.
+  The vendored tree carries one TenzorPipe-authored codec addition, the runtime-dispatched
+  SSE2/AVX2 8x8 inverse transform (`decode_mb_aux_simd.{inc,cpp}`), under the same
+  BSD-2-Clause terms as the surrounding sources and listed in TENZORPIPE_PATCH.md. It is
+  compiler intrinsics, not a new dependency, and `scripts/test_idct8x8_simd.sh` gates it
+  against the C function it replaces.
 - rusty_aac 0.5.0: Apache-2.0. Vendored Huffman, bit-reader, table and FFT-buffer patches retain the original references/tests and license.
 - RustFFT 6.4.1: MIT OR Apache-2.0. No smaller-FFT algorithm or new DSP dependency was introduced.
 - rust_h264 0.4.0: MIT OR Apache-2.0; used for patched SPS/VUI metadata, not its decoder.

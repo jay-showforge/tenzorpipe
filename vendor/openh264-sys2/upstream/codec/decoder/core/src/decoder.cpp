@@ -1143,11 +1143,20 @@ void InitPredFunc (PWelsDecoderContext pCtx, uint32_t uiCpuFlag) {
     pCtx->pGetIChromaPredFunc[C_PRED_DC]      = WelsDecoderIChromaPredDc_sse2;
     pCtx->pGetIChromaPredFunc[C_PRED_DC_T]    = WelsDecoderIChromaPredDcTop_sse2;
     pCtx->pGetI4x4LumaPredFunc[I4_PRED_H]     = WelsDecoderI4x4LumaPredH_sse2;
+#if defined(WELS_HAVE_IDCT8X8_SIMD)
+    // TenzorPipe addition: upstream has no x86 kernel for the 8x8 transform.
+    pCtx->pIdctResAddPredFunc8x8  = IdctResAddPred8x8_sse2;
+#endif
   }
 #if defined(HAVE_AVX2)
   if (uiCpuFlag & WELS_CPU_AVX2) {
     pCtx->pIdctResAddPredFunc     = IdctResAddPred_avx2;
     pCtx->pIdctFourResAddPredFunc = IdctFourResAddPred_avx2;
+  }
+#endif
+#if defined(WELS_HAVE_IDCT8X8_SIMD)
+  if (uiCpuFlag & WELS_CPU_AVX2) {
+    pCtx->pIdctResAddPredFunc8x8  = IdctResAddPred8x8_avx2;
   }
 #endif
 

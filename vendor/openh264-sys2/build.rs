@@ -1,4 +1,11 @@
 fn main() {
+    // TenzorPipe patch: without this, cargo never notices a change under `upstream/`
+    // and keeps relinking the previously compiled decoder objects, so an edit to the
+    // vendored C++ silently does nothing.
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=upstream");
+    println!("cargo:rerun-if-env-changed=OPENH264_ALLOW_C_FALLBACK");
+    println!("cargo:rerun-if-env-changed=OPENH264_NO_ASM");
     #[cfg(feature = "source")]
     source_build::compile();
 }

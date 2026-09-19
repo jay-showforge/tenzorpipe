@@ -102,9 +102,12 @@ competes on operational properties instead:
 
 - **0 MiB VRAM.** The decode path allocates no GPU memory at all, so it never contends with the
   model for an 8 GB card, and the same binary runs on hosts with no GPU.
-- **Bounded host memory that does not grow with clip length.** Engine RSS is 87 MiB at one worker
-  on the 1080p clip above, and about 500 MiB at eight. On a 2-core box a 330-second 640×360 clip
-  holds at 58 MiB and a 22-minute one at 119 MiB.
+- **Bounded host memory, and nearly flat in clip length.** Peak engine RSS is set by resolution,
+  keyframe interval and worker count — not by how long the clip is. It ranges from 29 MiB (720p,
+  one worker) to 234 MiB (1080p, four workers); a 640×360 330-second clip holds at 58 MiB. Going
+  from a 10-second 1080p clip to a 180-second one at two workers moves it from 119 MiB to
+  161 MiB while the artifact grows from 12 MiB to 218 MiB. See
+  [Host memory, measured](#host-memory-measured).
 - **Amortised across epochs.** Decode once; every later epoch is a memory-mapped read.
 - **Self-contained.** No FFmpeg, no CUDA, no system codec packages — one static binary plus a
   wheel, which is what makes air-gapped and embedded deployment straightforward.
@@ -258,6 +261,14 @@ Each worker adds OpenH264 picture buffers: about 48 MiB per extra worker at 1080
 explicit value when running several `tenzor` processes at once (see
 docs/FILE_BATCHING.md and `python/tenzor_batch.py`). BENCHMARKS.md has current measurements.
 
+The worker count is capped by the clip's keyframe count, because chunks start only at IDR
+access units. A 10-second clip encoded with x264's default 250-frame GOP has two keyframes, so
+it gets two workers however many cores the host has; the same clip at a 2-second GOP gets five.
+`tests/data/benchmark_1080p.mp4` (2 s GOP) and `tests/data/benchmark_1080p_gop250.mp4` (default
+GOP) are the same content at both settings, so this effect can be measured rather than argued
+about — `python3 scripts/generate_benchmark_assets.py --all` regenerates them, and
+`bench/gpu_bench.py --gop 250` runs the competitive benchmark on default-GOP media.
+
 ```sh
 ./target/release/tenzor -i fixtures/long-330.mp4 -o par.tenzor --profile          # auto workers
 ./target/release/tenzor -i fixtures/long-330.mp4 -o small.tenzor --video-workers 1 # lowest RAM
@@ -282,6 +293,32 @@ docs/FILE_BATCHING.md and `python/tenzor_batch.py`). BENCHMARKS.md has current m
   does not grow with input file size before decoding begins.
 - Each worker adds decoder state and allocator overhead to RSS. Queue, chunk and
   batch budgets are separate. See BENCHMARKS.md for current measured RSS.
+
+#### Host memory, measured
+
+Peak RSS (`VmHWM`, sampled every 2 ms) on a 2-core Xeon. The tensor bound printed in the
+header — `bound_bytes = window × max_chunk_tensor_bytes` — is what the engine enforces;
+everything else is decoder picture buffers and allocator overhead.
+
+| Clip | 1 worker | 2 workers | 4 workers |
+|---|---:|---:|---:|
+| 720p, 3.3 s | 29.4 MiB | 42.7 MiB | 42.7 MiB |
+| 1080p, 10 s, 2 s GOP | 76.2 MiB | 120.0 MiB | 206.4 MiB |
+| 1080p, 10 s, 250-frame GOP | 68.1 MiB | 105.0 MiB | 105.2 MiB |
+| 1080p, 60 s, 2 s GOP | 101.1 MiB | 145.7 MiB | 234.3 MiB |
+
+Three things move this number, and clip length is not really one of them:
+
+- **Resolution**, through the size of both a decoded picture and a chunk's tensors.
+- **Keyframe interval**, because a chunk holds every tensor it produces until it is emitted:
+  a 250-frame GOP is 17 epochs at the 0.5 s default, a 60-frame GOP is 4. The same GOP that
+  raises the per-chunk buffer also limits the worker count, which is why the GOP-250 row
+  stops rising after two workers.
+- **Worker count**, at roughly 48 MiB per extra worker at 1080p.
+
+Clip length adds very little: 10 s → 60 s → 180 s at two workers measures 119 → 146 →
+161 MiB, a 35% rise across an 18× longer clip, while the artifact goes from 12 MiB to
+218 MiB. Nothing accumulates per epoch.
 - Worker and emitter panics cancel before scoped joins; partial thread-start
   failures also trigger cancellation. Native faults remain process-level failures.
 

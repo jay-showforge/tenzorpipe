@@ -1,7 +1,7 @@
 {
-  "path": "tests/data/benchmark_1080p.mp4",
-  "bytes": 10115706,
-  "sha256": "e4a6ca7668b5d0bf1d9b5adb073107e4f1daed24eed850e83778ee4d98112428",
+  "path": "tests/data/benchmark_1080p_gop250.mp4",
+  "bytes": 10151255,
+  "sha256": "0a64ecaece6f1a0593cff79b90ec31750f9928d06328b12772bce95ebfe0e08f",
   "duration_s": 10.0,
   "video": {
     "codec": "h264",
@@ -16,6 +16,6 @@
     "sample_rate": 44100,
     "channels": 2
   },
-  "gop_frames": 60,
-  "keyframes": 5
+  "gop_frames": 250,
+  "keyframes": 2
 }

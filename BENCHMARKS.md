@@ -271,3 +271,118 @@ must either fail or match the clean output.
   and FFmpeg rows reproduced their earlier medians within 3% (release 0.1%, FFmpeg 2.2% video / 2.8% A/V).
 - **Version string:** these measurements and the first identity gate ran before the 0.3.0 bump. The
   identity scripts now substitute the version string read from Cargo.toml.
+
+---
+
+## Analysis — unreleased (pass-1 profile, SIMD 8x8 transform, benchmark realism)
+
+*Written 2026-09-19 on a 2-core Intel Xeon @ 2.10 GHz against FFmpeg 6.1.1, not the WSL2 machine
+the tables above were measured on. Absolute times are therefore not comparable with the tables;
+the deltas are, because every comparison below was interleaved within a single run. The full
+method and instruction-level profile is in `docs/PASS1_PROFILE.md`.*
+
+### Where pass 1 actually spends its instructions
+
+Callgrind, one worker, 1080p High-profile, 5.17e9 instructions total:
+
+| Component | Share |
+|---|---:|
+| OpenH264 C++ | 83.1% |
+| OpenH264 x86 assembly | 10.1% |
+| libc (`memset`/`memcpy`/`malloc`) | 3.7% |
+| `rustfft` (Log-Mel) | 0.8% |
+| `rust_h264` NAL parsing | 0.5% |
+| TenzorPipe YUV→CHW resize and colour | **0.35%** |
+| Arrow serialisation and MP4 demux | **0.00%** |
+
+At two workers the collector thread — which does all the Arrow packing and writing — is idle 97%
+of the wall clock. A fused SIMD YUV→CHW kernel, an arena for NAL pruning and a faster Arrow
+writer together cannot reach 1.5% of wall time, and the first of them risks the byte-identity
+guarantee through FMA contraction. None of them is worth doing.
+
+### SIMD 8x8 inverse transform (new)
+
+Upstream OpenH264 has MMX/SSE2/AVX2 assembly for the 4x4 transform and only C for the 8x8 one,
+which High-profile streams use for most residual blocks. It measured 4.30% of all instructions.
+`decode_mb_aux_simd.inc` adds SSE2 and AVX2 clones of the same 128-bit integer body, dispatched
+from the CPUID flags OpenH264 already detects, so pre-AVX2 CPUs keep working:
+
+| | instructions, 2 s 1080p clip, 1 worker |
+|---|---:|
+| v0.3.1 | 5,052,675,826 |
+| with the SIMD 8x8 kernel | **4,914,597,280** (−2.73%) |
+
+Every artifact digest is unchanged, and `scripts/test_idct8x8_simd.sh` compares both clones
+against the real upstream C function over a million random, sparse, DC-only and
+saturation-corner blocks at varying strides — because artifact digests alone would never
+exercise the SSE2 clone on an AVX2 machine.
+
+**Wall time is not quoted, because this box cannot measure it.** Eight interleaved runs give
+a run-to-run spread of about ±6%, against a 2.73% saving: medians move −2.4% at one worker
+and +0.4% at two, best-of-seven +0.1% and +1.5%. The instruction count is deterministic and
+the saving is real; how much of it shows up as latency depends on a quieter machine with
+cores to spare, and has not been measured here.
+
+### The keyframe ceiling, and why the old benchmark clip flattered us
+
+Chunks start at IDR access units, so the worker count cannot exceed the keyframe count:
+
+```
+2 s GOP,   10 s clip:  5 keyframes  --video-workers 8  ->  workers=5 chunks=5
+250-frame GOP, same:   2 keyframes  --video-workers 8  ->  workers=2 chunks=2
+```
+
+x264 and x265 default to a 250-frame GOP, so on real media a 10-second clip gets two decode
+workers whatever the core count, while libavcodec's frame threading uses every core. The clips
+above all use a 2-second GOP. `tests/data/benchmark_1080p_gop250.mp4` is the same content at
+the default setting, and `bench/gpu_bench.py --gop 250` runs the competitive benchmark on it.
+Quote both; never compare across them.
+
+Measured on this box, interleaved, medians of four runs:
+
+| | 2 s GOP clip | 250-frame GOP clip |
+|---|---:|---:|
+| `ffmpeg -threads 1 -f null` (decode only) | 2860 ms | 972 ms |
+| TenzorPipe `--video-workers 1` | 3038 ms *(+6.2%)* | 1068 ms *(+9.9%)* |
+| `ffmpeg -f null`, threads auto | 1812 ms | 730 ms |
+| TenzorPipe `--video-workers 2` | 1892 ms | 868 ms *(+18.9%)* |
+
+Two independent gaps: about 6–10% per frame (OpenH264 against libavcodec), and parallel scaling
+that is capped by keyframes. On a high-core-count host the second dominates on real media.
+
+### The early-stop idea, now measured
+
+The previous analysis listed "frames decoded after the last selected picture" as the next
+candidate with an unmeasured guess of 15–25%. It has now been measured, and the guess was right
+only for the 2-second-GOP clip. Counting the access units that follow a chunk's last selected
+picture in decode order:
+
+| clip | GOP | unnecessary access units, 0.5 s epochs |
+|---|---:|---:|
+| `benchmark_1080p.mp4` | 60 | 20.0% |
+| `fixtures/baseline720.mp4` | short | 22.2% |
+| 60 s clip built from 6× the benchmark clip | 60 | 3.3% |
+| 30 s x264 encode at the default GOP | 250 | **1.2%** |
+
+The win is the ratio of a chunk's trailing slack to its length, so it shrinks as the GOP grows.
+A prototype (bit-identical, digests unchanged) cut wall time 14.7% on the benchmark clip and
+1.1% — noise — on the 60-second one. Worth having; not the answer.
+
+### Host memory, restated from measurement
+
+Peak RSS (`VmHWM`, sampled every 2 ms). It is bounded by construction, but it is not a flat
+58 MiB above 720p:
+
+| Clip | 1 worker | 2 workers | 4 workers |
+|---|---:|---:|---:|
+| 720p, 3.3 s | 29.4 MiB | 42.7 MiB | 42.7 MiB |
+| 1080p, 10 s, 2 s GOP | 76.2 MiB | 120.0 MiB | 206.4 MiB |
+| 1080p, 10 s, 250-frame GOP | 68.1 MiB | 105.0 MiB | 105.2 MiB |
+| 1080p, 60 s, 2 s GOP | 101.1 MiB | 145.7 MiB | 234.3 MiB |
+
+It scales with resolution, with epochs per chunk (so with GOP length), and with worker count at
+about 48 MiB per extra worker at 1080p. It is nearly flat in clip length: 10 s → 60 s → 180 s at
+two workers measures 119 → 146 → 161 MiB, a 35% rise across an 18× longer clip, while the
+artifact grows from 12 MiB to 218 MiB. Second-pass reads are unaffected: `pyarrow.memory_map`
+plus `open_file` plus the first batch is 0.13–0.68 ms, and every optimisation above leaves the
+artifact byte-identical, so it cannot move.

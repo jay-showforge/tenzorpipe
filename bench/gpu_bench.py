@@ -69,20 +69,26 @@ def sh(cmd, **kw):
     return subprocess.run(cmd, check=True, text=True, capture_output=True, **kw).stdout
 
 
-def prepare_clips(seconds: int, force: bool) -> dict:
+def prepare_clips(seconds: int, force: bool, gop: int = 60) -> dict:
+    # The keyframe interval is a first-class benchmark parameter, not a detail: TenzorPipe's
+    # chunked decode splits at keyframes, so its worker count can never exceed the keyframe
+    # count, while libavcodec's frame threading has no such cap. A 2 s GOP (60 frames) gives
+    # a 20 s clip 10 chunks; x264's default 250-frame GOP gives it 3, which is what real
+    # media looks like. Quote both, and never compare across them.
     clip_dir = BENCH_HOME / "clips"
     clip_dir.mkdir(parents=True, exist_ok=True)
-    av = clip_dir / f"synthetic-1080p30-h264-aac-{seconds}s.mp4"
-    vo = clip_dir / f"synthetic-1080p30-h264-{seconds}s-video-only.mp4"
+    suffix = "" if gop == 60 else f"-gop{gop}"
+    av = clip_dir / f"synthetic-1080p30-h264-aac-{seconds}s{suffix}.mp4"
+    vo = clip_dir / f"synthetic-1080p30-h264-{seconds}s{suffix}-video-only.mp4"
     if force or not av.exists():
-        print(f"[prepare] encoding {av.name} (libx264 High, B-frames, 2 s GOP, BT.709, AAC 48 kHz stereo)")
+        print(f"[prepare] encoding {av.name} (libx264 High, B-frames, {gop}-frame GOP, BT.709, AAC 48 kHz stereo)")
         # testsrc2 + temporal noise keeps the bitrate near real camera footage (~8 Mb/s) instead of
         # the few hundred kb/s a static test pattern compresses to, which would flatter every decoder.
         sh(["ffmpeg", "-y", "-v", "error",
             "-f", "lavfi", "-i", f"testsrc2=size=1920x1080:rate=30:duration={seconds},noise=alls=10:allf=t+u",
             "-f", "lavfi", "-i", f"aevalsrc=0.4*sin(2*PI*(220+40*t)*t)|0.4*sin(2*PI*330*t)+0.05*(random(0)-0.5):s=48000:d={seconds}",
             "-c:v", "libx264", "-preset", "medium", "-profile:v", "high", "-pix_fmt", "yuv420p",
-            "-b:v", "8M", "-maxrate", "10M", "-bufsize", "16M", "-bf", "3", "-g", "60", "-keyint_min", "60",
+            "-b:v", "8M", "-maxrate", "10M", "-bufsize", "16M", "-bf", "3", "-g", str(gop), "-keyint_min", str(gop),
             "-sc_threshold", "0", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
             "-color_range", "tv", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(av)])
     if force or not vo.exists():
@@ -105,6 +111,10 @@ def prepare_clips(seconds: int, force: bool) -> dict:
             "path": str(path), "width": v["width"], "height": v["height"],
             "frames": int(v["nb_read_packets"]), "fps": v["avg_frame_rate"], "profile": v.get("profile"),
             "bit_rate_kbps": round(int(probe["format"]["bit_rate"]) / 1000),
+            "gop_frames": gop,
+            "keyframes": sum(1 for line in sh(["ffprobe", "-v", "error", "-select_streams", "v:0",
+                                               "-show_entries", "frame=key_frame", "-of", "csv=p=0",
+                                               str(path)]).split() if line.strip().startswith("1")),
             "duration_s": float(probe["format"]["duration"]), "epochs": epochs,
             "has_audio": any(s["codec_type"] == "audio" for s in probe["streams"]),
         }
@@ -601,12 +611,13 @@ def write_markdown(path, rows, results, clips, env, args):
         "An iteration ends when every output tensor has been checksummed (forces CUDA sync). "
         "TenzorPipe's iteration = run the CLI to `/dev/shm` **and** load the Arrow file into PyTorch tensors.",
         "",
-        "| Clip | Resolution | Frames | Bitrate | Profile | Epochs |",
-        "|---|---|---:|---:|---|---:|",
+        "| Clip | Resolution | Frames | Bitrate | Profile | GOP | Keyframes | Epochs |",
+        "|---|---|---:|---:|---|---:|---:|---:|",
     ]
     for sc, c in clips.items():
         md.append(f"| `{Path(c['path']).name}` ({sc}) | {c['width']}×{c['height']} @ {c['fps']} | {c['frames']} | "
-                  f"{c['bit_rate_kbps']} kb/s | {c['profile']} | {c['epochs']} |")
+                  f"{c['bit_rate_kbps']} kb/s | {c['profile']} | {c.get('gop_frames', '?')} | "
+                  f"{c.get('keyframes', '?')} | {c['epochs']} |")
     for sc, title in (("video", "Scenario 1 — video only (all contenders)"), ("av", "Scenario 2 — video + AAC audio")):
         if any(r["scenario"] == sc for r in rows):
             md += ["", f"## {title}", "", md_table(rows, sc)]
@@ -650,8 +661,12 @@ def write_markdown(path, rows, results, clips, env, args):
            "Raw per-iteration latencies: `bench/results/latest.json`. Reproduce inside WSL2/Linux:", "",
            "```sh", "bash bench/setup_wsl.sh && . ~/.tenzor-bench/env.sh",
            "cargo build --release --locked && mkdir -p target/release  # CARGO_TARGET_DIR may differ",
-           f"python bench/gpu_bench.py --iters {args.iters} --warmup {args.warmup} --seconds {args.seconds}"
+           f"python bench/gpu_bench.py --iters {args.iters} --warmup {args.warmup} --seconds {args.seconds} --gop {args.gop}"
            + (f" --tenzor-bin {os.path.relpath(TENZOR_BIN, ROOT)}" if TENZOR_BIN != CURRENT_BIN else ""), "```", "",
+           "`--gop` is not cosmetic. TenzorPipe's chunks start at keyframes, so its worker count is "
+           "capped by the keyframe count, while libavcodec's frame threading is not. `--gop 60` is "
+           "the historical setting and gives a 20 s clip 10 chunks; `--gop 250` is x264's default "
+           "and gives it 3, which is what real media looks like. Never compare numbers across the two.", "",
            "<!-- ANALYSIS -->", ""]
     old = path.read_text() if path.exists() else ""
     if "<!-- ANALYSIS -->" in old:  # keep hand-written analysis across reruns
@@ -672,6 +687,9 @@ def main():
     ap.add_argument("--scenarios", default="video,av")
     ap.add_argument("--only", default=",".join(CONTENDERS))
     ap.add_argument("--tmp", default="/dev/shm", help="TenzorPipe output dir (tmpfs keeps disk I/O out of the timing)")
+    ap.add_argument("--gop", type=int, default=60,
+                    help="keyframe interval in frames. 60 is the historical setting; 250 is "
+                         "x264's default and caps TenzorPipe at far fewer decode workers")
     ap.add_argument("--regen-clips", action="store_true")
     ap.add_argument("--out", default=str(ROOT / "BENCHMARKS.md"))
     ap.add_argument("--tenzor-bin", help="TenzorPipe binary under test (default: bin/tenzor-linux-x86_64)")
@@ -689,7 +707,7 @@ def main():
         sys.exit("need bin/tenzor-linux-x86_64 and ffmpeg on PATH (run bench/setup_wsl.sh, then . ~/.tenzor-bench/env.sh)")
     for binary in {TENZOR_BIN, RELEASE_BIN}:
         os.chmod(binary, 0o755)
-    clips = prepare_clips(args.seconds, args.regen_clips)
+    clips = prepare_clips(args.seconds, args.regen_clips, args.gop)
     for sc, c in clips.items():
         print(f"[clip] {sc}: {Path(c['path']).name} {c['width']}x{c['height']} {c['frames']} frames "
               f"{c['bit_rate_kbps']} kb/s, {c['epochs']} epochs")

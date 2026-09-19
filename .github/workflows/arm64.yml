@@ -22,6 +22,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: cargo build --release --locked --workspace
       - run: python3 -m pip install --break-system-packages -r python/requirements-test.txt
+      # Bit-exactness of the vendored SIMD 8x8 transform against the C reference it
+      # replaces; a no-op on non-x86 runners.
+      - run: bash scripts/test_idct8x8_simd.sh
       - run: python3 scripts/generate_matrix.py
       - run: bash scripts/gen_hevc_fixtures.sh
       - run: python3 scripts/gen_short_tail_fixtures.py

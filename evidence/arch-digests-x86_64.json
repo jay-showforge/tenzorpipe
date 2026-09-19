@@ -4,6 +4,26 @@
   "system": "Linux",
   "python": "3.11.15"
  },
+ "fixtures": {
+  "fixture-h264-aac.mp4": "de1466bfe7c77cebb8d59e0a62f9b062e419d76f1269d47835bc8022a75728d1",
+  "high-bframes.mp4": "67701e035621774d3915e8ca8c0ae586ee0ea90349da317ccb6565e7bfad1c31",
+  "baseline720.mp4": "478c66f28975e6df7228e3a6e4a105c840aad8a7ae4dbfc37f93d7b824e8d0ef",
+  "color709.mp4": "571eacaec272ee67ee6facc90eedf968b4a94a8bdfd98b34ea86182fe614aeb9",
+  "fullrange.mp4": "c52470dac7fd0aa7ab6c1c63f55299feee8932f5653630507db52bd3488f0fae",
+  "selection-vfr.mp4": "62495d9a009a329dbe77d1395c57c78b6937d45b9c3cb0698c12c34d100a728f",
+  "selection-sparse.mp4": "1d3d70ce9c2be5c9ded85a6e5a411031ea22f045d9330d167c2804953acb9b9b",
+  "sync-pulse.mp4": "94a13b35984ec24dafc138eec7ac8e1e2e444fe8e3f0a1a3e48996406bddc8ce",
+  "audio-truncated-pts.mp4": "668af6e2ab9898d74d115c719d52c2ded22c3c6eae98df5bd6d5f39fb80accff",
+  "aac-6ch.mp4": "2a5a2db246aeefcfe924524209464bfcf05824e1872744fc47fdad8adb4f6d14",
+  "audio-only.mp4": "9a8765630bfb5f05137a310a5d6a6a16501d4d3307c11b41230a5b77849a6464",
+  "wav-44100-2ch.wav": "47da012a9b7cc06f0733a927d77a6236ed6e9a77c6701eb04b4da7b53a28006e",
+  "wav-48000-6ch.wav": "ffe0a9d73de5d6b32690ec853ea0b668aed13dc63d33362a399e121b22a6a15b",
+  "hevc-av.mp4": "fa5b9fee8a75870b48c94c0d8bf5179b304f4c5ae60ba304fc5baf3c403b1868",
+  "hevc-720.mp4": "f31052d531b18029706e10907e71902ee8d867be954d6bda63a5acc3d07329be",
+  "hevc-bt709.mp4": "45930607d12a50794a013a50139ec4eb2a536fe4c4d6c4441a0782cd323287b2",
+  "tests/data/benchmark_1080p.mp4": "e4a6ca7668b5d0bf1d9b5adb073107e4f1daed24eed850e83778ee4d98112428",
+  "tests/data/benchmark_1080p_gop250.mp4": "0a64ecaece6f1a0593cff79b90ec31750f9928d06328b12772bce95ebfe0e08f"
+ },
  "digests": {
   "fixture-h264-aac.mp4": "844c71bf83354c4694be305bc40c160c8897a7b0cbf24b7bf1bf20a782d83281",
   "fixture-h264-aac.mp4 --video-workers 1": "844c71bf83354c4694be305bc40c160c8897a7b0cbf24b7bf1bf20a782d83281",
@@ -21,12 +41,13 @@
   "audio-only.mp4": "b73f89710fed13755da660b837e5aba3f044a4719552a30d5357e4575bf74446",
   "wav-44100-2ch.wav": "71bfa97e95d7a2ac68028be2b6f6db08a2ad20973e0f8bbb22b25916d20cfdea",
   "wav-48000-6ch.wav --window-sec 0.05 --batch-epochs 4": "44225a80a88170f3199d8156ee42a28e3da9586f8b3af76eeda8c2eee291e323",
-  "hevc-av.mp4": "b3ddc7fc84ab1d049761380f9336168b28b5e27ecd133a8a7d78925894bfc4e3",
-  "hevc-av.mp4 --video-workers 1": "b3ddc7fc84ab1d049761380f9336168b28b5e27ecd133a8a7d78925894bfc4e3",
-  "hevc-av.mp4 --video-workers 4 --chunk-target-ms 500": "b3ddc7fc84ab1d049761380f9336168b28b5e27ecd133a8a7d78925894bfc4e3",
-  "hevc-av.mp4 --no-skip-nonref": "b3ddc7fc84ab1d049761380f9336168b28b5e27ecd133a8a7d78925894bfc4e3",
+  "hevc-av.mp4": "7631f3cdc4454b8cd1babb50a45cc45d0b949f73bd544d100dd05bb3fe3c0487",
+  "hevc-av.mp4 --video-workers 1": "7631f3cdc4454b8cd1babb50a45cc45d0b949f73bd544d100dd05bb3fe3c0487",
+  "hevc-av.mp4 --video-workers 4 --chunk-target-ms 500": "7631f3cdc4454b8cd1babb50a45cc45d0b949f73bd544d100dd05bb3fe3c0487",
+  "hevc-av.mp4 --no-skip-nonref": "7631f3cdc4454b8cd1babb50a45cc45d0b949f73bd544d100dd05bb3fe3c0487",
   "hevc-720.mp4": "ba459a0d840f33868065697c3f682f1e1e497a36dd19959dfd10fd47749cb02f",
-  "hevc-bt709.mp4 --execution sequential": "e79582282d6eb01577b41fbeef7f473df6dbe799342b962e35dbefe000a8b9d4"
- },
- "note": "Recorded on GitHub's ubuntu-latest x86-64 runner for 0.3.1. The engine version string is embedded in every artifact, so these change on any version bump and are re-recorded with it."
+  "hevc-bt709.mp4 --execution sequential": "e79582282d6eb01577b41fbeef7f473df6dbe799342b962e35dbefe000a8b9d4",
+  "tests/data/benchmark_1080p.mp4 --video-workers 2": "6e3db6e66b78c0093853b0dc37e5e436cc776e4d45ed038b8dda6b792001db3e",
+  "tests/data/benchmark_1080p_gop250.mp4 --video-workers 2": "272c0476bddcd8da84072c8abe8439a0283b99bd1b3185952a03c8c8f182bad2"
+ }
 }

@@ -37,6 +37,7 @@ gate aac-tests-no-default cargo test --locked --manifest-path vendor/rusty_aac/C
 gate fmt          cargo fmt --all --check
 gate clippy       cargo clippy --locked --workspace --all-targets -- -D warnings
 gate licenses     cargo deny check licenses
+gate idct8x8-simd bash scripts/test_idct8x8_simd.sh
 gate skip-fixtures bash scripts/gen_skip_fixtures.sh "$TENZOR_GEN_FIXTURES"
 gate tail-fixtures python3 scripts/gen_short_tail_fixtures.py
 gate truncated-pts python3 scripts/gen_truncated_pts_fixture.py --verify

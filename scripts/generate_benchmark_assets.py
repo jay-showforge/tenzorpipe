@@ -1,15 +1,28 @@
 #!/usr/bin/env python3
-"""Generate the reproducible benchmark clip: tests/data/benchmark_1080p.mp4.
+"""Generate the reproducible benchmark clips under tests/data/.
 
-1080p30 H.264 (High profile, B-frames, 2 s GOP) with a frame-counter overlay and moving
-geometry, plus a 44.1 kHz stereo AAC track whose 1.0 s reference tone pulses start exactly on
-each whole second, so audio and video alignment is visible in the demo.
+1080p30 H.264 (High profile, B-frames) with a frame-counter overlay and moving geometry, plus
+a 44.1 kHz stereo AAC track whose 1.0 s reference tone pulses start exactly on each whole
+second, so audio and video alignment is visible in the demo.
+
+Two clips, differing only in keyframe interval:
+
+  benchmark_1080p.mp4         2 s GOP (60 frames), 5 keyframes in 10 s
+  benchmark_1080p_gop250.mp4  x264's default 250-frame GOP, 2 keyframes in 10 s
+
+The second one exists because chunked decode splits at keyframes, so the worker count can
+never exceed the keyframe count. The 2 s GOP clip yields 5 chunks and scales further than
+real-world media does; the GOP-250 clip is what a normal encoder produces and is the honest
+one to quote against FFmpeg, whose frame threading has no such cap. Keep both: the first for
+continuity with the recorded history, the second for competitive numbers.
 
 FFmpeg is a test-asset tool only; the engine never uses it at runtime. Encoder settings are
-pinned (single-threaded, fixed preset/CRF) so the same FFmpeg build reproduces the same bytes.
+pinned (single-threaded, fixed preset/bitrate) so the same FFmpeg build reproduces the same
+bytes.
 
-    python scripts/generate_benchmark_assets.py [--out tests/data/benchmark_1080p.mp4]
-                                                [--seconds 10] [--fps 30] [--force]
+    python scripts/generate_benchmark_assets.py --all           # both clips
+    python scripts/generate_benchmark_assets.py [--out PATH] [--seconds 10] [--fps 30]
+                                                [--gop FRAMES] [--force]
 """
 from __future__ import annotations
 
@@ -31,6 +44,11 @@ FONTS = [
 PULSE_HZ = 1000.0       # reference tone
 PULSE_LENGTH_S = 0.12   # pulse duration at the start of every second
 BACKGROUND = "0x0B1220"  # brand slate
+# (path, keyframe interval in frames). Identical content, different GOP.
+CLIPS = [
+    (ROOT / "tests/data/benchmark_1080p.mp4", 60),
+    (ROOT / "tests/data/benchmark_1080p_gop250.mp4", 250),
+]
 
 
 def font_path() -> str:
@@ -65,7 +83,7 @@ def video_filters(font: str) -> str:
     return ",".join([grid, cyan_box, amber_box, sweep, grain, pulse, counter, timecode, label])
 
 
-def build(out: pathlib.Path, seconds: float, fps: int) -> None:
+def build(out: pathlib.Path, seconds: float, fps: int, gop: int) -> None:
     font = font_path()
     frames = round(seconds * fps)
     # Pulses start on every whole second; both channels carry the same reference tone.
@@ -79,13 +97,21 @@ def build(out: pathlib.Path, seconds: float, fps: int) -> None:
         # 8 Mb/s matches the 1080p clip used in BENCHMARKS.md, so demo timings are comparable.
         "-c:v", "libx264", "-preset", "medium", "-profile:v", "high",
         "-b:v", "8M", "-maxrate", "10M", "-bufsize", "16M",
-        "-bf", "3", "-g", str(fps * 2), "-keyint_min", str(fps * 2), "-sc_threshold", "0",
+        "-bf", "3", "-g", str(gop), "-keyint_min", str(gop), "-sc_threshold", "0",
         "-pix_fmt", "yuv420p", "-threads", "1",
         "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
         "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
         "-movflags", "+faststart", str(out),
     ]
     subprocess.run(cmd, check=True)
+
+
+def keyframe_count(path: pathlib.Path) -> int:
+    """Keyframes bound the worker count, so record it beside the other clip facts."""
+    out = subprocess.check_output(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "frame=key_frame",
+         "-of", "csv=p=0", str(path)], text=True)
+    return sum(1 for line in out.split() if line.strip().startswith("1"))
 
 
 def probe(path: pathlib.Path) -> dict:
@@ -112,24 +138,29 @@ def main() -> None:
     ap.add_argument("--out", type=pathlib.Path, default=ROOT / "tests/data/benchmark_1080p.mp4")
     ap.add_argument("--seconds", type=float, default=10.0)
     ap.add_argument("--fps", type=int, default=30)
+    ap.add_argument("--gop", type=int, help="keyframe interval in frames (default: 2 seconds)")
+    ap.add_argument("--all", action="store_true", help="generate every clip in CLIPS")
     ap.add_argument("--force", action="store_true", help="overwrite an existing asset")
     a = ap.parse_args()
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         sys.exit("ffmpeg and ffprobe must be on PATH (see bench/setup_wsl.sh)")
-    a.out.parent.mkdir(parents=True, exist_ok=True)
-    if a.out.exists() and not a.force:
-        print(f"{a.out} exists; use --force to regenerate")
-    else:
-        build(a.out, a.seconds, a.fps)
-    info = probe(a.out)
-    expected_frames = round(a.seconds * a.fps)
-    assert info["video"]["frames"] == expected_frames, (info["video"]["frames"], expected_frames)
-    assert info["video"]["size"] == "1920x1080" and info["video"]["codec"] == "h264"
-    assert info["audio"]["sample_rate"] == 44100 and info["audio"]["channels"] == 2
-    assert info["audio"]["codec"] == "aac"
-    (ROOT / "tests/data").mkdir(parents=True, exist_ok=True)
-    (ROOT / "tests/data/benchmark_1080p.json").write_text(json.dumps(info, indent=2))
-    print(json.dumps(info, indent=2))
+    targets = CLIPS if a.all else [(a.out, a.gop if a.gop else round(a.fps * 2))]
+    for out, gop in targets:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        if out.exists() and not a.force:
+            print(f"{out} exists; use --force to regenerate")
+        else:
+            build(out, a.seconds, a.fps, gop)
+        info = probe(out)
+        expected_frames = round(a.seconds * a.fps)
+        assert info["video"]["frames"] == expected_frames, (info["video"]["frames"], expected_frames)
+        assert info["video"]["size"] == "1920x1080" and info["video"]["codec"] == "h264"
+        assert info["audio"]["sample_rate"] == 44100 and info["audio"]["channels"] == 2
+        assert info["audio"]["codec"] == "aac"
+        info["gop_frames"] = gop
+        info["keyframes"] = keyframe_count(out)
+        out.with_suffix(".json").write_text(json.dumps(info, indent=2) + "\n")
+        print(json.dumps(info, indent=2))
 
 
 if __name__ == "__main__":

@@ -41,6 +41,20 @@ namespace WelsDec {
 void IdctResAddPred_c (uint8_t* pPred, const int32_t kiStride, int16_t* pRs);
 void IdctResAddPred8x8_c (uint8_t* pPred, const int32_t kiStride, int16_t* pRs);
 
+/* TenzorPipe addition: SIMD clones of the 8x8 inverse transform, which upstream
+   ships only as C on x86. Needs GCC's function-level target attribute, so it is
+   compiled on GCC and Clang and skipped on MSVC, where the C version is kept. */
+#if defined(X86_ASM) && (defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86))
+#if defined(__GNUC__) || defined(__clang__)
+#define WELS_HAVE_IDCT8X8_SIMD 1
+#endif
+#endif
+
+#if defined(WELS_HAVE_IDCT8X8_SIMD)
+void IdctResAddPred8x8_sse2 (uint8_t* pPred, const int32_t kiStride, int16_t* pRs);
+void IdctResAddPred8x8_avx2 (uint8_t* pPred, const int32_t kiStride, int16_t* pRs);
+#endif
+
 #if defined(__cplusplus)
 extern "C" {
 #endif//__cplusplus
