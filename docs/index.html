@@ -96,14 +96,15 @@ tailwind.config = { theme: { extend: {
 <!-- Demo video -->
 <section class="mx-auto max-w-5xl px-6 py-12">
   <h2 class="text-3xl font-bold text-white">See it side by side</h2>
-  <p class="mt-2 text-slate-400">Narrated, 25 seconds. Every figure on screen was measured on the machine that produced the video.</p>
+  <p class="mt-2 text-slate-400">Narrated, about three minutes. It opens with the workload TenzorPipe loses &mdash; GPU decoding wins a single first pass &mdash; and every figure on screen comes from a saved measurement record.</p>
   <div class="mt-6 rounded-2xl overflow-hidden ring-1 ring-line bg-panel shadow-2xl shadow-cyan-500/5">
-    <video class="w-full" controls preload="metadata" poster="assets/banner.png">
-      <source src="assets/tenzorpipe_demo.mp4" type="video/mp4">
-      Your browser cannot play embedded video —
-      <a class="text-cyan-400 underline" href="assets/tenzorpipe_demo.mp4">download the MP4</a>.
+    <video class="w-full" controls preload="metadata" playsinline poster="assets/showcase-poster.jpg">
+      <source src="assets/tenzorpipe-robotics-showcase.mp4" type="video/mp4">
+      Your browser cannot play embedded video &mdash;
+      <a class="text-cyan-400 underline" href="assets/tenzorpipe-robotics-showcase.mp4">download the MP4</a>.
     </video>
   </div>
+  <p class="mt-3 text-xs text-slate-500">Source footage excerpts from <a class="underline hover:text-slate-300" href="https://durian.blender.org/sharing/">Sintel</a>, &copy; Blender Foundation, used under CC BY 3.0. Robotics and field scenes are labelled AI-generated concept art, not real deployments.</p>
 </section>
 
 <!-- How it works -->
