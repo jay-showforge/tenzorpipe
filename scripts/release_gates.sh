@@ -39,6 +39,7 @@ gate clippy       cargo clippy --locked --workspace --all-targets -- -D warnings
 gate licenses     cargo deny check licenses
 gate skip-fixtures bash scripts/gen_skip_fixtures.sh "$TENZOR_GEN_FIXTURES"
 gate tail-fixtures python3 scripts/gen_short_tail_fixtures.py
+gate truncated-pts python3 scripts/gen_truncated_pts_fixture.py --verify
 gate audio-tail   python3 scripts/test_audio_tail_tolerance.py
 gate hevc-fixtures bash scripts/gen_hevc_fixtures.sh
 gate hevc-fidelity python3 scripts/test_hevc_fidelity.py

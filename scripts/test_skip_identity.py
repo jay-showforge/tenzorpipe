@@ -65,7 +65,7 @@ EXPECTED_ERROR_CHANGES = [
 ]
 # Fixtures whose audio ends before its declared duration: within the default tolerance the
 # new engine converts them (padding with silence) where the old binary failed.
-EXPECTED_NEW_SUCCESS = ("audio-tail-short.mp4",)
+EXPECTED_NEW_SUCCESS = ("audio-tail-short.mp4", "audio-truncated-pts.mp4")
 # H.265 clips: the old binary has no HEVC decoder, so it fails where this one converts or
 # refuses by profile/bit depth. scripts/test_hevc_fidelity.py checks their pixels.
 EXPECTED_HEVC_PREFIX = "hevc-"

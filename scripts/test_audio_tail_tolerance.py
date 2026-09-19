@@ -23,6 +23,9 @@ FIXTURES = ROOT / "fixtures"
 BINARY = ROOT / "target/release/tenzor"
 SHORT = FIXTURES / "audio-tail-short.mp4"
 LONG_GAP = FIXTURES / "audio-tail-long-gap.mp4"
+# Committed fixtures whose audio access units stop early (scripts/gen_truncated_pts_fixture.py).
+TRUNCATED = FIXTURES / "audio-truncated-pts.mp4"
+TRUNCATED_WIDE = FIXTURES / "audio-truncated-pts-wide.mp4"
 OUT = pathlib.Path(tempfile.mkdtemp(prefix="tail-tolerance-"))
 RESULTS: list[tuple[str, bool]] = []
 
@@ -90,6 +93,46 @@ def main() -> int:
     code, digest, err, _ = run(BINARY, LONG_GAP, "--audio-tail-tolerance-ms", "100")
     check("explicit tolerance accepts the gap", code == 0 and digest is not None, err)
 
+    # The truncated-PTS fixtures. Their audio *packets* stop early — nothing was
+    # stretched — so these are the cases that prove strict mode fires on media an
+    # encoder would never produce padding for. They are committed, not derived, so
+    # this runs everywhere regardless of the local FFmpeg's muxing behaviour.
+    for path in (TRUNCATED, TRUNCATED_WIDE):
+        check(f"{path.name} is committed", path.exists())
+    if TRUNCATED.exists() and TRUNCATED_WIDE.exists():
+        code, digest, err, _ = run(BINARY, TRUNCATED)
+        check("truncated PTS converts by default", code == 0 and digest is not None, err)
+        check("truncated PTS gap is reported", "5.333 ms" in err and "padded" in err, err)
+
+        code, _, err, leftover = run(BINARY, TRUNCATED, "--audio-tail-tolerance-ms", "0")
+        check("strict mode exits 1 on truncated PTS", code == 1, f"exit {code}: {err}")
+        check("strict mode writes no partial output", not leftover)
+        check(
+            "strict rejection names the gap and the option",
+            all(t in err for t in ("287744 of 288000", "--audio-tail-tolerance-ms", "48000 Hz")),
+            err,
+        )
+
+        # A wider truncation is past the default tolerance, so it fails without asking.
+        code, _, err, leftover = run(BINARY, TRUNCATED_WIDE)
+        check("wide truncation exits 1 by default", code == 1 and not leftover, f"{code}: {err}")
+        check("wide truncation reports 90.667 ms", "90.667 ms" in err, err)
+        code, digest, err, _ = run(BINARY, TRUNCATED_WIDE, "--audio-tail-tolerance-ms", "100")
+        check("wide truncation accepted at 100 ms", code == 0 and digest is not None, err)
+
+        # Strict mode must not reject files that are actually complete.
+        code, _, err, _ = run(BINARY, FIXTURES / "fixture-h264-aac.mp4", "--audio-tail-tolerance-ms", "0")
+        check("strict mode accepts the untruncated source", code == 0, err)
+
+        # The committed bytes must still be the ones the generator produces.
+        gen = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/gen_truncated_pts_fixture.py"), "--verify"],
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        check("committed fixtures match the generator", gen.returncode == 0, gen.stdout + gen.stderr)
+
     # Option validation.
     code, _, err, _ = run(BINARY, SHORT, "--audio-tail-tolerance-ms", "1001")
     check("tolerance range is validated", code != 0 and "0..1000" in err, err)
@@ -112,8 +155,8 @@ def main() -> int:
     if args.old_binary:
         unchanged = 0
         for source in sorted(FIXTURES.glob("*.*")):
-            if source.name.startswith("audio-tail-"):
-                continue
+            if source.name.startswith(("audio-tail-", "audio-truncated-")):
+                continue  # deliberately short tails; the old binary predates the policy
             for extra in ([], ["--video-workers", "1"], ["--execution", "sequential"]):
                 old = run(args.old_binary, source, "-q", *extra)
                 new = run(BINARY, source, "-q", *extra)

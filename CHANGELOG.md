@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+- **Strict audio-tail rejection now has a fixture that actually triggers it.** The
+  independent stress test could not exercise `--audio-tail-tolerance-ms 0` cleanly,
+  because a normal FFmpeg mux reconciles the trailing AAC access units against the edit
+  list and leaves no gap to reject. Two fixtures are now committed whose audio *packets*
+  stop early, built by deleting trailing access units from the audio sample table while
+  `mdhd` and the edit list keep declaring the original duration — no encoder involved:
+  `fixtures/audio-truncated-pts.mp4` (5.333 ms short: converted and padded by default,
+  exit code 1 at tolerance `0`) and `fixtures/audio-truncated-pts-wide.mp4` (90.667 ms:
+  exit code 1 by default, accepted at `100`). `scripts/gen_truncated_pts_fixture.py`
+  builds them deterministically and `--verify` proves the committed bytes still match,
+  so the blobs stay auditable; it runs in both CI workflows and in `release_gates.sh`.
+  `scripts/test_audio_tail_tolerance.py` covers all four outcomes and the no-partial-file
+  guarantee (24 checks), and `audio-truncated-pts.mp4` joins the per-architecture digest
+  set so the silence-padded tail is pinned like any other tensor path.
+- The reference binaries under `reference/bin/` are committed executable, so
+  `scripts/test_skip_identity.py` runs from a fresh clone without a manual `chmod`.
+
 ## 0.3.1 — 2026-09-18
 
 - **Cross-architecture behaviour is now measured rather than assumed.** Video tensors are

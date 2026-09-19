@@ -49,6 +49,8 @@ CASES = [
     ("selection-vfr.mp4", []),
     ("selection-sparse.mp4", []),
     ("sync-pulse.mp4", []),
+    # The silence-padded tail is arithmetic too: pin it like any other tensor path.
+    ("audio-truncated-pts.mp4", []),
     ("aac-6ch.mp4", []),
     ("audio-only.mp4", []),
     ("wav-44100-2ch.wav", []),

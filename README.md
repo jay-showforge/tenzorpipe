@@ -361,6 +361,18 @@ longer gaps remain an error that names the gap and the fix.
 ./target/release/tenzor -i clip.mp4 -o clip.tenzor --audio-tail-tolerance-ms 50
 ```
 
+Strict mode is hard to exercise with FFmpeg-produced media, because a normal mux
+reconciles the trailing AAC access units against the edit list and leaves no gap to
+reject. Two committed fixtures create the gap in the sample table instead, with no
+encoder in the loop: `fixtures/audio-truncated-pts.mp4` (audio packets stop 5.333 ms
+early — converted and padded by default, rejected with exit code 1 at
+`--audio-tail-tolerance-ms 0`) and `fixtures/audio-truncated-pts-wide.mp4` (90.667 ms —
+rejected by default, accepted at `100`). `scripts/gen_truncated_pts_fixture.py` builds
+them from `fixtures/fixture-h264-aac.mp4` by deleting trailing access units while
+`mdhd` and the edit list keep declaring the original duration; `--verify` regenerates
+and compares byte for byte, and CI runs it so the committed blobs cannot drift.
+`scripts/test_audio_tail_tolerance.py` covers all four outcomes.
+
 Unsupported inputs name what was found and the conversion command, for example a
 H.265/HEVC video track, Opus or HE-AAC audio, or a non-MP4/WAV extension:
 
