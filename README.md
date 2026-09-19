@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.3.1-22D3EE">
+  <img alt="version" src="https://img.shields.io/badge/version-0.3.2-22D3EE">
   <img alt="Rust" src="https://img.shields.io/badge/Rust-1.98.1-000000?logo=rust">
   <img alt="PyO3" src="https://img.shields.io/badge/PyO3-abi3--py39-3776AB?logo=python&logoColor=white">
   <img alt="Apache Arrow" src="https://img.shields.io/badge/Apache%20Arrow-IPC-1868F2">
@@ -20,7 +20,7 @@ decoders, narrated, with the numbers measured on the machine that built it.
 ## Quickstart
 
 ```sh
-pip install https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl  # 1. install
+pip install https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.2/tenzorpipe-0.3.2-cp39-abi3-manylinux_2_34_x86_64.whl  # 1. install
 python -c "import tenzorpipe as tp; tp.ingest('clip.mp4', 'clip.tenzor')"   # 2. decode once
 python -c "import tenzorpipe as tp; d=tp.load('clip.tenzor'); print(len(d), d[0]['video'].shape)"  # 3. train
 ```
@@ -29,9 +29,9 @@ python -c "import tenzorpipe as tp; d=tp.load('clip.tenzor'); print(len(d), d[0]
 
 ```sh
 # Linux x86-64, with the PyTorch extra:
-pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl"
+pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.2/tenzorpipe-0.3.2-cp39-abi3-manylinux_2_34_x86_64.whl"
 # Linux ARM64 (Jetson, Graviton, ARM servers):
-pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.1/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_aarch64.whl"
+pip install "tenzorpipe[torch] @ https://github.com/jay-showforge/tenzorpipe/releases/download/v0.3.2/tenzorpipe-0.3.2-cp39-abi3-manylinux_2_34_aarch64.whl"
 # or from source, needing Rust 1.98.1 (plus NASM on x86-64):
 pip install ".[torch]"
 ```
@@ -531,7 +531,7 @@ decoding) and reads the output as zero-copy PyTorch tensors. One abi3 wheel supp
 CPython 3.9+ on Linux x86-64 with glibc 2.34 or newer.
 
 ```sh
-pip install "dist/tenzorpipe-0.3.1-cp39-abi3-manylinux_2_34_x86_64.whl[torch]"  # built wheel
+pip install "dist/tenzorpipe-0.3.2-cp39-abi3-manylinux_2_34_x86_64.whl[torch]"  # built wheel
 pip install ".[torch]"                                                         # from source
 pip install "tenzorpipe[torch]"                                                # once published on PyPI
 ```

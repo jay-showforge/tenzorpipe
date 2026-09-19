@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.2 — 2026-09-19
 
 - **Runtime-dispatched SIMD for the 8x8 inverse transform.** Upstream OpenH264 has
   MMX/SSE2/AVX2 assembly for the 4x4 transform and only C for the 8x8 one, which

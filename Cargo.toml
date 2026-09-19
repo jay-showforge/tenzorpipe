@@ -1,6 +1,6 @@
 [package]
 name = "tenzor-pipe"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2024"
 description = "High-throughput media-to-tensor preprocessing engine for multimodal AI"
 license = "BUSL-1.1"
