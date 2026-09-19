@@ -37,6 +37,22 @@ jobs:
         run: python3 scripts/test_arch_identity.py --record --out recorded/arch-digests-x86_64.json
       - name: Binary determinism on this architecture
         run: python3 scripts/test_arch_identity.py
+      # The 912-case matrix against the v0.2.0 reference binary. It normalises the embedded
+      # version string before hashing, so unlike the digest gate above it survives a version
+      # bump — which makes it the check that shows the SIMD 8x8 kernel changed no output
+      # bytes, rather than merely changing every digest. Artifacts are unlinked per case, so
+      # peak disk is bounded by JOBS rather than by the case count.
+      - name: Byte-identity against the v0.2.0 release binary
+        run: |
+          set -eu
+          mkdir -p /tmp/tenzor-artifacts /tmp/tenzor-skip-fixtures
+          bash scripts/gen_skip_fixtures.sh /tmp/tenzor-skip-fixtures
+          python3 scripts/test_skip_identity.py
+        env:
+          TENZOR_GEN_FIXTURES: /tmp/tenzor-skip-fixtures
+          TENZOR_OUTPUT_ROOT: /tmp/tenzor-artifacts
+          RESULT: evidence/skip-identity.json
+          JOBS: "4"
       - run: bash scripts/build_wheel.sh
       - uses: actions/upload-artifact@v4
         if: always()
